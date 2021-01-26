@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     //changeType (Bait, Status, Corpo)
-    DefineType setTypeTo;
+    public DefineType setTypeTo;
 
     public Camera mainCam = Camera.main;
     public GameObject player;
