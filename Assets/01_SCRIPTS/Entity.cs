@@ -5,10 +5,15 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public EntityStatus status;
-    public CorpoType type;
+    public CorpoType corpo;
     public int healthMax;
     public float moveSpeed;
     public float playerDetectionRadius;
     
-
+    //Spawn Neutral
+    //status = EntityStatus.Neutral
+    //Spawn Enemy
+    //status = EntityStatus.Enemy
+    //Spawn Ally
+    //status = EntityStatus.Ally
 }
