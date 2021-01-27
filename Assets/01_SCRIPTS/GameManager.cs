@@ -25,13 +25,14 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+        mainCam = Camera.main;
     }
     #endregion
 
     //changeType (Bait, Status, Corpo)
     public DefineType setTypeTo;
 
-    public Camera mainCam = Camera.main;
+    public Camera mainCam;
     public GameObject player;
 
     public GameState gameState = new GameState();
@@ -45,4 +46,5 @@ public class GameManager : MonoBehaviour
     public BaitInventory inventory = new BaitInventory();
     public PlayerStats playerStats = new PlayerStats();
 
+    public List<Location> allLocations;
 }

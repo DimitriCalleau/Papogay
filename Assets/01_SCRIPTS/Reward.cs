@@ -28,7 +28,7 @@ public class Reward
 
     public void ClearLoots()
     {
-        loots.RemoveAll(BaitType);
+        loots.Clear();
     }
 
 
