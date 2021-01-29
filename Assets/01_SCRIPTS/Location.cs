@@ -5,9 +5,11 @@ using UnityEngine;
 public class Location : MonoBehaviour
 {
     public bool occupied = false;
-
-    void Awake()
+    void Start()
     {
-        GameManager.Instance.allLocations.Add(this);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.allLocations.Add(this);
+        }
     }
 }

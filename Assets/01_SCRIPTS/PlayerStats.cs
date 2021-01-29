@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[System.Serializable]
 public class PlayerStats
 {
     public float currentHealth;
@@ -26,6 +28,10 @@ public class PlayerStats
     public void AddGold(int amount)
     {
         gold += amount;
+    }
+    public void Pay(int amount)
+    {
+        gold -= amount;
     }
 
     public void HealPlayer(int amount)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public EntityStatus status;
-    public CorpoType corpo;
+    public BaitTypes corpoType;
     public int healthMax;
     public float moveSpeed;
     public float playerDetectionRadius;

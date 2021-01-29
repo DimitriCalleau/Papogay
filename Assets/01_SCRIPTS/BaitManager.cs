@@ -10,6 +10,7 @@ public class BaitManager : MonoBehaviour
     int baitRotation;
 
     public GameObject preview;
+
     void FixedUpdate()
     {
         float minDist = Mathf.Infinity;
@@ -23,33 +24,29 @@ public class BaitManager : MonoBehaviour
                 if(closestLocation.occupied == false)
                 {
                     selectedLocation = closestLocation;
-                    Debug.Log(selectedLocation.name);
                 }
             }
         }
-    }
-    void Update()
-    {
         MovePreview(selectedLocation, baitRotation);
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            PlaceTrap(GameManager.Instance.inventory.selection, selectedLocation, GameManager.Instance.playerStats.gold);
-        }
     }
-    public void PlaceTrap(GameObject inventorySelection, Location location, int playerGold)
+    void PlaceTrap()
     {
-        if (playerGold > inventorySelection.GetComponent<Baits>().currentCost)
+        GameObject inventorySelection = UIManager.Instance.inventory.selection;
+        int playerGold = GameManager.Instance.playerStats.gold;
+
+        if (playerGold > UIManager.Instance.inventory.selection.GetComponent<Baits>().currentCost && inventorySelection != null)
         {
-            GameObject bait = GameObject.Instantiate(inventorySelection, location.transform.position, Quaternion.Euler(0, baitRotation, 0));
-            bait.GetComponent<Baits>().location = location;
+            GameObject bait = GameObject.Instantiate(inventorySelection, selectedLocation.transform.position, Quaternion.Euler(0, baitRotation, 0));
+            bait.GetComponent<Baits>().location = selectedLocation;
             bait.GetComponent<Baits>().InitBait();
-            location.occupied = true;
+            selectedLocation.occupied = true;
+            GameManager.Instance.playerStats.Pay(inventorySelection.GetComponent<Baits>().currentCost);
         }
         else
             Debug.Log("not enough gold");
     }
 
-    public void MovePreview(Location location, int rotation)
+    void MovePreview(Location location, int rotation)
     {
         if(location != null)
         {
@@ -77,5 +74,16 @@ public class BaitManager : MonoBehaviour
                 }
                 break;
         }
+    }
+    //Security Events
+    void OnEnable()
+    {
+        if(InputEvents.Instance !=null)
+            InputEvents.Instance.OnPlace += PlaceTrap;
+    }
+    void OnDisable()
+    {
+        if (InputEvents.Instance != null)
+            InputEvents.Instance.OnPlace -= PlaceTrap;
     }
 }

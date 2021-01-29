@@ -5,29 +5,37 @@ using UnityEngine;
 public class BaitInventory
 {
     public GameObject selection;
-    public List<Slot> allCurrentBaits;
-
-    public void AddRemovebaits(bool addOrRemove, int index)
+    public int selectionIndex;
+    public void SwitchBaitSelection(bool rightOrLeft)
     {
-        switch (addOrRemove)
+        Debug.Log(selectionIndex);
+        switch (rightOrLeft)
         {
-            case true :
-                allCurrentBaits[index].nbBaits += 1;
+            case true:
+                if(selectionIndex == UIManager.Instance.allCurrentBaits.Count)
+                {
+                    selectionIndex = 0;
+                }
+                else
+                {
+                    selectionIndex += 1;
+                }
                 break;
-            case false :
-                allCurrentBaits[index].nbBaits -= 1;
+            case false:
+                if (selectionIndex == 0)
+                {
+                    selectionIndex = UIManager.Instance.allCurrentBaits.Count;
+                }
+                else
+                {
+                    selectionIndex -= 1;
+                }
                 break;
         }
+        if(UIManager.Instance.allCurrentBaits.Count > 0)
+        {
+            selection = UIManager.Instance.allCurrentBaits[selectionIndex].baitPrefab;
+            UIManager.Instance.selectionTruc.transform.position = selection.transform.position;
+        }
     }
-
-    public void UpgradeBait(int index)
-    {
-        //allCurrentBaits[index].baitPrefab.GetComponent<Bait>().Upgrade();
-    }
-        
-    public void AddNewBait(GameObject baitPrefab, int index, int baitAmount)
-    {
-        Slot slot = new Slot(baitPrefab, baitAmount);
-        allCurrentBaits.Insert(index, slot);
-    }        
 }

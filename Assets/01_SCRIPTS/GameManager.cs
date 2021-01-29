@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,13 +23,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
         instance = this;
         DontDestroyOnLoad(this.gameObject);
         mainCam = Camera.main;
     }
     #endregion
-
     //changeType (Bait, Status, Corpo)
     public DefineType setTypeTo;
 
@@ -40,11 +39,57 @@ public class GameManager : MonoBehaviour
 
     public WaveManager waveManager = new WaveManager();
     public FirmeBuilder builder = new FirmeBuilder();
-    public Reward reward = new Reward();
-    public Shop shop = new Shop();
 
-    public BaitInventory inventory = new BaitInventory();
     public PlayerStats playerStats = new PlayerStats();
 
     public List<Location> allLocations;
+    public List<GameObject> allBaits;//Tous les baits du jeu
+
+
+    #region Events
+    public event Action StartWave;
+    public void EventStartWave()
+    {
+        if (StartWave != null)
+        {
+            StartWave();
+        }
+    }
+
+    public event Action EndWave;
+    public void EventEndWave()
+    {
+        if (EndWave != null)
+        {
+            EndWave();
+        }
+    }
+
+    public event Action StartGame;
+    public void EventStartGame()
+    {
+        if (StartGame != null)
+        {
+            StartGame();
+        }
+    }
+
+    public event Action Win;
+    public void EventWin()
+    {
+        if (Win != null)
+        {
+            Win();
+        }
+    }
+
+    public event Action Lose;
+    public void EventLose()
+    {
+        if (Lose != null)
+        {
+            Lose();
+        }
+    }
+    #endregion
 }

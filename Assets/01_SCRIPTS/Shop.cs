@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class Shop
 {
-    public void AddShopBait(int index)
+    public void BuyBait(BaitTypes typeOfBait)
     {
+        Slot slotSelection = null;
 
-    }
-
-    public void UpgradeShopTrap(int index)
-    {
-
-    }
-
-    public void BuyBait(int index)
-    {
-
+        for (int i = 0; i < UIManager.Instance.allCurrentBaits.Count; i++)
+        {
+            if (UIManager.Instance.allCurrentBaits[i].type == typeOfBait)
+            {
+                slotSelection = UIManager.Instance.allCurrentBaits[i];
+                break;
+            }
+        }
+        if (slotSelection != null)
+        {
+            if (slotSelection.currentCost >= GameManager.Instance.playerStats.gold)
+            {
+                slotSelection.AddRemove(true);
+                GameManager.Instance.playerStats.Pay(slotSelection.currentCost);
+            }
+        }
     }
 }

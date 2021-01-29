@@ -3,43 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //bait
-public enum BaitType { PaperBoy, FruitBox, Sign, MarketStand, Perfume, Antenna, Bar, Threadmill }
+public enum BaitTypes { PaperBoy, FruitBox, Sign, MarketStand, Perfume, Antenna, Bar, Threadmill, Iphone }
 //entity
 public enum EntityStatus { Neutral, Enemy, Ally }
 //corporation
-public enum CorpoType { Perfumery, Grossery, Food, Sport, Tech, Delivery }
+//public enum CorpoType { Perfumery = BaitType.Perfume, Grossery = BaitType.MarketStand, Food = BaitType.Bar, Sport = BaitType.Threadmill, Tech = BaitType.Antenna, Delivery }
 
 public class DefineType
 {
     //bait
-    public void ChangeBaitType(BaitType type)
+    public void ChangeBaitType(BaitTypes type)
     {
-        BaitType switchBait = type;
+        BaitTypes switchBait = type;
 
         switch (switchBait)
         {
-            case BaitType.PaperBoy:
+            case BaitTypes.PaperBoy:
                 Debug.Log("PaperBoy  Bait");
                 break;
-            case BaitType.FruitBox:
+            case BaitTypes.FruitBox:
                 Debug.Log("FruitBox  Bait");
                 break;
-            case BaitType.Sign:
+            case BaitTypes.Sign:
                 Debug.Log("Sign  Bait");
                 break;
-            case BaitType.MarketStand:
+            case BaitTypes.MarketStand:
                 Debug.Log("MarketStand  Bait");
                 break;
-            case BaitType.Perfume:
+            case BaitTypes.Perfume:
                 Debug.Log("Perfume  Bait");
                 break;
-            case BaitType.Antenna:
+            case BaitTypes.Antenna:
                 Debug.Log("Antenna Bait");
                 break;
-            case BaitType.Bar:
+            case BaitTypes.Bar:
                 Debug.Log("Bar Bait");
                 break;
-            case BaitType.Threadmill:
+            case BaitTypes.Threadmill:
                 Debug.Log("Threadmill Bait");
                 break;
         }
@@ -63,7 +63,7 @@ public class DefineType
         }
     }
     //Corporation
-    public void ChangeFirmeType(CorpoType type)
+    /*public void ChangeFirmeType(CorpoType type)
     {
         CorpoType switchCorpo = type;
 
@@ -88,5 +88,5 @@ public class DefineType
                 Debug.Log("Delivery Type");
                 break;
         }
-    }
+    }*/
 }

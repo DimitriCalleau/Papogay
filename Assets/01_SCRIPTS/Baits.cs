@@ -5,6 +5,7 @@ using UnityEngine;
 public class Baits : MonoBehaviour
 {
     #region Stats
+    public BaitTypes type;
     public int upgradeIndex;
     public Location location;
 
@@ -25,6 +26,9 @@ public class Baits : MonoBehaviour
     public LayerMask ennemisMask = -1;
     #endregion
 
+    [Header("UI")]
+    public List<Sprite> ui_Sprites;
+
     public Baits()
     {
 
@@ -42,6 +46,7 @@ public class Baits : MonoBehaviour
         this.upgradeIndex += 1;
         this.currentCost = costs[upgradeIndex];
         this.usure += this.usure * (this.usureMax[this.upgradeIndex] / this.currentUsureMax);
+        this.currentUsureMax = this.usureMax[this.upgradeIndex];
     }
 
     public void LoseLife(int damage)
