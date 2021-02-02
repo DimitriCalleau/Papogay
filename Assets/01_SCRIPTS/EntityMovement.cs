@@ -10,8 +10,7 @@ public class EntityMovement : Entity
     public float targetTreshold, RandomSelectorRadius;
     //[HideInInspector]
     public float minWaitingTime, maxWaitingTime, waitingDelay;
-    //[HideInInspector]
-    public bool closeToTarget, noEnmLeft;
+    public bool noEnmLeft;
 
     GameObject[] possibleTargets;
 
@@ -36,39 +35,49 @@ public class EntityMovement : Entity
 
     void Update()
     {
+        switch (CloseToTarget())
+        {
+            case true:
+                waitingDelay -= Time.deltaTime;
+                break;
+
+            case false:
+                destination.y = entityNavMeshAgent.baseOffset;
+                entityNavMeshAgent.destination = destination;
+                break;
+        }
+
+        //not working, the idea behind is to make the entity stop when in targetTreshold
+        /*
         if (CloseToTarget() == true)
         {
-            waitingDelay -= Time.deltaTime;
+            destination = entityNavMeshAgent.transform.position;
+            destination.y = entityNavMeshAgent.baseOffset;
         }
+        */
 
         if (status != EntityStatus.Enemy)
         {
-            if (Vector3.Distance(transform.position, destination) <= targetTreshold && waitingDelay < 0)
+            if (CloseToTarget() == true && waitingDelay < 0)
             {
                 waitingDelay = Random.Range(minWaitingTime, maxWaitingTime);
                 Target(status);
             }
         }
-        else if (status == EntityStatus.Enemy && waitingDelay < 0)
+        else if (status == EntityStatus.Enemy)
         {
-            if (Vector3.Distance(transform.position, destination) <= targetTreshold)
+            if (CloseToTarget() == true && (possibleTargets.Length == 0 || possibleTargets == null) && waitingDelay < 0)
             {
+                Debug.Log("no enm detected");
+                waitingDelay = Random.Range(minWaitingTime, maxWaitingTime);
                 Target(status);
-
-                if (noEnmLeft = false && (possibleTargets == null || possibleTargets.Length == 0))
-                {
-                    noEnmLeft = true;
-                }
             }
-
-            if (noEnmLeft == true)
+            else if (possibleTargets != null && noEnmLeft == false)
             {
-                Debug.Log("cum");
+                Debug.Log("enm detected + targets available");
+                Target(status);
             }
         }
-
-        destination.y = entityNavMeshAgent.baseOffset;
-        entityNavMeshAgent.destination = destination;
     }
 
     public Vector3 Target(EntityStatus status)
@@ -87,13 +96,22 @@ public class EntityMovement : Entity
 
 #region
             case EntityStatus.Enemy:
+                possibleTargets = GameObject.FindGameObjectsWithTag("TargetForEnemyEntity");
                 if (PlayerInRange(playerDetectionRadius, GameManager.Instance.player.transform.position) == true)
                 {
                     destination = GameManager.Instance.player.transform.position;
                 }
-                else if (possibleTargets != null || possibleTargets.Length != 0)
+                else if (possibleTargets.Length == 0 || possibleTargets == null)
                 {
-                    possibleTargets = GameObject.FindGameObjectsWithTag("TargetForEnemyEntity");
+                    destination = transform.position + Random.insideUnitSphere * RandomSelectorRadius;
+                    if (NavMesh.SamplePosition(destination, out navMeshHit, RandomSelectorRadius, NavMesh.AllAreas))
+                    {
+                        destination = navMeshHit.position;
+                    }
+                    noEnmLeft = true;
+                }
+                else
+                {
                     float shortDistance = Mathf.Infinity;
 
                     for (int i = 0; i < possibleTargets.Length; i++)
@@ -105,14 +123,6 @@ public class EntityMovement : Entity
                             destination = possibleTargets[i].transform.position;
                             noEnmLeft = false;
                         }
-                    }
-                }
-                else//s'active pas 
-                {
-                    destination = transform.position + Random.insideUnitSphere * RandomSelectorRadius;
-                    if (NavMesh.SamplePosition(destination, out navMeshHit, RandomSelectorRadius, NavMesh.AllAreas))
-                    {
-                        destination = navMeshHit.position;
                     }
                 }
                 break;
@@ -135,7 +145,7 @@ public class EntityMovement : Entity
                 }
                 else if (GameManager.Instance.builder.firmeLocation == null)
                 {
-                    //Destroy(gameObject);
+                    Destroy(gameObject);
                 }
                 break;
 #endregion
@@ -156,7 +166,7 @@ public class EntityMovement : Entity
 
     public bool CloseToTarget()
     {
-        if (Vector3.Distance(transform.position, destination) <= targetTreshold)
+        if (Vector3.Distance(entityNavMeshAgent.transform.position, destination) <= targetTreshold)
         {
             GetComponent<MeshRenderer>().material.color = Color.green;//delete
             return true;
