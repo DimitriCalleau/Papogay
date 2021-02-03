@@ -39,6 +39,7 @@ public class Baits : MonoBehaviour
         this.upgradeIndex = 0;
         this.currentUsureMax = this.usureMax[upgradeIndex];
         this.usurePercentage = this.currentUsureMax;
+        this.currentCost = costs[upgradeIndex];
     }
 
     public void Upgrade()

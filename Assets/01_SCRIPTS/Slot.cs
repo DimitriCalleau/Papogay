@@ -31,6 +31,8 @@ public class Slot
 
         thisShopSlot = GameObject.Instantiate(UIManager.Instance.shopSlotPrefab);
         thisShopSlot.transform.SetParent(UIManager.Instance.shopPanel.transform);
+        thisShopSlot.GetComponent<Button>().onClick.AddListener(this.BuyBait);
+
         UpdateDisplay();
     }
     void UpdateDisplay()
@@ -48,7 +50,15 @@ public class Slot
         currentUIImage = thisBait.ui_Sprites[thisBait.upgradeIndex];
         UpdateDisplay();
     }
-
+    public void BuyBait()
+    {
+        Debug.Log("buy : " + this.baitPrefab.name);
+        if (currentCost <= GameManager.Instance.playerStats.gold)
+        {
+            AddRemove(true);
+            GameManager.Instance.playerStats.Pay(currentCost);
+        }
+    }
     public void AddRemove(bool addRemove)
     {
         switch (addRemove)
@@ -57,6 +67,21 @@ public class Slot
                 nbBaits -= 1;
                 UpdateDisplay();
                 break;            
+            case true:
+                nbBaits += 1;
+                UpdateDisplay();
+                break;
+        }
+    }
+
+    public void SelectDeselect(bool selection)
+    {
+        switch (selection)
+        {
+            case false:
+                nbBaits -= 1;
+                UpdateDisplay();
+                break;
             case true:
                 nbBaits += 1;
                 UpdateDisplay();

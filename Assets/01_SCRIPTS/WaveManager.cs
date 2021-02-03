@@ -10,6 +10,7 @@ public class WaveManager
     public int nbNeutralEntities;
     public int nbEnemyEntities;
 
+    public int waveindex;
     public void AddRemoveEntity(EntityStatus status, bool addOrRemove)
     {
         if(addOrRemove == true)
@@ -46,5 +47,13 @@ public class WaveManager
                     break;
             }
         }
+    }
+
+    public void Reset()
+    {
+        waveindex = 0;
+        nbAllyEntities = 0;
+        nbNeutralEntities = 0;
+        nbEnemyEntities = 0;
     }
 }

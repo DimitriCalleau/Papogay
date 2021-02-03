@@ -4,38 +4,44 @@ using UnityEngine;
 
 public class BaitInventory
 {
-    public GameObject selection;
+    public Slot selection;
     public int selectionIndex;
     public void SwitchBaitSelection(bool rightOrLeft)
     {
-        Debug.Log(selectionIndex);
         switch (rightOrLeft)
         {
             case true:
-                if(selectionIndex == UIManager.Instance.allCurrentBaits.Count)
+                selectionIndex += 1;
+                if (selectionIndex == UIManager.Instance.allCurrentBaits.Count)
                 {
                     selectionIndex = 0;
                 }
-                else
-                {
-                    selectionIndex += 1;
-                }
                 break;
             case false:
-                if (selectionIndex == 0)
+                selectionIndex -= 1;
+                if (selectionIndex == -1)
                 {
-                    selectionIndex = UIManager.Instance.allCurrentBaits.Count;
-                }
-                else
-                {
-                    selectionIndex -= 1;
+                    selectionIndex = UIManager.Instance.allCurrentBaits.Count - 1;
                 }
                 break;
         }
         if(UIManager.Instance.allCurrentBaits.Count > 0)
         {
-            selection = UIManager.Instance.allCurrentBaits[selectionIndex].baitPrefab;
-            UIManager.Instance.selectionTruc.transform.position = selection.transform.position;
+            selection = UIManager.Instance.allCurrentBaits[selectionIndex];
+        }
+    }
+
+    public void OpenInventory()
+    {
+        UIManager.Instance.inventoryOpened = !UIManager.Instance.inventoryOpened;
+        switch (UIManager.Instance.inventoryOpened)
+        {
+            case true:
+                UIManager.Instance.inventoryPanel.SetActive(true);
+                break;
+            case false:
+                UIManager.Instance.inventoryPanel.SetActive(false);
+                break;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCam;
     public GameObject player;
+    public GameObject baitManager;
 
     public GameState gameState = new GameState();
     public MenuManager menuManager = new MenuManager();
@@ -43,8 +45,6 @@ public class GameManager : MonoBehaviour
     public PlayerStats playerStats = new PlayerStats();
 
     public List<Location> allLocations;
-    public List<GameObject> allBaits;//Tous les baits du jeu
-
 
     #region Events
     public event Action StartWave;
@@ -62,15 +62,6 @@ public class GameManager : MonoBehaviour
         if (EndWave != null)
         {
             EndWave();
-        }
-    }
-
-    public event Action StartGame;
-    public void EventStartGame()
-    {
-        if (StartGame != null)
-        {
-            StartGame();
         }
     }
 
@@ -92,4 +83,11 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
+    public void Retry()
+    {
+        waveManager.Reset();
+        UIManager.Instance.ResetMenus();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("retrying like a bitch");
+    }
 }

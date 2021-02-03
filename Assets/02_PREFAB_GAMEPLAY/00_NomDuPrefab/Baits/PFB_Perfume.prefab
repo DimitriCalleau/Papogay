@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6065224144304386527}
   - component: {fileID: 6065224144304386520}
+  - component: {fileID: -8169976624040830328}
+  - component: {fileID: -1533353702307121629}
   m_Layer: 0
   m_Name: PFB_Perfume
   m_TagString: Untagged
@@ -59,6 +61,53 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   ui_Sprites:
-  - {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 21300000, guid: 7491407f73a0ebc42845c3e04091dcdb, type: 3}
+  - {fileID: 21300000, guid: 9478c094c676d214d8b28d14bdd6553c, type: 3}
+  - {fileID: 21300000, guid: 2b118317d13a2cb4eae9d25e3214b7df, type: 3}
+--- !u!33 &-8169976624040830328
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065224144304386526}
+  m_Mesh: {fileID: -3678738297345544280, guid: 8148501178fbf064f9d65d05bec987b3, type: 3}
+--- !u!23 &-1533353702307121629
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065224144304386526}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b78019f3a5ff6ce48b958c8534d430cf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

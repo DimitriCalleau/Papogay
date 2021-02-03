@@ -6,7 +6,7 @@
             "id": "8b8115c6-6d8c-4a52-bdf0-636fdac8079f",
             "actions": [
                 {
-                    "name": "Place",
+                    "name": "PlaceBait",
                     "type": "Button",
                     "id": "d6d697d6-fb24-4935-9304-ca5a1c1c97dc",
                     "expectedControlType": "Button",
@@ -28,17 +28,41 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "RotateTrap",
+                    "type": "Value",
+                    "id": "8fb76f3a-fdd0-4c8d-9232-2d96e714515d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "4c2f5bd2-e27a-478f-bcee-693307e785eb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "a5eb572d-7707-4e7e-889c-ce821aab619b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "812b16c9-8ffc-409b-a999-0edc44dcf1be",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Place",
+                    "action": "PlaceBait",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -61,6 +85,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchBaitLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "818eb4d1-cb25-48b1-a55a-bc4cde9a96f5",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateTrap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b3517cf6-1ca2-4bc1-a160-a6c274b1e0ae",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d19e6abe-8610-4a62-8540-385cf5249a32",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
