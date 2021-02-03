@@ -7,7 +7,6 @@ public class InputEvents : MonoBehaviour
 {
     InputPapogay playerInputs;
     private static InputEvents instance = null;
-
     // Game Instance Singleton
     public static InputEvents Instance
     {
@@ -28,27 +27,61 @@ public class InputEvents : MonoBehaviour
 
         playerInputs = new InputPapogay();
 
-        playerInputs.Actions.Place.performed += ctx => OnPlaceBait();
-        playerInputs.Actions.SwitchBaitRight.performed += ctx => OnSwitchSelection(true);
-        playerInputs.Actions.SwitchBaitLeft.performed += ctx => OnSwitchSelection(false);
+        if(UIManager.Instance != null && UIManager.Instance.inventoryOpened == true)
+        {
+            playerInputs.Actions.PlaceBait.performed += ctx => OnPlaceBait();
+            playerInputs.Actions.SwitchBaitRight.performed += ctx => OnSwitchSelection(true);
+            playerInputs.Actions.SwitchBaitLeft.performed += ctx => OnSwitchSelection(false);
+            playerInputs.Actions.RotateTrap.performed += ctx => OnRotateBait(ctx.ReadValue<Vector2>());
+        }
+        playerInputs.Actions.Inventory.performed += ctx => OnOpenInventory();
+        playerInputs.Actions.Escape.performed += ctx => OnPause();
     }
 
     //Place Bait
-    public event Action OnPlace;
+    public event Action Place;
     void OnPlaceBait()
     {
-        if(OnPlace != null)
+        if (Place != null)
         {
-            OnPlace();
+            Place();
         }
     }
+
+    public event Action<Vector2> Rotate;
+    void OnRotateBait(Vector2 _whichWay)
+    {
+        if (Rotate != null)
+        {
+            Rotate(_whichWay);
+        }
+    }
+
     //InventorySelection
     public event Action<bool> SwitchSelection;
     void OnSwitchSelection(bool _witchSide)
     {
-        if(SwitchSelection != null)
+        if (SwitchSelection != null)
         {
             SwitchSelection(_witchSide);
+        }
+    }
+    //InventorySelection
+    public event Action OpenInventory;
+    void OnOpenInventory()
+    {
+        if (OpenInventory != null)
+        {
+            OpenInventory();
+        }
+    }
+
+    public event Action SetPause;
+    void OnPause()
+    {
+        if (SetPause != null)
+        {
+            SetPause();
         }
     }
 

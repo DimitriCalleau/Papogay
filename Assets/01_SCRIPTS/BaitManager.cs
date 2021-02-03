@@ -2,88 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaitManager : MonoBehaviour
+public class BaitManager
 {
-    Location closestLocation;
-    Location selectedLocation;
-
-    int baitRotation;
-
-    public GameObject preview;
-
-    void FixedUpdate()
+    public int baitRotation;
+    public float cooldownTimer;
+    public void PlaceTrap()
     {
-        float minDist = Mathf.Infinity;
-        for (int i = 0; i < GameManager.Instance.allLocations.Count; i++)
+        Slot inventorySelection = UIManager.Instance.inventory.selection;
+        if (cooldownTimer <= 0)
         {
-            float dist = Vector3.Distance(transform.position, GameManager.Instance.allLocations[i].transform.position);
-            if(dist <= minDist)
+            if (inventorySelection.nbBaits > 0 && inventorySelection != null)
             {
-                minDist = dist;
-                closestLocation = GameManager.Instance.allLocations[i];
-                if(closestLocation.occupied == false)
-                {
-                    selectedLocation = closestLocation;
-                }
+                GameObject bait = GameObject.Instantiate(inventorySelection.baitPrefab, UIManager.Instance.selectedLocation.transform.position, Quaternion.Euler(0, baitRotation, 0));
+                bait.GetComponent<Baits>().InitBait();
+                bait.GetComponent<Baits>().location = UIManager.Instance.selectedLocation;
+                UIManager.Instance.selectedLocation.occupied = true;
+                inventorySelection.AddRemove(false);
+                cooldownTimer = UIManager.Instance.timeBetweenBaits;
+            }
+            else
+                Debug.Log("not enough gold");
+        }
+    }
+
+    public void MovePreview(Location location, int rotation)
+    {
+        if(UIManager.Instance.inventory.selection != null)
+        {
+            UIManager.Instance.preview.GetComponent<MeshFilter>().mesh = UIManager.Instance.inventory.selection.baitPrefab.GetComponent<MeshFilter>().sharedMesh;
+        }
+        if (location != null)
+        {
+            UIManager.Instance.preview.transform.position = location.transform.position;
+            UIManager.Instance.preview.transform.rotation = Quaternion.Euler(0, rotation, 0);
+        }
+    }
+
+    public void RotateSelectedBait(Vector2 _whichDirection)
+    {
+        if (_whichDirection.y > 0)
+        {
+            baitRotation += 90;
+            if (baitRotation > 360)
+            {
+                baitRotation = 90;
             }
         }
-        MovePreview(selectedLocation, baitRotation);
-    }
-    void PlaceTrap()
-    {
-        GameObject inventorySelection = UIManager.Instance.inventory.selection;
-        int playerGold = GameManager.Instance.playerStats.gold;
-
-        if (playerGold > UIManager.Instance.inventory.selection.GetComponent<Baits>().currentCost && inventorySelection != null)
-        {
-            GameObject bait = GameObject.Instantiate(inventorySelection, selectedLocation.transform.position, Quaternion.Euler(0, baitRotation, 0));
-            bait.GetComponent<Baits>().location = selectedLocation;
-            bait.GetComponent<Baits>().InitBait();
-            selectedLocation.occupied = true;
-            GameManager.Instance.playerStats.Pay(inventorySelection.GetComponent<Baits>().currentCost);
-        }
         else
-            Debug.Log("not enough gold");
-    }
-
-    void MovePreview(Location location, int rotation)
-    {
-        if(location != null)
         {
-            preview.transform.position = location.transform.position;
-            preview.transform.Rotate(new Vector3(0, rotation, 0));
+            baitRotation -= 90;
+            if (baitRotation < 0)
+            {
+                baitRotation = 270;
+            }
         }
-    }
-
-    public void RotateBait(bool rotationDirection)
-    {
-        switch (rotationDirection)
-        {
-            case true:
-                baitRotation += 90;
-                if (baitRotation > 360)
-                {
-                    baitRotation = 90;
-                }
-                break;
-            case false:
-                baitRotation -= 90;
-                if (baitRotation < 0)
-                {
-                    baitRotation = 270;
-                }
-                break;
-        }
-    }
-    //Security Events
-    void OnEnable()
-    {
-        if(InputEvents.Instance !=null)
-            InputEvents.Instance.OnPlace += PlaceTrap;
-    }
-    void OnDisable()
-    {
-        if (InputEvents.Instance != null)
-            InputEvents.Instance.OnPlace -= PlaceTrap;
+        Debug.Log(baitRotation);
     }
 }
