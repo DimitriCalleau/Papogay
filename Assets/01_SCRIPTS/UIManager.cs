@@ -92,9 +92,9 @@ public class UIManager : MonoBehaviour
 
     public void AddFirstTraps()
     {
-        reward.AddOrUpgradeBait(allBaits[0], BaitTypes.PaperBoy, 10);
-        reward.AddOrUpgradeBait(allBaits[1], BaitTypes.FruitBox, 10);
-        reward.AddOrUpgradeBait(allBaits[2], BaitTypes.Sign, 10);
+        reward.AddOrUpgradeBait(allBaits[0], BaitType.PaperBoy, 10);
+        reward.AddOrUpgradeBait(allBaits[1], BaitType.FruitBox, 10);
+        reward.AddOrUpgradeBait(allBaits[2], BaitType.Sign, 10);
         inventory.SwitchBaitSelection(true);
         GameManager.Instance.EventStartWave();
     }

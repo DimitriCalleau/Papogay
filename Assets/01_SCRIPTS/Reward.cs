@@ -7,7 +7,7 @@ using System;
 public class Reward
 {
     public GameObject selectedReward;
-    public List<BaitTypes> loots;
+    public List<BaitType> loots;
 
     public void RewardSelection()
     {
@@ -20,7 +20,7 @@ public class Reward
             }
         }
     }
-    public void AddOrUpgradeBait(GameObject baitPrefab, BaitTypes typeOfBait, int baitAmount)
+    public void AddOrUpgradeBait(GameObject baitPrefab, BaitType typeOfBait, int baitAmount)
     {
         bool upgraded = false;
         if (UIManager.Instance.allCurrentBaits.Count > 0)
@@ -42,7 +42,7 @@ public class Reward
         }
     }
 
-    public void AddLootType(BaitTypes firmeType)
+    public void AddLootType(BaitType firmeType)
     {
         loots.Add(firmeType);
     }
