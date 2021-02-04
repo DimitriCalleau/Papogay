@@ -25,8 +25,8 @@ public class Slot
         thisBait.InitBait();
         currentCost = thisBait.currentCost;
         currentUIImage = thisBait.ui_Sprites[thisBait.upgradeIndex];
-
         thisInventorySlot = GameObject.Instantiate(UIManager.Instance.inventorySlotPrefab);
+        Debug.Log(thisInventorySlot.name);
         thisInventorySlot.transform.SetParent(UIManager.Instance.inventoryPanel.transform);
 
         thisShopSlot = GameObject.Instantiate(UIManager.Instance.shopSlotPrefab);

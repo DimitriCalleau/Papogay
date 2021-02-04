@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-//[System.Serializable]
+[System.Serializable]
 public class Reward
 {
     public GameObject selectedReward;
@@ -22,6 +22,7 @@ public class Reward
     }
     public void AddOrUpgradeBait(GameObject baitPrefab, BaitTypes typeOfBait, int baitAmount)
     {
+    
         bool upgraded = false;
         if (UIManager.Instance.allCurrentBaits.Count > 0)
         {
@@ -39,6 +40,7 @@ public class Reward
         {
             Slot newSlot = new Slot(baitPrefab, baitAmount, typeOfBait);
             UIManager.Instance.allCurrentBaits.Add(newSlot);
+            Debug.Log("test");
         }
     }
 

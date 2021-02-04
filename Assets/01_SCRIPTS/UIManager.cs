@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -38,10 +39,12 @@ public class UIManager : MonoBehaviour
     public GameObject inventorySlotPrefab;
     public GameObject shopSlotPrefab;
 
-    [Header("Panels")]
+    //[Header("Panels")]
     #region Panels
     public GameObject startPanel;
     public GameObject rewardPanel;
+    public GameObject rewardButton;
+    public GameObject firstTrapsButton;
     public GameObject shopPanel;
     public GameObject inventoryPanel;
     public GameObject pausePanel;
@@ -66,7 +69,6 @@ public class UIManager : MonoBehaviour
         {
             baitManager.cooldownTimer -= Time.deltaTime;
         }
-        Debug.Log(GameManager.Instance.gameState.pause);
     }
     void FixedUpdate()
     {
@@ -97,6 +99,11 @@ public class UIManager : MonoBehaviour
         reward.AddOrUpgradeBait(allBaits[2], BaitTypes.Sign, 10);
         inventory.SwitchBaitSelection(true);
         GameManager.Instance.EventStartWave();
+        GameManager.Instance.gameState.SetPause(false);
+        GameManager.Instance.gameState.start = true;
+        rewardButton.SetActive(true);
+        rewardPanel.SetActive(false);
+        firstTrapsButton.SetActive(false);
     }
     public void AddReward()
     {
@@ -105,13 +112,14 @@ public class UIManager : MonoBehaviour
         reward.selectedReward = null;
         reward.loots.Clear();
         GameManager.Instance.EventStartWave();
+        rewardPanel.SetActive(false);
+        GameManager.Instance.gameState.SetPause(false);
     }
 
     public void Play()
     {
-        startPanel.SetActive(false);
-        GameManager.Instance.gameState.SetPause(false);
-        GameManager.Instance.gameState.start = true;
+        allCurrentBaits.Clear();
+        MenuBaseState(true);
     }
     public void OpenCloseShop()
     {
@@ -167,16 +175,46 @@ public class UIManager : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        MenuBaseState(false);
         GameManager.Instance.gameState.start = false;
-        startPanel.SetActive(true);
+        GameManager.Instance.gameState.SetPause(true);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void MenuBaseState(bool state)
+    {
+        switch (state)
+        {
+            case true://Lance la partie
+                startPanel.SetActive(false);
+                rewardPanel.SetActive(true);
+                firstTrapsButton.SetActive(true);
+                break;
+            case false://Retour au menu start
+                startPanel.SetActive(true);
+                rewardPanel.SetActive(false);
+                firstTrapsButton.SetActive(false);
+                break;
+        }
+
         pausePanel.SetActive(false);
         winPanel.SetActive(false);
         losePanel.SetActive(false);
+        rewardButton.SetActive(false);
+        inventoryPanel.SetActive(false);
+        shopPanel.SetActive(false);
+        optionPanel.SetActive(false);
+        creditsPanel.SetActive(false);
     }
-    public void ResetMenus()
+
+    void OpenWinPanel()
     {
-        BackToMainMenu();
-        allCurrentBaits.Clear();
+        winPanel.SetActive(true);
+    }
+
+    void OpenLosePanel()
+    {
+        losePanel.SetActive(true);
     }
     void OnEnable()
     {
@@ -186,6 +224,8 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.OpenInventory += inventory.OpenInventory;
         InputEvents.Instance.SetPause += Pause;
         InputEvents.Instance.SetPause += CloseShop;
+        GameManager.Instance.Win += OpenWinPanel;
+        GameManager.Instance.Lose += OpenLosePanel;
     }
     void OnDisable()
     {
@@ -195,5 +235,7 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.OpenInventory -= inventory.OpenInventory;
         InputEvents.Instance.SetPause -= Pause;
         InputEvents.Instance.SetPause -= CloseShop;
+        GameManager.Instance.Win -= OpenWinPanel;
+        GameManager.Instance.Lose -= OpenLosePanel;
     }
 }
