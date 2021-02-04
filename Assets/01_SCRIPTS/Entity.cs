@@ -5,11 +5,9 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public EntityStatus status;
-    public BaitTypes corpoType;
-    public int healthMax;
-    public float moveSpeed;
-    public float playerDetectionRadius;
-    
+    public int healthMax, damageAlly, damageEnm;
+    public float moveSpeed, playerDetectionRadius, targetTreshold, RandomSelectorRadius, entityDamageCooldown;
+
     //Spawn Neutral
     //status = EntityStatus.Neutral
     //Spawn Enemy

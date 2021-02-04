@@ -3,43 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //bait
-public enum BaitTypes { PaperBoy, FruitBox, Sign, MarketStand, Perfume, Antenna, Bar, Threadmill, Iphone }
+public enum BaitType { PaperBoy, FruitBox, Sign, MarketStand, Perfume, Antenna, Bar, Threadmill, Iphone }
 //entity
 public enum EntityStatus { Neutral, Enemy, Ally }
-//corporation
-//public enum CorpoType { Perfumery = BaitType.Perfume, Grossery = BaitType.MarketStand, Food = BaitType.Bar, Sport = BaitType.Threadmill, Tech = BaitType.Antenna, Delivery }
 
 public class DefineType
 {
     //bait
-    public void ChangeBaitType(BaitTypes type)
+    public void ChangeBaitType(BaitType type)
     {
-        BaitTypes switchBait = type;
+        BaitType switchBait = type;
 
         switch (switchBait)
         {
-            case BaitTypes.PaperBoy:
+            case BaitType.PaperBoy:
                 Debug.Log("PaperBoy  Bait");
                 break;
-            case BaitTypes.FruitBox:
+            case BaitType.FruitBox:
                 Debug.Log("FruitBox  Bait");
                 break;
-            case BaitTypes.Sign:
+            case BaitType.Sign:
                 Debug.Log("Sign  Bait");
                 break;
-            case BaitTypes.MarketStand:
+            case BaitType.MarketStand:
                 Debug.Log("MarketStand  Bait");
                 break;
-            case BaitTypes.Perfume:
+            case BaitType.Perfume:
                 Debug.Log("Perfume  Bait");
                 break;
-            case BaitTypes.Antenna:
+            case BaitType.Antenna:
                 Debug.Log("Antenna Bait");
                 break;
-            case BaitTypes.Bar:
+            case BaitType.Bar:
                 Debug.Log("Bar Bait");
                 break;
-            case BaitTypes.Threadmill:
+            case BaitType.Threadmill:
                 Debug.Log("Threadmill Bait");
                 break;
         }
@@ -62,31 +60,4 @@ public class DefineType
                 break;
         }
     }
-    //Corporation
-    /*public void ChangeFirmeType(CorpoType type)
-    {
-        CorpoType switchCorpo = type;
-
-        switch (switchCorpo)
-        {
-            case CorpoType.Perfumery:
-                Debug.Log("Perfumery  Type");
-                break;
-            case CorpoType.Grossery:
-                Debug.Log("Grossery  Type");
-                break;
-            case CorpoType.Food:
-                Debug.Log("Food  Type");
-                break;
-            case CorpoType.Sport:
-                Debug.Log("Sport  Type");
-                break;
-            case CorpoType.Tech:
-                Debug.Log("Tech  Type");
-                break;
-            case CorpoType.Delivery:
-                Debug.Log("Delivery Type");
-                break;
-        }
-    }*/
 }
