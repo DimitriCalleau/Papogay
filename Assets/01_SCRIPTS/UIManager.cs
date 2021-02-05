@@ -210,11 +210,15 @@ public class UIManager : MonoBehaviour
     void OpenWinPanel()
     {
         winPanel.SetActive(true);
+        GameManager.Instance.gameState.SetPause(true);
+        GameManager.Instance.gameState.start = false;
     }
 
     void OpenLosePanel()
     {
         losePanel.SetActive(true);
+        GameManager.Instance.gameState.SetPause(true);
+        GameManager.Instance.gameState.start = false;
     }
     void OnEnable()
     {

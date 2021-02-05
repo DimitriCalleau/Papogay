@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     public GameObject baitManager;
 
     public GameState gameState = new GameState();
-    public MenuManager menuManager = new MenuManager();
+    public Wave menuManager = new Wave();
 
     public WaveManager waveManager = new WaveManager();
     public FirmeBuilder builder = new FirmeBuilder();
@@ -86,5 +86,14 @@ public class GameManager : MonoBehaviour
     {
         waveManager.Reset();
         UIManager.Instance.Play();
+    }
+
+    void OnEnable()
+    {
+        StartWave += waveManager.StartWave;
+    }
+    void OnDisable()
+    {
+        StartWave -= waveManager.StartWave;
     }
 }

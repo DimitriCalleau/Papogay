@@ -49,6 +49,11 @@ public class WaveManager
         }
     }
 
+    public void StartWave()
+    {
+
+    }
+
     public void Reset()
     {
         waveindex = 0;
