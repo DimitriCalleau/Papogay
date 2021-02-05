@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Wave
 {
-    public List<""> waveFirmes;
+    //public List<""> waveFirmes;
     public int nbFirmesMax;
 }
