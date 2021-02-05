@@ -7,7 +7,7 @@ using System;
 [System.Serializable]
 public class Slot
 {
-    public BaitTypes type;
+    public BaitType type;
     public GameObject baitPrefab;
     public int nbBaits;
     public int currentCost;
@@ -15,7 +15,7 @@ public class Slot
     public GameObject thisInventorySlot;
     public GameObject thisShopSlot;
 
-    public Slot(GameObject bait, int amount, BaitTypes baitType)
+    public Slot(GameObject bait, int amount, BaitType baitType)
     {
         baitPrefab = bait;
         nbBaits = amount;

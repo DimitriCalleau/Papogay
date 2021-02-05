@@ -5,7 +5,7 @@ using UnityEngine;
 public class Baits : MonoBehaviour
 {
     #region Stats
-    public BaitTypes type;
+    public BaitType type;
     public int upgradeIndex;
     public Location location;
 

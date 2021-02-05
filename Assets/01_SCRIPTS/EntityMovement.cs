@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,16 +8,15 @@ using UnityEngine.AI;
 public class EntityMovement : Entity
 {
     //[HideInInspector]
-    public float targetTreshold, RandomSelectorRadius;
-    //[HideInInspector]
     public float minWaitingTime, maxWaitingTime, waitingDelay;
+    //[HideInInspector]
     public bool noEnmLeft;
 
     GameObject[] possibleTargets;
 
     NavMeshAgent entityNavMeshAgent;
     NavMeshHit navMeshHit;
-    Vector3 destination;
+    public Vector3 destination;
 
     void Start()
     {
@@ -68,13 +68,11 @@ public class EntityMovement : Entity
         {
             if (CloseToTarget() == true && (possibleTargets.Length == 0 || possibleTargets == null) && waitingDelay < 0)
             {
-                Debug.Log("no enm detected");
                 waitingDelay = Random.Range(minWaitingTime, maxWaitingTime);
                 Target(status);
             }
             else if (possibleTargets != null && noEnmLeft == false)
             {
-                Debug.Log("enm detected + targets available");
                 Target(status);
             }
         }
@@ -84,7 +82,7 @@ public class EntityMovement : Entity
     {
         switch (status)
         {
-#region
+            #region
             case EntityStatus.Neutral:
                 destination = transform.position + Random.insideUnitSphere * RandomSelectorRadius;
                 if (NavMesh.SamplePosition(destination, out navMeshHit, RandomSelectorRadius, NavMesh.AllAreas))
@@ -92,9 +90,9 @@ public class EntityMovement : Entity
                     destination = navMeshHit.position;
                 }
                 break;
-#endregion
+            #endregion
 
-#region
+            #region
             case EntityStatus.Enemy:
                 possibleTargets = GameObject.FindGameObjectsWithTag("TargetForEnemyEntity");
                 if (PlayerInRange(playerDetectionRadius, GameManager.Instance.player.transform.position) == true)
@@ -126,9 +124,9 @@ public class EntityMovement : Entity
                     }
                 }
                 break;
-#endregion
+            #endregion
 
-#region
+            #region
             case EntityStatus.Ally:
                 float shortestDistance = Mathf.Infinity;
                 if (GameManager.Instance.builder.firmeLocation != null)
@@ -148,9 +146,8 @@ public class EntityMovement : Entity
                     Destroy(gameObject);
                 }
                 break;
-#endregion
+                #endregion
         }
-
         return destination;
     }
 
@@ -168,118 +165,11 @@ public class EntityMovement : Entity
     {
         if (Vector3.Distance(entityNavMeshAgent.transform.position, destination) <= targetTreshold)
         {
-            GetComponent<MeshRenderer>().material.color = Color.green;//delete
+            //GetComponent<MeshRenderer>().material.color = Color.green;//used as a debug
             return true;
         }
         else
-            GetComponent<MeshRenderer>().material.color = Color.red;//delete
+            //GetComponent<MeshRenderer>().material.color = Color.red;//used as a debug
             return false;
     }
 }
-
-/*
-     void Update()
-{
-    destination = Target(status);
-
-    waitingDelay -= Time.deltaTime;
-    entityNavMeshAgent.destination = destination;
-
-    if (Vector3.Distance(entityNavMeshAgent.transform.position, destination) >= targetTreshold && gotATarget == true && waitingDelay < 0)
-    {
-        waitingDelay = Random.Range(minWaitingTime, maxWaitingTime);
-        gotATarget = false;
-    }
-    else if (Vector3.Distance(entityNavMeshAgent.transform.position, destination) <= targetTreshold)
-    {
-        Debug.Log("cum");
-    }
-}
-
-public Vector3 Target(EntityStatus status)
-{
-    switch (status)
-    {
-        #region
-        case EntityStatus.Neutral:
-            Debug.Log(Vector3.Distance(entityNavMeshAgent.transform.position, destination));
-
-            if (waitingDelay <= 0 && Vector3.Distance(entityNavMeshAgent.transform.position, destination) >= targetTreshold)
-            {
-                destination = transform.position + Random.insideUnitSphere * RandomSelectorRadius;
-                destination.y = entityNavMeshAgent.baseOffset;
-                if (NavMesh.SamplePosition(destination, out navMeshHit, RandomSelectorRadius, NavMesh.AllAreas))
-                {
-                    destination = navMeshHit.position;
-                    gotATarget = true;
-                }
-
-                if (Vector3.Distance(entityNavMeshAgent.transform.position, destination) <= targetTreshold)
-                {
-                    Debug.Log("cum");
-                }
-            }
-            break;
-        #endregion
-
-        #region
-        case EntityStatus.Enemy:
-            if (PlayerInRange(playerDetectionRadius, GameManager.Instance.player.transform.position) == true)
-            {
-                destination = GameManager.Instance.player.transform.position;
-            }
-            else if (possibleTargets != null && possibleTargets.Length != 0)
-            {
-                possibleTargets = GameObject.FindGameObjectsWithTag("TargetForEnemyEntity");
-                float shortDistance = Mathf.Infinity;
-
-                for (int i = 0; i < possibleTargets.Length; i++)
-                {
-                    float distance = Vector3.Distance(transform.position, possibleTargets[i].transform.position);
-                    if (distance < shortDistance)
-                    {
-                        shortDistance = distance;
-                        destination = possibleTargets[i].transform.position;
-                    }
-                }
-            }
-            else if (waitingDelay <= 0 && possibleTargets.Length == 0 && Vector3.Distance(entityNavMeshAgent.transform.position, destination) >= targetTreshold)
-            {
-                destination = transform.position + Random.insideUnitSphere * RandomSelectorRadius;
-                destination.y = transform.position.y;
-                if (NavMesh.SamplePosition(destination, out navMeshHit, RandomSelectorRadius, NavMesh.AllAreas))
-                {
-                    destination = navMeshHit.position;
-                    gotATarget = true;
-                }
-            }
-            break;
-        #endregion
-
-        #region
-        case EntityStatus.Ally:
-            float shortestDistance = Mathf.Infinity;
-            if (GameManager.Instance.builder.firmeLocation != null)
-            {
-                for (int i = 0; i < GameManager.Instance.builder.firmeLocation.Count; i++)
-                {
-                    float distance = Vector3.Distance(transform.position, GameManager.Instance.builder.firmeLocation[i].position);
-                    if (distance < shortestDistance)
-                    {
-                        shortestDistance = distance;
-                        destination = GameManager.Instance.builder.firmeLocation[i].position;
-                    }
-                }
-            }
-            else if (GameManager.Instance.builder.firmeLocation == null)
-            {
-                Debug.Log("no corporation");//de-pop??? -> oui
-            }
-            break;
-        #endregion
-    }
-
-    return destination;
-}
-
- */
