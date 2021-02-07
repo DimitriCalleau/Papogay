@@ -90,4 +90,25 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Debug.Log("retrying like a bitch");
     }
+
+    public void NewWave(int _waveIndex)
+    {
+        switch (_waveIndex)
+        {
+            case 1:
+                break;
+                
+            case 2:
+                break;
+                
+            case 3:
+                break;
+                
+            case 4:
+                break;
+                
+            case 5:
+                break;
+        }
+    }
 }
