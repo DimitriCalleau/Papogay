@@ -30,7 +30,7 @@ public class EntityMovement : Entity
 
         entityNavMeshAgent = GetComponent<NavMeshAgent>();
         destination = entityNavMeshAgent.destination;
-        destination.y = entityNavMeshAgent.baseOffset;
+        destination.y = destination.y + entityNavMeshAgent.baseOffset;
     }
 
     void Update()
@@ -42,8 +42,8 @@ public class EntityMovement : Entity
                 break;
 
             case false:
-                destination.y = entityNavMeshAgent.baseOffset;
                 entityNavMeshAgent.destination = destination;
+                destination.y = destination.y + entityNavMeshAgent.baseOffset;
                 break;
         }
 
@@ -52,7 +52,7 @@ public class EntityMovement : Entity
         if (CloseToTarget() == true)
         {
             destination = entityNavMeshAgent.transform.position;
-            destination.y = entityNavMeshAgent.baseOffset;
+            destination.y = destination.y + entityNavMeshAgent.baseOffset;
         }
         */
 

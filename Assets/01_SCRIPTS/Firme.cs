@@ -32,7 +32,7 @@ public class Firme : MonoBehaviour
     {
         anm.SetBool("Destroy", true);
         UIManager.Instance.reward.AddLootType(corpoType);
-        if (anm.GetCurrentAnimatorStateInfo(0).IsName("Destroy"))//check if this is good when the corporation thing is set
+        if (anm.GetCurrentAnimatorStateInfo(0).IsName("Destroy"))//check if this is good when the corporation thing is set, need animator called "Destroy"
         {
             DestroyCorpo();
         }

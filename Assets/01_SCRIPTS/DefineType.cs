@@ -9,6 +9,8 @@ public enum EntityStatus { Neutral, Enemy, Ally }
 
 public class DefineType
 {
+    public GameObject enm;
+
     //bait
     public void ChangeBaitType(BaitType type)
     {
