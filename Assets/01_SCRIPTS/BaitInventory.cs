@@ -10,6 +10,8 @@ public class BaitInventory
     {
         if (UIManager.Instance.inventoryOpened == true)
         {
+            Debug.Log("tryed to select");
+
             switch (rightOrLeft)
             {
                 case true:
@@ -27,10 +29,10 @@ public class BaitInventory
                     }
                     break;
             }
-            if (UIManager.Instance.allCurrentBaits.Count > 0)
-            {
-                selection = UIManager.Instance.allCurrentBaits[selectionIndex];
-            }
+        }
+        if (UIManager.Instance.allCurrentBaits.Count > 0)
+        {
+            selection = UIManager.Instance.allCurrentBaits[selectionIndex];
         }
     }
 

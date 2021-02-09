@@ -65,6 +65,30 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""ff6e6a16-d07d-4f5b-8be4-31590a246fd4"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""76d5f322-2a6f-4b83-9571-92269ca30971"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveCam"",
+                    ""type"": ""Value"",
+                    ""id"": ""0044689e-13e2-4deb-af8f-a44374165cb7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -133,6 +157,83 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                     ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""19a73597-fa87-4b4b-b3c1-0b899a74de2e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""ZQSD"",
+                    ""id"": ""b1c7f9fc-9193-4bbd-b2bc-0bee26ba4782"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""55527adf-b2d2-470d-8d07-7b8bd580d29f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0a57cc0c-55b2-477f-9be7-7069b97d112f"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""f9b5c270-d0de-486a-a58a-5a5338edf07d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1fc77cab-784e-410c-a3f5-d75a76f28d4f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93c43abb-66fd-4c94-9d71-b5a7ccea3f3f"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -147,6 +248,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         m_Actions_RotateTrap = m_Actions.FindAction("RotateTrap", throwIfNotFound: true);
         m_Actions_Inventory = m_Actions.FindAction("Inventory", throwIfNotFound: true);
         m_Actions_Escape = m_Actions.FindAction("Escape", throwIfNotFound: true);
+        m_Actions_Move = m_Actions.FindAction("Move", throwIfNotFound: true);
+        m_Actions_Roll = m_Actions.FindAction("Roll", throwIfNotFound: true);
+        m_Actions_MoveCam = m_Actions.FindAction("MoveCam", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -202,6 +306,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
     private readonly InputAction m_Actions_RotateTrap;
     private readonly InputAction m_Actions_Inventory;
     private readonly InputAction m_Actions_Escape;
+    private readonly InputAction m_Actions_Move;
+    private readonly InputAction m_Actions_Roll;
+    private readonly InputAction m_Actions_MoveCam;
     public struct ActionsActions
     {
         private @InputPapogay m_Wrapper;
@@ -212,6 +319,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         public InputAction @RotateTrap => m_Wrapper.m_Actions_RotateTrap;
         public InputAction @Inventory => m_Wrapper.m_Actions_Inventory;
         public InputAction @Escape => m_Wrapper.m_Actions_Escape;
+        public InputAction @Move => m_Wrapper.m_Actions_Move;
+        public InputAction @Roll => m_Wrapper.m_Actions_Roll;
+        public InputAction @MoveCam => m_Wrapper.m_Actions_MoveCam;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -239,6 +349,15 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 @Escape.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnEscape;
                 @Escape.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnEscape;
                 @Escape.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnEscape;
+                @Move.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMove;
+                @Roll.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRoll;
+                @MoveCam.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMoveCam;
+                @MoveCam.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMoveCam;
+                @MoveCam.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMoveCam;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -261,6 +380,15 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 @Escape.started += instance.OnEscape;
                 @Escape.performed += instance.OnEscape;
                 @Escape.canceled += instance.OnEscape;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
+                @MoveCam.started += instance.OnMoveCam;
+                @MoveCam.performed += instance.OnMoveCam;
+                @MoveCam.canceled += instance.OnMoveCam;
             }
         }
     }
@@ -273,5 +401,8 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         void OnRotateTrap(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
+        void OnMoveCam(InputAction.CallbackContext context);
     }
 }

@@ -33,6 +33,9 @@ public class InputEvents : MonoBehaviour
         playerInputs.Actions.RotateTrap.performed += ctx => OnRotateBait(ctx.ReadValue<Vector2>());
         playerInputs.Actions.Inventory.performed += ctx => OnOpenInventory();
 
+        playerInputs.Actions.MoveCam.performed += ctx => OnMoveCam(ctx.ReadValue<Vector2>()) ;
+        playerInputs.Actions.MoveCam.canceled += ctx => OnMoveCam(Vector2.zero);
+
         if (GameManager.Instance != null && GameManager.Instance.gameState.start == true && GameManager.Instance.gameState.pause == false)
         {
 
@@ -84,6 +87,15 @@ public class InputEvents : MonoBehaviour
         if (SetPause != null)
         {
             SetPause();
+        }
+    }
+
+    public event Action<Vector2> MoveCam;
+    void OnMoveCam(Vector2 camMovement)
+    {
+        if (MoveCam != null)
+        {
+            MoveCam(camMovement);
         }
     }
 

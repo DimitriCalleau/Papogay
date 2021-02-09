@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     #endregion
 
@@ -104,6 +106,9 @@ public class UIManager : MonoBehaviour
         rewardButton.SetActive(true);
         rewardPanel.SetActive(false);
         firstTrapsButton.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void AddReward()
     {
@@ -114,6 +119,9 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.EventStartWave();
         rewardPanel.SetActive(false);
         GameManager.Instance.gameState.SetPause(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void Play()
@@ -142,6 +150,9 @@ public class UIManager : MonoBehaviour
                 {
                     GameManager.Instance.gameState.SetPause(true);
                     pausePanel.SetActive(true);
+
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                 }
                 break;
         }
@@ -153,6 +164,9 @@ public class UIManager : MonoBehaviour
         {
             GameManager.Instance.gameState.SetPause(false);
             pausePanel.SetActive(false);
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         optionPanel.SetActive(false);
         creditsPanel.SetActive(false);
@@ -179,6 +193,9 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.gameState.start = false;
         GameManager.Instance.gameState.SetPause(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void MenuBaseState(bool state)
@@ -212,6 +229,9 @@ public class UIManager : MonoBehaviour
         winPanel.SetActive(true);
         GameManager.Instance.gameState.SetPause(true);
         GameManager.Instance.gameState.start = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void OpenLosePanel()
@@ -219,6 +239,9 @@ public class UIManager : MonoBehaviour
         losePanel.SetActive(true);
         GameManager.Instance.gameState.SetPause(true);
         GameManager.Instance.gameState.start = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     void OnEnable()
     {

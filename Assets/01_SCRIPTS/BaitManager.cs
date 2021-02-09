@@ -11,6 +11,7 @@ public class BaitManager
         if (UIManager.Instance.inventoryOpened == true)
         {
             Slot inventorySelection = UIManager.Instance.inventory.selection;
+
             if (cooldownTimer <= 0)
             {
                 if (inventorySelection.nbBaits > 0 && inventorySelection != null)
@@ -23,7 +24,7 @@ public class BaitManager
                     cooldownTimer = UIManager.Instance.timeBetweenBaits;
                 }
                 else
-                    Debug.Log("not enough gold");
+                    Debug.LogError("aled");
             }
         }
     }
