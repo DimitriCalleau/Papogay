@@ -4,30 +4,42 @@ using UnityEngine;
 
 public class Firme : MonoBehaviour
 {
-    public Animator anm;
-
-    public BaitType firmeType;
+    Animator anm;
+    WaveManager waveManager;
+    public BaitType corpoType;
+    public float defaultHealth;
     float health;
     int firmeIndex;
+    bool destruction;
 
-    public void DAmageFirme(int _damages)
+    void Awake()
+    {
+        anm = GetComponentInChildren<Animator>();
+        health = defaultHealth;
+    }
+
+    public void DamageFirme(int _damages)
     {
         health -= _damages;
+
+        if (health <= 0)
+        {
+            StartCorpoDestruction();
+        }
     }
 
-    void StartFirmeDestruction()
+    void StartCorpoDestruction()
     {
         anm.SetBool("Destroy", true);
-        UIManager.Instance.reward.AddLootType(firmeType);
+        UIManager.Instance.reward.AddLootType(corpoType);
+        if (anm.GetCurrentAnimatorStateInfo(0).IsName("Destroy"))//check if this is good when the corporation thing is set, need animator called "Destroy"
+        {
+            DestroyCorpo();
+        }
     }
 
-    void DestroyFirme()
+    void DestroyCorpo()
     {
         Destroy(this.gameObject);
-    }
-
-    public void InitializeFirmeTest(int _type, int _index, WaveManager _waveManager, FirmeBuilder _testBuilder)
-    {
-
     }
 }

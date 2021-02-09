@@ -29,8 +29,10 @@ public class EntityMovement : Entity
         possibleTargets = GameObject.FindGameObjectsWithTag("TargetForEnemyEntity");
 
         entityNavMeshAgent = GetComponent<NavMeshAgent>();
+        entityNavMeshAgent.speed = moveSpeed;
+
         destination = entityNavMeshAgent.destination;
-        destination.y = entityNavMeshAgent.baseOffset;
+        destination.y = destination.y + entityNavMeshAgent.baseOffset;
     }
 
     void Update()
@@ -42,8 +44,8 @@ public class EntityMovement : Entity
                 break;
 
             case false:
-                destination.y = entityNavMeshAgent.baseOffset;
                 entityNavMeshAgent.destination = destination;
+                destination.y = destination.y + entityNavMeshAgent.baseOffset;
                 break;
         }
 
@@ -52,7 +54,7 @@ public class EntityMovement : Entity
         if (CloseToTarget() == true)
         {
             destination = entityNavMeshAgent.transform.position;
-            destination.y = entityNavMeshAgent.baseOffset;
+            destination.y = destination.y + entityNavMeshAgent.baseOffset;
         }
         */
 
@@ -108,7 +110,7 @@ public class EntityMovement : Entity
                     }
                     noEnmLeft = true;
                 }
-                else
+                else //add when attrated by bait
                 {
                     float shortDistance = Mathf.Infinity;
 

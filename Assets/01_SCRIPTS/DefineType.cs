@@ -42,22 +42,4 @@ public class DefineType
                 break;
         }
     }
-
-    public void ChangeEntityStatus(EntityStatus status)
-    {
-        EntityStatus switchStatus = status;
-
-        switch (switchStatus)
-        {
-            case EntityStatus.Neutral:
-                Debug.Log("Neutral status");
-                break;
-            case EntityStatus.Enemy:
-                Debug.Log("Enemy status");
-                break;
-            case EntityStatus.Ally:
-                Debug.Log("Ally status");
-                break;
-        }
-    }
 }
