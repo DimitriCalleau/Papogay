@@ -8,20 +8,24 @@ public class BaitManager
     public float cooldownTimer;
     public void PlaceTrap()
     {
-        Slot inventorySelection = UIManager.Instance.inventory.selection;
-        if (cooldownTimer <= 0)
+        if (UIManager.Instance.inventoryOpened == true)
         {
-            if (inventorySelection.nbBaits > 0 && inventorySelection != null)
+            Slot inventorySelection = UIManager.Instance.inventory.selection;
+
+            if (cooldownTimer <= 0)
             {
-                GameObject bait = GameObject.Instantiate(inventorySelection.baitPrefab, UIManager.Instance.selectedLocation.transform.position, Quaternion.Euler(0, baitRotation, 0));
-                bait.GetComponent<Baits>().InitBait();
-                bait.GetComponent<Baits>().location = UIManager.Instance.selectedLocation;
-                UIManager.Instance.selectedLocation.occupied = true;
-                inventorySelection.AddRemove(false);
-                cooldownTimer = UIManager.Instance.timeBetweenBaits;
+                if (inventorySelection.nbBaits > 0 && inventorySelection != null)
+                {
+                    GameObject bait = GameObject.Instantiate(inventorySelection.baitPrefab, UIManager.Instance.selectedLocation.transform.position, Quaternion.Euler(0, baitRotation, 0));
+                    bait.GetComponent<Baits>().InitBait();
+                    bait.GetComponent<Baits>().location = UIManager.Instance.selectedLocation;
+                    UIManager.Instance.selectedLocation.occupied = true;
+                    inventorySelection.AddRemove(false);
+                    cooldownTimer = UIManager.Instance.timeBetweenBaits;
+                }
+                else
+                    Debug.LogError("aled");
             }
-            else
-                Debug.Log("not enough gold");
         }
     }
 
@@ -40,22 +44,24 @@ public class BaitManager
 
     public void RotateSelectedBait(Vector2 _whichDirection)
     {
-        if (_whichDirection.y > 0)
+        if (UIManager.Instance.inventoryOpened == true)
         {
-            baitRotation += 90;
-            if (baitRotation > 360)
+            if (_whichDirection.y > 0)
             {
-                baitRotation = 90;
+                baitRotation += 90;
+                if (baitRotation > 360)
+                {
+                    baitRotation = 90;
+                }
+            }
+            else
+            {
+                baitRotation -= 90;
+                if (baitRotation < 0)
+                {
+                    baitRotation = 270;
+                }
             }
         }
-        else
-        {
-            baitRotation -= 90;
-            if (baitRotation < 0)
-            {
-                baitRotation = 270;
-            }
-        }
-        Debug.Log(baitRotation);
     }
 }

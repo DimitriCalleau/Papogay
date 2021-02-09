@@ -40,10 +40,10 @@ public class PlayerStats
         healthPercentage = currentHealth / maxHealth;
     }
 
-    public void Invincibility(float time)
+    public void Invincibility()
     {
         invincible = true;
-        float timer = time;
+        float timer = invincibilityTime;
         while (timer >= 0)
         {
             timer -= Time.deltaTime;

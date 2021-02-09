@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,14 +36,12 @@ public class GameManager : MonoBehaviour
     public GameObject baitManager;
 
     public GameState gameState = new GameState();
-    public MenuManager menuManager = new MenuManager();
+    public Wave menuManager = new Wave();
 
     public WaveManager waveManager = new WaveManager();
     public FirmeBuilder builder = new FirmeBuilder();
 
     public PlayerStats playerStats = new PlayerStats();
-
-    public List<Location> allLocations;
 
     #region Events
     public event Action StartWave;
@@ -86,9 +83,16 @@ public class GameManager : MonoBehaviour
     public void Retry()
     {
         waveManager.Reset();
-        UIManager.Instance.ResetMenus();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Debug.Log("retrying like a bitch");
+        UIManager.Instance.Play();
+    }
+
+    void OnEnable()
+    {
+        StartWave += waveManager.StartWave;
+    }
+    void OnDisable()
+    {
+        StartWave -= waveManager.StartWave;
     }
 
     public void NewWave(int _waveIndex)

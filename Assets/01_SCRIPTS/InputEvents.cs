@@ -27,14 +27,19 @@ public class InputEvents : MonoBehaviour
 
         playerInputs = new InputPapogay();
 
-        if(UIManager.Instance != null && UIManager.Instance.inventoryOpened == true)
-        {
-            playerInputs.Actions.PlaceBait.performed += ctx => OnPlaceBait();
-            playerInputs.Actions.SwitchBaitRight.performed += ctx => OnSwitchSelection(true);
-            playerInputs.Actions.SwitchBaitLeft.performed += ctx => OnSwitchSelection(false);
-            playerInputs.Actions.RotateTrap.performed += ctx => OnRotateBait(ctx.ReadValue<Vector2>());
-        }
+        playerInputs.Actions.PlaceBait.performed += ctx => OnPlaceBait();
+        playerInputs.Actions.SwitchBaitRight.performed += ctx => OnSwitchSelection(true);
+        playerInputs.Actions.SwitchBaitLeft.performed += ctx => OnSwitchSelection(false);
+        playerInputs.Actions.RotateTrap.performed += ctx => OnRotateBait(ctx.ReadValue<Vector2>());
         playerInputs.Actions.Inventory.performed += ctx => OnOpenInventory();
+
+        playerInputs.Actions.MoveCam.performed += ctx => OnMoveCam(ctx.ReadValue<Vector2>()) ;
+        playerInputs.Actions.MoveCam.canceled += ctx => OnMoveCam(Vector2.zero);
+
+        if (GameManager.Instance != null && GameManager.Instance.gameState.start == true && GameManager.Instance.gameState.pause == false)
+        {
+
+        }
         playerInputs.Actions.Escape.performed += ctx => OnPause();
     }
 
@@ -82,6 +87,15 @@ public class InputEvents : MonoBehaviour
         if (SetPause != null)
         {
             SetPause();
+        }
+    }
+
+    public event Action<Vector2> MoveCam;
+    void OnMoveCam(Vector2 camMovement)
+    {
+        if (MoveCam != null)
+        {
+            MoveCam(camMovement);
         }
     }
 
