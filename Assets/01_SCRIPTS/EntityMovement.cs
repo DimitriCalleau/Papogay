@@ -29,6 +29,8 @@ public class EntityMovement : Entity
         possibleTargets = GameObject.FindGameObjectsWithTag("TargetForEnemyEntity");
 
         entityNavMeshAgent = GetComponent<NavMeshAgent>();
+        entityNavMeshAgent.speed = moveSpeed;
+
         destination = entityNavMeshAgent.destination;
         destination.y = destination.y + entityNavMeshAgent.baseOffset;
     }
@@ -108,7 +110,7 @@ public class EntityMovement : Entity
                     }
                     noEnmLeft = true;
                 }
-                else
+                else //add when attrated by bait
                 {
                     float shortDistance = Mathf.Infinity;
 

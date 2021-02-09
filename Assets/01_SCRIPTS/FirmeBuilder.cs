@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirmeBuilder : MonoBehaviour
+[System.Serializable]
+public class FirmeBuilder
 {
+    BaitType _corpoType;
+
     int corpoNb, destroyedCorpo;
     Vector3[] corpoPerWave;
     GameObject[] modifiedHouses, housesTabl;
@@ -50,7 +53,7 @@ public class FirmeBuilder : MonoBehaviour
                 modifiedHouses[indexChangedHouses].SetActive(false);
 
                 GameObject corpoToInstanciate = allCorpo[0];
-                GameObject corpoInstance = Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
+                GameObject corpoInstance = GameObject.Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
                 indexChangedHouses += 1;
             }
         }
@@ -72,7 +75,7 @@ public class FirmeBuilder : MonoBehaviour
                 modifiedHouses[indexChangedHouses].SetActive(false);
 
                 GameObject corpoToInstanciate = allCorpo[1];
-                GameObject corpoInstance = Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
+                GameObject corpoInstance = GameObject.Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
                 indexChangedHouses += 1;
             }
         }
@@ -94,7 +97,7 @@ public class FirmeBuilder : MonoBehaviour
                 modifiedHouses[indexChangedHouses].SetActive(false);
 
                 GameObject corpoToInstanciate = allCorpo[2];
-                GameObject corpoInstance = Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
+                GameObject corpoInstance = GameObject.Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
                 indexChangedHouses += 1;
             }
         }
@@ -111,9 +114,10 @@ public class FirmeBuilder : MonoBehaviour
         }
         else
         {
-            GameObject shop = Instantiate(pfb_Shop, modifiedHouses[_index].transform.position, modifiedHouses[_index].transform.rotation);
-            //shop.GetComponent<Shop_Feedback>().player = GetComponent<Reward>().player;
-            Destroy(modifiedHouses[_index]);
+            //_corpoType = ;
+            GameObject shop = GameObject.Instantiate(pfb_Shop, modifiedHouses[_index].transform.position, modifiedHouses[_index].transform.rotation);
+            UIManager.Instance.reward.AddLootType(_corpoType);
+            GameObject.Destroy(modifiedHouses[_index]);
         }
     }
 }

@@ -9,8 +9,6 @@ public enum EntityStatus { Neutral, Enemy, Ally }
 
 public class DefineType
 {
-    public GameObject enm;
-
     //bait
     public void ChangeBaitType(BaitType type)
     {
@@ -41,24 +39,6 @@ public class DefineType
                 break;
             case BaitType.Threadmill:
                 Debug.Log("Threadmill Bait");
-                break;
-        }
-    }
-    //entity
-    public void ChangeEntityStatus(EntityStatus status)
-    {
-        EntityStatus switchStatus = status;
-
-        switch (switchStatus)
-        {
-            case EntityStatus.Neutral:
-                Debug.Log("Neutral status");
-                break;
-            case EntityStatus.Enemy:
-                Debug.Log("Enemy status");
-                break;
-            case EntityStatus.Ally:
-                Debug.Log("Ally status");
                 break;
         }
     }
