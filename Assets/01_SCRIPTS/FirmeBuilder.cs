@@ -12,9 +12,19 @@ public class FirmeBuilder
     GameObject[] modifiedHouses, housesTabl;
     public GameObject[] allCorpo;
     public GameObject pfb_Shop;
+
+    public List<GameObject> bigFirmes;
+    public List<GameObject> mediumFirmes;
+    public List<GameObject> smallFirmes;
+
+    public List<GameObject> smallHouses;
+    public List<GameObject> bigHouses;
     public List<Transform> firmeLocation;
 
-    void CountDestroyedFirms(Transform destroyedFirmeTransform)
+    public int nbFirmesMax;
+    public int destroyedFirmes;
+
+    public void CountDestroyedFirms(Transform destroyedFirmeTransform)
     {
         destroyedCorpo += 1;
         firmeLocation.Add(destroyedFirmeTransform);
