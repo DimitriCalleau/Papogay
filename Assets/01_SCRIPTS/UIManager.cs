@@ -56,7 +56,9 @@ public class UIManager : MonoBehaviour
     public GameObject creditsPanel;
     #endregion
     public GameObject preview;
-
+    public float locationDetectionRange;
+    [SerializeField]
+    LayerMask locationLayer = -1;
     Location closestLocation;
     [HideInInspector]
     public Location selectedLocation;
@@ -76,14 +78,16 @@ public class UIManager : MonoBehaviour
     {
         if(inventoryOpened == true)
         {
+            Collider[] allLocations = Physics.OverlapSphere(GameManager.Instance.baitManager.transform.position, locationDetectionRange, locationLayer);
+
             float minDist = Mathf.Infinity;
-            for (int i = 0; i < GameManager.Instance.allLocations.Count; i++)
+            for (int i = 0; i < allLocations.Length; i++)
             {
-                float dist = Vector3.Distance(GameManager.Instance.baitManager.transform.position, GameManager.Instance.allLocations[i].transform.position);
+                float dist = Vector3.Distance(GameManager.Instance.baitManager.transform.position, allLocations[i].transform.position);
                 if (dist <= minDist)
                 {
                     minDist = dist;
-                    closestLocation = GameManager.Instance.allLocations[i];
+                    closestLocation = allLocations[i].gameObject.GetComponent<Location>();
                     if (closestLocation.occupied == false)
                     {
                         selectedLocation = closestLocation;
@@ -264,5 +268,11 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.SetPause -= CloseShop;
         GameManager.Instance.Win -= OpenWinPanel;
         GameManager.Instance.Lose -= OpenLosePanel;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(GameManager.Instance.baitManager.transform.position, locationDetectionRange);
     }
 }

@@ -43,8 +43,6 @@ public class GameManager : MonoBehaviour
 
     public PlayerStats playerStats = new PlayerStats();
 
-    public List<Location> allLocations;
-
     #region Events
     public event Action StartWave;
     public void EventStartWave()
