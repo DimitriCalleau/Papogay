@@ -42,7 +42,7 @@ public class DefineType
                 break;
         }
     }
-    //entity
+
     public void ChangeEntityStatus(EntityStatus status)
     {
         EntityStatus switchStatus = status;

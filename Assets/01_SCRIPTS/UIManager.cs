@@ -137,6 +137,25 @@ public class UIManager : MonoBehaviour
     {
 
     }
+
+    public GameObject PickBait(BaitType type)
+    {
+        GameObject selection = null;
+        for (int i = 0; i < allBaits.Count; i++)
+        {
+            if(allBaits[i].GetComponent<Baits>().type == type)
+            {
+                selection = allBaits[i];
+            }
+        }
+
+        if (selection != null)
+        {
+            return selection;
+        }
+        else
+            return null;
+    }
     public void CloseShop()
     {
 
@@ -268,11 +287,5 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.SetPause -= CloseShop;
         GameManager.Instance.Win -= OpenWinPanel;
         GameManager.Instance.Lose -= OpenLosePanel;
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(GameManager.Instance.baitManager.transform.position, locationDetectionRange);
     }
 }

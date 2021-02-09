@@ -4,5 +4,14 @@ using UnityEngine;
 
 public class Sign : Baits
 {
+    public Vector3 colliderSize, gatheringPoint;
 
+    public void Update()
+    {
+        
+    }
+    public void Attack()
+    {
+
+    }
 }
