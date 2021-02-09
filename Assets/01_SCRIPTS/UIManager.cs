@@ -100,9 +100,9 @@ public class UIManager : MonoBehaviour
 
     public void AddFirstTraps()
     {
-        reward.AddOrUpgradeBait(allBaits[0], BaitType.PaperBoy, 10);
-        reward.AddOrUpgradeBait(allBaits[1], BaitType.FruitBox, 10);
-        reward.AddOrUpgradeBait(allBaits[2], BaitType.Sign, 10);
+        reward.AddOrUpgradeBait(BaitType.PaperBoy, 10);
+        reward.AddOrUpgradeBait(BaitType.FruitBox, 10);
+        reward.AddOrUpgradeBait(BaitType.Sign, 10);
         inventory.SwitchBaitSelection(true);
         GameManager.Instance.EventStartWave();
         GameManager.Instance.gameState.SetPause(false);
@@ -116,9 +116,7 @@ public class UIManager : MonoBehaviour
     }
     public void AddReward()
     {
-        reward.RewardSelection();
-        reward.AddOrUpgradeBait(reward.selectedReward, reward.loots[reward.loots.Count - 1], 10);
-        reward.selectedReward = null;
+        reward.AddOrUpgradeBait(reward.loots[reward.loots.Count - 1], 10);
         reward.loots.Clear();
         GameManager.Instance.EventStartWave();
         rewardPanel.SetActive(false);

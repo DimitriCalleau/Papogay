@@ -15,9 +15,9 @@ public class Slot
     public GameObject thisInventorySlot;
     public GameObject thisShopSlot;
 
-    public Slot(GameObject bait, int amount, BaitType baitType)
+    public Slot(int amount, BaitType baitType)
     {
-        baitPrefab = bait;
+        baitPrefab = UIManager.Instance.PickBait(baitType);
         nbBaits = amount;
         type = baitType;
 
