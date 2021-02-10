@@ -30,7 +30,7 @@ public class Entity : MonoBehaviour
         {
             health -= _damage;
         }
-        else
+        else if (DamageTheEmn() == false)
         {
             health += _damage;
         }

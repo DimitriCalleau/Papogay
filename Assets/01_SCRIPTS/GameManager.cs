@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
     public GameObject baitManager;
 
     public GameState gameState = new GameState();
-    public Wave menuManager = new Wave();
 
     public WaveManager waveManager = new WaveManager();
     public FirmeBuilder builder = new FirmeBuilder();
