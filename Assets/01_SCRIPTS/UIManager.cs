@@ -38,6 +38,8 @@ public class UIManager : MonoBehaviour
     public BaitInventory inventory = new BaitInventory();
     public BaitManager baitManager = new BaitManager();
 
+    public PreviewBait preview = new PreviewBait();
+
     public GameObject inventorySlotPrefab;
     public GameObject shopSlotPrefab;
 
@@ -55,7 +57,7 @@ public class UIManager : MonoBehaviour
     public GameObject optionPanel;
     public GameObject creditsPanel;
     #endregion
-    public GameObject preview;
+
     public float locationDetectionRange;
     [SerializeField]
     LayerMask locationLayer = -1;
@@ -66,7 +68,10 @@ public class UIManager : MonoBehaviour
     public bool inventoryOpened;
 
     public float timeBetweenBaits;
-
+    void Start()
+    {
+        preview.InitPreview();
+    }
     void Update()
     {
         if(baitManager.cooldownTimer > 0)
@@ -94,7 +99,8 @@ public class UIManager : MonoBehaviour
                     }
                 }
             }
-            baitManager.MovePreview(selectedLocation, baitManager.baitRotation);
+            preview.MovePreview(selectedLocation,  baitManager.baitRotation, inventory.selection.baitPrefab.GetComponent<MeshFilter>().sharedMesh);
+            UIManager.Instance.inventory.selection.UpdatePreviewMesh();
         }
     }
 
@@ -126,22 +132,12 @@ public class UIManager : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void Play()
-    {
-        allCurrentBaits.Clear();
-        MenuBaseState(true);
-    }
-    public void OpenCloseShop()
-    {
-
-    }
-
     public GameObject PickBait(BaitType type)
     {
         GameObject selection = null;
         for (int i = 0; i < allBaits.Count; i++)
         {
-            if(allBaits[i].GetComponent<Baits>().type == type)
+            if (allBaits[i].GetComponent<Baits>().type == type)
             {
                 selection = allBaits[i];
             }
@@ -154,6 +150,17 @@ public class UIManager : MonoBehaviour
         else
             return null;
     }
+
+    public void Play()
+    {
+        allCurrentBaits.Clear();
+        MenuBaseState(true);
+    }
+    public void OpenCloseShop()
+    {
+
+    }
+
     public void CloseShop()
     {
 

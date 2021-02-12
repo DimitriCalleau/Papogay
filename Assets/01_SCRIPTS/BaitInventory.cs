@@ -10,8 +10,6 @@ public class BaitInventory
     {
         if (UIManager.Instance.inventoryOpened == true)
         {
-            Debug.Log("tryed to select");
-
             switch (rightOrLeft)
             {
                 case true:
@@ -45,9 +43,11 @@ public class BaitInventory
             {
                 case true:
                     UIManager.Instance.inventoryPanel.SetActive(true);
+                    UIManager.Instance.preview.HidePreview(true);
                     break;
                 case false:
                     UIManager.Instance.inventoryPanel.SetActive(false);
+                    UIManager.Instance.preview.HidePreview(false);
                     break;
             }
         }

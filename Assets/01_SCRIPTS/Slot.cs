@@ -73,18 +73,82 @@ public class Slot
         }
     }
 
-    public void SelectDeselect(bool selection)
+    public void UpdatePreviewMesh()
     {
-        switch (selection)
+        if(UIManager.Instance.selectedLocation != null)
         {
-            case false:
-                nbBaits -= 1;
-                UpdateDisplay();
-                break;
-            case true:
-                nbBaits += 1;
-                UpdateDisplay();
-                break;
+            switch (type)
+            {
+                case BaitType.PaperBoy:
+                    if (baitPrefab.GetComponent<PaperBoy>().colliderCenter != null)
+                    {
+                        Debug.Log("paperboy");
+                        baitPrefab.GetComponent<PaperBoy>().SetCollider();
+                        UIManager.Instance.preview.SphereRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<PaperBoy>().colliderCenter, baitPrefab.GetComponent<PaperBoy>().detectionRange);
+                    }
+                    break;
+                case BaitType.FruitBox:
+                    if (baitPrefab.GetComponent<FruitBox>().colliderCenter != null)
+                    {
+                        Debug.Log("fruitbox");
+                        baitPrefab.GetComponent<FruitBox>().SetCollider();
+                        UIManager.Instance.preview.BoxRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<FruitBox>().colliderCenter, baitPrefab.GetComponent<FruitBox>().rotatedColliderSize);
+                    }
+                    break;
+                case BaitType.Sign:
+                    if (baitPrefab.GetComponent<Sign>().colliderCenter != null)
+                    {
+                        Debug.Log("sign");
+                        baitPrefab.GetComponent<Sign>().SetCollider();
+                        UIManager.Instance.preview.BoxRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Sign>().colliderCenter, baitPrefab.GetComponent<Sign>().rotatedColliderSize);
+                    }
+                    break;
+                case BaitType.MarketStand:
+                    if (baitPrefab.GetComponent<MarketStand>().colliderCenter != null)
+                    {
+                        Debug.Log("marketstand");
+                        baitPrefab.GetComponent<MarketStand>().SetCollider();
+                        UIManager.Instance.preview.BoxRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<MarketStand>().colliderCenter, baitPrefab.GetComponent<MarketStand>().rotatedColliderSize);
+                    }
+                    break;
+                case BaitType.Perfume:
+                    if (baitPrefab.GetComponent<Perfume>().colliderCenter != null)
+                    {
+                        Debug.Log("perfume");
+                        baitPrefab.GetComponent<Perfume>().SetCollider();
+                        UIManager.Instance.preview.SphereRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Perfume>().colliderCenter, baitPrefab.GetComponent<Perfume>().range);
+                    }
+                    break;
+                case BaitType.Antenna:
+                    if (baitPrefab.GetComponent<Antenna>().colliderCenter != null)
+                    {
+                        Debug.Log("antenna");
+                        baitPrefab.GetComponent<Antenna>().SetCollider();
+                        UIManager.Instance.preview.SphereRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Antenna>().colliderCenter, baitPrefab.GetComponent<Antenna>().range);
+                    }
+                    break;
+                case BaitType.Bar:
+                    if (baitPrefab.GetComponent<Bar>().colliderCenter != null)
+                    {
+                        Debug.Log("bar");
+                        baitPrefab.GetComponent<Bar>().SetCollider();
+                        UIManager.Instance.preview.SphereRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Bar>().colliderCenter, baitPrefab.GetComponent<Bar>().range);
+                    }
+                    break;
+                case BaitType.Threadmill:
+                    if (baitPrefab.GetComponent<Treadmill>().colliderCenter != null)
+                    {
+                        Debug.Log("treadmill");
+                        baitPrefab.GetComponent<Treadmill>().SetCollider();
+                        UIManager.Instance.preview.BoxRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Treadmill>().colliderCenter, baitPrefab.GetComponent<Treadmill>().rotatedColliderSize);
+                    }
+                    break;
+                case BaitType.Iphone:
+                    break;
+                default:
+                    break;
+            }
         }
+
     }
 }

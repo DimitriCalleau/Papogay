@@ -11,7 +11,6 @@ public class BaitManager
         if (UIManager.Instance.inventoryOpened == true)
         {
             Slot inventorySelection = UIManager.Instance.inventory.selection;
-
             if (cooldownTimer <= 0)
             {
                 if (inventorySelection.nbBaits > 0 && inventorySelection != null)
@@ -26,19 +25,6 @@ public class BaitManager
                 else
                     Debug.LogError("aled");
             }
-        }
-    }
-
-    public void MovePreview(Location location, int rotation)
-    {
-        if(UIManager.Instance.inventory.selection != null)
-        {
-            UIManager.Instance.preview.GetComponent<MeshFilter>().mesh = UIManager.Instance.inventory.selection.baitPrefab.GetComponent<MeshFilter>().sharedMesh;
-        }
-        if (location != null)
-        {
-            UIManager.Instance.preview.transform.position = location.transform.position;
-            UIManager.Instance.preview.transform.rotation = Quaternion.Euler(0, rotation, 0);
         }
     }
 
@@ -63,5 +49,6 @@ public class BaitManager
                 }
             }
         }
+        UIManager.Instance.inventory.selection.UpdatePreviewMesh();
     }
 }
