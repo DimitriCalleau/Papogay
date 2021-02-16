@@ -7,15 +7,16 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EntityMovement : Entity
 {
-    //[HideInInspector]
     public float minWaitingTime, maxWaitingTime, waitingDelay;
     //[HideInInspector]
     public bool noEnmLeft;
 
     GameObject[] possibleTargets;
 
-    NavMeshAgent entityNavMeshAgent;
+    [HideInInspector]
+    public NavMeshAgent entityNavMeshAgent;
     NavMeshHit navMeshHit;
+    [HideInInspector]
     public Vector3 destination;
 
     void Start()

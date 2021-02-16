@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //bait
-public enum BaitType { PaperBoy, FruitBox, Sign, MarketStand, Perfume, Antenna, Bar, Threadmill, Iphone }
+public enum BaitType { PaperBoy, FruitBox, Sign, MarketStand, Perfume, Antenna, Bar, Threadmill, Amazoon }
 //entity
 public enum EntityStatus { Neutral, Enemy, Ally }
 
+//useless mais stylé
 public class DefineType
 {
     //bait
@@ -17,28 +18,28 @@ public class DefineType
         switch (switchBait)
         {
             case BaitType.PaperBoy:
-                Debug.Log("PaperBoy  Bait");
+                Debug.Log("PaperBoy");
                 break;
             case BaitType.FruitBox:
-                Debug.Log("FruitBox  Bait");
+                Debug.Log("FruitBox");
                 break;
             case BaitType.Sign:
-                Debug.Log("Sign  Bait");
+                Debug.Log("Sign");
                 break;
             case BaitType.MarketStand:
-                Debug.Log("MarketStand  Bait");
+                Debug.Log("MarketStand / carrefour");
                 break;
             case BaitType.Perfume:
-                Debug.Log("Perfume  Bait");
+                Debug.Log("Perfume / sephora");
                 break;
             case BaitType.Antenna:
-                Debug.Log("Antenna Bait");
+                Debug.Log("Antenna / apple");
                 break;
             case BaitType.Bar:
-                Debug.Log("Bar Bait");
+                Debug.Log("Bar / mc donald");
                 break;
             case BaitType.Threadmill:
-                Debug.Log("Threadmill Bait");
+                Debug.Log("Threadmill / basic thicc");
                 break;
         }
     }

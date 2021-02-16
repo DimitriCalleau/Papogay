@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    EntityMovement entityMvt;
+
     public EntityStatus status;
+    public BaitType type;
     public int health, healthMaxALLY, healthMinENM, damageAlly, damageEnm;
-    public float moveSpeed, playerDetectionRadius, targetTreshold, RandomSelectorRadius, entityDamageCooldown;
+    public float moveSpeed, playerDetectionRadius, targetTreshold, RandomSelectorRadius, entityDamageCooldown, amazoonSpeedFactor;
 
     void Awake()
     {
@@ -24,13 +27,35 @@ public class Entity : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (status == EntityStatus.Enemy)
+        {
+            switch (type)
+            {
+                case BaitType.Perfume:
+
+                    break;
+                case BaitType.Antenna:
+                    break;
+                case BaitType.Bar:
+                    break;
+                case BaitType.Threadmill:
+                    break;
+                case BaitType.Amazoon:
+                    entityMvt.entityNavMeshAgent.speed = moveSpeed * amazoonSpeedFactor;
+                    break;
+            }
+        }
+    }
+
     public void DamageEntity(int _damage)
     {
         if (DamageTheEmn() == true)
         {
             health -= _damage;
         }
-        else
+        else if (DamageTheEmn() == false)
         {
             health += _damage;
         }
