@@ -48,6 +48,13 @@ MonoBehaviour:
   type: 0
   upgradeIndex: 0
   location: {fileID: 0}
+  colliderCenter: {x: 0, y: 0, z: 0}
+  offsetHeightCollider: 2
+  offSetForwardCollider: 0
+  startAttack: 0
+  afterSpawnMaterial: {fileID: 0}
+  timeBeforeSpawn: 2
+  uiUsurebar: {fileID: 7452419864353182867}
   usure: 20
   currentUsureMax: 20
   usureMax:
@@ -72,7 +79,6 @@ MonoBehaviour:
   ennemisMask:
     serializedVersion: 2
     m_Bits: 1024
-  offsetHeightCollider: 2
   detectionRange: 20
   attackRange: 2
   paperboyNav: {fileID: 8092799528721751473}

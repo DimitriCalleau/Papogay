@@ -12,6 +12,7 @@ public class Baits : MonoBehaviour
     [HideInInspector] public Location location;
     [HideInInspector] public Vector3 colliderCenter;
     public float offsetHeightCollider, offSetForwardCollider;
+    public float timeBeforeSpawn;
 
     [Header("baitDuration")]
     public float usure;
@@ -25,6 +26,7 @@ public class Baits : MonoBehaviour
 
     [Header("UI")]
     public List<Sprite> ui_Sprites;
+    public GameObject ui_UsureBar;
     public Image ui_healthBar;
     public TextMeshProUGUI ui_UsureAmountText;
 
@@ -35,7 +37,6 @@ public class Baits : MonoBehaviour
     public LayerMask ennemisMask = -1;
     #endregion
 
-
     public Baits()
     {
 
@@ -43,6 +44,10 @@ public class Baits : MonoBehaviour
 
     public void InitBait()
     {
+        if(ui_UsureBar != null)
+        {
+            ui_UsureBar.SetActive(true);
+        }
         this.currentUsureMax = this.usureMax[upgradeIndex];
         this.usure = this.currentUsureMax;
         this.usurePercentage = this.currentUsureMax;

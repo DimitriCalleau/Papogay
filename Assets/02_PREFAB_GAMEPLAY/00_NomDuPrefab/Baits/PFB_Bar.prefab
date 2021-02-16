@@ -49,6 +49,13 @@ MonoBehaviour:
   type: 6
   upgradeIndex: 0
   location: {fileID: 0}
+  colliderCenter: {x: 0, y: 0, z: 0}
+  offsetHeightCollider: 0
+  offSetForwardCollider: 0
+  startAttack: 0
+  afterSpawnMaterial: {fileID: 0}
+  timeBeforeSpawn: 2
+  uiUsurebar: {fileID: 1742713038934588032}
   usure: 0
   currentUsureMax: 0
   usureMax:
@@ -73,7 +80,6 @@ MonoBehaviour:
   ennemisMask:
     serializedVersion: 2
     m_Bits: 3072
-  offsetHeightCollider: 0
   range: 0
   ui_cooldownImage: {fileID: 7539282940462142958}
 --- !u!33 &-140406527506176174
@@ -242,6 +248,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f8cc1f448abb4a44b912c7b86a6a840, type: 3}
+--- !u!1 &1742713038934588032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1248398481099662321, guid: 1f8cc1f448abb4a44b912c7b86a6a840,
+    type: 3}
+  m_PrefabInstance: {fileID: 683543888043317617}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1742713038934588060 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1248398481099662317, guid: 1f8cc1f448abb4a44b912c7b86a6a840,

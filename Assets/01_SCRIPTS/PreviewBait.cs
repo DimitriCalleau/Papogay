@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class PreviewBait
 {
     GameObject preview_GO, rangePreview_GO;
     Mesh preview_Mesh, range_Mesh;
-    public GameObject spherePrefab, cubePrefab;
+    public GameObject spherePrefab, cubePrefab, ui_Preview_Stats;
+    public float offsetHeightStatsPreview;
+    TextMeshProUGUI nbBaitsPreview;
     public Material previewMat, range_Mat;
 
     public void InitPreview()
     {
         preview_GO = new GameObject("Preview");
         rangePreview_GO = new GameObject("Range_Preview");
+        GameObject statsPreview = GameObject.Instantiate(ui_Preview_Stats, preview_GO.transform.position + Vector3.up * offsetHeightStatsPreview, preview_GO.transform.rotation);
+        statsPreview.transform.SetParent(preview_GO.transform);
+        nbBaitsPreview = statsPreview.GetComponentInChildren<TextMeshProUGUI>();
 
         preview_GO.AddComponent<MeshFilter>();
         preview_GO.AddComponent<MeshRenderer>();
@@ -22,6 +28,8 @@ public class PreviewBait
         rangePreview_GO.AddComponent<MeshFilter>();
         rangePreview_GO.AddComponent<MeshRenderer>();
         rangePreview_GO.GetComponent<MeshRenderer>().material = range_Mat;
+
+        HidePreview(false);
     }
     public void HidePreview(bool hideUnhide)
     {
@@ -29,9 +37,11 @@ public class PreviewBait
         {
             case true:
                 preview_GO.SetActive(true);
+                rangePreview_GO.SetActive(true);
                 break;
             case false:
                 preview_GO.SetActive(false);
+                rangePreview_GO.SetActive(false);
                 break;
         }
     }
@@ -41,6 +51,7 @@ public class PreviewBait
         {
             preview_Mesh = _previewMesh;
             preview_GO.GetComponent<MeshFilter>().mesh = preview_Mesh;
+            nbBaitsPreview.text = UIManager.Instance.inventory.selection.nbBaits.ToString();
         }
         if (location != null)
         {

@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
 
     public GameObject inventorySlotPrefab;
     public GameObject shopSlotPrefab;
+    public GameObject baitSpawnerPrefab;
 
     //[Header("Panels")]
     #region Panels
@@ -65,9 +66,10 @@ public class UIManager : MonoBehaviour
     [HideInInspector]
     public Location selectedLocation;
     [HideInInspector]
-    public bool inventoryOpened;
+    public bool inventoryOpened, shopOpened;
 
     public float timeBetweenBaits;
+    
     void Start()
     {
         preview.InitPreview();
@@ -102,6 +104,7 @@ public class UIManager : MonoBehaviour
             preview.MovePreview(selectedLocation,  baitManager.baitRotation, inventory.selection.baitPrefab.GetComponent<MeshFilter>().sharedMesh);
             UIManager.Instance.inventory.selection.UpdatePreviewMesh();
         }
+        shop.DetectCloseShop();
     }
 
     public void AddFirstTraps()
@@ -117,8 +120,7 @@ public class UIManager : MonoBehaviour
         rewardPanel.SetActive(false);
         firstTrapsButton.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        CursorState(true);
     }
     public void AddReward()
     {
@@ -128,8 +130,14 @@ public class UIManager : MonoBehaviour
         rewardPanel.SetActive(false);
         GameManager.Instance.gameState.SetPause(false);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        CursorState(true);
+    }
+    public void OpenRewardPanel()
+    {
+        GameManager.Instance.gameState.SetPause(true);
+        GameManager.Instance.gameState.start = false;
+        rewardPanel.SetActive(true);
+        CursorState(false);
     }
 
     public GameObject PickBait(BaitType type)
@@ -158,12 +166,29 @@ public class UIManager : MonoBehaviour
     }
     public void OpenCloseShop()
     {
+        Debug.Log("heho");
+        switch (shopOpened)
+        {
+            case true:
+                CloseShop();
+                break;
+            case false:
+                if (shop.closeToShop == true)
+                {
+                    shopPanel.SetActive(true);
+                    CursorState(false);
+                    shopOpened = true;
+                }
+                break;
+        }
 
     }
 
     public void CloseShop()
     {
-
+        shopPanel.SetActive(false);
+        CursorState(true);
+        shopOpened = false;
     }
 
     public void Pause()
@@ -178,9 +203,7 @@ public class UIManager : MonoBehaviour
                 {
                     GameManager.Instance.gameState.SetPause(true);
                     pausePanel.SetActive(true);
-
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
+                    CursorState(false);
                 }
                 break;
         }
@@ -193,8 +216,7 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.gameState.SetPause(false);
             pausePanel.SetActive(false);
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            CursorState(true);
         }
         optionPanel.SetActive(false);
         creditsPanel.SetActive(false);
@@ -221,9 +243,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.gameState.start = false;
         GameManager.Instance.gameState.SetPause(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        CursorState(false);
     }
 
     void MenuBaseState(bool state)
@@ -257,9 +277,7 @@ public class UIManager : MonoBehaviour
         winPanel.SetActive(true);
         GameManager.Instance.gameState.SetPause(true);
         GameManager.Instance.gameState.start = false;
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        CursorState(false);
     }
 
     void OpenLosePanel()
@@ -267,9 +285,22 @@ public class UIManager : MonoBehaviour
         losePanel.SetActive(true);
         GameManager.Instance.gameState.SetPause(true);
         GameManager.Instance.gameState.start = false;
+        CursorState(false);
+    }
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+    public void CursorState(bool lockedUnlock)
+    {
+        switch (lockedUnlock)
+        {
+            case true:
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                break;
+            case false:
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                break;
+        }
     }
     void OnEnable()
     {
@@ -278,6 +309,7 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.Rotate += baitManager.RotateSelectedBait;
         InputEvents.Instance.OpenInventory += inventory.OpenInventory;
         InputEvents.Instance.SetPause += Pause;
+        InputEvents.Instance.OpenShop += OpenCloseShop;
         InputEvents.Instance.SetPause += CloseShop;
         GameManager.Instance.Win += OpenWinPanel;
         GameManager.Instance.Lose += OpenLosePanel;
@@ -289,6 +321,7 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.Rotate -= baitManager.RotateSelectedBait;
         InputEvents.Instance.OpenInventory -= inventory.OpenInventory;
         InputEvents.Instance.SetPause -= Pause;
+        InputEvents.Instance.OpenShop -= OpenCloseShop;
         InputEvents.Instance.SetPause -= CloseShop;
         GameManager.Instance.Win -= OpenWinPanel;
         GameManager.Instance.Lose -= OpenLosePanel;

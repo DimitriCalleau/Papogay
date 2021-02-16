@@ -51,7 +51,6 @@ public class Slot
     }
     public void BuyBait()
     {
-        Debug.Log("buy : " + this.baitPrefab.name);
         if (currentCost <= GameManager.Instance.playerStats.gold)
         {
             AddRemove(true);

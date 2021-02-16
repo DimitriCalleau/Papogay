@@ -444,6 +444,13 @@ MonoBehaviour:
   type: 7
   upgradeIndex: 0
   location: {fileID: 0}
+  colliderCenter: {x: 0, y: 0, z: 0}
+  offsetHeightCollider: 0
+  offSetForwardCollider: 0
+  startAttack: 0
+  afterSpawnMaterial: {fileID: 0}
+  timeBeforeSpawn: 2
+  uiUsurebar: {fileID: 7309760489228546681}
   usure: 0
   currentUsureMax: 0
   usureMax:
@@ -465,9 +472,8 @@ MonoBehaviour:
   ennemisMask:
     serializedVersion: 2
     m_Bits: 1024
-  offSetForwardCollider: 0
-  colliderCenter: {x: 0, y: 0, z: 0}
   colliderSize: {x: 2, y: 2, z: 4}
+  rotatedColliderSize: {x: 0, y: 0, z: 0}
 --- !u!33 &1202719561799859970
 MeshFilter:
   m_ObjectHideFlags: 0

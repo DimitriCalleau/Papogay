@@ -15,9 +15,8 @@ public class BaitManager
             {
                 if (inventorySelection.nbBaits > 0 && inventorySelection != null)
                 {
-                    GameObject bait = GameObject.Instantiate(inventorySelection.baitPrefab, UIManager.Instance.selectedLocation.transform.position, Quaternion.Euler(0, baitRotation, 0));
-                    bait.GetComponent<Baits>().InitBait();
-                    bait.GetComponent<Baits>().location = UIManager.Instance.selectedLocation;
+                    GameObject baitSpawner = GameObject.Instantiate(UIManager.Instance.baitSpawnerPrefab, UIManager.Instance.selectedLocation.transform.position, Quaternion.Euler(0, baitRotation, 0));
+                    baitSpawner.GetComponent<BaitSpawner>().InitSpawn(inventorySelection.baitPrefab, UIManager.Instance.selectedLocation);
                     UIManager.Instance.selectedLocation.occupied = true;
                     inventorySelection.AddRemove(false);
                     cooldownTimer = UIManager.Instance.timeBetweenBaits;

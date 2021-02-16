@@ -447,6 +447,10 @@ MonoBehaviour:
   colliderCenter: {x: 0, y: 0, z: 0}
   offsetHeightCollider: 0
   offSetForwardCollider: 0
+  startAttack: 0
+  afterSpawnMaterial: {fileID: 0}
+  timeBeforeSpawn: 2
+  uiUsurebar: {fileID: 402847521210973707}
   usure: 20
   currentUsureMax: 20
   usureMax:
@@ -470,6 +474,7 @@ MonoBehaviour:
     m_Bits: 1024
   colliderSize: {x: 6, y: 6, z: 15}
   gatheringPoint: {x: 0, y: 0, z: 1}
+  rotatedColliderSize: {x: 0, y: 0, z: 0}
 --- !u!33 &7422682549750173078
 MeshFilter:
   m_ObjectHideFlags: 0
