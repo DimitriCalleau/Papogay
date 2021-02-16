@@ -62,3 +62,4 @@ crashlytics-build.properties
 
 ProjectSettings/PackageManagerSettings.asset
 ProjectSettings/QualitySettings.asset
+*.meta

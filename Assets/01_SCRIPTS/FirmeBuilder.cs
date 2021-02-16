@@ -10,7 +10,7 @@ public class FirmeBuilder
     int corpoNb, destroyedCorpo;
     Vector3[] corpoPerWave;
     GameObject[] modifiedHouses, housesTabl;
-    public GameObject[] allCorpo;
+    public GameObject[] allCorpo;//prefabs corporation   -0 : small   -1 : medium   -2 : big
     public GameObject pfb_Shop;
 
     public List<GameObject> bigFirmes;
@@ -30,7 +30,7 @@ public class FirmeBuilder
         firmeLocation.Add(destroyedFirmeTransform);
     }
     
-    public void ReplaceHousesByFirme(int _waveIndex)
+    public void ReplaceHousesByCorpo(int _waveIndex)
     {
         destroyedCorpo = 0;
 
@@ -63,6 +63,7 @@ public class FirmeBuilder
                 modifiedHouses[indexChangedHouses].SetActive(false);
 
                 GameObject corpoToInstanciate = allCorpo[0];
+                corpoToInstanciate.tag = "Corpo";
                 GameObject corpoInstance = GameObject.Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
                 indexChangedHouses += 1;
             }
@@ -85,6 +86,7 @@ public class FirmeBuilder
                 modifiedHouses[indexChangedHouses].SetActive(false);
 
                 GameObject corpoToInstanciate = allCorpo[1];
+                corpoToInstanciate.tag = "Corpo";
                 GameObject corpoInstance = GameObject.Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
                 indexChangedHouses += 1;
             }
@@ -107,6 +109,7 @@ public class FirmeBuilder
                 modifiedHouses[indexChangedHouses].SetActive(false);
 
                 GameObject corpoToInstanciate = allCorpo[2];
+                corpoToInstanciate.tag = "Corpo";
                 GameObject corpoInstance = GameObject.Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
                 indexChangedHouses += 1;
             }

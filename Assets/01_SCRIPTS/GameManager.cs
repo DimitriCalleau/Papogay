@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         mainCam = Camera.main;
     }
     #endregion
-    //changeType (Bait, Status, Corpo)
+    //changeType (Bait, Status, Corpo) ----------- useless
     public DefineType setTypeTo;
 
     public Camera mainCam;
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     public GameState gameState = new GameState();
 
+    public EntitySpawner entitySpawner = new EntitySpawner();
     public WaveManager waveManager = new WaveManager();
     public FirmeBuilder builder = new FirmeBuilder();
 
@@ -87,31 +88,15 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        StartWave += waveManager.StartWave;
+        StartWave += waveManager.IncreaseWaveIndex;
     }
     void OnDisable()
     {
-        StartWave -= waveManager.StartWave;
+        StartWave -= waveManager.IncreaseWaveIndex;
     }
 
-    public void NewWave(int _waveIndex)
+    public void NewWave()
     {
-        switch (_waveIndex)
-        {
-            case 1:
-                break;
-                
-            case 2:
-                break;
-                
-            case 3:
-                break;
-                
-            case 4:
-                break;
-                
-            case 5:
-                break;
-        }
+        waveManager.StartWave();
     }
 }

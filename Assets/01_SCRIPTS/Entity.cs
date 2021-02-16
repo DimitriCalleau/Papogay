@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    EntityMovement entityMvt;
+
     public EntityStatus status;
+    public BaitType type;
     public int health, healthMaxALLY, healthMinENM, damageAlly, damageEnm;
-    public float moveSpeed, playerDetectionRadius, targetTreshold, RandomSelectorRadius, entityDamageCooldown;
+    public float moveSpeed, playerDetectionRadius, targetTreshold, RandomSelectorRadius, entityDamageCooldown, amazoonSpeedFactor;
 
     void Awake()
     {
@@ -21,6 +24,28 @@ public class Entity : MonoBehaviour
         else if (health < healthMinENM && health > healthMaxALLY)
         {
             status = EntityStatus.Neutral;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (status == EntityStatus.Enemy)
+        {
+            switch (type)
+            {
+                case BaitType.Perfume:
+
+                    break;
+                case BaitType.Antenna:
+                    break;
+                case BaitType.Bar:
+                    break;
+                case BaitType.Threadmill:
+                    break;
+                case BaitType.Amazoon:
+                    entityMvt.entityNavMeshAgent.speed = moveSpeed * amazoonSpeedFactor;
+                    break;
+            }
         }
     }
 
