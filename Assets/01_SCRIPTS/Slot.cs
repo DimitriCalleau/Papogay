@@ -142,10 +142,6 @@ public class Slot
                         UIManager.Instance.preview.BoxRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Treadmill>().colliderCenter, baitPrefab.GetComponent<Treadmill>().rotatedColliderSize);
                     }
                     break;
-                case BaitType.Iphone:
-                    break;
-                default:
-                    break;
             }
         }
 
