@@ -845,12 +845,7 @@ MonoBehaviour:
   colliderCenter: {x: 0, y: 0.5, z: 14.29}
   offsetHeightCollider: 0.5
   offSetForwardCollider: 14.29
-  startAttack: 1
   timeBeforeSpawn: 2
-  spawnTimer: 0
-  uiSpawnTime: {fileID: 1534521129262164639}
-  uiSpawnTimeImage: {fileID: 1534521130310248850}
-  spawningTimeText: {fileID: 1534521129912031992}
   usure: 10
   currentUsureMax: 10
   usureMax:
