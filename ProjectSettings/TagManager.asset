@@ -19,10 +19,10 @@ TagManager:
   - 
   - Floor
   - Location
-  - 
-  - 
-  - 
-  - 
+  - Enemy Entity
+  - Neutral Entity
+  - Ally Entity
+  - Shop
   - 
   - 
   - 
