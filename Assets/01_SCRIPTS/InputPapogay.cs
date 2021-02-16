@@ -89,6 +89,14 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Shop"",
+                    ""type"": ""Button"",
+                    ""id"": ""d718f7d2-6a81-4937-8248-8e2b605ea8b9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -234,6 +242,17 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                     ""action"": ""MoveCam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7070ed4-3ba3-4f4e-9cf2-0410735f1f89"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -251,6 +270,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         m_Actions_Move = m_Actions.FindAction("Move", throwIfNotFound: true);
         m_Actions_Roll = m_Actions.FindAction("Roll", throwIfNotFound: true);
         m_Actions_MoveCam = m_Actions.FindAction("MoveCam", throwIfNotFound: true);
+        m_Actions_Shop = m_Actions.FindAction("Shop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -309,6 +329,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
     private readonly InputAction m_Actions_Move;
     private readonly InputAction m_Actions_Roll;
     private readonly InputAction m_Actions_MoveCam;
+    private readonly InputAction m_Actions_Shop;
     public struct ActionsActions
     {
         private @InputPapogay m_Wrapper;
@@ -322,6 +343,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Actions_Move;
         public InputAction @Roll => m_Wrapper.m_Actions_Roll;
         public InputAction @MoveCam => m_Wrapper.m_Actions_MoveCam;
+        public InputAction @Shop => m_Wrapper.m_Actions_Shop;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -358,6 +380,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 @MoveCam.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMoveCam;
                 @MoveCam.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMoveCam;
                 @MoveCam.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMoveCam;
+                @Shop.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShop;
+                @Shop.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShop;
+                @Shop.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShop;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -389,6 +414,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 @MoveCam.started += instance.OnMoveCam;
                 @MoveCam.performed += instance.OnMoveCam;
                 @MoveCam.canceled += instance.OnMoveCam;
+                @Shop.started += instance.OnShop;
+                @Shop.performed += instance.OnShop;
+                @Shop.canceled += instance.OnShop;
             }
         }
     }
@@ -404,5 +432,6 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
         void OnMoveCam(InputAction.CallbackContext context);
+        void OnShop(InputAction.CallbackContext context);
     }
 }

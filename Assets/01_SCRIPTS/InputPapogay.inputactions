@@ -76,6 +76,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Shop",
+                    "type": "Button",
+                    "id": "d718f7d2-6a81-4937-8248-8e2b605ea8b9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -219,6 +227,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7070ed4-3ba3-4f4e-9cf2-0410735f1f89",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
