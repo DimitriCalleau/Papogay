@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class BaitSpawner : MonoBehaviour
 {
@@ -9,7 +11,12 @@ public class BaitSpawner : MonoBehaviour
     Location locationToSpawn;
     float timeBeforeSpawn;
     float spawnTimer;
+    float timerPercentage;
     bool hasSpawned;
+
+    public GameObject prespawnUI;
+    public Image timerImage;
+    public TextMeshProUGUI timerText;
     public void InitSpawn(GameObject _baitprefab, Location _location)
     {
         prefabToSpawn = _baitprefab;
@@ -19,6 +26,11 @@ public class BaitSpawner : MonoBehaviour
         timeBeforeSpawn = prefabToSpawn.GetComponent<Baits>().timeBeforeSpawn;
         spawnTimer = timeBeforeSpawn;
         hasSpawned = false;
+
+        timerPercentage = timeBeforeSpawn / spawnTimer;
+
+        timerText.text = timerPercentage.ToString();
+        timerImage.fillAmount = timerPercentage;
     }
 
     void Update()
@@ -26,6 +38,9 @@ public class BaitSpawner : MonoBehaviour
         if (spawnTimer > 0)
         {
             spawnTimer -= Time.deltaTime;
+            timerPercentage = timeBeforeSpawn / spawnTimer;
+            timerText.text = timerPercentage.ToString();
+            timerImage.fillAmount = timerPercentage;
         }
         else
         {
