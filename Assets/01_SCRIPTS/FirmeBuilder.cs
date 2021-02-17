@@ -129,7 +129,6 @@ public class FirmeBuilder
         {
             //_corpoType = ;
             GameObject shop = GameObject.Instantiate(pfb_Shop, modifiedHouses[_index].transform.position, modifiedHouses[_index].transform.rotation);
-            UIManager.Instance.reward.AddLootType(_corpoType);
             GameObject.Destroy(modifiedHouses[_index]);
         }
     }
