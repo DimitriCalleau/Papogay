@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
 
     public GameObject inventorySlotPrefab;
     public GameObject shopSlotPrefab;
+    public GameObject upgradeSlotPrefab;
     public GameObject baitSpawnerPrefab;
 
     //[Header("Panels")]
@@ -109,9 +110,9 @@ public class UIManager : MonoBehaviour
 
     public void AddFirstTraps()
     {
-        reward.AddOrUpgradeBait(BaitType.PaperBoy, 10);
-        reward.AddOrUpgradeBait(BaitType.FruitBox, 10);
-        reward.AddOrUpgradeBait(BaitType.Sign, 10);
+        reward.AddBait(BaitType.PaperBoy, 10);
+        reward.AddBait(BaitType.FruitBox, 10);
+        reward.AddBait(BaitType.Sign, 10);
         inventory.SwitchBaitSelection(true);
         GameManager.Instance.EventStartWave();
         GameManager.Instance.gameState.SetPause(false);
@@ -124,8 +125,7 @@ public class UIManager : MonoBehaviour
     }
     public void AddReward()
     {
-        reward.AddOrUpgradeBait(reward.loots[reward.loots.Count - 1], 10);
-        reward.loots.Clear();
+        reward.AddBait(reward.loots[GameManager.Instance.waveManager.waveindex - 1], 10);
         GameManager.Instance.EventStartWave();
         rewardPanel.SetActive(false);
         GameManager.Instance.gameState.SetPause(false);
@@ -166,11 +166,11 @@ public class UIManager : MonoBehaviour
     }
     public void OpenCloseShop()
     {
-        Debug.Log("heho");
         switch (shopOpened)
         {
             case true:
                 CloseShop();
+                GameManager.Instance.gameState.SetPause(false);
                 break;
             case false:
                 if (shop.closeToShop == true)
@@ -178,6 +178,7 @@ public class UIManager : MonoBehaviour
                     shopPanel.SetActive(true);
                     CursorState(false);
                     shopOpened = true;
+                    GameManager.Instance.gameState.SetPause(true);
                 }
                 break;
         }

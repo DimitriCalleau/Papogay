@@ -49,15 +49,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   upgradeIndex: 0
+  nbUpgradeMax: 3
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 0, z: 0}
   offsetHeightCollider: 0
   offSetForwardCollider: 0
-  startAttack: 0
   timeBeforeSpawn: 2
-  uiUsurebar: {fileID: 1865939466658713082}
-  uiSpawnTimeImage: {fileID: 1534521129166371123}
-  spawningTimeText: {fileID: 1534521129036614233}
   usure: 0
   currentUsureMax: 0
   usureMax:
@@ -67,10 +64,13 @@ MonoBehaviour:
   usurePercentage: 0
   costs: 140000001e00000028000000
   currentCost: 0
+  upgradeCosts: 64000000c80000002c010000
+  currentUpgradeCost: 0
   ui_Sprites:
   - {fileID: 21300000, guid: 727125a6e0bf8e7479bb0543222de7be, type: 3}
   - {fileID: 21300000, guid: c8e6e4d4d68caf94cbdfe9842ec9af33, type: 3}
   - {fileID: 21300000, guid: 1f0c28faacc38b34b83db20bb88d1ae9, type: 3}
+  ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 1865939467704635127}
   ui_UsureAmountText: {fileID: 1865939467826593181}
   damages: 
@@ -673,12 +673,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f8cc1f448abb4a44b912c7b86a6a840, type: 3}
---- !u!1 &1865939466658713082 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1248398481099662321, guid: 1f8cc1f448abb4a44b912c7b86a6a840,
-    type: 3}
-  m_PrefabInstance: {fileID: 627713125034372619}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1865939466658713062 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1248398481099662317, guid: 1f8cc1f448abb4a44b912c7b86a6a840,

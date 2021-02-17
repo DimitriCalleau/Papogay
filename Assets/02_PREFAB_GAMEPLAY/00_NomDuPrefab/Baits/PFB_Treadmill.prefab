@@ -443,14 +443,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 7
   upgradeIndex: 0
+  nbUpgradeMax: 3
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 0, z: 0}
   offsetHeightCollider: 0
   offSetForwardCollider: 0
-  startAttack: 0
-  afterSpawnMaterial: {fileID: 0}
   timeBeforeSpawn: 2
-  uiUsurebar: {fileID: 7309760489228546681}
   usure: 0
   currentUsureMax: 0
   usureMax:
@@ -460,10 +458,13 @@ MonoBehaviour:
   usurePercentage: 0
   costs: 62000000140000001e000000
   currentCost: 0
+  upgradeCosts: 6c000000d000000034010000
+  currentUpgradeCost: 0
   ui_Sprites:
   - {fileID: 21300000, guid: 1c1ef0139db72034dba5f63dd430c308, type: 3}
   - {fileID: 21300000, guid: 5a1b773b1f35bec40b56f8be9eceb742, type: 3}
   - {fileID: 21300000, guid: 8f49d6e47a6e71b499c3c21c2df55e33, type: 3}
+  ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 7309760490339479924}
   ui_UsureAmountText: {fileID: 7309760490460889630}
   damages: 

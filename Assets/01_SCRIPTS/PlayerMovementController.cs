@@ -8,6 +8,8 @@ public class PlayerMovementController : MonoBehaviour
 
     public LayerMask floor;
 
+    public Animator playerAnimator;
+
     public Transform floorDetectorPosition;
     public float floorDetectionRayRange;
     public float floorDetectionSphereRange;
@@ -28,12 +30,16 @@ public class PlayerMovementController : MonoBehaviour
 
     bool isrolling;
     bool isboosted;
+
+    bool isInvincible;
+    float rollTimer;
+   
     void Awake()
     {
         inputs = new InputPapogay();
         inputs.Actions.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         inputs.Actions.Move.canceled += ctx => move = Vector2.zero;
-        inputs.Actions.Roll.canceled += ctx => Roll(currentRollDir);
+        inputs.Actions.Roll.performed += ctx => TriggerRoll();
     }
     void Start()
     {
@@ -42,30 +48,42 @@ public class PlayerMovementController : MonoBehaviour
     }
     void Update()
     {
-        Move();
-        switch (isrolling)
+        if(GameManager.Instance.gameState.pause == false)
         {
-            case true:
-                if(isboosted == true)
-                {
-                    currentSpeed = stats.rollSpeed * stats.boostFactor;
-                }
-                else
-                {
-                    currentSpeed = stats.rollSpeed;
-                }
-                break;
+            if (rollTimer > 0)
+            {
+                Roll(currentRollDir);
+                rollTimer -= Time.deltaTime;
+            }
+            else
+            {
+                GameManager.Instance.playerStats.Invincibility(false);
+                Move();
+            }
+            switch (isrolling)
+            {
+                case true:
+                    if (isboosted == true)
+                    {
+                        currentSpeed = stats.rollSpeed * stats.boostFactor;
+                    }
+                    else
+                    {
+                        currentSpeed = stats.rollSpeed;
+                    }
+                    break;
 
-            case false:
-                if (isboosted == true)
-                {
-                    currentSpeed = stats.speed * stats.boostFactor;
-                }
-                else
-                {
-                    currentSpeed = stats.speed;
-                }
-                break;
+                case false:
+                    if (isboosted == true)
+                    {
+                        currentSpeed = stats.speed * stats.boostFactor;
+                    }
+                    else
+                    {
+                        currentSpeed = stats.speed;
+                    }
+                    break;
+            }
         }
     }
     public void Move()
@@ -81,10 +99,12 @@ public class PlayerMovementController : MonoBehaviour
 
         if (move != Vector2.zero)
         {
+            playerAnimator.SetBool("Forward", true);
             moveDir = Quaternion.Euler(FloorInclinaison()) * (Quaternion.Euler(0, targetRotation, 0) * (Vector3.forward * currentSpeed)) + securityGravity;
         }
         else
         {
+            playerAnimator.SetBool("Forward", false);
             moveDir = Vector3.zero; 
         }
 
@@ -111,9 +131,20 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    void TriggerRoll()
+    {
+        rollTimer = GameManager.Instance.playerStats.invincibilityTime;
+        playerAnimator.SetTrigger("Roulade");
+    }
     public void Roll(Quaternion rollDirection)
     {
-        
+        skin.transform.rotation = rollDirection;
+        GameManager.Instance.playerStats.Invincibility(true);
+        isInvincible = true;
+
+        Vector3 rollDir = Quaternion.Euler(FloorInclinaison()) * rollDirection * (Vector3.forward * GameManager.Instance.playerStats.rollSpeed);
+
+        transform.Translate(rollDir * Time.deltaTime);
     }
 
     public void Boost(float boosTime, float boostSpeed)

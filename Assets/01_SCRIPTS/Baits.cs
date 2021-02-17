@@ -9,6 +9,7 @@ public class Baits : MonoBehaviour
     #region Stats
     public BaitType type;
     public int upgradeIndex;
+    public int nbUpgradeMax;
     [HideInInspector] public Location location;
     [HideInInspector] public Vector3 colliderCenter;
     public float offsetHeightCollider, offSetForwardCollider;
@@ -23,6 +24,8 @@ public class Baits : MonoBehaviour
     [Header("Costs")]
     public List<int> costs;
     public int currentCost;
+    public List<int> upgradeCosts;
+    public int currentUpgradeCost;
 
     [Header("UI")]
     public List<Sprite> ui_Sprites;
@@ -52,6 +55,7 @@ public class Baits : MonoBehaviour
         this.usure = this.currentUsureMax;
         this.usurePercentage = this.currentUsureMax;
         this.currentCost = costs[upgradeIndex];
+        this.currentUpgradeCost = upgradeCosts[upgradeIndex];
         this.ui_UsureAmountText.text = this.usure.ToString();
         this.ui_healthBar.fillAmount = this.usurePercentage;
         if (this.cooldown.Count > 0)
@@ -64,6 +68,7 @@ public class Baits : MonoBehaviour
     {
         this.upgradeIndex += 1;
         this.currentCost = costs[upgradeIndex];
+        this.currentUpgradeCost = upgradeCosts[upgradeIndex];
         this.usure += this.usure * (this.usureMax[this.upgradeIndex] / this.currentUsureMax);
         this.currentUsureMax = this.usureMax[this.upgradeIndex];
     }

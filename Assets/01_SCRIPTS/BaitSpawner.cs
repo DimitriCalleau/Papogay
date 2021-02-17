@@ -16,12 +16,13 @@ public class BaitSpawner : MonoBehaviour
 
     public Image timerImage;
     public TextMeshProUGUI timerText;
+    public MeshFilter previewMeshFilter;
     public void InitSpawn(GameObject _baitprefab, Location _location)
     {
         prefabToSpawn = _baitprefab;
         locationToSpawn = _location;
         baitMesh = prefabToSpawn.GetComponent<MeshFilter>().sharedMesh;
-        GetComponent<MeshFilter>().mesh = baitMesh;
+        previewMeshFilter.mesh = baitMesh;
         timeBeforeSpawn = prefabToSpawn.GetComponent<Baits>().timeBeforeSpawn;
         spawnTimer = timeBeforeSpawn;
         hasSpawned = false;

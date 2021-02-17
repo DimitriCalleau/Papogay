@@ -841,6 +841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   upgradeIndex: 0
+  nbUpgradeMax: 3
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 0.5, z: 14.29}
   offsetHeightCollider: 0.5
@@ -855,6 +856,8 @@ MonoBehaviour:
   usurePercentage: 10
   costs: 14000000190000001e000000
   currentCost: 20
+  upgradeCosts: 66000000cb0000002f010000
+  currentUpgradeCost: 102
   ui_Sprites:
   - {fileID: 21300000, guid: 02c208d5a9776d049b752fec20d90e0e, type: 3}
   - {fileID: 21300000, guid: 02c208d5a9776d049b752fec20d90e0e, type: 3}
