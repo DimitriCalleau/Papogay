@@ -29,11 +29,8 @@ public class PlayerMovementController : MonoBehaviour
     PlayerStats stats;
 
     bool isrolling;
-    bool isboosted;
-
-    bool isInvincible;
     float rollTimer;
-   
+    bool isboosted = false;
     void Awake()
     {
         inputs = new InputPapogay();
@@ -141,7 +138,6 @@ public class PlayerMovementController : MonoBehaviour
         isrolling = true;
         skin.transform.rotation = rollDirection;
         GameManager.Instance.playerStats.Invincibility(true);
-        isInvincible = true;
 
         Vector3 rollDir = Quaternion.Euler(FloorInclinaison()) * rollDirection * (Vector3.forward * GameManager.Instance.playerStats.rollSpeed);
 

@@ -4,28 +4,18 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    EntityMovement entityMvt;
+    EntityMovement entityMvt = null;
 
     public EntityStatus status;
     public BaitType type;
     public int health, healthMaxALLY, healthMinENM, damageAlly, damageEnm;
     public float moveSpeed, baseSpeed, playerDetectionRadius, targetTreshold, RandomSelectorRadius, entityDamageCooldown, amazoonSpeedFactor;
 
-    void Awake()
+    public void Init(int lifePoints)
     {
         baseSpeed = moveSpeed;
-        if (health <= healthMaxALLY)
-        {
-            status = EntityStatus.Ally;
-        }
-        else if (health >= healthMinENM)
-        {
-            status = EntityStatus.Enemy;
-        }
-        else if (health < healthMinENM && health > healthMaxALLY)
-        {
-            status = EntityStatus.Neutral;
-        }
+        health = lifePoints;
+        ChangeEntityStatus();
     }
 
     void FixedUpdate()

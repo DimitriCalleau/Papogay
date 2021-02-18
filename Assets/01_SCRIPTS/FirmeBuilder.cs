@@ -5,130 +5,142 @@ using UnityEngine;
 [System.Serializable]
 public class FirmeBuilder
 {
-    GameManager gameManager;
-    BaitType _corpoType;
-
-    int corpoNb, destroyedCorpo;
-    GameObject[] modifiedHouses, housesTabl;
-    public GameObject[] allCorpo;//prefabs corporation   -0 : small   -1 : medium   -2 : big
+    public List<WaveStats> waveStats;
     public GameObject pfb_Shop;
 
-    public List<GameObject> bigFirmes;
-    public List<GameObject> mediumFirmes;
-    public List<GameObject> smallFirmes;
+    public GameObject[] smallHouses;
+    public GameObject[] bigHouses;
+    public List<int> modifiedBigHouses; //Sauvegarde les index de bighouse des maisons modifiées
+    public List<int> modifiedSmallHouses; //Sauvegarde les index de bighouse des maisons modifiées
+    public List<Transform> allFirmesLocations;
+    public Vector3 firmeLocation, firmeRotation;
+    int changeHouseIndex;
 
-    public List<GameObject> smallHouses;
-    public List<GameObject> bigHouses;
-    public List<Transform> firmeLocation;
+    int nbDestroyedFirmes, nbFirmesThisWave, firmeSpawnIndex;
 
-    public int destroyedFirmes;
-
-    public void CountDestroyedFirms(Transform destroyedFirmeTransform)
+    public List<GameObject> entityPrefabs;
+    public int nbEntityMaxThisWave;
+    public void ReplaceHousesBycorporations(int _waveIndex)
     {
-        destroyedCorpo += 1;
-        firmeLocation.Add(destroyedFirmeTransform);
-    }
-    
-    public void ReplaceHousesByCorpo(int _waveIndex)
-    {
-        destroyedCorpo = 0;
+        Debug.Log("heho");
+        //Reset Arrays
+        bigHouses = new GameObject[0];
+        smallHouses = new GameObject[0];
+        modifiedBigHouses.Clear();
+        modifiedSmallHouses.Clear();
+        allFirmesLocations.Clear();
+        nbDestroyedFirmes = 0;
+        firmeSpawnIndex = 0;
 
-        housesTabl = GameObject.FindGameObjectsWithTag("Maisons");
+        //Find Houses
+        int currentWaveIndex = GameManager.Instance.waveManager.waveindex;
+        bigHouses = GameObject.FindGameObjectsWithTag("BigHouse");
+        smallHouses = GameObject.FindGameObjectsWithTag("SmallHouse");
+        nbFirmesThisWave = waveStats[currentWaveIndex].nbFirmesThisWave;
+        nbEntityMaxThisWave = waveStats[currentWaveIndex].nbMaxEntity;
 
-        int nbSmallCorp = Mathf.RoundToInt(gameManager.corpoPerWave[_waveIndex].x);
-        int nbMediumCorp = Mathf.RoundToInt(gameManager.corpoPerWave[_waveIndex].y);
-        int nbBigCorp = Mathf.RoundToInt(gameManager.corpoPerWave[_waveIndex].z);
-
-        int corpoNb = Mathf.RoundToInt(nbSmallCorp + nbMediumCorp + nbBigCorp);
-        modifiedHouses = new GameObject[corpoNb];
-
-        int indexChangedHouses = 0;
-        int _houseIndex = Random.Range(0, housesTabl.Length - 1);
-
-        if (nbSmallCorp > 0)
+        for (int i = 0; i < nbFirmesThisWave; i++)
         {
-            for (int _x = 0; _x < nbSmallCorp; _x++)
+            GameObject firmeToInstanciate = waveStats[currentWaveIndex].firmeToSpawnPrefab[i];
+            BaitType firmeType = waveStats[currentWaveIndex].typesDeFirmes[i];
+            int firmeSize = waveStats[currentWaveIndex].firmeSize[i];
+
+            if(firmeSize == 2)//BigFirme
             {
-                if (housesTabl[_houseIndex].tag.Equals("ModifiedHouse"))
+                changeHouseIndex = Random.Range(0, bigHouses.Length);
+                if (modifiedBigHouses.Contains(changeHouseIndex))
                 {
-                    while (housesTabl[_houseIndex].tag.Equals("ModifiedHouse"))
+                    while (modifiedBigHouses.Contains(changeHouseIndex))
                     {
-                        _houseIndex = Random.Range(0, housesTabl.Length - 1);
+                        changeHouseIndex = Random.Range(0, bigHouses.Length);
                     }
                 }
 
-                modifiedHouses[indexChangedHouses] = housesTabl[_houseIndex];
-                modifiedHouses[indexChangedHouses].tag = "ModifiedHouse";
-                modifiedHouses[indexChangedHouses].SetActive(false);
-
-                GameObject corpoToInstanciate = allCorpo[0];
-                corpoToInstanciate.tag = "Corpo";
-                GameObject corpoInstance = GameObject.Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
-                indexChangedHouses += 1;
+                firmeLocation = bigHouses[changeHouseIndex].transform.position;
+                firmeRotation = bigHouses[changeHouseIndex].transform.eulerAngles;
+                allFirmesLocations.Add(bigHouses[changeHouseIndex].transform);
+                bigHouses[changeHouseIndex].SetActive(false);
+                GameObject newFirme = GameObject.Instantiate(firmeToInstanciate, firmeLocation, Quaternion.Euler(firmeRotation));
+                firmeSpawnIndex += 1;
+                newFirme.GetComponent<Firme>().corpoType = firmeType;
+                newFirme.GetComponent<Firme>().modifiedHouseIndex = firmeSpawnIndex;
+                newFirme.GetComponent<Firme>().firmeSize = firmeSize;
+                modifiedBigHouses.Add(changeHouseIndex);
             }
-        }
-
-        if (nbMediumCorp > 0)
-        {
-            if (housesTabl[_houseIndex].tag.Equals("ModifiedHouse"))
+            else
             {
-                while (housesTabl[_houseIndex].tag.Equals("ModifiedHouse"))
+                changeHouseIndex = Random.Range(0, smallHouses.Length);
+                if (modifiedSmallHouses.Contains(changeHouseIndex))
                 {
-                    _houseIndex = Random.Range(0, housesTabl.Length - 1);
+                    while (modifiedSmallHouses.Contains(changeHouseIndex))
+                    {
+                        changeHouseIndex = Random.Range(0, smallHouses.Length);
+                    }
                 }
-            }
+                firmeLocation = smallHouses[changeHouseIndex].transform.position;
+                firmeRotation = smallHouses[changeHouseIndex].transform.eulerAngles;
+                allFirmesLocations.Add(smallHouses[changeHouseIndex].transform);
+                smallHouses[changeHouseIndex].SetActive(false);
+                GameObject newFirme = GameObject.Instantiate(firmeToInstanciate, firmeLocation, Quaternion.Euler(firmeRotation));
+                firmeSpawnIndex += 1;
+                newFirme.GetComponent<Firme>().corpoType = firmeType;
+                newFirme.GetComponent<Firme>().modifiedHouseIndex = firmeSpawnIndex;
+                newFirme.GetComponent<Firme>().firmeSize = firmeSize;
+                modifiedSmallHouses.Add(changeHouseIndex);
 
-            for (int _y = 0; _y < nbSmallCorp; _y++)
-            {
-                modifiedHouses[indexChangedHouses] = housesTabl[_houseIndex];
-                modifiedHouses[indexChangedHouses].tag = "ModifiedHouse";
-                modifiedHouses[indexChangedHouses].SetActive(false);
-
-                GameObject corpoToInstanciate = allCorpo[1];
-                corpoToInstanciate.tag = "Corpo";
-                GameObject corpoInstance = GameObject.Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
-                indexChangedHouses += 1;
-            }
-        }
-
-        if (nbBigCorp > 0)
-        {
-            if (housesTabl[_houseIndex].tag.Equals("ModifiedHouse"))
-            {
-                while (housesTabl[_houseIndex].tag.Equals("ModifiedHouse"))
-                {
-                    _houseIndex = Random.Range(0, housesTabl.Length - 1);
-                }
-            }
-
-            for (int _z = 0; _z < nbSmallCorp; _z++)
-            {
-                modifiedHouses[indexChangedHouses] = housesTabl[_houseIndex];
-                modifiedHouses[indexChangedHouses].tag = "ModifiedHouse";
-                modifiedHouses[indexChangedHouses].SetActive(false);
-
-                GameObject corpoToInstanciate = allCorpo[2];
-                corpoToInstanciate.tag = "Corpo";
-                GameObject corpoInstance = GameObject.Instantiate(corpoToInstanciate, modifiedHouses[indexChangedHouses].transform.position, modifiedHouses[indexChangedHouses].transform.rotation);
-                indexChangedHouses += 1;
             }
         }
     }
 
-    public void RecallModifiedHouses(int _index)
+    public void RecallModifiedHouses(int _index, int _size)
     {
-        destroyedCorpo += 1;
-        if (destroyedCorpo < corpoNb)
+        nbDestroyedFirmes += 1;
+        if (nbDestroyedFirmes < nbFirmesThisWave)
         {
-            modifiedHouses[_index].SetActive(true);
-            modifiedHouses[_index].tag = "Maisons";
-            modifiedHouses[_index] = null;
+            if(_size == 2)
+            {
+                bigHouses[modifiedBigHouses[_index]].SetActive(true);
+            }
+            else
+            {
+                smallHouses[modifiedSmallHouses[_index]].SetActive(true);
+            }
         }
         else
         {
-            //_corpoType = ;
-            GameObject shop = GameObject.Instantiate(pfb_Shop, modifiedHouses[_index].transform.position, modifiedHouses[_index].transform.rotation);
-            GameObject.Destroy(modifiedHouses[_index]);
+            if (_size == 2)
+            {
+                GameObject shop = GameObject.Instantiate(pfb_Shop, bigHouses[modifiedBigHouses[_index]].transform.position, bigHouses[modifiedBigHouses[_index]].transform.rotation);
+                GameObject.Destroy(bigHouses[modifiedBigHouses[_index]]);
+                GameManager.Instance.EventEndWave();
+            }
+            else
+            {
+                GameObject shop = GameObject.Instantiate(pfb_Shop, smallHouses[modifiedSmallHouses[_index]].transform.position, smallHouses[modifiedSmallHouses[_index]].transform.rotation);
+                GameObject.Destroy(smallHouses[modifiedSmallHouses[_index]]);
+                GameManager.Instance.EventEndWave();
+            }
         }
+    }
+
+    public GameObject SelectEntity(BaitType whichType)
+    {
+        GameObject selection = null;
+        bool found = false;
+        for (int b = 0; b < entityPrefabs.Count; b++)
+        { 
+            if(entityPrefabs[b].GetComponent<Entity>().type == whichType)
+            {
+                selection = entityPrefabs[b];
+                found = true;
+                break;
+            }
+        }
+        if (found == true)
+        {
+            return selection;
+        }
+        else
+            return null;
     }
 }

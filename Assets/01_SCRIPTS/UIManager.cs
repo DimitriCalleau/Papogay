@@ -183,17 +183,19 @@ public class UIManager : MonoBehaviour
         }
 
     }
-
     public void CloseShop()
     {
-        if (shop.hasNewBaitToAdd)
+        if (shopOpened == true)
         {
-            GameManager.Instance.EventStartWave();
-            shop.hasNewBaitToAdd = false;
+            if (shop.hasNewBaitToAdd)
+            {
+                GameManager.Instance.EventStartWave();
+                shop.hasNewBaitToAdd = false;
+            }
+            shopPanel.SetActive(false);
+            CursorState(true);
+            shopOpened = false;
         }
-        shopPanel.SetActive(false);
-        CursorState(true);
-        shopOpened = false;
     }
 
     public void Pause()

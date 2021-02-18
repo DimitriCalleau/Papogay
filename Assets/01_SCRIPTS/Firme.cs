@@ -6,29 +6,33 @@ using UnityEngine.AI;
 public class Firme : MonoBehaviour
 {
     Animator anm;
-    WaveManager waveManager;
     public BaitType corpoType;
     public float defaultHealth;
     float health;
-    int firmeIndex;
-    bool destruction;
 
+    public int modifiedHouseIndex, firmeSize;
+
+    [Header("Spawner")]
+    GameObject entityToSpawn;
+    public float timeBetweenSpawn, spawnRadius;
+    float timerSpawn;
     void Awake()
     {
         anm = GetComponentInChildren<Animator>();
         health = defaultHealth;
+        entityToSpawn = GameManager.Instance.builder.SelectEntity(corpoType);
     }
-
-    public void DamageFirme(int _damages)
+    void Update()
     {
-        health -= _damages;
-
-        if (health <= 0)
+        if (timerSpawn <= 0 && entityToSpawn != null)
         {
-            StartCorpoDestruction();
+            SpawnEntity(ChooseSpawnPointEntity(spawnRadius));
+        }
+        else
+        {
+            timerSpawn -= Time.deltaTime;
         }
     }
-
     public Vector3 ChooseSpawnPointEntity(float _radius)
     {
         Vector3 randomDirection = transform.position + Random.insideUnitSphere * _radius;
@@ -40,18 +44,38 @@ public class Firme : MonoBehaviour
         }
         return entitySpawnPoint;
     }
+    void SpawnEntity(Vector3 _spawnPoint)
+    {
+        anm.SetTrigger("Spawn");
+        if(GameManager.Instance.waveManager.nbEntities < GameManager.Instance.builder.nbEntityMaxThisWave)
+        {
+            GameObject newEntity = GameObject.Instantiate(entityToSpawn, _spawnPoint, Quaternion.identity);
+            newEntity.GetComponent<Entity>().Init(0);//entity has 0 healthPoint
+            GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
+
+            timerSpawn = timeBetweenSpawn;
+        }
+    }
+    public void DamageFirme(int _damages)
+    {
+        health -= _damages;
+
+        if (health <= 0)
+        {
+            StartCorpoDestruction();
+        }
+    }
 
     void StartCorpoDestruction()
     {
         anm.SetBool("Destroy", true);
-        if (anm.GetCurrentAnimatorStateInfo(0).IsName("Destroy"))//check if this is good when the corporation thing is set, need animator called "Destroy"
-        {
-            DestroyCorpo();
-        }
+        //Should Wait For Destruction anim to end
+        DestroyCorpo();
     }
 
     void DestroyCorpo()
     {
+        GameManager.Instance.builder.RecallModifiedHouses(modifiedHouseIndex, firmeSize);
         Destroy(this.gameObject);
     }
 }

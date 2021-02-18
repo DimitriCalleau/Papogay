@@ -5,9 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - TargetForEnemyEntity
-  - Maisons
   - ModifiedHouse
   - Corpo
+  - BigHouse
+  - SmallHouse
+  - Shop
   layers:
   - Default
   - TransparentFX

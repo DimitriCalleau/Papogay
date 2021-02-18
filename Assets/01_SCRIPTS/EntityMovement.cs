@@ -131,19 +131,19 @@ public class EntityMovement : Entity
             #region ally
             case EntityStatus.Ally:
                 float shortestDistance = Mathf.Infinity;
-                if (GameManager.Instance.builder.firmeLocation != null)
+                if (GameManager.Instance.builder.allFirmesLocations != null)
                 {
-                    for (int i = 0; i < GameManager.Instance.builder.firmeLocation.Count; i++)
+                    for (int i = 0; i < GameManager.Instance.builder.allFirmesLocations.Count; i++)
                     {
-                        float distance = Vector3.Distance(transform.position, GameManager.Instance.builder.firmeLocation[i].position);
+                        float distance = Vector3.Distance(transform.position, GameManager.Instance.builder.allFirmesLocations[i].position);
                         if (distance < shortestDistance)
                         {
                             shortestDistance = distance;
-                            destination = GameManager.Instance.builder.firmeLocation[i].position;
+                            destination = GameManager.Instance.builder.allFirmesLocations[i].position;
                         }
                     }
                 }
-                else if (GameManager.Instance.builder.firmeLocation == null)
+                else if (GameManager.Instance.builder.allFirmesLocations == null)
                 {
                     Destroy(gameObject);
                 }

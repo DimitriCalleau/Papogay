@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
 
     public GameState gameState = new GameState();
 
-    public EntitySpawner entitySpawner = new EntitySpawner();
     public WaveManager waveManager = new WaveManager();
     public FirmeBuilder builder = new FirmeBuilder();
 
@@ -47,24 +46,6 @@ public class GameManager : MonoBehaviour
     [Header("FX Spawn")]
     [Header("EntitySpawner")]
     public Animator anm;
-    #endregion
-
-    #region waveManager
-    [Header("      8 = amazoon")]
-    [Header("      7 = basic thicc")]
-    [Header("      6 = Duck donald")]
-    [Header("      5 = pear")]
-    [Header("      4 = stink")]
-    [Header("      3 = roundabout")]
-    [Header("CorpoType")]
-    public int[] corpoNbPerType;//amount of corporation by type
-    public List<int>[] cum;//list corporationTypeWave (to do a "table in a table" thing) & length depend of the wave amount
-
-    [Header("      2 = big")]
-    [Header("      1 = medium")]
-    [Header("      0 = small")]
-    [Header("Corpo amount by size")]
-    public Vector3[] corpoPerWave;//size -0 : small   -1 : medium   -2 : big
     #endregion
 
     #region Events
@@ -112,15 +93,14 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
+        StartWave += waveManager.StartWave;
         StartWave += waveManager.IncreaseWaveIndex;
+        EndWave += waveManager.IncreaseWaveIndex;
     }
     void OnDisable()
     {
+        StartWave -= waveManager.StartWave;
         StartWave -= waveManager.IncreaseWaveIndex;
-    }
-
-    public void NewWave()
-    {
-        waveManager.StartWave();
+        EndWave -= waveManager.IncreaseWaveIndex;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EntityAttack : Entity
 {
-    EntityMovement entityMvt;
+    EntityMovement entityMvt = null;
 
     float timerCooldownAttack;
 

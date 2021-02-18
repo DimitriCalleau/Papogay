@@ -13,10 +13,13 @@ public class WaveManager
     public int nbNeutralEntities;
     [HideInInspector]
     public int nbEnemyEntities;
+    [HideInInspector]
+    public int nbEntities;
 
     [HideInInspector]
     public int waveindex;
-    [HideInInspector]
+
+    public GameObject[] locationZones;
     public void AddRemoveEntity(EntityStatus status, bool addOrRemove)
     {
         if(addOrRemove == true)
@@ -53,51 +56,16 @@ public class WaveManager
                     break;
             }
         }
+
+        nbEntities = nbAllyEntities + nbNeutralEntities + nbEnemyEntities;
     }
 
     public void StartWave()
     {
-        switch (GameManager.Instance.waveManager.waveindex)
+        GameManager.Instance.builder.ReplaceHousesBycorporations(waveindex);
+        if(locationZones[waveindex] != null)
         {
-            case 1:
-                for (int i = 0; i < GameManager.Instance.entitySpawner.corpoType.Length; i++)
-                {
-                    /*
-                    for (int i = 0; i < length; i++)
-                    {
-                        GameManager.Instance.builder.ReplaceHousesByCorpo(GameManager.Instance.waveManager.waveindex);
-                    }
-                    */
-                }
-                break;
-
-            case 2:
-                for (int i = 0; i < GameManager.Instance.entitySpawner.corpoType.Length; i++)
-                {
-                    //corpoNbPerType[i];
-                }
-                break;
-
-            case 3:
-                for (int i = 0; i < GameManager.Instance.entitySpawner.corpoType.Length; i++)
-                {
-                    //corpoNbPerType[i];
-                }
-                break;
-
-            case 4:
-                for (int i = 0; i < GameManager.Instance.entitySpawner.corpoType.Length; i++)
-                {
-                    //corpoNbPerType[i];
-                }
-                break;
-
-            case 5:
-                for (int i = 0; i < GameManager.Instance.entitySpawner.corpoType.Length; i++)
-                {
-                    //corpoNbPerType[i];
-                }
-                break;
+            locationZones[waveindex].SetActive(true);
         }
     }
 
