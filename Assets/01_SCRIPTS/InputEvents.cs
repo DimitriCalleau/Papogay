@@ -37,10 +37,6 @@ public class InputEvents : MonoBehaviour
         playerInputs.Actions.MoveCam.performed += ctx => OnMoveCam(ctx.ReadValue<Vector2>()) ;
         playerInputs.Actions.MoveCam.canceled += ctx => OnMoveCam(Vector2.zero);
 
-        if (GameManager.Instance != null && GameManager.Instance.gameState.start == true && GameManager.Instance.gameState.pause == false)
-        {
-
-        }
         playerInputs.Actions.Escape.performed += ctx => OnPause();
     }
 

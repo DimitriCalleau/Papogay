@@ -14,20 +14,20 @@ public class BaitSpawner : MonoBehaviour
     float timerPercentage;
     bool hasSpawned;
 
-    public GameObject prespawnUI;
     public Image timerImage;
     public TextMeshProUGUI timerText;
+    public MeshFilter previewMeshFilter;
     public void InitSpawn(GameObject _baitprefab, Location _location)
     {
         prefabToSpawn = _baitprefab;
         locationToSpawn = _location;
         baitMesh = prefabToSpawn.GetComponent<MeshFilter>().sharedMesh;
-        GetComponent<MeshFilter>().mesh = baitMesh;
+        previewMeshFilter.mesh = baitMesh;
         timeBeforeSpawn = prefabToSpawn.GetComponent<Baits>().timeBeforeSpawn;
         spawnTimer = timeBeforeSpawn;
         hasSpawned = false;
 
-        timerPercentage = timeBeforeSpawn / spawnTimer;
+        timerPercentage = spawnTimer / timeBeforeSpawn;
 
         timerText.text = timerPercentage.ToString();
         timerImage.fillAmount = timerPercentage;
@@ -38,8 +38,9 @@ public class BaitSpawner : MonoBehaviour
         if (spawnTimer > 0)
         {
             spawnTimer -= Time.deltaTime;
-            timerPercentage = timeBeforeSpawn / spawnTimer;
-            timerText.text = timerPercentage.ToString();
+            timerPercentage = spawnTimer / timeBeforeSpawn;
+            Debug.Log(timerPercentage);
+            timerText.text = Mathf.CeilToInt(timerPercentage).ToString();
             timerImage.fillAmount = timerPercentage;
         }
         else
@@ -57,6 +58,6 @@ public class BaitSpawner : MonoBehaviour
         bait.GetComponent<Baits>().InitBait();
         bait.GetComponent<Baits>().location = locationToSpawn;
         hasSpawned = true;
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }

@@ -40,17 +40,19 @@ public class PlayerStats
         healthPercentage = currentHealth / maxHealth;
     }
 
-    public void Invincibility()
+    public void Invincibility(bool switchInvinsibility)
     {
-        invincible = true;
-        float timer = invincibilityTime;
-        while (timer >= 0)
+
+        switch (switchInvinsibility)
         {
-            timer -= Time.deltaTime;
-        }
-        if(timer <= 0)
-        {
-            invincible = false;
+            case true:
+                if (invincible == false)
+                    invincible = true;
+                break;
+            case false:
+                if (invincible == true)
+                    invincible = false;
+                break;
         }
     }
 }

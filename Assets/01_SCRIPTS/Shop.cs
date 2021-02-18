@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class Shop
 {
+    public bool hasNewBaitToAdd;
+    
     public float detectionRange;
     [SerializeField]
     LayerMask shopLayer = -1;
@@ -26,8 +28,6 @@ public class Shop
                     minDist = distance;
                 }
             }
-            Debug.Log("selected :" + selectedShop);
-            Debug.Log("oldselection :" + oldShopSelection);
             if (selectedShop != oldShopSelection)
             {
                 if (oldShopSelection != null)
@@ -37,13 +37,13 @@ public class Shop
                     GameObject oldAnimatedPart = oldShopSelection.transform.GetChild(1).gameObject;
                     oldAnimatedPart.GetComponent<Animator>().SetBool("OpenClose", false);
                 }
-
-                GameObject child = selectedShop.transform.GetChild(0).gameObject;
-                child.SetActive(true);
-                GameObject animatedPart = selectedShop.transform.GetChild(1).gameObject;
-                animatedPart.GetComponent<Animator>().SetBool("OpenClose", true);
-                oldShopSelection = selectedShop;
             }
+            GameObject child = selectedShop.transform.GetChild(0).gameObject;
+            child.SetActive(true);
+            GameObject animatedPart = selectedShop.transform.GetChild(1).gameObject;
+            animatedPart.GetComponent<Animator>().SetBool("OpenClose", true);
+            oldShopSelection = selectedShop;
+            closeToShop = true;
         }
         else
         {
@@ -55,6 +55,8 @@ public class Shop
                 animatedPart.GetComponent<Animator>().SetBool("OpenClose", false);
                 selectedShop = null;
             }
+            closeToShop = false;
         }
     }
+
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -42,6 +44,7 @@ public class UIManager : MonoBehaviour
 
     public GameObject inventorySlotPrefab;
     public GameObject shopSlotPrefab;
+    public GameObject upgradeSlotPrefab;
     public GameObject baitSpawnerPrefab;
 
     //[Header("Panels")]
@@ -58,6 +61,9 @@ public class UIManager : MonoBehaviour
     public GameObject optionPanel;
     public GameObject creditsPanel;
     #endregion
+
+    public TextMeshProUGUI goldText;
+    public Image healthBar;
 
     public float locationDetectionRange;
     [SerializeField]
@@ -80,6 +86,8 @@ public class UIManager : MonoBehaviour
         {
             baitManager.cooldownTimer -= Time.deltaTime;
         }
+        goldText.text = GameManager.Instance.playerStats.gold.ToString();
+        healthBar.fillAmount = GameManager.Instance.playerStats.healthPercentage;
     }
     void FixedUpdate()
     {
@@ -106,12 +114,12 @@ public class UIManager : MonoBehaviour
         }
         shop.DetectCloseShop();
     }
-
+     
     public void AddFirstTraps()
     {
-        reward.AddOrUpgradeBait(BaitType.PaperBoy, 10);
-        reward.AddOrUpgradeBait(BaitType.FruitBox, 10);
-        reward.AddOrUpgradeBait(BaitType.Sign, 10);
+        reward.AddBait(BaitType.PaperBoy, 10);
+        reward.AddBait(BaitType.FruitBox, 10);
+        reward.AddBait(BaitType.Sign, 10);
         inventory.SwitchBaitSelection(true);
         GameManager.Instance.EventStartWave();
         GameManager.Instance.gameState.SetPause(false);
@@ -124,20 +132,8 @@ public class UIManager : MonoBehaviour
     }
     public void AddReward()
     {
-        reward.AddOrUpgradeBait(reward.loots[reward.loots.Count - 1], 10);
-        reward.loots.Clear();
-        GameManager.Instance.EventStartWave();
+        reward.AddBait(reward.loots[GameManager.Instance.waveManager.waveindex], 10);
         rewardPanel.SetActive(false);
-        GameManager.Instance.gameState.SetPause(false);
-
-        CursorState(true);
-    }
-    public void OpenRewardPanel()
-    {
-        GameManager.Instance.gameState.SetPause(true);
-        GameManager.Instance.gameState.start = false;
-        rewardPanel.SetActive(true);
-        CursorState(false);
     }
 
     public GameObject PickBait(BaitType type)
@@ -158,7 +154,6 @@ public class UIManager : MonoBehaviour
         else
             return null;
     }
-
     public void Play()
     {
         allCurrentBaits.Clear();
@@ -166,18 +161,23 @@ public class UIManager : MonoBehaviour
     }
     public void OpenCloseShop()
     {
-        Debug.Log("heho");
         switch (shopOpened)
         {
             case true:
                 CloseShop();
+                GameManager.Instance.gameState.SetPause(false);
                 break;
             case false:
                 if (shop.closeToShop == true)
                 {
+                    if (shop.hasNewBaitToAdd == true)
+                    {
+                        rewardPanel.SetActive(true);
+                    }
                     shopPanel.SetActive(true);
                     CursorState(false);
                     shopOpened = true;
+                    GameManager.Instance.gameState.SetPause(true);
                 }
                 break;
         }
@@ -186,6 +186,11 @@ public class UIManager : MonoBehaviour
 
     public void CloseShop()
     {
+        if (shop.hasNewBaitToAdd)
+        {
+            GameManager.Instance.EventStartWave();
+            shop.hasNewBaitToAdd = false;
+        }
         shopPanel.SetActive(false);
         CursorState(true);
         shopOpened = false;
