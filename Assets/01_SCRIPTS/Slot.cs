@@ -28,8 +28,8 @@ public class Slot
         thisBait.InitBait();
         currentCost = thisBait.currentCost;
         upgradeCost = thisBait.currentUpgradeCost;
-        currentUIImage = thisBait.ui_Sprites[thisBait.upgradeIndex];
-        if(thisBait.upgradeIndex < thisBait.nbUpgradeMax - 1)
+        currentUIImage = thisBait.ui_Sprites[thisBait.upgradeIndex]; 
+        if (thisBait.upgradeIndex < thisBait.nbUpgradeMax - 1)
         {
             currentUpgradeImage = thisBait.ui_Sprites[thisBait.upgradeIndex + 1];
         }
@@ -59,14 +59,19 @@ public class Slot
     }
     public void UpgradeSlotBait()
     {
-        if (upgradeCost <= GameManager.Instance.playerStats.gold)
+        Baits thisBait = baitPrefab.GetComponent<Baits>();
+        if (upgradeCost <= GameManager.Instance.playerStats.gold && thisBait.upgradeIndex < thisBait.nbUpgradeMax - 1)
         {
-            Baits thisBait = baitPrefab.GetComponent<Baits>();
             thisBait.Upgrade();
             currentCost = thisBait.currentCost;
+            upgradeCost = thisBait.currentUpgradeCost;
             currentUIImage = thisBait.ui_Sprites[thisBait.upgradeIndex];
-            UpdateDisplay();
+            if (thisBait.upgradeIndex < thisBait.nbUpgradeMax - 1)
+            {
+                currentUpgradeImage = thisBait.ui_Sprites[thisBait.upgradeIndex + 1];
+            }
             GameManager.Instance.playerStats.Pay(upgradeCost);
+            UpdateDisplay();
         }
     }
     public void BuyBait()

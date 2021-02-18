@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -60,6 +62,9 @@ public class UIManager : MonoBehaviour
     public GameObject creditsPanel;
     #endregion
 
+    public TextMeshProUGUI goldText;
+    public Image healthBar;
+
     public float locationDetectionRange;
     [SerializeField]
     LayerMask locationLayer = -1;
@@ -81,6 +86,8 @@ public class UIManager : MonoBehaviour
         {
             baitManager.cooldownTimer -= Time.deltaTime;
         }
+        goldText.text = GameManager.Instance.playerStats.gold.ToString();
+        healthBar.fillAmount = GameManager.Instance.playerStats.healthPercentage;
     }
     void FixedUpdate()
     {
@@ -107,7 +114,7 @@ public class UIManager : MonoBehaviour
         }
         shop.DetectCloseShop();
     }
-
+     
     public void AddFirstTraps()
     {
         reward.AddBait(BaitType.PaperBoy, 10);
@@ -125,19 +132,8 @@ public class UIManager : MonoBehaviour
     }
     public void AddReward()
     {
-        reward.AddBait(reward.loots[GameManager.Instance.waveManager.waveindex - 1], 10);
-        GameManager.Instance.EventStartWave();
+        reward.AddBait(reward.loots[GameManager.Instance.waveManager.waveindex], 10);
         rewardPanel.SetActive(false);
-        GameManager.Instance.gameState.SetPause(false);
-
-        CursorState(true);
-    }
-    public void OpenRewardPanel()
-    {
-        GameManager.Instance.gameState.SetPause(true);
-        GameManager.Instance.gameState.start = false;
-        rewardPanel.SetActive(true);
-        CursorState(false);
     }
 
     public GameObject PickBait(BaitType type)
@@ -158,7 +154,6 @@ public class UIManager : MonoBehaviour
         else
             return null;
     }
-
     public void Play()
     {
         allCurrentBaits.Clear();
@@ -175,6 +170,10 @@ public class UIManager : MonoBehaviour
             case false:
                 if (shop.closeToShop == true)
                 {
+                    if (shop.hasNewBaitToAdd == true)
+                    {
+                        rewardPanel.SetActive(true);
+                    }
                     shopPanel.SetActive(true);
                     CursorState(false);
                     shopOpened = true;
@@ -187,6 +186,11 @@ public class UIManager : MonoBehaviour
 
     public void CloseShop()
     {
+        if (shop.hasNewBaitToAdd)
+        {
+            GameManager.Instance.EventStartWave();
+            shop.hasNewBaitToAdd = false;
+        }
         shopPanel.SetActive(false);
         CursorState(true);
         shopOpened = false;

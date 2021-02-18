@@ -47,6 +47,7 @@ public class Baits : MonoBehaviour
 
     public void InitBait()
     {
+        upgradeIndex = 0;
         if(ui_UsureBar != null)
         {
             ui_UsureBar.SetActive(true);
@@ -54,8 +55,8 @@ public class Baits : MonoBehaviour
         this.currentUsureMax = this.usureMax[upgradeIndex];
         this.usure = this.currentUsureMax;
         this.usurePercentage = this.currentUsureMax;
-        this.currentCost = costs[upgradeIndex];
-        this.currentUpgradeCost = upgradeCosts[upgradeIndex];
+        this.currentCost = this.costs[this.upgradeIndex];
+        this.currentUpgradeCost = this.upgradeCosts[this.upgradeIndex];
         this.ui_UsureAmountText.text = this.usure.ToString();
         this.ui_healthBar.fillAmount = this.usurePercentage;
         if (this.cooldown.Count > 0)

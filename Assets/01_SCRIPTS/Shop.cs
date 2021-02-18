@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class Shop
 {
+    public bool hasNewBaitToAdd;
+    
     public float detectionRange;
     [SerializeField]
     LayerMask shopLayer = -1;

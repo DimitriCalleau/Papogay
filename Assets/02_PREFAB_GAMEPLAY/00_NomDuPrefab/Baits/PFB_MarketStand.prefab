@@ -54,17 +54,17 @@ MonoBehaviour:
   offsetHeightCollider: 0
   offSetForwardCollider: 0
   timeBeforeSpawn: 2
-  usure: 0
-  currentUsureMax: 0
+  usure: 75
+  currentUsureMax: 30
   usureMax:
   - 10
   - 20
   - 30
-  usurePercentage: 0
+  usurePercentage: 10
   costs: 140000001e00000028000000
-  currentCost: 0
+  currentCost: 40
   upgradeCosts: 68000000cc00000030010000
-  currentUpgradeCost: 0
+  currentUpgradeCost: 304
   ui_Sprites:
   - {fileID: 21300000, guid: e6a45fe2536490744867e78da4c0f295, type: 3}
   - {fileID: 21300000, guid: 0669d26e64d14bf4ba8f2f7528609d8f, type: 3}
@@ -77,7 +77,7 @@ MonoBehaviour:
   - 2.5
   - 2
   - 1.5
-  countdown: 0
+  countdown: 2.5
   ennemisMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -140,6 +140,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7069832796164665053}
     m_Modifications:
+    - target: {fileID: 1248398480471839638, guid: 1f8cc1f448abb4a44b912c7b86a6a840,
+        type: 3}
+      propertyPath: m_text
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1248398481099662317, guid: 1f8cc1f448abb4a44b912c7b86a6a840,
         type: 3}
       propertyPath: m_LocalPosition.x

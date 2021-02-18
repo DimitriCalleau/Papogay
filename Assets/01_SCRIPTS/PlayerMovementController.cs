@@ -138,6 +138,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     public void Roll(Quaternion rollDirection)
     {
+        isrolling = true;
         skin.transform.rotation = rollDirection;
         GameManager.Instance.playerStats.Invincibility(true);
         isInvincible = true;
