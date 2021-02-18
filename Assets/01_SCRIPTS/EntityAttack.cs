@@ -8,6 +8,22 @@ public class EntityAttack : Entity
 
     float timerCooldownAttack;
 
+    void FixedUpdate()
+    {
+        if (status == EntityStatus.Enemy)
+        {
+            switch (type)
+            {
+                case BaitType.Antenna:
+                    //damageAlly * (x%)[+1, +∞]
+                    break;
+                case BaitType.Bar:
+                    //damageEnm * (x%)[+0, +1]
+                    break;
+            }
+        }
+    }
+
     void Update()
     {
         if (entityMvt.CloseToTarget() == true)
@@ -41,12 +57,12 @@ public class EntityAttack : Entity
         }
     }
 
-    public void AttacksPlayer(int damagesLOCAL)
+    public void AttacksPlayer(int damagesLOCAL)//if no void dedicated in the player script
     {
         Debug.Log("attacks player void " + damagesLOCAL);
     }
 
-    public void AttacksFirme(int damagesLOCAL)
+    public void AttacksFirme(int damagesLOCAL)//if no void dedicated in the corporation script
     {
         Debug.Log("attacks firme void " + damagesLOCAL);
     }

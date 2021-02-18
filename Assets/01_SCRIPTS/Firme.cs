@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Firme : MonoBehaviour
 {
@@ -26,6 +27,18 @@ public class Firme : MonoBehaviour
         {
             StartCorpoDestruction();
         }
+    }
+
+    public Vector3 ChooseSpawnPointEntity(float _radius)
+    {
+        Vector3 randomDirection = transform.position + Random.insideUnitSphere * _radius;
+        NavMeshHit hit;
+        Vector3 entitySpawnPoint = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out hit, _radius, NavMesh.AllAreas))
+        {
+            entitySpawnPoint = hit.position;
+        }
+        return entitySpawnPoint;
     }
 
     void StartCorpoDestruction()
