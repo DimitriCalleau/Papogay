@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -85,7 +84,7 @@ public class EntityMovement : Entity
     {
         switch (status)
         {
-            #region
+            #region neutral
             case EntityStatus.Neutral:
                 destination = transform.position + Random.insideUnitSphere * RandomSelectorRadius;
                 if (NavMesh.SamplePosition(destination, out navMeshHit, RandomSelectorRadius, NavMesh.AllAreas))
@@ -95,7 +94,7 @@ public class EntityMovement : Entity
                 break;
             #endregion
 
-            #region
+            #region enemy
             case EntityStatus.Enemy:
                 possibleTargets = GameObject.FindGameObjectsWithTag("TargetForEnemyEntity");
                 if (PlayerInRange(playerDetectionRadius, GameManager.Instance.player.transform.position) == true)
@@ -129,7 +128,7 @@ public class EntityMovement : Entity
                 break;
             #endregion
 
-            #region
+            #region ally
             case EntityStatus.Ally:
                 float shortestDistance = Mathf.Infinity;
                 if (GameManager.Instance.builder.firmeLocation != null)

@@ -9,10 +9,11 @@ public class Entity : MonoBehaviour
     public EntityStatus status;
     public BaitType type;
     public int health, healthMaxALLY, healthMinENM, damageAlly, damageEnm;
-    public float moveSpeed, playerDetectionRadius, targetTreshold, RandomSelectorRadius, entityDamageCooldown, amazoonSpeedFactor;
+    public float moveSpeed, baseSpeed, playerDetectionRadius, targetTreshold, RandomSelectorRadius, entityDamageCooldown, amazoonSpeedFactor;
 
     void Awake()
     {
+        baseSpeed = moveSpeed;
         if (health <= healthMaxALLY)
         {
             status = EntityStatus.Ally;
@@ -33,17 +34,11 @@ public class Entity : MonoBehaviour
         {
             switch (type)
             {
-                case BaitType.Perfume:
-
-                    break;
-                case BaitType.Antenna:
-                    break;
-                case BaitType.Bar:
-                    break;
-                case BaitType.Threadmill:
-                    break;
                 case BaitType.Amazoon:
                     entityMvt.entityNavMeshAgent.speed = moveSpeed * amazoonSpeedFactor;
+                    break;
+                case BaitType.Threadmill:
+                    entityMvt.entityNavMeshAgent.speed = baseSpeed;
                     break;
             }
         }

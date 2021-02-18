@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class FirmeBuilder
 {
+    GameManager gameManager;
     BaitType _corpoType;
 
     int corpoNb, destroyedCorpo;
-    Vector3[] corpoPerWave;
     GameObject[] modifiedHouses, housesTabl;
     public GameObject[] allCorpo;//prefabs corporation   -0 : small   -1 : medium   -2 : big
     public GameObject pfb_Shop;
@@ -21,7 +21,6 @@ public class FirmeBuilder
     public List<GameObject> bigHouses;
     public List<Transform> firmeLocation;
 
-    public int nbFirmesMax;
     public int destroyedFirmes;
 
     public void CountDestroyedFirms(Transform destroyedFirmeTransform)
@@ -36,9 +35,9 @@ public class FirmeBuilder
 
         housesTabl = GameObject.FindGameObjectsWithTag("Maisons");
 
-        int nbSmallCorp = Mathf.RoundToInt(corpoPerWave[_waveIndex].x);
-        int nbMediumCorp = Mathf.RoundToInt(corpoPerWave[_waveIndex].y);
-        int nbBigCorp = Mathf.RoundToInt(corpoPerWave[_waveIndex].z);
+        int nbSmallCorp = Mathf.RoundToInt(gameManager.corpoPerWave[_waveIndex].x);
+        int nbMediumCorp = Mathf.RoundToInt(gameManager.corpoPerWave[_waveIndex].y);
+        int nbBigCorp = Mathf.RoundToInt(gameManager.corpoPerWave[_waveIndex].z);
 
         int corpoNb = Mathf.RoundToInt(nbSmallCorp + nbMediumCorp + nbBigCorp);
         modifiedHouses = new GameObject[corpoNb];

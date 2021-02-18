@@ -60,24 +60,43 @@ public class WaveManager
         switch (GameManager.Instance.waveManager.waveindex)
         {
             case 1:
-                //entity amount per type;
-                //corpoType + amount
                 for (int i = 0; i < GameManager.Instance.entitySpawner.corpoType.Length; i++)
                 {
-                    //GameManager.Instance.entitySpawner.corpoType[i];
+                    /*
+                    for (int i = 0; i < length; i++)
+                    {
+                        GameManager.Instance.builder.ReplaceHousesByCorpo(GameManager.Instance.waveManager.waveindex);
+                    }
+                    */
                 }
                 break;
 
             case 2:
+                for (int i = 0; i < GameManager.Instance.entitySpawner.corpoType.Length; i++)
+                {
+                    //corpoNbPerType[i];
+                }
                 break;
 
             case 3:
+                for (int i = 0; i < GameManager.Instance.entitySpawner.corpoType.Length; i++)
+                {
+                    //corpoNbPerType[i];
+                }
                 break;
 
             case 4:
+                for (int i = 0; i < GameManager.Instance.entitySpawner.corpoType.Length; i++)
+                {
+                    //corpoNbPerType[i];
+                }
                 break;
 
             case 5:
+                for (int i = 0; i < GameManager.Instance.entitySpawner.corpoType.Length; i++)
+                {
+                    //corpoNbPerType[i];
+                }
                 break;
         }
     }
