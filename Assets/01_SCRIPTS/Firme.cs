@@ -58,6 +58,7 @@ public class Firme : MonoBehaviour
     }
     public void DamageFirme(int _damages)
     {
+        Debug.Log("boom ta mere la reine des firmes");
         health -= _damages;
 
         if (health <= 0)
@@ -68,7 +69,7 @@ public class Firme : MonoBehaviour
 
     void StartCorpoDestruction()
     {
-        anm.SetBool("Destroy", true);
+        //anm.SetBool("Destroy", true);
         //Should Wait For Destruction anim to end
         DestroyCorpo();
     }

@@ -8,12 +8,15 @@ public class FirmeBuilder
     public List<WaveStats> waveStats;
     public GameObject pfb_Shop;
 
-    public GameObject[] smallHouses;
-    public GameObject[] bigHouses;
+    GameObject[] smallHouses;
+    GameObject[] bigHouses;
+    [HideInInspector]
     public List<int> modifiedBigHouses; //Sauvegarde les index de bighouse des maisons modifiées
+    [HideInInspector]
     public List<int> modifiedSmallHouses; //Sauvegarde les index de bighouse des maisons modifiées
+    [HideInInspector]
     public List<Transform> allFirmesLocations;
-    public Vector3 firmeLocation, firmeRotation;
+    Vector3 firmeLocation, firmeRotation;
     int changeHouseIndex;
 
     int nbDestroyedFirmes, nbFirmesThisWave, firmeSpawnIndex;
@@ -22,7 +25,6 @@ public class FirmeBuilder
     public int nbEntityMaxThisWave;
     public void ReplaceHousesBycorporations(int _waveIndex)
     {
-        Debug.Log("heho");
         //Reset Arrays
         bigHouses = new GameObject[0];
         smallHouses = new GameObject[0];
@@ -58,13 +60,13 @@ public class FirmeBuilder
 
                 firmeLocation = bigHouses[changeHouseIndex].transform.position;
                 firmeRotation = bigHouses[changeHouseIndex].transform.eulerAngles;
-                allFirmesLocations.Add(bigHouses[changeHouseIndex].transform);
                 bigHouses[changeHouseIndex].SetActive(false);
                 GameObject newFirme = GameObject.Instantiate(firmeToInstanciate, firmeLocation, Quaternion.Euler(firmeRotation));
                 firmeSpawnIndex += 1;
                 newFirme.GetComponent<Firme>().corpoType = firmeType;
                 newFirme.GetComponent<Firme>().modifiedHouseIndex = firmeSpawnIndex;
                 newFirme.GetComponent<Firme>().firmeSize = firmeSize;
+                allFirmesLocations.Add(newFirme.transform);
                 modifiedBigHouses.Add(changeHouseIndex);
             }
             else
@@ -79,13 +81,13 @@ public class FirmeBuilder
                 }
                 firmeLocation = smallHouses[changeHouseIndex].transform.position;
                 firmeRotation = smallHouses[changeHouseIndex].transform.eulerAngles;
-                allFirmesLocations.Add(smallHouses[changeHouseIndex].transform);
                 smallHouses[changeHouseIndex].SetActive(false);
                 GameObject newFirme = GameObject.Instantiate(firmeToInstanciate, firmeLocation, Quaternion.Euler(firmeRotation));
                 firmeSpawnIndex += 1;
                 newFirme.GetComponent<Firme>().corpoType = firmeType;
                 newFirme.GetComponent<Firme>().modifiedHouseIndex = firmeSpawnIndex;
                 newFirme.GetComponent<Firme>().firmeSize = firmeSize;
+                allFirmesLocations.Add(newFirme.transform);
                 modifiedSmallHouses.Add(changeHouseIndex);
 
             }

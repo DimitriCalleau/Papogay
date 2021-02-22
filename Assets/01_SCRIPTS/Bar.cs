@@ -36,7 +36,7 @@ public class Bar : Baits
         {
             foreach (Collider e in Enemies)
             {
-                e.gameObject.GetComponent<Entity>().DamageEntity(damages[upgradeIndex]);
+                e.gameObject.GetComponent<Entity>().DamageEntity(damages[upgradeIndex], true);
                 countdown = 0;
                 ui_cooldownImage.fillAmount = 0;
             }

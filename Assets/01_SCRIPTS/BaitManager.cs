@@ -47,7 +47,7 @@ public class BaitManager
                     baitRotation = 270;
                 }
             }
+            UIManager.Instance.inventory.selection.UpdatePreviewMesh();
         }
-        UIManager.Instance.inventory.selection.UpdatePreviewMesh();
     }
 }

@@ -59,7 +59,7 @@ public class MarketStand : Baits
             float enmDist = Vector3.Distance(gatheringPoint, item.transform.position);
             if(enmDist <= attackRange)
             {
-                item.GetComponent<Entity>().DamageEntity(damages[upgradeIndex]);
+                item.GetComponent<Entity>().DamageEntity(damages[upgradeIndex], true);
                 nbTouchedEnemies += 1;
             }
         }
