@@ -60,6 +60,7 @@ public class UIManager : MonoBehaviour
     public GameObject losePanel;
     public GameObject optionPanel;
     public GameObject creditsPanel;
+    public GameObject mapPanel;
     #endregion
 
     public TextMeshProUGUI goldText;
@@ -72,7 +73,7 @@ public class UIManager : MonoBehaviour
     [HideInInspector]
     public Location selectedLocation;
     [HideInInspector]
-    public bool inventoryOpened, shopOpened;
+    public bool inventoryOpened, shopOpened, mapOpened;
 
     public float timeBetweenBaits;
     
@@ -197,6 +198,21 @@ public class UIManager : MonoBehaviour
             shopOpened = false;
         }
     }
+    public void OpenCloseMap()
+    {
+        switch (mapOpened)
+        {
+            case true:
+                mapPanel.SetActive(false);
+                mapOpened = false;
+                break;
+            case false:
+                mapPanel.SetActive(true);
+                mapOpened = true;
+                break;
+        }
+
+    }
 
     public void Pause()
     {
@@ -318,6 +334,7 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.SetPause += Pause;
         InputEvents.Instance.OpenShop += OpenCloseShop;
         InputEvents.Instance.SetPause += CloseShop;
+        InputEvents.Instance.OpenMap += OpenCloseMap;
         GameManager.Instance.Win += OpenWinPanel;
         GameManager.Instance.Lose += OpenLosePanel;
     }
@@ -330,6 +347,7 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.SetPause -= Pause;
         InputEvents.Instance.OpenShop -= OpenCloseShop;
         InputEvents.Instance.SetPause -= CloseShop;
+        InputEvents.Instance.OpenMap -= OpenCloseMap;
         GameManager.Instance.Win -= OpenWinPanel;
         GameManager.Instance.Lose -= OpenLosePanel;
     }

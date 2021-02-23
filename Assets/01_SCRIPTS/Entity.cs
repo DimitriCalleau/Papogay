@@ -36,6 +36,7 @@ public class Entity : MonoBehaviour
     public Image EnemyProgressBar;
     public Gradient StateColors;
     public Image StateIndicator;
+    public Image mapIndicator;
 
     /*public bool testenemyAlly;
     void Start()
@@ -240,6 +241,7 @@ public class Entity : MonoBehaviour
         {
             status = EntityStatus.Ally;
             StateIndicator.color = StateColors.colorKeys[0].color;
+            mapIndicator.color = StateColors.colorKeys[0].color;
             currentSpeed = baseSpeed;
             gameObject.tag = "TargetForEnemyEntity";
             if (previousStatus == EntityStatus.Neutral)
@@ -252,6 +254,7 @@ public class Entity : MonoBehaviour
         {
             status = EntityStatus.Enemy;
             StateIndicator.color = StateColors.colorKeys[2].color;
+            mapIndicator.color = StateColors.colorKeys[2].color;
             gameObject.tag = "Untagged";
             if (previousStatus == EntityStatus.Neutral)
             {
@@ -263,6 +266,7 @@ public class Entity : MonoBehaviour
         {
             status = EntityStatus.Neutral;
             StateIndicator.color = StateColors.colorKeys[1].color;
+            mapIndicator.color = StateColors.colorKeys[1].color;
             currentSpeed = baseSpeed;
             gameObject.tag = "TargetForEnemyEntity";
 

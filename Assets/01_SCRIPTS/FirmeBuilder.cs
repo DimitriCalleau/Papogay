@@ -38,8 +38,11 @@ public class FirmeBuilder
         int currentWaveIndex = GameManager.Instance.waveManager.waveindex;
         bigHouses = GameObject.FindGameObjectsWithTag("BigHouse");
         smallHouses = GameObject.FindGameObjectsWithTag("SmallHouse");
-        nbFirmesThisWave = waveStats[currentWaveIndex].nbFirmesThisWave;
-        nbEntityMaxThisWave = waveStats[currentWaveIndex].nbMaxEntity;
+        if(waveStats.Count > 0) {
+            nbFirmesThisWave = waveStats[currentWaveIndex].nbFirmesThisWave;
+            nbEntityMaxThisWave = waveStats[currentWaveIndex].nbMaxEntity;
+        }
+
 
         for (int i = 0; i < nbFirmesThisWave; i++)
         {

@@ -97,6 +97,14 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Map"",
+                    ""type"": ""Button"",
+                    ""id"": ""14450eb9-06f1-4e3f-8589-52e33a6ef4cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -253,6 +261,17 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                     ""action"": ""Shop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""637188b9-8fab-4ddc-9b2e-2b4f28fd8c4e"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Map"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +290,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         m_Actions_Roll = m_Actions.FindAction("Roll", throwIfNotFound: true);
         m_Actions_MoveCam = m_Actions.FindAction("MoveCam", throwIfNotFound: true);
         m_Actions_Shop = m_Actions.FindAction("Shop", throwIfNotFound: true);
+        m_Actions_Map = m_Actions.FindAction("Map", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -330,6 +350,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
     private readonly InputAction m_Actions_Roll;
     private readonly InputAction m_Actions_MoveCam;
     private readonly InputAction m_Actions_Shop;
+    private readonly InputAction m_Actions_Map;
     public struct ActionsActions
     {
         private @InputPapogay m_Wrapper;
@@ -344,6 +365,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         public InputAction @Roll => m_Wrapper.m_Actions_Roll;
         public InputAction @MoveCam => m_Wrapper.m_Actions_MoveCam;
         public InputAction @Shop => m_Wrapper.m_Actions_Shop;
+        public InputAction @Map => m_Wrapper.m_Actions_Map;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -383,6 +405,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 @Shop.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShop;
                 @Shop.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShop;
                 @Shop.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShop;
+                @Map.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMap;
+                @Map.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMap;
+                @Map.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMap;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -417,6 +442,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 @Shop.started += instance.OnShop;
                 @Shop.performed += instance.OnShop;
                 @Shop.canceled += instance.OnShop;
+                @Map.started += instance.OnMap;
+                @Map.performed += instance.OnMap;
+                @Map.canceled += instance.OnMap;
             }
         }
     }
@@ -433,5 +461,6 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         void OnRoll(InputAction.CallbackContext context);
         void OnMoveCam(InputAction.CallbackContext context);
         void OnShop(InputAction.CallbackContext context);
+        void OnMap(InputAction.CallbackContext context);
     }
 }
