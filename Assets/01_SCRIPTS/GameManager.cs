@@ -25,13 +25,14 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+        mainCam = Camera.main;
     }
     #endregion
 
     //changeType (Bait, Status, Corpo)
-    DefineType setTypeTo;
+    public DefineType setTypeTo;
 
-    public Camera mainCam = Camera.main;
+    public Camera mainCam;
     public GameObject player;
 
     public GameState gameState = new GameState();
