@@ -34,7 +34,7 @@ public class FruitBox : Baits
         {
             foreach (Collider e in Enemies)
             {
-                //Slow
+                e.GetComponent<Entity>().ChangeEntitySpeed(slowFactor, 0.5f);
             }
         }
     }

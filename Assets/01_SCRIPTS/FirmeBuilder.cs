@@ -8,11 +8,11 @@ public class FirmeBuilder
     public List<WaveStats> waveStats;
     public GameObject pfb_Shop;
 
-    GameObject[] smallHouses;
-    GameObject[] bigHouses;
+    public GameObject[] smallHouses;
+    public GameObject[] bigHouses;
     [HideInInspector]
     public List<int> modifiedBigHouses; //Sauvegarde les index de bighouse des maisons modifiées
-    [HideInInspector]
+    //[HideInInspector]
     public List<int> modifiedSmallHouses; //Sauvegarde les index de bighouse des maisons modifiées
     [HideInInspector]
     public List<Transform> allFirmesLocations;
@@ -62,10 +62,8 @@ public class FirmeBuilder
                 firmeRotation = bigHouses[changeHouseIndex].transform.eulerAngles;
                 bigHouses[changeHouseIndex].SetActive(false);
                 GameObject newFirme = GameObject.Instantiate(firmeToInstanciate, firmeLocation, Quaternion.Euler(firmeRotation));
+                newFirme.GetComponent<Firme>().InitFirme(firmeType, firmeSize, firmeSpawnIndex);
                 firmeSpawnIndex += 1;
-                newFirme.GetComponent<Firme>().corpoType = firmeType;
-                newFirme.GetComponent<Firme>().modifiedHouseIndex = firmeSpawnIndex;
-                newFirme.GetComponent<Firme>().firmeSize = firmeSize;
                 allFirmesLocations.Add(newFirme.transform);
                 modifiedBigHouses.Add(changeHouseIndex);
             }
@@ -83,10 +81,8 @@ public class FirmeBuilder
                 firmeRotation = smallHouses[changeHouseIndex].transform.eulerAngles;
                 smallHouses[changeHouseIndex].SetActive(false);
                 GameObject newFirme = GameObject.Instantiate(firmeToInstanciate, firmeLocation, Quaternion.Euler(firmeRotation));
+                newFirme.GetComponent<Firme>().InitFirme(firmeType, firmeSize, firmeSpawnIndex);
                 firmeSpawnIndex += 1;
-                newFirme.GetComponent<Firme>().corpoType = firmeType;
-                newFirme.GetComponent<Firme>().modifiedHouseIndex = firmeSpawnIndex;
-                newFirme.GetComponent<Firme>().firmeSize = firmeSize;
                 allFirmesLocations.Add(newFirme.transform);
                 modifiedSmallHouses.Add(changeHouseIndex);
 
@@ -130,8 +126,8 @@ public class FirmeBuilder
         GameObject selection = null;
         bool found = false;
         for (int b = 0; b < entityPrefabs.Count; b++)
-        { 
-            if(entityPrefabs[b].GetComponent<Entity>().type == whichType)
+        {
+            if (entityPrefabs[b].GetComponent<Entity>().type == whichType)
             {
                 selection = entityPrefabs[b];
                 found = true;

@@ -22,6 +22,7 @@ public class EntityAttack : MonoBehaviour
                 {
                     if (entity.target != null  && Vector3.Distance(transform.position, entity.target.transform.position) <= entityAttackRange)
                     {
+                        Debug.Log(entity.target);
                         if (entity.target == GameManager.Instance.player)
                         {
                             GameManager.Instance.playerStats.DamagePlayer(enemyAttackDamages);

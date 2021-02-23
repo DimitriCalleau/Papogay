@@ -35,7 +35,7 @@ public class Sign : Baits
         {
             foreach(Collider e in Enemies)
             {
-                //Attarct Enemy
+                e.GetComponent<Entity>().AttractEntity(gatheringPoint);
             }
         }
     }
