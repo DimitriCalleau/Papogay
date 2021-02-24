@@ -16,10 +16,15 @@ public class Firme : MonoBehaviour
     GameObject entityToSpawn;
     public float timeBetweenSpawn, spawnRadius;
     float timerSpawn;
-    void Awake()
+    public void InitFirme(BaitType _firmeType, int _size, int _index)
     {
+        corpoType = _firmeType;
+        firmeSize = _size;
+        modifiedHouseIndex = _index;
+
         anm = GetComponentInChildren<Animator>();
         health = defaultHealth;
+        timerSpawn = timeBetweenSpawn;
         entityToSpawn = GameManager.Instance.builder.SelectEntity(corpoType);
     }
     void Update()
@@ -46,21 +51,18 @@ public class Firme : MonoBehaviour
     }
     void SpawnEntity(Vector3 _spawnPoint)
     {
-        anm.SetTrigger("Spawn");
         if(GameManager.Instance.waveManager.nbEntities < GameManager.Instance.builder.nbEntityMaxThisWave)
         {
             GameObject newEntity = GameObject.Instantiate(entityToSpawn, _spawnPoint, Quaternion.identity);
-            newEntity.GetComponent<Entity>().Init(0);//entity has 0 healthPoint
-            GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
-
+            newEntity.GetComponent<Entity>().Init(100);//0 = ally, 100 = enm, 50 = neutral
             timerSpawn = timeBetweenSpawn;
+            anm.SetTrigger("Spawn");
         }
     }
     public void DamageFirme(int _damages)
     {
-        Debug.Log("boom ta mere la reine des firmes");
         health -= _damages;
-
+        anm.SetTrigger("Damages");
         if (health <= 0)
         {
             StartCorpoDestruction();
@@ -69,7 +71,7 @@ public class Firme : MonoBehaviour
 
     void StartCorpoDestruction()
     {
-        //anm.SetBool("Destroy", true);
+        anm.SetBool("Destroy", true);
         //Should Wait For Destruction anim to end
         DestroyCorpo();
     }

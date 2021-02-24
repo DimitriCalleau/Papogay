@@ -33,6 +33,8 @@ public class InputEvents : MonoBehaviour
         playerInputs.Actions.RotateTrap.performed += ctx => OnRotateBait(ctx.ReadValue<Vector2>());
         playerInputs.Actions.Inventory.performed += ctx => OnOpenInventory();
         playerInputs.Actions.Shop.performed += ctx => OnOpenShop();
+        playerInputs.Actions.Map.started += ctx => OnOpenMap();
+        playerInputs.Actions.Map.canceled += ctx => OnOpenMap();
 
         playerInputs.Actions.MoveCam.performed += ctx => OnMoveCam(ctx.ReadValue<Vector2>()) ;
         playerInputs.Actions.MoveCam.canceled += ctx => OnMoveCam(Vector2.zero);
@@ -83,6 +85,14 @@ public class InputEvents : MonoBehaviour
         if (OpenShop != null)
         {
             OpenShop();
+        }
+    }
+    public event Action OpenMap;
+    void OnOpenMap()
+    {
+        if (OpenMap != null)
+        {
+            OpenMap();
         }
     }
 
