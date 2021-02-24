@@ -42,12 +42,6 @@ public class GameManager : MonoBehaviour
 
     public PlayerStats playerStats = new PlayerStats();
 
-    #region entity Spawner
-    [Header("FX Spawn")]
-    [Header("EntitySpawner")]
-    public Animator anm;
-    #endregion
-
     #region Events
     public event Action StartWave;
     public void EventStartWave()

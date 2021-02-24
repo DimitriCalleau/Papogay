@@ -3756,7 +3756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d83df11992f4164da1b43a9e12ce68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 0}
+  mainCam: {fileID: 819391315}
   player: {fileID: 661149735}
   baitManager: {fileID: 1199215770}
   waveManager:
@@ -3799,7 +3799,6 @@ MonoBehaviour:
     speed: 50
     rollSpeed: 100
     boostFactor: 1.5
-  anm: {fileID: 0}
 --- !u!4 &1536710594
 Transform:
   m_ObjectHideFlags: 0
