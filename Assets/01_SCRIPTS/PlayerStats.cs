@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[System.Serializable]
 public class PlayerStats
 {
     public float currentHealth;
@@ -27,6 +29,10 @@ public class PlayerStats
     {
         gold += amount;
     }
+    public void Pay(int amount)
+    {
+        gold -= amount;
+    }
 
     public void HealPlayer(int amount)
     {
@@ -34,17 +40,19 @@ public class PlayerStats
         healthPercentage = currentHealth / maxHealth;
     }
 
-    public void Invincibility(float time)
+    public void Invincibility(bool switchInvinsibility)
     {
-        invincible = true;
-        float timer = time;
-        while (timer >= 0)
+
+        switch (switchInvinsibility)
         {
-            timer -= Time.deltaTime;
-        }
-        if(timer <= 0)
-        {
-            invincible = false;
+            case true:
+                if (invincible == false)
+                    invincible = true;
+                break;
+            case false:
+                if (invincible == true)
+                    invincible = false;
+                break;
         }
     }
 }

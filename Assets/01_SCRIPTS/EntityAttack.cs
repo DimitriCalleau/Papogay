@@ -2,15 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityAttack : Entity
+public class EntityAttack : MonoBehaviour
 {
-    public void AttacksPlayer(int damages)
+    [HideInInspector]
+    public Entity entity;
+    float timerCooldownAttack;
+    public int allyAttackDamages, enemyAttackDamages; 
+    public float entityDamageCooldown, entityAttackRange;
+    void Update()
     {
-        Debug.Log("attacks player void");
-    }
+        switch (entity.status)
+        {
+            case EntityStatus.Enemy:
+                if (timerCooldownAttack > 0)
+                {
+                    timerCooldownAttack -= Time.deltaTime;
+                }
+                else 
+                {
+                    if (entity.target != null  && Vector3.Distance(transform.position, entity.target.transform.position) <= entityAttackRange)
+                    {
+                        if (entity.target == GameManager.Instance.player)
+                        {
+                            GameManager.Instance.playerStats.DamagePlayer(enemyAttackDamages);
+                            timerCooldownAttack = entityDamageCooldown;
+                        }
+                        else
+                        {
+                            entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, true);
+                            timerCooldownAttack = entityDamageCooldown;
+                        }
+                    }
 
-    public void PlayerInAttackRange(float attackDistance, Vector3 playerPosition)
-    {
-        Debug.Log("player in attack range void");
+                }
+                break;
+
+            case EntityStatus.Ally:
+                if (timerCooldownAttack > 0)
+                {
+                    timerCooldownAttack -= Time.deltaTime;
+                }
+                else if (timerCooldownAttack <= 0 && entity.target != null)//link between destination and target
+                {
+                    if (Vector3.Distance(transform.position, entity.target.transform.position) <= entityAttackRange)
+                    {
+                        timerCooldownAttack = entityDamageCooldown;
+                        entity.target.GetComponent<Firme>().DamageFirme(allyAttackDamages);
+                    }
+                }
+                break;
+        }
     }
 }

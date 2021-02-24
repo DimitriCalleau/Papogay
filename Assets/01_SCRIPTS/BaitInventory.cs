@@ -4,30 +4,52 @@ using UnityEngine;
 
 public class BaitInventory
 {
-    public GameObject selection;
-    public List<Slot> allCurrentBaits;
-
-    public void AddRemovebaits(bool addOrRemove, int index)
+    public Slot selection;
+    public int selectionIndex;
+    public void SwitchBaitSelection(bool rightOrLeft)
     {
-        switch (addOrRemove)
+        if (UIManager.Instance.inventoryOpened == true)
         {
-            case true :
-                allCurrentBaits[index].nbBaits += 1;
-                break;
-            case false :
-                allCurrentBaits[index].nbBaits -= 1;
-                break;
+            switch (rightOrLeft)
+            {
+                case true:
+                    selectionIndex += 1;
+                    if (selectionIndex == UIManager.Instance.allCurrentBaits.Count)
+                    {
+                        selectionIndex = 0;
+                    }
+                    break;
+                case false:
+                    selectionIndex -= 1;
+                    if (selectionIndex == -1)
+                    {
+                        selectionIndex = UIManager.Instance.allCurrentBaits.Count - 1;
+                    }
+                    break;
+            }
+        }
+        if (UIManager.Instance.allCurrentBaits.Count > 0)
+        {
+            selection = UIManager.Instance.allCurrentBaits[selectionIndex];
         }
     }
 
-    public void UpgradeBait(int index)
+    public void OpenInventory()
     {
-        //allCurrentBaits[index].baitPrefab.GetComponent<Bait>().Upgrade();
+        if(GameManager.Instance.gameState.start == true && GameManager.Instance.gameState.pause == false)
+        {
+            UIManager.Instance.inventoryOpened = !UIManager.Instance.inventoryOpened;
+            switch (UIManager.Instance.inventoryOpened)
+            {
+                case true:
+                    UIManager.Instance.inventoryPanel.SetActive(true);
+                    UIManager.Instance.preview.HidePreview(true);
+                    break;
+                case false:
+                    UIManager.Instance.inventoryPanel.SetActive(false);
+                    UIManager.Instance.preview.HidePreview(false);
+                    break;
+            }
+        }
     }
-        
-    public void AddNewBait(GameObject baitPrefab, int index, int baitAmount)
-    {
-        Slot slot = new Slot(baitPrefab, baitAmount);
-        allCurrentBaits.Insert(index, slot);
-    }        
 }

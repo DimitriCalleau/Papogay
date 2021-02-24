@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - TargetForEnemyEntity
+  - ModifiedHouse
+  - Corpo
+  - BigHouse
+  - SmallHouse
+  - Shop
   layers:
   - Default
   - TransparentFX
@@ -14,12 +19,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Floor
+  - Location
+  - Enemy Entity
+  - Neutral Entity
+  - Ally Entity
+  - Shop
   - 
   - 
   - 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Location
+public class Location : MonoBehaviour
 {
+    public bool occupied = false;
 }
