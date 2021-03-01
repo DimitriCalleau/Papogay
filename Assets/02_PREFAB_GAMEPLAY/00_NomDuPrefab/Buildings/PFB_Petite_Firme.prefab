@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8285685916039351850}
   - component: {fileID: 2831523530597126201}
   - component: {fileID: 5827241366719811339}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: PFB_Petite_Firme
   m_TagString: Untagged
   m_Icon: {fileID: 0}

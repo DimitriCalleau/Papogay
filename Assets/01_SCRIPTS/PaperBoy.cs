@@ -79,9 +79,13 @@ public class PaperBoy : Baits
         {
             if (paperboyNav.remainingDistance <= attackRange)
             {
-                target.GetComponent<Entity>().DamageEntity(damages[upgradeIndex], false);
+                target.GetComponent<Entity>().DamageEntity(damages[upgradeIndex], true);
                 countdown = 0;
                 ui_cooldownImage.fillAmount = 0;
+            }
+            if(target.GetComponent<Entity>().status == EntityStatus.Ally)
+            {
+                target = null;
             }
         }
     }

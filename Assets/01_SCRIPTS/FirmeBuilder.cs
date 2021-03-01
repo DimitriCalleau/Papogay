@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class FirmeBuilder
 {
     public List<WaveStats> waveStats;
-    public GameObject pfb_Shop;
+    public GameObject pfb_Small_Shop, pfb_Big_Shop;
 
     public GameObject[] smallHouses;
     public GameObject[] bigHouses;
@@ -132,16 +132,16 @@ public class FirmeBuilder
             }
             if (_size == FirmeSize.Big)
             {
-                GameObject shop = GameObject.Instantiate(pfb_Shop, bigHouses[modifiedBigHouses[_index]].transform.position, bigHouses[modifiedBigHouses[_index]].transform.rotation);
+                GameObject shop = GameObject.Instantiate(pfb_Big_Shop, bigHouses[modifiedBigHouses[_index]].transform.position, bigHouses[modifiedBigHouses[_index]].transform.rotation);
                 GameObject.Destroy(bigHouses[modifiedBigHouses[_index]]);
-                GameManager.Instance.EventEndWave();
             }
             else
             {
-                GameObject shop = GameObject.Instantiate(pfb_Shop, smallHouses[modifiedSmallHouses[_index]].transform.position, smallHouses[modifiedSmallHouses[_index]].transform.rotation);
+                GameObject shop = GameObject.Instantiate(pfb_Small_Shop, smallHouses[modifiedSmallHouses[_index]].transform.position, smallHouses[modifiedSmallHouses[_index]].transform.rotation);
                 GameObject.Destroy(smallHouses[modifiedSmallHouses[_index]]);
-                GameManager.Instance.EventEndWave();
             }
+            UIManager.Instance.shop.hasNewBaitToAdd = true;
+            GameManager.Instance.EventEndWave();
         }
     }
 

@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 7194532886188430435}
   - component: {fileID: 4546836861814274969}
   - component: {fileID: 5200875198212636600}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: PFB_Grande_Firme
   m_TagString: Untagged
   m_Icon: {fileID: 0}

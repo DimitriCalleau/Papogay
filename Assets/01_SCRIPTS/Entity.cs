@@ -15,7 +15,7 @@ public class Entity : MonoBehaviour
 
     public bool isAttracted, attrationStopped;
     public float health, maxHealth;
-    public int healthMaxALLY, healthMinENM;
+    public int healthMinAlly, healthMaxEnm;
     public float currentSpeed, baseSpeed, playerDetectionRadius, targetTreshold, amazoonSpeedFactor;
 
     public float randomSelectorRadius,minWaitingTime, maxWaitingTime, waitingDelay;
@@ -70,7 +70,6 @@ public class Entity : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(isAttracted);
         if(entityNavMeshAgent != null)
         {
             entityNavMeshAgent.stoppingDistance = targetTreshold;
@@ -221,13 +220,13 @@ public class Entity : MonoBehaviour
                 health -= _damage;
                 break;
         }
-        EnemyProgressBar.fillAmount = health / maxHealth;
+        EnemyProgressBar.fillAmount = maxHealth / health;
         ChangeEntityStatus();
     }
     public void ChangeEntityStatus()
     {
         EntityStatus previousStatus = status;
-        if (health <= healthMaxALLY)
+        if (health >= healthMinAlly)
         {
             status = EntityStatus.Ally;
             StateIndicator.color = StateColors.colorKeys[0].color;
@@ -240,7 +239,7 @@ public class Entity : MonoBehaviour
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
             }
         }
-        else if (health >= healthMinENM)
+        else if (health <= healthMaxEnm)
         {
             status = EntityStatus.Enemy;
             StateIndicator.color = StateColors.colorKeys[2].color;
@@ -252,7 +251,7 @@ public class Entity : MonoBehaviour
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
             }
         }
-        else if (health < healthMinENM && health > healthMaxALLY)
+        else if (health > healthMaxEnm && health < healthMinAlly)
         {
             status = EntityStatus.Neutral;
             StateIndicator.color = StateColors.colorKeys[1].color;
@@ -275,15 +274,15 @@ public class Entity : MonoBehaviour
 
     void AddEntity()
     {
-        if (health <= healthMaxALLY)
+        if (health >= healthMinAlly)
         {
             GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
         }
-        else if (health >= healthMinENM)
+        else if (health <= healthMaxEnm)
         {
             GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
         }
-        else if (health < healthMinENM && health > healthMaxALLY)
+        else if (health > healthMaxEnm && health < healthMinAlly)
         {
             GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
         }

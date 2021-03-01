@@ -65,6 +65,7 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI goldText;
     public Image healthBar;
+    public GameObject damageIndicatorPanel;
 
     public float locationDetectionRange;
     [SerializeField]
@@ -88,8 +89,16 @@ public class UIManager : MonoBehaviour
             baitManager.cooldownTimer -= Time.deltaTime;
         }
         goldText.text = GameManager.Instance.playerStats.gold.ToString();
-        Debug.Log(GameManager.Instance.playerStats.healthPercentage);
         healthBar.fillAmount = GameManager.Instance.playerStats.healthPercentage;
+
+        if (GameManager.Instance.playerStats.timerIndicator >= 0)
+        {
+            damageIndicatorPanel.SetActive(false);
+        }
+        else
+        {
+            GameManager.Instance.playerStats.timerIndicator -= Time.deltaTime;
+        }
     }
     void FixedUpdate()
     {
@@ -119,7 +128,7 @@ public class UIManager : MonoBehaviour
      
     public void AddFirstTraps()
     {
-        reward.AddBait(BaitType.PaperBoy, 10, 0);
+        reward.AddBait(BaitType.Bar, 10, 0);
         reward.AddBait(BaitType.FruitBox, 10, 0);
         reward.AddBait(BaitType.Sign, 10, 0);
         inventory.SwitchBaitSelection(true);

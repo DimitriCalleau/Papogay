@@ -9,6 +9,8 @@ public class EntityAttack : MonoBehaviour
     float timerCooldownAttack;
     public int allyAttackDamages, enemyAttackDamages; 
     public float entityDamageCooldown, entityAttackRange;
+
+    public LayerMask allyAttackLayer = -1;
     void Update()
     {
         switch (entity.status)
@@ -38,19 +40,28 @@ public class EntityAttack : MonoBehaviour
                 break;
 
             case EntityStatus.Ally:
-                if (timerCooldownAttack > 0)
+                Debug.Log(entity.target);
+                Debug.Log(entityAttackRange);
+                if (entity.target != null)//link between destination and target
                 {
-                    timerCooldownAttack -= Time.deltaTime;
-                }
-                else if (timerCooldownAttack <= 0 && entity.target != null)//link between destination and target
-                {
-                    if (Vector3.Distance(transform.position, entity.target.transform.position) <= entityAttackRange)
+                    Collider[] firme = Physics.OverlapSphere(transform.position + Vector3.up, entityAttackRange, allyAttackLayer);
+                    if(firme.Length != 0)
                     {
-                        timerCooldownAttack = entityDamageCooldown;
-                        entity.target.GetComponent<Firme>().DamageFirme(allyAttackDamages);
+                        for (int i = 0; i < firme.Length; i++)
+                        {
+                            Debug.Log(firme[i]);
+                            firme[i].GetComponent<Firme>().DamageFirme(allyAttackDamages);
+                            Destroy(gameObject);
+                        }
                     }
                 }
                 break;
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + Vector3.up, entityAttackRange);
     }
 }

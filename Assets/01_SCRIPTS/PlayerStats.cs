@@ -16,6 +16,8 @@ public class PlayerStats
     public float rollSpeed;
     public float boostFactor;
 
+    public float indicatorShowTime;
+    public float timerIndicator;
     public void SetHealth()
     {
         currentHealth = maxHealth;
@@ -25,6 +27,8 @@ public class PlayerStats
     {
         if(invincible == false)
         {
+            timerIndicator = indicatorShowTime;
+            UIManager.Instance.damageIndicatorPanel.SetActive(true);
             currentHealth -= damages;
             healthPercentage = currentHealth / maxHealth;
         }

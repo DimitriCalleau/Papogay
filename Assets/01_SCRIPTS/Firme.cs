@@ -52,10 +52,11 @@ public class Firme : MonoBehaviour
     }
     void SpawnEntity(Vector3 _spawnPoint)
     {
+        Debug.Log(_spawnPoint);
         if(GameManager.Instance.waveManager.nbEntities < GameManager.Instance.builder.nbEntityMaxThisWave)
         {
             GameObject newEntity = GameObject.Instantiate(entityToSpawn, _spawnPoint, Quaternion.identity);
-            newEntity.GetComponent<Entity>().Init(100);//0 = ally, 100 = enm, 50 = neutral
+            newEntity.GetComponent<Entity>().Init(0);//0 = enm, 100 = ally, 50 = neutral
             timerSpawn = timeBetweenSpawn;
             anm.SetTrigger("Spawn");
         }

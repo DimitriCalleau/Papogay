@@ -17,6 +17,8 @@ public class WaveManager
     [HideInInspector]
     public int nbEntities;
 
+    public LayerMask entitylayers = -1;
+
     [HideInInspector]
     public int waveindex;
     [HideInInspector]
@@ -62,6 +64,23 @@ public class WaveManager
 
         nbEntities = nbAllyEntities + nbNeutralEntities + nbEnemyEntities;
     }
+
+    public void RemoveCurrentEntities()
+    {
+        Collider[] currentEntitiesInScene = Physics.OverlapSphere(Vector3.zero, 1000, entitylayers);
+        if(currentEntitiesInScene.Length != 0)
+        {
+            foreach(Collider e in currentEntitiesInScene)
+            {
+               GameObject.Destroy(e.gameObject);
+            }
+        }
+        nbAllyEntities = 0;
+        nbEnemyEntities = 0;
+        nbNeutralEntities = 0;
+        nbEntities = 0;
+    }
+
 
     public void StartWave()
     {

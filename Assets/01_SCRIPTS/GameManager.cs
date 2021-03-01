@@ -89,13 +89,13 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         StartWave += waveManager.StartWave;
-        StartWave += waveManager.IncreaseWaveIndex;
         EndWave += waveManager.IncreaseWaveIndex;
+        EndWave += waveManager.RemoveCurrentEntities;
     }
     void OnDisable()
     {
         StartWave -= waveManager.StartWave;
-        StartWave -= waveManager.IncreaseWaveIndex;
         EndWave -= waveManager.IncreaseWaveIndex;
+        EndWave -= waveManager.RemoveCurrentEntities;
     }
 }
