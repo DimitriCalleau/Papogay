@@ -19,8 +19,10 @@ public class WaveManager
 
     [HideInInspector]
     public int waveindex;
-
+    [HideInInspector]
+    public int zoneIndex = 0;
     public GameObject[] locationZones;
+    public GameObject[] blocageZones;
     public void AddRemoveEntity(EntityStatus status, bool addOrRemove)
     {
         if(addOrRemove == true)
@@ -63,16 +65,27 @@ public class WaveManager
 
     public void StartWave()
     {
-        GameManager.Instance.builder.ReplaceHousesBycorporations(waveindex);
         if(locationZones[waveindex] != null)
         {
+            zoneIndex += 1;
             locationZones[waveindex].SetActive(true);
+            for (int i = 0; i < GameManager.Instance.houseFolder.transform.childCount; i++)
+            {
+                Transform tempSlect = GameManager.Instance.houseFolder.transform.GetChild(i);
+                tempSlect.GetComponent<Houses>().ActivateTag(zoneIndex);
+            }
+            if (blocageZones[waveindex] != null)
+            {
+                blocageZones[waveindex].SetActive(false);
+            }
         }
+        GameManager.Instance.builder.ReplaceHousesBycorporations(waveindex);
     }
 
     public void Reset()
     {
         waveindex = 0;
+        zoneIndex = 0;
         nbAllyEntities = 0;
         nbNeutralEntities = 0;
         nbEnemyEntities = 0;
@@ -81,5 +94,13 @@ public class WaveManager
     public void IncreaseWaveIndex()
     {
         waveindex += 1;
+    }
+
+    public void CheckEntityRatio()
+    {
+        if(nbEntities == nbEnemyEntities)
+        {
+            GameManager.Instance.EventLose();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [System.Serializable]
 public class FirmeBuilder
@@ -12,7 +13,7 @@ public class FirmeBuilder
     public GameObject[] bigHouses;
     [HideInInspector]
     public List<int> modifiedBigHouses; //Sauvegarde les index de bighouse des maisons modifiées
-    //[HideInInspector]
+    [HideInInspector]
     public List<int> modifiedSmallHouses; //Sauvegarde les index de bighouse des maisons modifiées
     [HideInInspector]
     public List<Transform> allFirmesLocations;
@@ -25,6 +26,23 @@ public class FirmeBuilder
     public int nbEntityMaxThisWave;
     public void ReplaceHousesBycorporations(int _waveIndex)
     {
+        int currentWaveIndex = GameManager.Instance.waveManager.waveindex;
+
+        for (int i = 0; i < waveStats[currentWaveIndex].nbNeutralEntities; i++)
+        {
+            //Spawn Neutrals
+            Vector3 spawnPoint = Vector3.zero;
+            Vector3 randomDirection = Random.insideUnitSphere * 1000;
+            NavMeshHit hit;
+            Vector3 entitySpawnPoint = Vector3.zero;
+            if (NavMesh.SamplePosition(randomDirection, out hit, 1000, NavMesh.AllAreas))
+            {
+                spawnPoint = hit.position;
+            }
+            GameObject newNeutral = GameObject.Instantiate(GameManager.Instance.neutralEntityPrefab, spawnPoint, Quaternion.identity);
+            newNeutral.GetComponent<Entity>().Init(50);
+        }
+
         //Reset Arrays
         bigHouses = new GameObject[0];
         smallHouses = new GameObject[0];
@@ -35,7 +53,7 @@ public class FirmeBuilder
         firmeSpawnIndex = 0;
 
         //Find Houses
-        int currentWaveIndex = GameManager.Instance.waveManager.waveindex;
+
         bigHouses = GameObject.FindGameObjectsWithTag("BigHouse");
         smallHouses = GameObject.FindGameObjectsWithTag("SmallHouse");
         if(waveStats.Count > 0) {
@@ -47,10 +65,10 @@ public class FirmeBuilder
         for (int i = 0; i < nbFirmesThisWave; i++)
         {
             GameObject firmeToInstanciate = waveStats[currentWaveIndex].firmeToSpawnPrefab[i];
-            BaitType firmeType = waveStats[currentWaveIndex].typesDeFirmes[i];
-            int firmeSize = waveStats[currentWaveIndex].firmeSize[i];
+            FirmeType firmeType = waveStats[currentWaveIndex].typesDeFirmes[i];
+            FirmeSize firmeSize = waveStats[currentWaveIndex].firmeSize0Small1Medium2Big[i];
 
-            if(firmeSize == 2)//BigFirme
+            if(firmeSize == FirmeSize.Big)//BigFirme
             {
                 changeHouseIndex = Random.Range(0, bigHouses.Length);
                 if (modifiedBigHouses.Contains(changeHouseIndex))
@@ -88,17 +106,16 @@ public class FirmeBuilder
                 firmeSpawnIndex += 1;
                 allFirmesLocations.Add(newFirme.transform);
                 modifiedSmallHouses.Add(changeHouseIndex);
-
             }
         }
     }
 
-    public void RecallModifiedHouses(int _index, int _size)
+    public void RecallModifiedHouses(int _index, FirmeSize _size)
     {
         nbDestroyedFirmes += 1;
         if (nbDestroyedFirmes < nbFirmesThisWave)
         {
-            if(_size == 2)
+            if(_size == FirmeSize.Big)
             {
                 bigHouses[modifiedBigHouses[_index]].SetActive(true);
             }
@@ -109,7 +126,11 @@ public class FirmeBuilder
         }
         else
         {
-            if (_size == 2)
+            if (GameManager.Instance.waveManager.waveindex >= waveStats.Count)
+            {
+                GameManager.Instance.EventWin();
+            }
+            if (_size == FirmeSize.Big)
             {
                 GameObject shop = GameObject.Instantiate(pfb_Shop, bigHouses[modifiedBigHouses[_index]].transform.position, bigHouses[modifiedBigHouses[_index]].transform.rotation);
                 GameObject.Destroy(bigHouses[modifiedBigHouses[_index]]);
@@ -124,7 +145,7 @@ public class FirmeBuilder
         }
     }
 
-    public GameObject SelectEntity(BaitType whichType)
+    public GameObject SelectEntity(FirmeType whichType)
     {
         GameObject selection = null;
         bool found = false;

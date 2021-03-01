@@ -68,16 +68,18 @@ public class PaperBoy : Baits
                 }
             }
         }
+        if(target != null)
+        {
+            paperboyNav.destination = target.transform.position;
+        }
     }
     public void BaitAttack()
     {
         if (target != null)
         {
-            paperboyNav.destination = target.transform.position;
-
             if (paperboyNav.remainingDistance <= attackRange)
             {
-                target.GetComponent<Entity>().DamageEntity(damages[upgradeIndex], true);
+                target.GetComponent<Entity>().DamageEntity(damages[upgradeIndex], false);
                 countdown = 0;
                 ui_cooldownImage.fillAmount = 0;
             }

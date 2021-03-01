@@ -6,8 +6,9 @@ using UnityEngine;
 public class WaveStats 
 {
     public int nbFirmesThisWave;
-    public List<BaitType> typesDeFirmes;
-    public List<int> firmeSize;
+    public List<FirmeType> typesDeFirmes;
+    public List<FirmeSize> firmeSize0Small1Medium2Big;
     public List<GameObject> firmeToSpawnPrefab;
+    public int nbNeutralEntities;
     public int nbMaxEntity; 
 }

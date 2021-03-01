@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3009938537905712910}
   - component: {fileID: 4623670639971930580}
   - component: {fileID: 7400395176144220997}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PFB_Pave
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,17 +6,18 @@ using UnityEngine.AI;
 public class Firme : MonoBehaviour
 {
     Animator anm;
-    public BaitType corpoType;
+    FirmeType corpoType;
+    FirmeSize firmeSize;
     public float defaultHealth;
     float health;
 
-    public int modifiedHouseIndex, firmeSize;
+    public int modifiedHouseIndex;
 
     [Header("Spawner")]
     GameObject entityToSpawn;
     public float timeBetweenSpawn, spawnRadius;
     float timerSpawn;
-    public void InitFirme(BaitType _firmeType, int _size, int _index)
+    public void InitFirme(FirmeType _firmeType, FirmeSize _size, int _index)
     {
         corpoType = _firmeType;
         firmeSize = _size;

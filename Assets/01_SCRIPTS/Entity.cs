@@ -11,9 +11,9 @@ public class Entity : MonoBehaviour
 {
     [Header("Stats")]
     public EntityStatus status;
-    public BaitType type;
+    public FirmeType type;
 
-    public bool isAttracted;
+    public bool isAttracted, attrationStopped;
     public float health, maxHealth;
     public int healthMaxALLY, healthMinENM;
     public float currentSpeed, baseSpeed, playerDetectionRadius, targetTreshold, amazoonSpeedFactor;
@@ -38,20 +38,9 @@ public class Entity : MonoBehaviour
     public Image StateIndicator;
     public Image mapIndicator;
 
-    /*public bool testenemyAlly;
-    void Start()
-    {
-        if (testenemyAlly == true)
-        {
-            Init(100);
-
-        }
-        else 
-            Init(0);
-    }*/
     public void Init(int lifePoints)
     {
-        if (type == BaitType.Amazoon)
+        if (type == FirmeType.Amazoon)
         {
             baseSpeed = baseSpeed * amazoonSpeedFactor;
         }
@@ -81,6 +70,7 @@ public class Entity : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(isAttracted);
         if(entityNavMeshAgent != null)
         {
             entityNavMeshAgent.stoppingDistance = targetTreshold;
@@ -201,11 +191,12 @@ public class Entity : MonoBehaviour
             }
         }
 
-        if(attractingTimer <= 0)
+        if(attractingTimer <= 0 && attrationStopped == true)
         {
             isAttracted = false;
+            attrationStopped = false;
         }
-        else
+        if(attractingTimer > 0)
         {
             attractingTimer -= Time.deltaTime;
         }
@@ -230,7 +221,6 @@ public class Entity : MonoBehaviour
                 health -= _damage;
                 break;
         }
-        Debug.Log(health / maxHealth);
         EnemyProgressBar.fillAmount = health / maxHealth;
         ChangeEntityStatus();
     }
@@ -300,7 +290,7 @@ public class Entity : MonoBehaviour
     }
     public void ChangeEntitySpeed(float slowFactor, float duration)
     {
-        if (type != BaitType.Threadmill)//les Entités de ce groupe sont immunisées au controles
+        if (type != FirmeType.NormalGym)//les Entités de ce groupe sont immunisées au controles
         {
             currentSpeed = baseSpeed * slowFactor;
             timerSlow = duration;
@@ -310,7 +300,12 @@ public class Entity : MonoBehaviour
     {
         isAttracted = true;
         entityNavMeshAgent.destination = attractingPoint;
-        attractingTimer = 0.5f;
+    }
+
+    public void StopAttraction()
+    {
+        attractingTimer = 1.2f;
+        attrationStopped = true;
     }
 
     public void Dead()

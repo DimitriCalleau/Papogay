@@ -37,7 +37,13 @@ public class MarketStand : Baits
             countdown += Time.deltaTime;
             ui_cooldownImage.fillAmount = countdown / cooldown[upgradeIndex];
         }
-
+        if (usure >= currentUsureMax - 1)
+        {
+            foreach (Collider e in Enemies)
+            {
+                e.GetComponent<Entity>().StopAttraction();
+            }
+        }
         LoseLife(Time.deltaTime);
     }
     public void Attract()

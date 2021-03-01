@@ -17,6 +17,7 @@ public class Sign : Baits
         Quaternion forwardRotation = Quaternion.Euler(0, UIManager.Instance.baitManager.baitRotation, 0);
         Vector3 forwardVector = forwardRotation * Vector3.forward * offSetForwardCollider;
         rotatedColliderSize = forwardRotation * colliderSize;
+        gatheringPoint = transform.position + forwardRotation * gatheringPoint;
         colliderCenter = transform.position + Vector3.up * offsetHeightCollider + forwardVector;
     }
     void Start()
@@ -27,6 +28,13 @@ public class Sign : Baits
     {
         BaitAttack();
         LoseLife(Time.deltaTime);
+        if(usure >= currentUsureMax - 1)
+        {
+            foreach (Collider e in Enemies)
+            {
+                e.GetComponent<Entity>().StopAttraction();
+            }
+        }
     }
     public void BaitAttack()
     {

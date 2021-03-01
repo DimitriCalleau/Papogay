@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //bait
-public enum BaitType { PaperBoy, FruitBox, Sign, MarketStand, Perfume, Antenna, Bar, Threadmill, Amazoon }
+public enum BaitType { PaperBoy, FruitBox, Sign, MarketStand, Perfume, Antenna, Bar, Threadmill}
 //entity
+public enum FirmeType { Carrouf, FastRegal, Sinpharo, NormalGym, Banana, Amazoon }
+public enum FirmeSize { Small, Medium, Big }
 public enum EntityStatus { Neutral, Enemy, Ally }
 
 //useless mais stylé

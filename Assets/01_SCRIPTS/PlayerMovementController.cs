@@ -9,6 +9,7 @@ public class PlayerMovementController : MonoBehaviour
     public LayerMask floor;
 
     public Animator playerAnimator;
+    CharacterController chara;
 
     public Transform floorDetectorPosition;
     public float floorDetectionRayRange;
@@ -40,6 +41,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     void Start()
     {
+        chara = GetComponent<CharacterController>();
         cam = GameManager.Instance.mainCam.transform;
         stats = GameManager.Instance.playerStats;
     }
@@ -91,10 +93,10 @@ public class PlayerMovementController : MonoBehaviour
         Vector3 securityGravity = Vector3.zero;
         if(groundCheck.Length == 0)
         {
-            securityGravity = Vector3.down;
+            securityGravity = Vector3.down * gravity;
         }
 
-        if (move != Vector2.zero)
+        /*if (move != Vector2.zero)
         {
             playerAnimator.SetBool("Forward", true);
             moveDir = Quaternion.Euler(FloorInclinaison()) * (Quaternion.Euler(0, targetRotation, 0) * (Vector3.forward * currentSpeed)) + securityGravity;
@@ -104,9 +106,23 @@ public class PlayerMovementController : MonoBehaviour
             playerAnimator.SetBool("Forward", false);
             moveDir = Vector3.zero; 
         }
+        transform.Translate(moveDir * Time.deltaTime);*/
 
-        transform.Translate(moveDir * Time.deltaTime);
-        skin.transform.rotation = Quaternion.Lerp(skin.transform.rotation, rotation, turnSmooth); 
+
+        if (move != Vector2.zero)
+        {
+            playerAnimator.SetBool("Forward", true);
+            moveDir = (Quaternion.Euler(0, targetRotation, 0) * (Vector3.forward * currentSpeed)) + securityGravity;
+        }
+        else
+        {
+            playerAnimator.SetBool("Forward", false);
+            moveDir = Vector3.zero;
+        }
+        chara.Move(moveDir * Time.deltaTime);
+
+
+        skin.transform.rotation = Quaternion.Slerp(skin.transform.rotation, rotation, turnSmooth); 
 
         currentRollDir = Quaternion.Euler(0f, targetRotation, 0f);
     }
@@ -139,9 +155,12 @@ public class PlayerMovementController : MonoBehaviour
         skin.transform.rotation = rollDirection;
         GameManager.Instance.playerStats.Invincibility(true);
 
-        Vector3 rollDir = Quaternion.Euler(FloorInclinaison()) * rollDirection * (Vector3.forward * GameManager.Instance.playerStats.rollSpeed);
+        /*Vector3 rollDir = Quaternion.Euler(FloorInclinaison()) * rollDirection * (Vector3.forward * GameManager.Instance.playerStats.rollSpeed);
 
-        transform.Translate(rollDir * Time.deltaTime);
+        transform.Translate(rollDir * Time.deltaTime);*/
+        Vector3 rollDir = rollDirection * (Vector3.forward * GameManager.Instance.playerStats.rollSpeed) + gravity * Vector3.down;
+
+        chara.Move(rollDir * Time.deltaTime);
     }
 
     public void Boost(float boosTime, float boostSpeed)

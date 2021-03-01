@@ -41,7 +41,8 @@ public class GameManager : MonoBehaviour
     public FirmeBuilder builder = new FirmeBuilder();
 
     public PlayerStats playerStats = new PlayerStats();
-
+    public GameObject houseFolder;
+    public GameObject neutralEntityPrefab;
     #region Events
     public event Action StartWave;
     public void EventStartWave()

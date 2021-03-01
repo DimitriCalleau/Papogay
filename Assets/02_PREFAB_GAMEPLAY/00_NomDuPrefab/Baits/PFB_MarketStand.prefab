@@ -72,7 +72,7 @@ MonoBehaviour:
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 6671124462570676745}
   ui_UsureAmountText: {fileID: 6671124462960922979}
-  damages: 010000000100000002000000
+  damages: 0a0000000f00000014000000
   cooldown:
   - 2.5
   - 2

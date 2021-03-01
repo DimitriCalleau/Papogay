@@ -16,12 +16,21 @@ public class PlayerStats
     public float rollSpeed;
     public float boostFactor;
 
+    public void SetHealth()
+    {
+        currentHealth = maxHealth;
+        healthPercentage = currentHealth / maxHealth;
+    }
     public void DamagePlayer(int damages)
     {
         if(invincible == false)
         {
             currentHealth -= damages;
             healthPercentage = currentHealth / maxHealth;
+        }
+        if(currentHealth <= 0)
+        {
+            GameManager.Instance.EventLose();
         }
     }
 
