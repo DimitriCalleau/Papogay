@@ -54,6 +54,8 @@ public class UIManager : MonoBehaviour
     public GameObject rewardButton;
     public GameObject firstTrapsButton;
     public GameObject shopPanel;
+    public GameObject shopLayout;
+    public GameObject upgradeLayout;
     public GameObject inventoryPanel;
     public GameObject pausePanel;
     public GameObject winPanel;
@@ -64,8 +66,12 @@ public class UIManager : MonoBehaviour
     #endregion
 
     public TextMeshProUGUI goldText;
+    public TextMeshProUGUI shopGoldText;
     public Image healthBar;
     public GameObject damageIndicatorPanel;
+
+    public Image allyEntityBar;
+    public Image enemyEntityBar;
 
     public float locationDetectionRange;
     [SerializeField]
@@ -89,6 +95,7 @@ public class UIManager : MonoBehaviour
             baitManager.cooldownTimer -= Time.deltaTime;
         }
         goldText.text = GameManager.Instance.playerStats.gold.ToString();
+        shopGoldText.text = GameManager.Instance.playerStats.gold.ToString();
         healthBar.fillAmount = GameManager.Instance.playerStats.healthPercentage;
 
         if (GameManager.Instance.playerStats.timerIndicator >= 0)

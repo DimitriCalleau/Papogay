@@ -61,8 +61,13 @@ public class WaveManager
                     break;
             }
         }
-
+        Debug.Log(nbEnemyEntities);
         nbEntities = nbAllyEntities + nbNeutralEntities + nbEnemyEntities;
+        if (nbEntities > 0)
+        {
+            UIManager.Instance.allyEntityBar.fillAmount = nbAllyEntities / nbEntities;
+            UIManager.Instance.enemyEntityBar.fillAmount = nbEnemyEntities / nbEntities;
+        }
     }
 
     public void RemoveCurrentEntities()

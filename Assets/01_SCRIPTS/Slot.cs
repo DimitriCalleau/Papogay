@@ -38,12 +38,12 @@ public class Slot
 
         //Slot pour acheter des appats
         thisShopSlot = GameObject.Instantiate(UIManager.Instance.shopSlotPrefab);
-        thisShopSlot.transform.SetParent(UIManager.Instance.shopPanel.transform);
+        thisShopSlot.transform.SetParent(UIManager.Instance.shopLayout.transform);
         thisShopSlot.GetComponent<Button>().onClick.AddListener(this.BuyBait);
 
         //Slot pour upgrade des appats
         thisUpgradeSlot = GameObject.Instantiate(UIManager.Instance.upgradeSlotPrefab);
-        thisUpgradeSlot.transform.SetParent(UIManager.Instance.shopPanel.transform);
+        thisUpgradeSlot.transform.SetParent(UIManager.Instance.upgradeLayout.transform);
         thisUpgradeSlot.GetComponent<Button>().onClick.AddListener(this.UpgradeSlotBait);
 
         UpdateDisplay();
