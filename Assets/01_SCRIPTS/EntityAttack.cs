@@ -26,11 +26,13 @@ public class EntityAttack : MonoBehaviour
                     {
                         if (entity.target == GameManager.Instance.player)
                         {
+                            entity.anm.SetTrigger("Attack");
                             GameManager.Instance.playerStats.DamagePlayer(enemyAttackDamages);
                             timerCooldownAttack = entityDamageCooldown;
                         }
                         else
                         {
+                            entity.anm.SetTrigger("Attack");
                             entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, false);
                             timerCooldownAttack = entityDamageCooldown;
                         }
@@ -47,9 +49,9 @@ public class EntityAttack : MonoBehaviour
                     {
                         for (int i = 0; i < firme.Length; i++)
                         {
+                            entity.Dead();
                             firme[i].GetComponent<Firme>().DamageFirme(allyAttackDamages);
                         }
-                        entity.Dead();
                     }
                 }
                 break;

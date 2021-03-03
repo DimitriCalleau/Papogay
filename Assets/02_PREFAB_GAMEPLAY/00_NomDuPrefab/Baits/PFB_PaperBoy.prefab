@@ -51,7 +51,7 @@ MonoBehaviour:
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 2, z: 0}
   offsetHeightCollider: 2
-  offSetForwardCollider: 0
+  offsetForwardCollider: 0
   timeBeforeSpawn: 2
   usure: 20
   currentUsureMax: 20
@@ -62,7 +62,7 @@ MonoBehaviour:
   usurePercentage: 20
   costs: 0a000000140000001e000000
   currentCost: 10
-  upgradeCosts: 69000000cd00000031010000
+  upgradeCosts: 64000000c80000002c010000
   currentUpgradeCost: 105
   ui_Sprites:
   - {fileID: 21300000, guid: 02c208d5a9776d049b752fec20d90e0e, type: 3}
@@ -71,7 +71,7 @@ MonoBehaviour:
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 1736244942355804732}
   ui_UsureAmountText: {fileID: 1736244941965377878}
-  damages: c8000000c8000000c8000000
+  damages: 14000000190000001e000000
   cooldown:
   - 2.5
   - 2
@@ -81,7 +81,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   detectionRange: 30
-  attackRange: 30
+  attackRange: 3
   paperboyNav: {fileID: 8092799528721751473}
   ui_cooldownImage: {fileID: 7536725829856632415}
 --- !u!33 &9118843834274069201

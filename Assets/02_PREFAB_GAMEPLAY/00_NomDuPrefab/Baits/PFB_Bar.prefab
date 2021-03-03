@@ -52,7 +52,7 @@ MonoBehaviour:
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 0, z: 0}
   offsetHeightCollider: 0
-  offSetForwardCollider: 0
+  offsetForwardCollider: 0
   timeBeforeSpawn: 2
   usure: 20
   currentUsureMax: 20

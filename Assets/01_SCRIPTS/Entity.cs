@@ -30,7 +30,12 @@ public class Entity : MonoBehaviour
     public NavMeshAgent entityNavMeshAgent;
     NavMeshHit navMeshHit;
     [HideInInspector]
-    public Vector3 destination;//Position a atteindre
+    public Vector3 destination;//Position a atteind
+
+    public GameObject skin;
+    public SkinnedMeshRenderer rnd;
+    public Material[] stateMats;//Enemy = 0, Neutral = 1, Ally = 2
+    public Animator anm;
 
     [Header("UI")]
     public Image AllyProgressBar;
@@ -41,6 +46,8 @@ public class Entity : MonoBehaviour
     public void Init(int lifePoints)
     {
         health = lifePoints;
+
+        anm = skin.GetComponent<Animator>();
 
         if (type == FirmeType.Amazoon)
         {
@@ -104,6 +111,7 @@ public class Entity : MonoBehaviour
                     {
                         target = GameManager.Instance.player;
                         destination = target.transform.position;
+                        anm.SetBool("Walking", true);
                     }
                     else if (possibleTargets.Length == 0 || possibleTargets == null)
                     {
@@ -115,10 +123,12 @@ public class Entity : MonoBehaviour
                             {
                                 waitingDelay = Random.Range(minWaitingTime, maxWaitingTime);
                                 destination = navMeshHit.position;
+                                anm.SetBool("Walking", true);
                             }
                         }
                         if (entityNavMeshAgent.remainingDistance <= targetTreshold)
                         {
+                            anm.SetBool("Walking", false);
                             waitingDelay -= Time.deltaTime;
                         }
                     }
@@ -134,6 +144,7 @@ public class Entity : MonoBehaviour
                                 shortDistance = distance;
                                 destination = possibleTargets[i].transform.position;
                                 target = possibleTargets[i].gameObject;
+                                anm.SetBool("Walking", true);
                             }
                         }
                     }
@@ -146,7 +157,6 @@ public class Entity : MonoBehaviour
                     {
                         currentSpeed = baseSpeed;
                     }
-
                     break;
                 #endregion
 
@@ -227,6 +237,8 @@ public class Entity : MonoBehaviour
         if (health >= healthMinAlly)
         {
             status = EntityStatus.Ally;
+            this.gameObject.layer = 12;//allyLayer;
+            gameObject.tag = "TargetForEnemyEntity";
 
             AllyProgressBar.fillAmount = health / maxHealth;
             if(health == 0)
@@ -237,25 +249,26 @@ public class Entity : MonoBehaviour
             StateIndicator.color = StateColors.colorKeys[0].color;
             mapIndicator.color = StateColors.colorKeys[0].color;
             currentSpeed = baseSpeed;
-            gameObject.tag = "TargetForEnemyEntity";
             if (previousStatus == EntityStatus.Neutral)
             {
-                //Debug.Log("neutral => ally");
                 previousStatus = EntityStatus.Ally;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
+                rnd.material = stateMats[2];
             }
             if (previousStatus == EntityStatus.Enemy)
             {
-                //Debug.Log("enemy => ally");
                 previousStatus = EntityStatus.Ally;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
+                rnd.material = stateMats[2];
             }
         }
         else if (health <= healthMaxEnm)
         {
             status = EntityStatus.Enemy;
+            this.gameObject.layer = 10;// enemyLayer;
+            gameObject.tag = "Untagged";
 
             AllyProgressBar.fillAmount = health / maxHealth;
             if (health == 0)
@@ -264,25 +277,26 @@ public class Entity : MonoBehaviour
             }
             StateIndicator.color = StateColors.colorKeys[2].color;
             mapIndicator.color = StateColors.colorKeys[2].color;
-            gameObject.tag = "Untagged";
             if (previousStatus == EntityStatus.Neutral)
             {
-                //Debug.Log("neutral => enemy");
                 previousStatus = EntityStatus.Enemy;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
+                rnd.material = stateMats[0];
             }
             if (previousStatus == EntityStatus.Ally)
             {
-                //Debug.Log("ally => enemy");
                 previousStatus = EntityStatus.Enemy;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, false);
+                rnd.material = stateMats[0];
             }
         }
         else if (health > healthMaxEnm && health < healthMinAlly)
         {
             status = EntityStatus.Neutral;
+            this.gameObject.layer = 11;//neutralLayer;
+            gameObject.tag = "TargetForEnemyEntity";
 
             AllyProgressBar.fillAmount = health / maxHealth;
             if (health == 0)
@@ -292,21 +306,20 @@ public class Entity : MonoBehaviour
             StateIndicator.color = StateColors.colorKeys[1].color;
             mapIndicator.color = StateColors.colorKeys[1].color;
             currentSpeed = baseSpeed;
-            gameObject.tag = "TargetForEnemyEntity";
 
             if (previousStatus == EntityStatus.Enemy)
             {
-                //Debug.Log("enemy => neutral");
                 previousStatus = EntityStatus.Neutral;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
+                rnd.material = stateMats[1];
             }
             if (previousStatus == EntityStatus.Ally)
             {
-                //Debug.Log("ally => neutral");
                 previousStatus = EntityStatus.Neutral;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, false);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
+                rnd.material = stateMats[1];
             }
         }
     }
@@ -316,16 +329,20 @@ public class Entity : MonoBehaviour
         {
             previousStatus = EntityStatus.Ally;
             GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
+            rnd.material = stateMats[2];
         }
         else if (health <= healthMaxEnm)
         {
             previousStatus = EntityStatus.Enemy;
             GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
+            anm.SetBool("Walking", true);
+            rnd.material = stateMats[0];
         }
         else if (health > healthMaxEnm && health < healthMinAlly)
         {
             previousStatus = EntityStatus.Neutral;
             GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
+            rnd.material = stateMats[1];
         }
     }
     public void ChangeEntitySpeed(float slowFactor, float duration)

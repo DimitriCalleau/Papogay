@@ -63,11 +63,6 @@ public class WaveManager
         }
         nbEntities = nbAllyEntities + nbNeutralEntities + nbEnemyEntities;
 
-        /*Debug.Log("nb enemy : " + nbEnemyEntities);
-        Debug.Log("nb ally : " + nbAllyEntities);
-        Debug.Log("nb neutral : " + nbNeutralEntities);
-        Debug.Log("nb entité totale : " + nbEntities);*/
-
         if (nbEntities > 0)
         {
             float floatEnm = nbEnemyEntities;
@@ -77,6 +72,11 @@ public class WaveManager
             UIManager.Instance.allyEntityBar.fillAmount = floatAlly / floatGeneral;
             UIManager.Instance.enemyEntityBar.fillAmount = floatEnm / floatGeneral;
             CheckEntityRatio();
+        }
+        else
+        {
+            UIManager.Instance.allyEntityBar.fillAmount = 0;
+            UIManager.Instance.enemyEntityBar.fillAmount = 0;
         }
     }
 

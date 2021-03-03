@@ -4860,7 +4860,7 @@ MonoBehaviour:
       firmeSize0Small1Medium2Big: 00000000
       firmeToSpawnPrefab:
       - {fileID: 165665749172826155, guid: 4b9d294f1ff7bd84a902327929ba3713, type: 3}
-      nbNeutralEntities: 5
+      nbNeutralEntities: 2
       nbMaxEntity: 20
     - nbFirmesThisWave: 2
       typesDeFirmes: 0000000000000000
@@ -4933,12 +4933,11 @@ MonoBehaviour:
     allFirmesLocations: []
     entityPrefabs:
     - {fileID: 4488616244660598821, guid: d69bb6e5d7f5d0040bacda9dddb7d9c6, type: 3}
-    - {fileID: 4488616244660598821, guid: d69bb6e5d7f5d0040bacda9dddb7d9c6, type: 3}
-    - {fileID: 4488616244660598821, guid: d69bb6e5d7f5d0040bacda9dddb7d9c6, type: 3}
-    - {fileID: 4488616244660598821, guid: d69bb6e5d7f5d0040bacda9dddb7d9c6, type: 3}
-    - {fileID: 4488616244660598821, guid: d69bb6e5d7f5d0040bacda9dddb7d9c6, type: 3}
-    - {fileID: 4488616244660598821, guid: d69bb6e5d7f5d0040bacda9dddb7d9c6, type: 3}
-    - {fileID: 4488616244660598821, guid: d69bb6e5d7f5d0040bacda9dddb7d9c6, type: 3}
+    - {fileID: 4488616244660598821, guid: 7ffda890451ef164baf6d463a38f3352, type: 3}
+    - {fileID: 4488616244660598821, guid: 21554c95c038d8944ab7c6968d845b37, type: 3}
+    - {fileID: 4488616244660598821, guid: ffcf39409b06ab14db25659c5292c47d, type: 3}
+    - {fileID: 4488616244660598821, guid: aa4aabd0c2084ae4b8e4c47b2b3c7f21, type: 3}
+    - {fileID: 4488616244660598821, guid: 9f98d3169f464b548b1a576cf75e452b, type: 3}
     nbEntityMaxThisWave: 0
   playerStats:
     currentHealth: 0
@@ -4947,7 +4946,7 @@ MonoBehaviour:
     gold: 8000
     invincible: 0
     invincibilityTime: 0.5
-    speed: 50
+    speed: 30
     rollSpeed: 100
     boostFactor: 1.5
     indicatorShowTime: 0.3
@@ -5000,9 +4999,9 @@ MonoBehaviour:
   - {fileID: 2130587786071613459, guid: ed1b81bea0dca694088f78e08c975359, type: 3}
   - {fileID: 7069832796164665050, guid: b4e54fb1366bad341a7a7bc02549b8ef, type: 3}
   - {fileID: 6065224144304386526, guid: 06e80a794f06709478dd1d492edb613e, type: 3}
-  - {fileID: 420909277834398029, guid: 007b2eaced718844fa66ffe02abdd0c3, type: 3}
+  - {fileID: 107334587937293959, guid: 007b2eaced718844fa66ffe02abdd0c3, type: 3}
   - {fileID: 4121014938640837758, guid: 40026230a1321574bb1a9b0a7e904fc7, type: 3}
-  - {fileID: 7424570334442639439, guid: 9358280cc8a81444ca2290888f8e76fd, type: 3}
+  - {fileID: 6823520541489202590, guid: 9358280cc8a81444ca2290888f8e76fd, type: 3}
   allCurrentBaits: []
   reward:
     loots: 020000000300000004000000050000000600000007000000
@@ -6869,6 +6868,60 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 65649503, guid: 189ff1b9d3dda7e4dae91649b05ff671, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 763367847435423712, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350682252520497021, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298652861547290038, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400296294174172219, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5708487666174223481, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140089033136771415, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6ea6ace21837cb46a3e427fec7380c9, type: 2}
+    - target: {fileID: 6140089033136771415, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6ea6ace21837cb46a3e427fec7380c9, type: 2}
+    - target: {fileID: 6140089033136771415, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6ea6ace21837cb46a3e427fec7380c9, type: 2}
+    - target: {fileID: 6140089033136771415, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6ea6ace21837cb46a3e427fec7380c9, type: 2}
+    - target: {fileID: 7733889474028428294, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7793907873889669674, guid: 189ff1b9d3dda7e4dae91649b05ff671,
         type: 3}
       propertyPath: m_LocalPosition.x

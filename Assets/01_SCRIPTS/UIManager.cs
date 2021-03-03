@@ -177,6 +177,11 @@ public class UIManager : MonoBehaviour
         allCurrentBaits.Clear();
         MenuBaseState(true);
         GameManager.Instance.playerStats.SetHealth();
+        inventory.selectionIndex = 0;
+        for (int i = 0; i < inventoryPanel.transform.childCount; i++)
+        {
+            Destroy(inventoryPanel.transform.GetChild(i).gameObject);
+        }
     }
     public void OpenCloseShop()
     {
