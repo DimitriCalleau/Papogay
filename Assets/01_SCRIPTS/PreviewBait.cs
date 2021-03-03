@@ -31,7 +31,7 @@ public class PreviewBait
 
         HidePreview(false);
     }
-    public void HidePreview(bool hideUnhide)
+    public void HidePreview(bool hideUnhide)//true = unhide
     {
         switch (hideUnhide)
         {

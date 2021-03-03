@@ -57,6 +57,7 @@ public class PlayerMovementController : MonoBehaviour
             else
             {
                 GameManager.Instance.playerStats.Invincibility(false);
+                currentSpeed = GameManager.Instance.playerStats.speed;
                 Move();
             }
             switch (isrolling)
@@ -121,7 +122,6 @@ public class PlayerMovementController : MonoBehaviour
         }
         chara.Move(moveDir * Time.deltaTime);
 
-
         skin.transform.rotation = Quaternion.Slerp(skin.transform.rotation, rotation, turnSmooth); 
 
         currentRollDir = Quaternion.Euler(0f, targetRotation, 0f);
@@ -166,14 +166,6 @@ public class PlayerMovementController : MonoBehaviour
     public void Boost(float boosTime, float boostSpeed)
     {
 
-    }
-
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(floorDetectorPosition.position, Vector3.down);
-        Gizmos.DrawWireSphere(floorDetectorPosition.position, floorDetectionSphereRange);
     }
 
     void OnEnable()

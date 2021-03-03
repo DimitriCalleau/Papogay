@@ -111,7 +111,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""812b16c9-8ffc-409b-a999-0edc44dcf1be"",
-                    ""path"": ""<Keyboard>/t"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -155,7 +155,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b3517cf6-1ca2-4bc1-a160-a6c274b1e0ae"",
-                    ""path"": ""<Keyboard>/i"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -254,7 +254,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c7070ed4-3ba3-4f4e-9cf2-0410735f1f89"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

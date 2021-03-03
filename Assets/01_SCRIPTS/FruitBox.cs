@@ -14,7 +14,7 @@ public class FruitBox : Baits
     {
         offsetHeightCollider = colliderSize.y / 2;
         Quaternion forwardRotation = Quaternion.Euler(0, UIManager.Instance.baitManager.baitRotation, 0);
-        Vector3 forwardVector = forwardRotation * Vector3.forward * offSetForwardCollider;
+        Vector3 forwardVector = forwardRotation * Vector3.forward * offsetForwardCollider;
         rotatedColliderSize = forwardRotation * colliderSize;
         colliderCenter = transform.position + Vector3.up * offsetHeightCollider + forwardVector;
     }
@@ -37,5 +37,12 @@ public class FruitBox : Baits
                 e.GetComponent<Entity>().ChangeEntitySpeed(slowFactor, 0.5f);
             }
         }
+    }
+
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawCube(colliderCenter, colliderSize);
     }
 }

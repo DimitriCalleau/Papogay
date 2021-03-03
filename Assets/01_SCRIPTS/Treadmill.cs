@@ -12,9 +12,9 @@ public class Treadmill : Baits
     public void SetCollider()
     {
         offsetHeightCollider = colliderSize.y / 2;
-        offSetForwardCollider = 0;
+        offsetForwardCollider = 0;
         Quaternion forwardRotation = Quaternion.Euler(0, UIManager.Instance.baitManager.baitRotation, 0);
-        Vector3 forwardVector = forwardRotation * Vector3.forward * offSetForwardCollider;
+        Vector3 forwardVector = forwardRotation * Vector3.forward * offsetForwardCollider;
         rotatedColliderSize = forwardRotation * colliderSize;
         colliderCenter = transform.position + Vector3.up * offsetHeightCollider + forwardVector;
     }

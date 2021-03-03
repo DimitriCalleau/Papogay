@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 9190409310306658831}
   - component: {fileID: 2013677863774042788}
   m_Layer: 5
-  m_Name: AllyProgressBar
+  m_Name: EnemyProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.9999995, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.08528901, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 2107304693182459343}
   - component: {fileID: 1070349280361404770}
   m_Layer: 5
-  m_Name: EnemyProgressBar
+  m_Name: AllyProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.9452326, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_FillMethod: 1
   m_FillAmount: 0
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &823950087830017782
@@ -1357,6 +1357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 1
+  previousStatus: 0
   type: 0
   isAttracted: 0
   attrationStopped: 0
@@ -1376,7 +1377,7 @@ MonoBehaviour:
   target: {fileID: 0}
   entityNavMeshAgent: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
-  EnemyProgressBar: {fileID: 1070349280361404770}
+  AllyProgressBar: {fileID: 1070349280361404770}
   StateColors:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 1, a: 1}

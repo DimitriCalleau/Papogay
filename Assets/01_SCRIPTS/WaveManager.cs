@@ -44,7 +44,7 @@ public class WaveManager
                     break;
             }
         }
-        else
+        else if (addOrRemove == false)
         {
             switch (status)
             {
@@ -61,31 +61,24 @@ public class WaveManager
                     break;
             }
         }
-        Debug.Log(nbEnemyEntities);
         nbEntities = nbAllyEntities + nbNeutralEntities + nbEnemyEntities;
+
+        /*Debug.Log("nb enemy : " + nbEnemyEntities);
+        Debug.Log("nb ally : " + nbAllyEntities);
+        Debug.Log("nb neutral : " + nbNeutralEntities);
+        Debug.Log("nb entité totale : " + nbEntities);*/
+
         if (nbEntities > 0)
         {
-            UIManager.Instance.allyEntityBar.fillAmount = nbAllyEntities / nbEntities;
-            UIManager.Instance.enemyEntityBar.fillAmount = nbEnemyEntities / nbEntities;
+            float floatEnm = nbEnemyEntities;
+            float floatAlly = nbAllyEntities;
+            float floatGeneral = GameManager.Instance.builder.nbEntityMaxThisWave;
+
+            UIManager.Instance.allyEntityBar.fillAmount = floatAlly / floatGeneral;
+            UIManager.Instance.enemyEntityBar.fillAmount = floatEnm / floatGeneral;
+            CheckEntityRatio();
         }
     }
-
-    public void RemoveCurrentEntities()
-    {
-        Collider[] currentEntitiesInScene = Physics.OverlapSphere(Vector3.zero, 1000, entitylayers);
-        if(currentEntitiesInScene.Length != 0)
-        {
-            foreach(Collider e in currentEntitiesInScene)
-            {
-               GameObject.Destroy(e.gameObject);
-            }
-        }
-        nbAllyEntities = 0;
-        nbEnemyEntities = 0;
-        nbNeutralEntities = 0;
-        nbEntities = 0;
-    }
-
 
     public void StartWave()
     {
@@ -108,6 +101,22 @@ public class WaveManager
 
     public void Reset()
     {
+        for (int i = 0; i < locationZones.Length; i++)
+        {
+            if (locationZones[i] != null)
+            {
+                locationZones[i].SetActive(false);
+                for (int j = 0; j < GameManager.Instance.houseFolder.transform.childCount; j++)
+                {
+                    Transform tempSlect = GameManager.Instance.houseFolder.transform.GetChild(j);
+                    tempSlect.GetComponent<Houses>().Unactivate();
+                }
+                if (blocageZones[i] != null)
+                {
+                    blocageZones[i].SetActive(true);
+                }
+            }
+        }
         waveindex = 0;
         zoneIndex = 0;
         nbAllyEntities = 0;
@@ -122,7 +131,7 @@ public class WaveManager
 
     public void CheckEntityRatio()
     {
-        if(nbEntities == nbEnemyEntities)
+        if(nbEnemyEntities == GameManager.Instance.builder.nbEntityMaxThisWave)
         {
             GameManager.Instance.EventLose();
         }

@@ -31,7 +31,7 @@ public class EntityAttack : MonoBehaviour
                         }
                         else
                         {
-                            entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, true);
+                            entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, false);
                             timerCooldownAttack = entityDamageCooldown;
                         }
                     }
@@ -40,8 +40,6 @@ public class EntityAttack : MonoBehaviour
                 break;
 
             case EntityStatus.Ally:
-                Debug.Log(entity.target);
-                Debug.Log(entityAttackRange);
                 if (entity.target != null)//link between destination and target
                 {
                     Collider[] firme = Physics.OverlapSphere(transform.position + Vector3.up, entityAttackRange, allyAttackLayer);
@@ -49,10 +47,9 @@ public class EntityAttack : MonoBehaviour
                     {
                         for (int i = 0; i < firme.Length; i++)
                         {
-                            Debug.Log(firme[i]);
                             firme[i].GetComponent<Firme>().DamageFirme(allyAttackDamages);
-                            Destroy(gameObject);
                         }
+                        entity.Dead();
                     }
                 }
                 break;

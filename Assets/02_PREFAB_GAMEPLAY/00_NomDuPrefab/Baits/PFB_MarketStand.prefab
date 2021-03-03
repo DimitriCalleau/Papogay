@@ -82,7 +82,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   attackRange: 0
-  colliderSize: {x: 2, y: 1, z: 1}
+  colliderSize: {x: 7.25, y: 10, z: 20}
   gatheringPoint: {x: 0, y: 0, z: 0}
   rotatedColliderSize: {x: 0, y: 0, z: 0}
   ui_cooldownImage: {fileID: 3178184539470270058}

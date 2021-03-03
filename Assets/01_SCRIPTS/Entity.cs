@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class Entity : MonoBehaviour
 {
     [Header("Stats")]
-    public EntityStatus status;
+    public EntityStatus status, previousStatus;
     public FirmeType type;
 
     public bool isAttracted, attrationStopped;
@@ -33,21 +33,24 @@ public class Entity : MonoBehaviour
     public Vector3 destination;//Position a atteindre
 
     [Header("UI")]
-    public Image EnemyProgressBar;
+    public Image AllyProgressBar;
     public Gradient StateColors;
     public Image StateIndicator;
     public Image mapIndicator;
 
     public void Init(int lifePoints)
     {
+        health = lifePoints;
+
         if (type == FirmeType.Amazoon)
         {
             baseSpeed = baseSpeed * amazoonSpeedFactor;
         }
         currentSpeed = baseSpeed;
-        health = lifePoints;
+
         AddEntity();
         ChangeEntityStatus();
+
         if (targetTreshold == 0f)
         {
             targetTreshold = 1.5f;
@@ -62,10 +65,7 @@ public class Entity : MonoBehaviour
         destination = entityNavMeshAgent.destination;
         destination.y = destination.y + entityNavMeshAgent.baseOffset;
 
-
         GetComponent<EntityAttack>().entity = this;
-
-        EnemyProgressBar.fillAmount = health / maxHealth;
     }
 
     void Update()
@@ -209,7 +209,7 @@ public class Entity : MonoBehaviour
         else
             return false;
     }
-    public void DamageEntity(int _damage, bool damageOrHeal)//true -> damage, false -> heal
+    public void DamageEntity(int _damage, bool damageOrHeal)//true -> heal, false -> damage
     {
         switch (damageOrHeal)
         {
@@ -220,40 +220,75 @@ public class Entity : MonoBehaviour
                 health -= _damage;
                 break;
         }
-        EnemyProgressBar.fillAmount = maxHealth / health;
         ChangeEntityStatus();
     }
     public void ChangeEntityStatus()
     {
-        EntityStatus previousStatus = status;
         if (health >= healthMinAlly)
         {
             status = EntityStatus.Ally;
+
+            AllyProgressBar.fillAmount = health / maxHealth;
+            if(health == 0)
+            {
+                AllyProgressBar.fillAmount = 0;
+            }
+
             StateIndicator.color = StateColors.colorKeys[0].color;
             mapIndicator.color = StateColors.colorKeys[0].color;
             currentSpeed = baseSpeed;
             gameObject.tag = "TargetForEnemyEntity";
             if (previousStatus == EntityStatus.Neutral)
             {
+                //Debug.Log("neutral => ally");
+                previousStatus = EntityStatus.Ally;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
+            }
+            if (previousStatus == EntityStatus.Enemy)
+            {
+                //Debug.Log("enemy => ally");
+                previousStatus = EntityStatus.Ally;
+                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
+                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
             }
         }
         else if (health <= healthMaxEnm)
         {
             status = EntityStatus.Enemy;
+
+            AllyProgressBar.fillAmount = health / maxHealth;
+            if (health == 0)
+            {
+                AllyProgressBar.fillAmount = 0;
+            }
             StateIndicator.color = StateColors.colorKeys[2].color;
             mapIndicator.color = StateColors.colorKeys[2].color;
             gameObject.tag = "Untagged";
             if (previousStatus == EntityStatus.Neutral)
             {
+                //Debug.Log("neutral => enemy");
+                previousStatus = EntityStatus.Enemy;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
+            }
+            if (previousStatus == EntityStatus.Ally)
+            {
+                //Debug.Log("ally => enemy");
+                previousStatus = EntityStatus.Enemy;
+                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
+                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, false);
             }
         }
         else if (health > healthMaxEnm && health < healthMinAlly)
         {
             status = EntityStatus.Neutral;
+
+            AllyProgressBar.fillAmount = health / maxHealth;
+            if (health == 0)
+            {
+                AllyProgressBar.fillAmount = 0;
+            }
             StateIndicator.color = StateColors.colorKeys[1].color;
             mapIndicator.color = StateColors.colorKeys[1].color;
             currentSpeed = baseSpeed;
@@ -261,29 +296,35 @@ public class Entity : MonoBehaviour
 
             if (previousStatus == EntityStatus.Enemy)
             {
+                //Debug.Log("enemy => neutral");
+                previousStatus = EntityStatus.Neutral;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
             }
             if (previousStatus == EntityStatus.Ally)
             {
+                //Debug.Log("ally => neutral");
+                previousStatus = EntityStatus.Neutral;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, false);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
             }
         }
     }
-
     void AddEntity()
     {
         if (health >= healthMinAlly)
         {
+            previousStatus = EntityStatus.Ally;
             GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
         }
         else if (health <= healthMaxEnm)
         {
+            previousStatus = EntityStatus.Enemy;
             GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
         }
         else if (health > healthMaxEnm && health < healthMinAlly)
         {
+            previousStatus = EntityStatus.Neutral;
             GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
         }
     }
@@ -300,15 +341,36 @@ public class Entity : MonoBehaviour
         isAttracted = true;
         entityNavMeshAgent.destination = attractingPoint;
     }
-
     public void StopAttraction()
     {
         attractingTimer = 1.2f;
         attrationStopped = true;
     }
-
     public void Dead()
     {
-        Destroy(this);
+        switch (status)
+        {
+            case EntityStatus.Neutral:
+                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
+                break;
+            case EntityStatus.Enemy:
+                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
+                break;
+            case EntityStatus.Ally:
+                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, false);
+                break;
+            default:
+                break;
+        }
+        Destroy(this.gameObject);
+    }
+
+    void OnEnable()
+    {
+        GameManager.Instance.EndWave += Dead;
+    }
+    void OnDisable()
+    {
+        GameManager.Instance.EndWave -= Dead;
     }
 }
