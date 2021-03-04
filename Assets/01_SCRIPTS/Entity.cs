@@ -91,7 +91,7 @@ public class Entity : MonoBehaviour
             entityNavMeshAgent.destination = tempAttractingPoint;
         }
 
-        if (entityNavMeshAgent.destination != null)
+        if (entityNavMeshAgent.destination != null || entityNavMeshAgent.isStopped == false)
         {
             if (entityNavMeshAgent.remainingDistance <= targetTreshold)
             {
@@ -248,7 +248,7 @@ public class Entity : MonoBehaviour
                 break;
             case false:
                 health -= _damage;
-                anm.SetTrigger("Hit");
+                //anm.SetTrigger("Hit");
                 break;
         }
         ChangeEntityStatus();

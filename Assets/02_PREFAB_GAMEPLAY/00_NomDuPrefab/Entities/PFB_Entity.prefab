@@ -547,7 +547,7 @@ MonoBehaviour:
   entityAttackRange: 5
   entityStratAttackingRange: 7
   enemyDamageAnticipationDuration: 1.2
-  allyDamageAnticipationDuration: 0.2
+  allyDamageAnticipationDuration: 1
   allyAttackLayer:
     serializedVersion: 2
     m_Bits: 32768
