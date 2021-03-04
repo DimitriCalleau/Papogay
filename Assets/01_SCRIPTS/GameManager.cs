@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCam;
     public GameObject player;
+    public Vector3 playerStartPosition;
     public GameObject baitManager;
 
     public GameState gameState = new GameState();
@@ -82,20 +83,18 @@ public class GameManager : MonoBehaviour
     #endregion
     public void Retry()
     {
+        EventEndWave();
         waveManager.Reset();
+        builder.ResetShops();
         UIManager.Instance.Play();
     }
 
     void OnEnable()
     {
         StartWave += waveManager.StartWave;
-        EndWave += waveManager.IncreaseWaveIndex;
-        EndWave += waveManager.RemoveCurrentEntities;
     }
     void OnDisable()
     {
         StartWave -= waveManager.StartWave;
-        EndWave -= waveManager.IncreaseWaveIndex;
-        EndWave -= waveManager.RemoveCurrentEntities;
     }
 }

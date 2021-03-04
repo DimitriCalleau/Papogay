@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3c330a5607c4ab74ca8eb5b3462c0594, type: 2}
+  - {fileID: 2100000, guid: bc9910ab1e8e16549b7c0d74a4c92f73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 3685257802823438992}
   - component: {fileID: 9062001928644248578}
   - component: {fileID: 186578712947146733}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PFB_Maison_Marron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseTag: BigHouse
   zone: 0
+  shopped: 0
 --- !u!1 &6389467887629013635
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1990421731285251290
 Transform:
   m_ObjectHideFlags: 0
@@ -354,7 +355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9041636969872690301}
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.08726, y: 0, z: 0.26731}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3685257802823438992}
@@ -367,7 +368,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9041636969872690301}
-  m_Mesh: {fileID: 2810060597446052174, guid: 36a2231da4a63c9449ea4b9c150740db, type: 3}
+  m_Mesh: {fileID: 4821104749129630694, guid: 64b5957014d447948b5eb530d44f03ed, type: 3}
 --- !u!23 &1869694718171864453
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -386,7 +387,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f6af1429b679ae948b44d62d66772160, type: 2}
+  - {fileID: 2100000, guid: 6d561a545814269469c7e02b73ed3a59, type: 2}
   - {fileID: 2100000, guid: f6af1429b679ae948b44d62d66772160, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

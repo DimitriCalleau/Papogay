@@ -16,7 +16,7 @@ public class Firme : MonoBehaviour
     [Header("Spawner")]
     GameObject entityToSpawn;
     public float timeBetweenSpawn, spawnRadius;
-    float timerSpawn;
+    public float timerSpawn;
     public void InitFirme(FirmeType _firmeType, FirmeSize _size, int _index)
     {
         corpoType = _firmeType;
@@ -43,7 +43,7 @@ public class Firme : MonoBehaviour
     {
         Vector3 randomDirection = transform.position + Random.insideUnitSphere * _radius;
         NavMeshHit hit;
-        Vector3 entitySpawnPoint = Vector3.zero;
+        Vector3 entitySpawnPoint = new Vector3(0, -15.5f, -35);
         if (NavMesh.SamplePosition(randomDirection, out hit, _radius, NavMesh.AllAreas))
         {
             entitySpawnPoint = hit.position;
@@ -52,7 +52,6 @@ public class Firme : MonoBehaviour
     }
     void SpawnEntity(Vector3 _spawnPoint)
     {
-        Debug.Log(_spawnPoint);
         if(GameManager.Instance.waveManager.nbEntities < GameManager.Instance.builder.nbEntityMaxThisWave)
         {
             GameObject newEntity = GameObject.Instantiate(entityToSpawn, _spawnPoint, Quaternion.identity);
@@ -75,12 +74,22 @@ public class Firme : MonoBehaviour
     {
         anm.SetBool("Destroy", true);
         //Should Wait For Destruction anim to end
+        GameManager.Instance.builder.RecallModifiedHouses(modifiedHouseIndex, firmeSize);
         DestroyCorpo();
     }
 
     void DestroyCorpo()
     {
-        GameManager.Instance.builder.RecallModifiedHouses(modifiedHouseIndex, firmeSize);
         Destroy(this.gameObject);
+    }
+
+    void OnEnable()
+    {
+        GameManager.Instance.EndWave += DestroyCorpo;
+    }
+
+    void OnDisable()
+    {
+        GameManager.Instance.EndWave -= DestroyCorpo;
     }
 }

@@ -109,7 +109,7 @@ public class UIManager : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(inventoryOpened == true)
+        if (inventoryOpened == true)
         {
             Collider[] allLocations = Physics.OverlapSphere(GameManager.Instance.baitManager.transform.position, locationDetectionRange, locationLayer);
 
@@ -135,9 +135,8 @@ public class UIManager : MonoBehaviour
      
     public void AddFirstTraps()
     {
-        reward.AddBait(BaitType.Bar, 10, 0);
+        reward.AddBait(BaitType.PaperBoy, 10, 0);
         reward.AddBait(BaitType.FruitBox, 10, 0);
-        reward.AddBait(BaitType.Sign, 10, 0);
         inventory.SwitchBaitSelection(true);
         GameManager.Instance.EventStartWave();
         GameManager.Instance.gameState.SetPause(false);
@@ -145,13 +144,14 @@ public class UIManager : MonoBehaviour
         rewardButton.SetActive(true);
         rewardPanel.SetActive(false);
         firstTrapsButton.SetActive(false);
-
         CursorState(true);
     }
     public void AddReward()
     {
         reward.AddBait(reward.loots[GameManager.Instance.waveManager.waveindex], 10, reward.goldReward[GameManager.Instance.waveManager.waveindex]);
+        shop.baitHasBeenTaken = true;
         rewardPanel.SetActive(false);
+        GameManager.Instance.waveManager.IncreaseWaveIndex();
     }
 
     public GameObject PickBait(BaitType type)
@@ -177,6 +177,11 @@ public class UIManager : MonoBehaviour
         allCurrentBaits.Clear();
         MenuBaseState(true);
         GameManager.Instance.playerStats.SetHealth();
+        inventory.selectionIndex = 0;
+        for (int i = 0; i < inventoryPanel.transform.childCount; i++)
+        {
+            Destroy(inventoryPanel.transform.GetChild(i).gameObject);
+        }
     }
     public void OpenCloseShop()
     {
@@ -206,11 +211,13 @@ public class UIManager : MonoBehaviour
     {
         if (shopOpened == true)
         {
-            if (shop.hasNewBaitToAdd)
+            if (shop.hasNewBaitToAdd && shop.baitHasBeenTaken)
             {
                 GameManager.Instance.EventStartWave();
                 shop.hasNewBaitToAdd = false;
+                shop.baitHasBeenTaken = false;
             }
+            rewardPanel.SetActive(false);
             shopPanel.SetActive(false);
             CursorState(true);
             shopOpened = false;
@@ -283,7 +290,6 @@ public class UIManager : MonoBehaviour
         MenuBaseState(false);
         GameManager.Instance.gameState.start = false;
         GameManager.Instance.gameState.SetPause(true);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         CursorState(false);
     }
 
@@ -292,9 +298,9 @@ public class UIManager : MonoBehaviour
         switch (state)
         {
             case true://Lance la partie
-                startPanel.SetActive(false);
                 rewardPanel.SetActive(true);
                 firstTrapsButton.SetActive(true);
+                startPanel.SetActive(false);
                 break;
             case false://Retour au menu start
                 startPanel.SetActive(true);
@@ -311,6 +317,7 @@ public class UIManager : MonoBehaviour
         shopPanel.SetActive(false);
         optionPanel.SetActive(false);
         creditsPanel.SetActive(false);
+        mapPanel.SetActive(false);
     }
 
     void OpenWinPanel()

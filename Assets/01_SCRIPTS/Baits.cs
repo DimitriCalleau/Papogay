@@ -12,7 +12,7 @@ public class Baits : MonoBehaviour
     public int nbUpgradeMax;
     [HideInInspector] public Location location;
     [HideInInspector] public Vector3 colliderCenter;
-    public float offsetHeightCollider, offSetForwardCollider;
+    public float offsetHeightCollider, offsetForwardCollider;
     public float timeBeforeSpawn;
 
     [Header("baitDuration")]
@@ -86,5 +86,20 @@ public class Baits : MonoBehaviour
             location.occupied = false;
             Destroy(this.gameObject);
         }
+    }
+
+    void DestroyBait()
+    {
+        location.occupied = false;
+        Destroy(this.gameObject);
+    }
+
+    void OnEnable()
+    {
+        GameManager.Instance.EndWave += DestroyBait;
+    }
+    void OnDisable()
+    {
+        GameManager.Instance.EndWave -= DestroyBait;
     }
 }

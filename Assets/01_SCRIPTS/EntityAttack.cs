@@ -6,10 +6,10 @@ public class EntityAttack : MonoBehaviour
 {
     [HideInInspector]
     public Entity entity;
-    float timerCooldownAttack;
+    float timerCooldownAttack, timerDamageAnticipation;
     public int allyAttackDamages, enemyAttackDamages; 
-    public float entityDamageCooldown, entityAttackRange;
-
+    public float entityDamageCooldown, entityAttackRange, entityStratAttackingRange, damageAnticipationDuration;
+    bool isAttacking;
     public LayerMask allyAttackLayer = -1;
     void Update()
     {
@@ -22,26 +22,52 @@ public class EntityAttack : MonoBehaviour
                 }
                 else 
                 {
-                    if (entity.target != null  && Vector3.Distance(transform.position, entity.target.transform.position) <= entityAttackRange)
+                    if (entity.target != null  && Vector3.Distance(transform.position, entity.target.transform.position) <= entityStratAttackingRange)
                     {
                         if (entity.target == GameManager.Instance.player)
                         {
-                            GameManager.Instance.playerStats.DamagePlayer(enemyAttackDamages);
+                            entity.anm.SetTrigger("Attack");
                             timerCooldownAttack = entityDamageCooldown;
+                            timerDamageAnticipation = damageAnticipationDuration;
+                            isAttacking = true;
                         }
                         else
                         {
-                            entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, true);
+                            entity.anm.SetTrigger("Attack");
                             timerCooldownAttack = entityDamageCooldown;
+                            timerDamageAnticipation = damageAnticipationDuration;
+                            isAttacking = true;
                         }
                     }
 
                 }
+
+                if(timerDamageAnticipation >= 0)
+                {
+                    timerDamageAnticipation -= Time.deltaTime;
+                }
+                else
+                {
+                    if (isAttacking == true)
+                    {
+                        if (entity.target != null && Vector3.Distance(transform.position, entity.target.transform.position) <= entityAttackRange)
+                        {
+                            if (entity.target == GameManager.Instance.player)
+                            {
+                                GameManager.Instance.playerStats.DamagePlayer(enemyAttackDamages);
+                                isAttacking = false;
+                            }
+                            else
+                            {
+                                entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, false);
+                                isAttacking = false;
+                            }
+                        }
+                    }
+                }
                 break;
 
             case EntityStatus.Ally:
-                Debug.Log(entity.target);
-                Debug.Log(entityAttackRange);
                 if (entity.target != null)//link between destination and target
                 {
                     Collider[] firme = Physics.OverlapSphere(transform.position + Vector3.up, entityAttackRange, allyAttackLayer);
@@ -49,9 +75,8 @@ public class EntityAttack : MonoBehaviour
                     {
                         for (int i = 0; i < firme.Length; i++)
                         {
-                            Debug.Log(firme[i]);
+                            entity.Dead();
                             firme[i].GetComponent<Firme>().DamageFirme(allyAttackDamages);
-                            Destroy(gameObject);
                         }
                     }
                 }

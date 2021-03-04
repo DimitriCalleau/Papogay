@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 2671000274635612757}
   - component: {fileID: 5245139746801865800}
   - component: {fileID: 5542605488981413629}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PFB_Maison_Jaune
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,6 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseTag: BigHouse
   zone: 0
+  shopped: 0
 --- !u!1 &5380245548249544654
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3c330a5607c4ab74ca8eb5b3462c0594, type: 2}
+  - {fileID: 2100000, guid: bc9910ab1e8e16549b7c0d74a4c92f73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -422,7 +423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3385641686147406401
 Transform:
   m_ObjectHideFlags: 0

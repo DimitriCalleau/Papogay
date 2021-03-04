@@ -138,7 +138,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3c330a5607c4ab74ca8eb5b3462c0594, type: 2}
+  - {fileID: 2100000, guid: bc9910ab1e8e16549b7c0d74a4c92f73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -286,7 +286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4687885858549622633
 Transform:
   m_ObjectHideFlags: 0
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 8007015291541055492}
   - component: {fileID: 1670280078219575634}
   - component: {fileID: -7462605027743985783}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PFB_Maison_Rose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,6 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseTag: BigHouse
   zone: 0
+  shopped: 0
 --- !u!1001 &592164509710654425
 PrefabInstance:
   m_ObjectHideFlags: 0

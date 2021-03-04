@@ -15,9 +15,9 @@ public class MarketStand : Baits
     public void SetCollider()
     {
         offsetHeightCollider = colliderSize.y / 2;
-        offSetForwardCollider = colliderSize.z / 2;
+        offsetForwardCollider = colliderSize.z / 2;
         Quaternion forwardRotation = Quaternion.Euler(0, UIManager.Instance.baitManager.baitRotation, 0);
-        Vector3 forwardVector = forwardRotation * Vector3.forward * offSetForwardCollider;
+        Vector3 forwardVector = forwardRotation * Vector3.forward * offsetForwardCollider;
         rotatedColliderSize = forwardRotation * colliderSize;
         colliderCenter = transform.position + Vector3.up * offsetHeightCollider + forwardVector;
     }

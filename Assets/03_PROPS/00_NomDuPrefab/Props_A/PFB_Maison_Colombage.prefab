@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 565599321685810428}
   - component: {fileID: 8774144009153495481}
   - component: {fileID: -6792987311248635244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PFB_Maison_Colombage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseTag: SmallHouse
   zone: 0
+  shopped: 0
 --- !u!1 &5410487721202163921
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,8 +79,8 @@ GameObject:
   m_Name: Fondation_Maison_Colombage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &247025515491926364
 Transform:
@@ -121,7 +122,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3c330a5607c4ab74ca8eb5b3462c0594, type: 2}
+  - {fileID: 2100000, guid: bc9910ab1e8e16549b7c0d74a4c92f73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -244,7 +245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &691566685122389100
 Transform:
   m_ObjectHideFlags: 0
@@ -253,7 +254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7070328517800979204}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8455477226952871055}

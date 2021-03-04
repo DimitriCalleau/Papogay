@@ -52,40 +52,37 @@ public class PaperBoy : Baits
                     }
                 }
             }
+        }
+
+        if (target != null)
+        {
+            if (Vector3.Distance(target.transform.position, transform.position) > detectionRange || target.layer == 12)
+            {
+                target = null;
+                paperboyNav.isStopped = true;
+                return;
+            }
             else
             {
-                bool stillInRange = false;
-                for (int i = 0; i < Enemies.Length; i++)
-                {
-                    if (Enemies[i].gameObject == target)
-                    {
-                        stillInRange = true;
-                    }
-                }
-                if (stillInRange == false)
-                {
-                    target = null;
-                }
+                paperboyNav.destination = target.transform.position;
+                paperboyNav.isStopped = false;
             }
-        }
-        if(target != null)
-        {
-            paperboyNav.destination = target.transform.position;
         }
     }
     public void BaitAttack()
     {
         if (target != null)
         {
-            if (paperboyNav.remainingDistance <= attackRange)
+            if (target.GetComponent<Entity>().status == EntityStatus.Ally)
+            {
+                target = null;
+                return;
+            }
+            if (Vector3.Distance(target.transform.position, paperboyNav.transform.position) <= attackRange)
             {
                 target.GetComponent<Entity>().DamageEntity(damages[upgradeIndex], true);
                 countdown = 0;
                 ui_cooldownImage.fillAmount = 0;
-            }
-            if(target.GetComponent<Entity>().status == EntityStatus.Ally)
-            {
-                target = null;
             }
         }
     }

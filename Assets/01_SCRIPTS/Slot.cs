@@ -138,11 +138,11 @@ public class Slot
                         UIManager.Instance.preview.SphereRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Perfume>().colliderCenter, baitPrefab.GetComponent<Perfume>().range);
                     }
                     break;
-                case BaitType.Antenna:
-                    if (baitPrefab.GetComponent<Antenna>().colliderCenter != null)
+                case BaitType.Militant:
+                    if (baitPrefab.GetComponent<Militant>().colliderCenter != null)
                     {
-                        baitPrefab.GetComponent<Antenna>().SetCollider();
-                        UIManager.Instance.preview.SphereRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Antenna>().colliderCenter, baitPrefab.GetComponent<Antenna>().range);
+                        baitPrefab.GetComponent<Militant>().SetCollider();
+                        UIManager.Instance.preview.SphereRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Militant>().colliderCenter, baitPrefab.GetComponent<Militant>().range);
                     }
                     break;
                 case BaitType.Bar:
@@ -152,11 +152,11 @@ public class Slot
                         UIManager.Instance.preview.SphereRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Bar>().colliderCenter, baitPrefab.GetComponent<Bar>().range);
                     }
                     break;
-                case BaitType.Threadmill:
-                    if (baitPrefab.GetComponent<Treadmill>().colliderCenter != null)
+                case BaitType.Bus:
+                    if (baitPrefab.GetComponent<Bus>().colliderCenter != null)
                     {
-                        baitPrefab.GetComponent<Treadmill>().SetCollider();
-                        UIManager.Instance.preview.BoxRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Treadmill>().colliderCenter, baitPrefab.GetComponent<Treadmill>().rotatedColliderSize);
+                        baitPrefab.GetComponent<Bus>().SetCollider();
+                        UIManager.Instance.preview.SphereRangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Bus>().colliderCenter, baitPrefab.GetComponent<Bus>().range);
                     }
                     break;
             }

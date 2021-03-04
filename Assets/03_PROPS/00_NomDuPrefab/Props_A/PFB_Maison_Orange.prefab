@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8067720578389191736
 Transform:
   m_ObjectHideFlags: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219759094167840316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.039686, y: 0.01, z: 1.6934}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2378037860136741554}
@@ -39,7 +39,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219759094167840316}
-  m_Mesh: {fileID: -5628842705204918542, guid: 94a1137bbe7c283409f7032ccc9da1e0, type: 3}
+  m_Mesh: {fileID: -3374186950852593850, guid: a04b6de23ba49fe4380840ac1691df55, type: 3}
 --- !u!23 &1052902483688952412
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ee32ed6eed0243f47bc185f034245cb3, type: 2}
+  - {fileID: 2100000, guid: 6d561a545814269469c7e02b73ed3a59, type: 2}
   - {fileID: 2100000, guid: ee32ed6eed0243f47bc185f034245cb3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 2378037860136741554}
   - component: {fileID: 2970527534494480390}
   - component: {fileID: 4460938969420271710}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PFB_Maison_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseTag: SmallHouse
   zone: 0
+  shopped: 0
 --- !u!1 &3620609299485338771
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +329,7 @@ GameObject:
   - component: {fileID: 6261754546510657874}
   - component: {fileID: 87174733225732456}
   m_Layer: 8
-  m_Name: Fondation_Maison_Orang
+  m_Name: Fondation_Maison_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
@@ -374,7 +375,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3c330a5607c4ab74ca8eb5b3462c0594, type: 2}
+  - {fileID: 2100000, guid: bc9910ab1e8e16549b7c0d74a4c92f73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

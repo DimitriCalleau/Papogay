@@ -21,8 +21,6 @@ public class BaitManager
                     inventorySelection.AddRemove(false);
                     cooldownTimer = UIManager.Instance.timeBetweenBaits;
                 }
-                else
-                    Debug.LogError("aled");
             }
         }
     }

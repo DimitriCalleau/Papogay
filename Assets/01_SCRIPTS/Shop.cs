@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Shop
 {
-    public bool hasNewBaitToAdd;
+    public bool hasNewBaitToAdd, baitHasBeenTaken;
     
     public float detectionRange;
     [SerializeField]
