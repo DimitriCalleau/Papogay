@@ -140,7 +140,7 @@ MonoBehaviour:
   lastManualRotationTime: 0
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 41216
   shakePower: 0.2
   shakeDuration: 0.2
   shake: 0

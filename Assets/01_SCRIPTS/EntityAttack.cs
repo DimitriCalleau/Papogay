@@ -6,10 +6,10 @@ public class EntityAttack : MonoBehaviour
 {
     [HideInInspector]
     public Entity entity;
-    float timerCooldownAttack;
+    float timerCooldownAttack, timerDamageAnticipation;
     public int allyAttackDamages, enemyAttackDamages; 
-    public float entityDamageCooldown, entityAttackRange;
-
+    public float entityDamageCooldown, entityAttackRange, entityStratAttackingRange, damageAnticipationDuration;
+    bool isAttacking;
     public LayerMask allyAttackLayer = -1;
     void Update()
     {
@@ -22,22 +22,48 @@ public class EntityAttack : MonoBehaviour
                 }
                 else 
                 {
-                    if (entity.target != null  && Vector3.Distance(transform.position, entity.target.transform.position) <= entityAttackRange)
+                    if (entity.target != null  && Vector3.Distance(transform.position, entity.target.transform.position) <= entityStratAttackingRange)
                     {
                         if (entity.target == GameManager.Instance.player)
                         {
                             entity.anm.SetTrigger("Attack");
-                            GameManager.Instance.playerStats.DamagePlayer(enemyAttackDamages);
                             timerCooldownAttack = entityDamageCooldown;
+                            timerDamageAnticipation = damageAnticipationDuration;
+                            isAttacking = true;
                         }
                         else
                         {
                             entity.anm.SetTrigger("Attack");
-                            entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, false);
                             timerCooldownAttack = entityDamageCooldown;
+                            timerDamageAnticipation = damageAnticipationDuration;
+                            isAttacking = true;
                         }
                     }
 
+                }
+
+                if(timerDamageAnticipation >= 0)
+                {
+                    timerDamageAnticipation -= Time.deltaTime;
+                }
+                else
+                {
+                    if (isAttacking == true)
+                    {
+                        if (entity.target != null && Vector3.Distance(transform.position, entity.target.transform.position) <= entityAttackRange)
+                        {
+                            if (entity.target == GameManager.Instance.player)
+                            {
+                                GameManager.Instance.playerStats.DamagePlayer(enemyAttackDamages);
+                                isAttacking = false;
+                            }
+                            else
+                            {
+                                entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, false);
+                                isAttacking = false;
+                            }
+                        }
+                    }
                 }
                 break;
 
