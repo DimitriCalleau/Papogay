@@ -111,7 +111,6 @@ public class Entity : MonoBehaviour
                     {
                         target = GameManager.Instance.player;
                         destination = target.transform.position;
-                        anm.SetBool("Walking", true);
                     }
                     else if (possibleTargets.Length == 0 || possibleTargets == null)
                     {
@@ -123,12 +122,10 @@ public class Entity : MonoBehaviour
                             {
                                 waitingDelay = Random.Range(minWaitingTime, maxWaitingTime);
                                 destination = navMeshHit.position;
-                                anm.SetBool("Walking", true);
                             }
                         }
                         if (entityNavMeshAgent.remainingDistance <= targetTreshold)
                         {
-                            anm.SetBool("Walking", false);
                             waitingDelay -= Time.deltaTime;
                         }
                     }
@@ -144,7 +141,6 @@ public class Entity : MonoBehaviour
                                 shortDistance = distance;
                                 destination = possibleTargets[i].transform.position;
                                 target = possibleTargets[i].gameObject;
-                                anm.SetBool("Walking", true);
                             }
                         }
                     }
@@ -157,6 +153,7 @@ public class Entity : MonoBehaviour
                     {
                         currentSpeed = baseSpeed;
                     }
+
                     break;
                 #endregion
 
@@ -197,6 +194,20 @@ public class Entity : MonoBehaviour
             {
                 entityNavMeshAgent.speed = currentSpeed;
                 entityNavMeshAgent.destination = destination;
+            }
+
+            if (entityNavMeshAgent.destination != null)
+            {
+                if (entityNavMeshAgent.remainingDistance <= targetTreshold)
+                {
+                    anm.SetBool("Walking", false);
+                }
+                else
+                    anm.SetBool("Walking", true);
+            }
+            else
+            {
+                anm.SetBool("Walking", false);
             }
         }
 
@@ -239,6 +250,7 @@ public class Entity : MonoBehaviour
             status = EntityStatus.Ally;
             this.gameObject.layer = 12;//allyLayer;
             gameObject.tag = "TargetForEnemyEntity";
+            anm.SetInteger("Status", 2);
 
             AllyProgressBar.fillAmount = health / maxHealth;
             if(health == 0)
@@ -269,6 +281,7 @@ public class Entity : MonoBehaviour
             status = EntityStatus.Enemy;
             this.gameObject.layer = 10;// enemyLayer;
             gameObject.tag = "Untagged";
+            anm.SetInteger("Status", 0);
 
             AllyProgressBar.fillAmount = health / maxHealth;
             if (health == 0)
@@ -297,6 +310,7 @@ public class Entity : MonoBehaviour
             status = EntityStatus.Neutral;
             this.gameObject.layer = 11;//neutralLayer;
             gameObject.tag = "TargetForEnemyEntity";
+            anm.SetInteger("Status", 1);
 
             AllyProgressBar.fillAmount = health / maxHealth;
             if (health == 0)
@@ -335,7 +349,6 @@ public class Entity : MonoBehaviour
         {
             previousStatus = EntityStatus.Enemy;
             GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
-            anm.SetBool("Walking", true);
             rnd.material = stateMats[0];
         }
         else if (health > healthMaxEnm && health < healthMinAlly)
