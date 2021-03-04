@@ -473,7 +473,6 @@ MonoBehaviour:
   previousStatus: 0
   type: 0
   isAttracted: 0
-  attrationStopped: 0
   health: 0
   maxHealth: 100
   healthMinAlly: 55
@@ -547,7 +546,8 @@ MonoBehaviour:
   entityDamageCooldown: 2
   entityAttackRange: 5
   entityStratAttackingRange: 7
-  damageAnticipationDuration: 1.2
+  enemyDamageAnticipationDuration: 1.2
+  allyDamageAnticipationDuration: 0.2
   allyAttackLayer:
     serializedVersion: 2
     m_Bits: 32768

@@ -445,9 +445,9 @@ MonoBehaviour:
   upgradeIndex: 0
   nbUpgradeMax: 3
   location: {fileID: 0}
-  colliderCenter: {x: 7.4999995, y: 5.5, z: 0.00000044703484}
+  colliderCenter: {x: 0, y: 5.5, z: 10}
   offsetHeightCollider: 5.5
-  offSetForwardCollider: 7.5
+  offsetForwardCollider: 10
   timeBeforeSpawn: 2
   usure: 10
   currentUsureMax: 10
@@ -474,8 +474,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   colliderSize: {x: 10, y: 11, z: 20}
-  gatheringPoint: {x: 0, y: 0, z: 1}
-  rotatedColliderSize: {x: 15, y: 11, z: -9.999998}
+  gatheringPoint: {x: 0, y: 0, z: 3}
+  rotatedColliderSize: {x: 10, y: 11, z: 20}
 --- !u!33 &7422682549750173078
 MeshFilter:
   m_ObjectHideFlags: 0
