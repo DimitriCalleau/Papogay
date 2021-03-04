@@ -183,6 +183,14 @@ public class UIManager : MonoBehaviour
         {
             Destroy(inventoryPanel.transform.GetChild(i).gameObject);
         }
+        for (int i = 0; i < upgradeLayout.transform.childCount; i++)
+        {
+            Destroy(upgradeLayout.transform.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < shopLayout.transform.childCount; i++)
+        {
+            Destroy(shopLayout.transform.GetChild(i).gameObject);
+        }
     }
     public void OpenCloseShop()
     {

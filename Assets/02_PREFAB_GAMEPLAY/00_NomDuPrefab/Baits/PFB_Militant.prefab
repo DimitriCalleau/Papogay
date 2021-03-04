@@ -63,7 +63,10 @@ MonoBehaviour:
   currentCost: 0
   upgradeCosts: 
   currentUpgradeCost: 0
-  ui_Sprites: []
+  ui_Sprites:
+  - {fileID: 21300000, guid: 41ce185f0fa8e5240a6fe36c8ad937ee, type: 3}
+  - {fileID: 21300000, guid: 3a0164d1fa4747b428e604600c9cf582, type: 3}
+  - {fileID: 21300000, guid: c20ccc4ecb830a74b84653a11a12f009, type: 3}
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 0}
   ui_UsureAmountText: {fileID: 0}

@@ -52,23 +52,23 @@ MonoBehaviour:
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 0, z: 0}
   offsetHeightCollider: 0
-  offSetForwardCollider: 0
+  offsetForwardCollider: 0
   timeBeforeSpawn: 2
-  usure: 75
-  currentUsureMax: 30
+  usure: 10
+  currentUsureMax: 10
   usureMax:
   - 10
   - 20
   - 30
   usurePercentage: 10
   costs: 140000001e00000028000000
-  currentCost: 40
+  currentCost: 20
   upgradeCosts: 68000000cc00000030010000
-  currentUpgradeCost: 304
+  currentUpgradeCost: 104
   ui_Sprites:
-  - {fileID: 21300000, guid: e6a45fe2536490744867e78da4c0f295, type: 3}
-  - {fileID: 21300000, guid: 0669d26e64d14bf4ba8f2f7528609d8f, type: 3}
-  - {fileID: 21300000, guid: 05976e965286b0f4ba0a475952e5e4e9, type: 3}
+  - {fileID: 21300000, guid: 8e0aadb058fdd8a45a447189c7ae9c81, type: 3}
+  - {fileID: 21300000, guid: f244309f611820d48b71492c0b58ab01, type: 3}
+  - {fileID: 21300000, guid: 4da18e7a6589f474fac5453c5c0459aa, type: 3}
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 6671124462570676745}
   ui_UsureAmountText: {fileID: 6671124462960922979}

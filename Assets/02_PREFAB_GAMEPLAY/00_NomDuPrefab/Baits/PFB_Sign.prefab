@@ -461,9 +461,9 @@ MonoBehaviour:
   upgradeCosts: 6b000000cf00000033010000
   currentUpgradeCost: 107
   ui_Sprites:
-  - {fileID: 21300000, guid: 02c208d5a9776d049b752fec20d90e0e, type: 3}
-  - {fileID: 21300000, guid: 02c208d5a9776d049b752fec20d90e0e, type: 3}
-  - {fileID: 21300000, guid: 02c208d5a9776d049b752fec20d90e0e, type: 3}
+  - {fileID: 21300000, guid: 4aa49ea3df1ad804687cc0c8b0f38ecc, type: 3}
+  - {fileID: 21300000, guid: 853b057e9b1893b45bdcd21246578c83, type: 3}
+  - {fileID: 21300000, guid: ada0b85eb26416a48a37a43d7030880b, type: 3}
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 402847522312469766}
   ui_UsureAmountText: {fileID: 402847522459045484}

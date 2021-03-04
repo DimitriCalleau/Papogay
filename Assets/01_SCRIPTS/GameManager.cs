@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
         waveManager.Reset();
         builder.ResetShops();
         UIManager.Instance.Play();
+        playerStats.SetHealth();
     }
 
     void OnEnable()

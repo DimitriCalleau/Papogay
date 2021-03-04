@@ -12125,17 +12125,18 @@ MonoBehaviour:
     allFirmesLocations: []
     entityPrefabs:
     - {fileID: 4488616244660598821, guid: d69bb6e5d7f5d0040bacda9dddb7d9c6, type: 3}
-    - {fileID: 4488616244660598821, guid: 7ffda890451ef164baf6d463a38f3352, type: 3}
-    - {fileID: 4488616244660598821, guid: 21554c95c038d8944ab7c6968d845b37, type: 3}
-    - {fileID: 4488616244660598821, guid: ffcf39409b06ab14db25659c5292c47d, type: 3}
-    - {fileID: 4488616244660598821, guid: aa4aabd0c2084ae4b8e4c47b2b3c7f21, type: 3}
-    - {fileID: 4488616244660598821, guid: 9f98d3169f464b548b1a576cf75e452b, type: 3}
+    - {fileID: 4488616244660598821, guid: 949b95b4e1638644cbcb58ace5bb8080, type: 3}
+    - {fileID: 4488616244660598821, guid: 1fd94f55373c90b40aa9f52976638571, type: 3}
+    - {fileID: 4488616244660598821, guid: f53fc8085cf310a49a6ca445936697fb, type: 3}
+    - {fileID: 4488616244660598821, guid: cae9dc44ff4cd714bb88ede478909eca, type: 3}
+    - {fileID: 4488616244660598821, guid: a5cc25607c5eb614fa29b15b24799939, type: 3}
     nbEntityMaxThisWave: 0
   playerStats:
     currentHealth: 0
     maxHealth: 100
     healthPercentage: 0
     gold: 8000
+    startGold: 8000
     invincible: 0
     invincibilityTime: 0.5
     speed: 30
@@ -16010,25 +16011,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3985747051969166490, guid: 189ff1b9d3dda7e4dae91649b05ff671,
-        type: 3}
-      propertyPath: m_RenderingLayerMask
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3985747051969166490, guid: 189ff1b9d3dda7e4dae91649b05ff671,
-        type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3985747051969166490, guid: 189ff1b9d3dda7e4dae91649b05ff671,
-        type: 3}
-      propertyPath: m_LightProbeUsage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3985747051969166490, guid: 189ff1b9d3dda7e4dae91649b05ff671,
-        type: 3}
-      propertyPath: m_CastShadows
+    - target: {fileID: 143752213, guid: 189ff1b9d3dda7e4dae91649b05ff671, type: 3}
+      propertyPath: m_Intensity
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 143752213, guid: 189ff1b9d3dda7e4dae91649b05ff671, type: 3}
+      propertyPath: m_Color.r
+      value: 0.85882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 143752213, guid: 189ff1b9d3dda7e4dae91649b05ff671, type: 3}
+      propertyPath: m_Color.g
+      value: 0.82619596
+      objectReference: {fileID: 0}
+    - target: {fileID: 143752213, guid: 189ff1b9d3dda7e4dae91649b05ff671, type: 3}
+      propertyPath: m_Color.b
+      value: 0.46666667
       objectReference: {fileID: 0}
     - target: {fileID: 7793907873889669674, guid: 189ff1b9d3dda7e4dae91649b05ff671,
         type: 3}

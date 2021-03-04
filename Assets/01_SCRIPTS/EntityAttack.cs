@@ -27,7 +27,6 @@ public class EntityAttack : MonoBehaviour
                         if (entity.target == GameManager.Instance.player)
                         {
                             entity.entityNavMeshAgent.isStopped = true;
-                            //entity.anm.SetTrigger("Attack");
                             entity.anm.SetBool("isAttacking", true);
                             timerCooldownAttack = entityDamageCooldown;
                             timerDamageAnticipation = enemyDamageAnticipationDuration;
@@ -36,7 +35,6 @@ public class EntityAttack : MonoBehaviour
                         else
                         {
                             entity.entityNavMeshAgent.isStopped = true;
-                            //entity.anm.SetTrigger("Attack");
                             entity.anm.SetBool("isAttacking", true);
                             timerCooldownAttack = entityDamageCooldown;
                             timerDamageAnticipation = enemyDamageAnticipationDuration;
@@ -49,29 +47,25 @@ public class EntityAttack : MonoBehaviour
                 if(timerDamageAnticipation >= 0)
                 {
                     timerDamageAnticipation -= Time.deltaTime;
-                    Debug.Log(timerDamageAnticipation);
                 }
                 else
                 {
                     if (enemyIsAttacking == true)
                     {
-                        entity.entityNavMeshAgent.isStopped = false;
-
-                        if (entity.target != null && Vector3.Distance(transform.position, entity.target.transform.position) <= entityAttackRange)
+                        if (entity.target != null && Vector3.Distance(transform.position, entity.target.transform.position) <= entityAttackRange +1)
                         {
                             if (entity.target == GameManager.Instance.player)
                             {
-                                entity.anm.SetBool("isAttacking", false);
                                 GameManager.Instance.playerStats.DamagePlayer(enemyAttackDamages);
-                                enemyIsAttacking = false;
                             }
                             else
                             {
-                                entity.anm.SetBool("isAttacking", false);
                                 entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, false);
-                                enemyIsAttacking = false;
                             }
                         }
+                        entity.entityNavMeshAgent.isStopped = false;
+                        entity.anm.SetBool("isAttacking", false);
+                        enemyIsAttacking = false;
                     }
                 }
                 break;
@@ -96,20 +90,20 @@ public class EntityAttack : MonoBehaviour
                     if (timerDamageAnticipation >= 0)
                     {
                         timerDamageAnticipation -= Time.deltaTime;
-                        Debug.Log(timerDamageAnticipation);
                     }
                     else
                     {
                         if (allyIsAttacking == true)
                         {
+
+                            entity.anm.SetBool("isAttacking", false);
                             entity.entityNavMeshAgent.isStopped = false;
+                            allyIsAttacking = false;
                             if (firme.Length != 0)
                             {
                                 for (int i = 0; i < firme.Length; i++)
                                 {
                                     firme[i].GetComponent<Firme>().DamageFirme(allyAttackDamages);
-                                    entity.anm.SetBool("isAttacking", false);
-                                    allyIsAttacking = false;
                                     entity.Dead();
                                 }
                             }

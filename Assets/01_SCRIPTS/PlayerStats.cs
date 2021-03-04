@@ -10,6 +10,7 @@ public class PlayerStats
     public float maxHealth;
     public float healthPercentage;
     public int gold;
+    public int startGold;
     public bool invincible;
     public float invincibilityTime;
     public float speed;
@@ -20,6 +21,7 @@ public class PlayerStats
     public float timerIndicator;
     public void SetHealth()
     {
+        gold = startGold;
         currentHealth = maxHealth;
         healthPercentage = currentHealth / maxHealth;
     }

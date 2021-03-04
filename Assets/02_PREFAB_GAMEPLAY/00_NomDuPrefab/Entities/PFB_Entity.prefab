@@ -544,10 +544,10 @@ MonoBehaviour:
   allyAttackDamages: 10
   enemyAttackDamages: 10
   entityDamageCooldown: 2
-  entityAttackRange: 5
+  entityAttackRange: 6.5
   entityStratAttackingRange: 7
   enemyDamageAnticipationDuration: 1.2
-  allyDamageAnticipationDuration: 1
+  allyDamageAnticipationDuration: 0.8
   allyAttackLayer:
     serializedVersion: 2
     m_Bits: 32768
