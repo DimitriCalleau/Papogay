@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Firme : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Firme : MonoBehaviour
     FirmeSize firmeSize;
     public float defaultHealth;
     float health;
+    public Image healthbar;
 
     public int modifiedHouseIndex;
 
@@ -25,6 +27,7 @@ public class Firme : MonoBehaviour
 
         anm = GetComponentInChildren<Animator>();
         health = defaultHealth;
+        healthbar.fillAmount = (health / defaultHealth);
         timerSpawn = timeBetweenSpawn;
         entityToSpawn = GameManager.Instance.builder.SelectEntity(corpoType);
     }
@@ -63,6 +66,7 @@ public class Firme : MonoBehaviour
     public void DamageFirme(int _damages)
     {
         health -= _damages;
+        healthbar.fillAmount = (health / defaultHealth);
         anm.SetTrigger("Damages");
         if (health <= 0)
         {

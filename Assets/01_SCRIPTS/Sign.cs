@@ -28,22 +28,19 @@ public class Sign : Baits
     {
         BaitAttack();
         LoseLife(Time.deltaTime);
-        if(usure >= currentUsureMax - 1)
-        {
-            foreach (Collider e in Enemies)
-            {
-                e.GetComponent<Entity>().StopAttraction();
-            }
-        }
     }
     public void BaitAttack()
     {
         Enemies = Physics.OverlapBox(colliderCenter, rotatedColliderSize, Quaternion.identity, ennemisMask);
         if(Enemies.Length > 0)
         {
-            foreach(Collider e in Enemies)
+            Debug.Log("frero");
+            foreach (Collider e in Enemies)
             {
-                e.GetComponent<Entity>().AttractEntity(gatheringPoint);
+                if(e.GetComponent<Entity>().isAttracted == false)
+                {
+                    e.GetComponent<Entity>().AttractEntity(gatheringPoint, usure);
+                }
             }
         }
     }

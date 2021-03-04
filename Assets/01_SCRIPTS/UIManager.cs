@@ -145,6 +145,7 @@ public class UIManager : MonoBehaviour
         rewardPanel.SetActive(false);
         firstTrapsButton.SetActive(false);
         CursorState(true);
+        GameManager.Instance.player.GetComponent<PlayerMovementController>().hasRetried = true;
     }
     public void AddReward()
     {

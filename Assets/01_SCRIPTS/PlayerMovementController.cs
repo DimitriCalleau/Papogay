@@ -32,6 +32,8 @@ public class PlayerMovementController : MonoBehaviour
     bool isrolling;
     float rollTimer;
     bool isboosted = false;
+    public bool hasRetried;
+
     void Awake()
     {
         inputs = new InputPapogay();
@@ -47,7 +49,14 @@ public class PlayerMovementController : MonoBehaviour
     }
     void Update()
     {
-        if(GameManager.Instance.gameState.pause == false)
+        if (hasRetried)
+        {
+            chara.enabled = false;
+            transform.position = GameManager.Instance.playerStartPosition;
+            hasRetried = false;
+            chara.enabled = true;
+        }
+        if (GameManager.Instance.gameState.pause == false)
         {
             if (rollTimer > 0)
             {

@@ -14363,6 +14363,11 @@ PrefabInstance:
       propertyPath: focus
       value: 
       objectReference: {fileID: 661149737}
+    - target: {fileID: 766921223989089177, guid: 449c4e3ae1e5d3b4e9843195f6079b13,
+        type: 3}
+      propertyPath: verticalSensitivity
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 766921223989089179, guid: 449c4e3ae1e5d3b4e9843195f6079b13,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14432,6 +14437,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3985747051969166490, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985747051969166490, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985747051969166490, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985747051969166490, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7793907873889669674, guid: 189ff1b9d3dda7e4dae91649b05ff671,
         type: 3}
       propertyPath: m_LocalPosition.x

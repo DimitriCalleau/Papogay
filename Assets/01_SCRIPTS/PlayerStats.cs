@@ -31,6 +31,7 @@ public class PlayerStats
             UIManager.Instance.damageIndicatorPanel.SetActive(true);
             currentHealth -= damages;
             healthPercentage = currentHealth / maxHealth;
+            GameManager.Instance.mainCam.GetComponent<CameraController>().shake = true;
         }
         if(currentHealth <= 0)
         {
