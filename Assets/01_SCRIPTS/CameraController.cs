@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]
     float verticalSensitivity = 0.5f;
+    float horizontalSentivity = 0.5f;
 
     [SerializeField]
     Transform focus = default;
@@ -148,7 +149,7 @@ public class CameraController : MonoBehaviour
         {
             if (moveCam.x < -e || moveCam.x > e || moveCam.y < -e || moveCam.y > e)
             {
-                orbitAngles += rotationSpeed * Time.unscaledDeltaTime * new Vector2(-moveCam.y * verticalSensitivity, moveCam.x);
+                orbitAngles += rotationSpeed * Time.unscaledDeltaTime * new Vector2(-moveCam.y * verticalSensitivity, moveCam.x * horizontalSentivity);
                 lastManualRotationTime = Time.unscaledTime;
                 return true;
             }
