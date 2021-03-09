@@ -98,14 +98,14 @@ public class Entity : MonoBehaviour
         {
             if (entityNavMeshAgent.remainingDistance <= targetTreshold)
             {
-                anm.SetBool("Walking", false);
+                anm.SetFloat("WalkIdle", 0);
             }
             else
-                anm.SetBool("Walking", true);
+                anm.SetFloat("WalkIdle", 1);
         }
         else
         {
-            anm.SetBool("Walking", false);
+            anm.SetFloat("WalkIdle", 0);
         }
 
         if (attractingTimer > 0)
@@ -235,7 +235,7 @@ public class Entity : MonoBehaviour
     }
     public bool PlayerInRange()
     {
-        if (GameManager.Instance.player.activeInHierarchy == true && Vector3.Distance(transform.position, GameManager.Instance.player.transform.position) <= playerDetectionRadius)
+        if (GameManager.Instance != null && GameManager.Instance.player.activeInHierarchy == true && Vector3.Distance(transform.position, GameManager.Instance.player.transform.position) <= playerDetectionRadius)
         {
             return true;
         }
@@ -244,6 +244,8 @@ public class Entity : MonoBehaviour
     }
     public void DamageEntity(int _damage, bool damageOrHeal)//true -> heal, false -> damage
     {
+        anm.SetTrigger("Hit");
+
         switch (damageOrHeal)
         {
             case true:
@@ -251,7 +253,6 @@ public class Entity : MonoBehaviour
                 break;
             case false:
                 health -= _damage;
-                //anm.SetTrigger("Hit");
                 break;
         }
         ChangeEntityStatus();
@@ -379,19 +380,29 @@ public class Entity : MonoBehaviour
         if (health >= healthMinAlly)
         {
             previousStatus = EntityStatus.Ally;
-            GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
+            }
             rnd.material = stateMats[2];
         }
         else if (health <= healthMaxEnm)
         {
             previousStatus = EntityStatus.Enemy;
-            GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
+            }
             rnd.material = stateMats[0];
         }
         else if (health > healthMaxEnm && health < healthMinAlly)
         {
             previousStatus = EntityStatus.Neutral;
-            GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
+            if(GameManager.Instance != null)
+            {
+                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
+            }
             rnd.material = stateMats[1];
         }
     }
@@ -429,9 +440,12 @@ public class Entity : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    void OnEnable()
+    void OnEnable() 
     {
-        GameManager.Instance.EndWave += Dead;
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.EndWave += Dead;
+        }
     }
     void OnDisable()
     {

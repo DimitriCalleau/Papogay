@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -46,6 +47,10 @@ public class GameManager : MonoBehaviour
     public GameObject neutralEntityPrefab;
     #region Events
     public event Action StartWave;
+
+    public float deathTime;
+    float deathTimer;
+    bool isDying;
     public void EventStartWave()
     {
         if (StartWave != null)
@@ -88,6 +93,36 @@ public class GameManager : MonoBehaviour
         builder.ResetShops();
         UIManager.Instance.Play();
         playerStats.SetHealth();
+        isDying = false;
+        player.GetComponent<PlayerMovementController>().playerAnimator.SetTrigger("Retry");
+    }
+
+    void Update()
+    {
+        if(isDying)
+        {
+            if (deathTimer >= deathTime)
+            {
+                UIManager.Instance.deathfadePanel.SetActive(false);
+                EventLose();
+                isDying = false;
+                return;
+            }
+            else
+            {
+                deathTimer += Time.deltaTime;
+                Color c = UIManager.Instance.deathfadePanel.GetComponent<Image>().color;
+                c.a = (deathTimer / deathTime);
+                Debug.Log((deathTimer / deathTime));
+                UIManager.Instance.deathfadePanel.GetComponent<Image>().color = c;
+            }
+        }
+    }
+    public void PlayerDeath()
+    {
+        player.GetComponent<PlayerMovementController>().playerAnimator.SetTrigger("Death");
+        deathTimer = 0;
+        isDying = true;
     }
 
     void OnEnable()

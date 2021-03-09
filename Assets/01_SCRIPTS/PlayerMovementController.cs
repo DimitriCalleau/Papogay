@@ -93,6 +93,8 @@ public class PlayerMovementController : MonoBehaviour
                     }
                     break;
             }
+            playerAnimator.SetFloat("XMove", move.x);
+            playerAnimator.SetFloat("YMove", move.y);
         }
     }
     public void Move()
@@ -121,12 +123,10 @@ public class PlayerMovementController : MonoBehaviour
 
         if (move != Vector2.zero)
         {
-            playerAnimator.SetBool("Forward", true);
             moveDir = (Quaternion.Euler(0, targetRotation, 0) * (Vector3.forward * currentSpeed)) + securityGravity;
         }
         else
         {
-            playerAnimator.SetBool("Forward", false);
             moveDir = Vector3.zero;
         }
         chara.Move(moveDir * Time.deltaTime);

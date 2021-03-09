@@ -19,6 +19,8 @@ public class PlayerStats
 
     public float indicatorShowTime;
     public float timerIndicator;
+
+    bool itsAlreadyDead;
     public void SetHealth()
     {
         gold = startGold;
@@ -27,6 +29,7 @@ public class PlayerStats
     }
     public void DamagePlayer(int damages)
     {
+
         if(invincible == false)
         {
             timerIndicator = indicatorShowTime;
@@ -35,9 +38,10 @@ public class PlayerStats
             healthPercentage = currentHealth / maxHealth;
             GameManager.Instance.mainCam.GetComponent<CameraController>().shake = true;
         }
-        if(currentHealth <= 0)
+        if(itsAlreadyDead == false && currentHealth <= 0)
         {
-            GameManager.Instance.EventLose();
+            GameManager.Instance.PlayerDeath();
+            itsAlreadyDead = true;
         }
     }
 

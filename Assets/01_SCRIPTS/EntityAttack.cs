@@ -27,7 +27,8 @@ public class EntityAttack : MonoBehaviour
                         if (entity.target == GameManager.Instance.player)
                         {
                             entity.entityNavMeshAgent.isStopped = true;
-                            entity.anm.SetBool("isAttacking", true);
+                            entity.anm.SetTrigger("Attack"); 
+                            Debug.Log("attaque");
                             timerCooldownAttack = entityDamageCooldown;
                             timerDamageAnticipation = enemyDamageAnticipationDuration;
                             enemyIsAttacking = true;
@@ -35,7 +36,8 @@ public class EntityAttack : MonoBehaviour
                         else
                         {
                             entity.entityNavMeshAgent.isStopped = true;
-                            entity.anm.SetBool("isAttacking", true);
+                            entity.anm.SetTrigger("Attack");
+                            Debug.Log("attaque");
                             timerCooldownAttack = entityDamageCooldown;
                             timerDamageAnticipation = enemyDamageAnticipationDuration;
                             enemyIsAttacking = true;
@@ -64,7 +66,6 @@ public class EntityAttack : MonoBehaviour
                             }
                         }
                         entity.entityNavMeshAgent.isStopped = false;
-                        entity.anm.SetBool("isAttacking", false);
                         enemyIsAttacking = false;
                     }
                 }
@@ -81,8 +82,7 @@ public class EntityAttack : MonoBehaviour
                         for (int i = 0; i < firme.Length; i++)
                         {
                             entity.entityNavMeshAgent.isStopped = true;
-                            //entity.anm.SetTrigger("Attack");
-                            entity.anm.SetBool("isAttacking", true);
+                            entity.anm.SetTrigger("Attack");
                             timerDamageAnticipation = allyDamageAnticipationDuration;
                             allyIsAttacking = true;
                         }
@@ -96,7 +96,6 @@ public class EntityAttack : MonoBehaviour
                         if (allyIsAttacking == true)
                         {
 
-                            entity.anm.SetBool("isAttacking", false);
                             entity.entityNavMeshAgent.isStopped = false;
                             allyIsAttacking = false;
                             if (firme.Length != 0)

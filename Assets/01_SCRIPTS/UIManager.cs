@@ -69,6 +69,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI shopGoldText;
     public Image healthBar;
     public GameObject damageIndicatorPanel;
+    public GameObject deathfadePanel;
 
     public Image allyEntityBar;
     public Image enemyEntityBar;
@@ -327,6 +328,11 @@ public class UIManager : MonoBehaviour
         optionPanel.SetActive(false);
         creditsPanel.SetActive(false);
         mapPanel.SetActive(false);
+
+        deathfadePanel.SetActive(true);
+        Color c = deathfadePanel.GetComponent<Image>().color;
+        c.a = 0;
+        deathfadePanel.GetComponent<Image>().color = c;
     }
 
     void OpenWinPanel()

@@ -81,7 +81,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   detectionRange: 30
-  attackRange: 3
+  attackRange: 5
   paperboyNav: {fileID: 8092799528721751473}
   ui_cooldownImage: {fileID: 7536725829856632415}
 --- !u!33 &9118843834274069201

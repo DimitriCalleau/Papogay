@@ -3934,7 +3934,7 @@ RectTransform:
   m_GameObject: {fileID: 524123840}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.4, z: 1}
   m_Children:
   - {fileID: 346446357}
   m_Father: {fileID: 1786807596}
@@ -3942,7 +3942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: 0, y: 684}
   m_SizeDelta: {x: 910, y: 60}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &524123842
@@ -5838,7 +5838,7 @@ Transform:
   - {fileID: 1697603692}
   - {fileID: 664338261}
   - {fileID: 160676744}
-  - {fileID: 885139274}
+  - {fileID: 1439544399}
   - {fileID: 126053782}
   - {fileID: 145650625}
   - {fileID: 1496526852}
@@ -5850,19 +5850,19 @@ Transform:
   - {fileID: 213107145}
   - {fileID: 1784705285}
   - {fileID: 56129154}
-  - {fileID: 1439544399}
   - {fileID: 1088769311}
   - {fileID: 1142918232}
+  - {fileID: 885139274}
   - {fileID: 1199073822}
-  - {fileID: 358618519}
   - {fileID: 842754738}
   - {fileID: 486900523}
   - {fileID: 1123344303}
-  - {fileID: 2018646526}
   - {fileID: 1287644772}
   - {fileID: 486869645}
+  - {fileID: 2018646526}
   - {fileID: 714545677}
   - {fileID: 1222917905}
+  - {fileID: 358618519}
   - {fileID: 1672650892}
   - {fileID: 67646998}
   - {fileID: 101545734}
@@ -10608,7 +10608,7 @@ RectTransform:
   m_GameObject: {fileID: 1528535992}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.27644, y: 0.27644, z: 0.27644}
   m_Children:
   - {fileID: 1784796819}
   - {fileID: 1546365708}
@@ -10618,7 +10618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchoredPosition: {x: 805, y: -389}
   m_SizeDelta: {x: 1000, y: 60}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1528535994

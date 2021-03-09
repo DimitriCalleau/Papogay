@@ -19,6 +19,10 @@ public class Firme : MonoBehaviour
     GameObject entityToSpawn;
     public float timeBetweenSpawn, spawnRadius;
     public float timerSpawn;
+
+    public ParticleSystem damagedParticles;
+    public ParticleSystem spawnParticles;
+    public ParticleSystem destroyedParticles;
     public void InitFirme(FirmeType _firmeType, FirmeSize _size, int _index)
     {
         corpoType = _firmeType;
