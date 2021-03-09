@@ -840,24 +840,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  upgradeIndex: 0
+  upgradeIndex: 2
   nbUpgradeMax: 3
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 0.5, z: 0}
   offsetHeightCollider: 0.5
   offsetForwardCollider: 0
   timeBeforeSpawn: 2
-  usure: 10
-  currentUsureMax: 10
+  usure: 75
+  currentUsureMax: 30
   usureMax:
   - 10
   - 20
   - 30
   usurePercentage: 10
   costs: 14000000190000001e000000
-  currentCost: 20
+  currentCost: 30
   upgradeCosts: 66000000cb0000002f010000
-  currentUpgradeCost: 102
+  currentUpgradeCost: 303
   ui_Sprites:
   - {fileID: 21300000, guid: b04820e9874dc894385d3e8fee99facf, type: 3}
   - {fileID: 21300000, guid: 4a59499c0240e5d44a0b706200708198, type: 3}
@@ -873,7 +873,7 @@ MonoBehaviour:
     m_Bits: 1024
   slowFactor: 0.5
   colliderSize: {x: 5, y: 1, z: 5}
-  rotatedColliderSize: {x: 5, y: 1, z: 5}
+  rotatedColliderSize: {x: -4.9999995, y: 1, z: 5}
 --- !u!33 &6149078815159792092
 MeshFilter:
   m_ObjectHideFlags: 0
