@@ -398,6 +398,36 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2797127274336403471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5997194916130801108}
+  m_Layer: 10
+  m_Name: Particle_Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5997194916130801108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797127274336403471}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 585979075384967873}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4488616244660598821
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +462,7 @@ Transform:
   - {fileID: 6957681089047891072}
   - {fileID: 2926533259636830153}
   - {fileID: 1763493309}
+  - {fileID: 5997194916130801108}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -496,6 +527,11 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e197588c2cc03c04b904c7f4e6b7a888, type: 2}
   - {fileID: 2100000, guid: cc44f9b2c0ddb3948b67887bd2871f9a, type: 2}
   anm: {fileID: 0}
+  particlesParent: {fileID: 2797127274336403471}
+  particlePrefabs:
+  - {fileID: 4851875388189877695, guid: cde0eeddb3aefad439e110e730cc3983, type: 3}
+  - {fileID: 5263877543810189558, guid: b8d1497108cfe7e49bd9a90062eabcde, type: 3}
+  - {fileID: 650293548815446706, guid: 2a86d360100f6c045b6bca2c52b77ffd, type: 3}
   AllyProgressBar: {fileID: 1070349280361404770}
   StateColors:
     serializedVersion: 2

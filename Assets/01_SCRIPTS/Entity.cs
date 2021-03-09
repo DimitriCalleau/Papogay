@@ -33,10 +33,13 @@ public class Entity : MonoBehaviour
     [HideInInspector]
     public Vector3 destination;//Position a atteind
 
+    [Header("VisualInformations")]
     public GameObject skin;
     public SkinnedMeshRenderer rnd;
     public Material[] stateMats;//Enemy = 0, Neutral = 1, Ally = 2
     public Animator anm;
+    public GameObject particlesParent;
+    public ParticleSystem[] particlePrefabs;
 
     [Header("UI")]
     public Image AllyProgressBar;
@@ -277,6 +280,10 @@ public class Entity : MonoBehaviour
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
                 rnd.material = stateMats[2];
+
+                GameObject convertingParticles = Instantiate(particlePrefabs[2].gameObject, transform.position, Quaternion.identity);
+                convertingParticles.transform.parent = particlesParent.transform;
+                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             }
             if (previousStatus == EntityStatus.Enemy)
             {
@@ -284,6 +291,10 @@ public class Entity : MonoBehaviour
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
                 rnd.material = stateMats[2];
+
+                GameObject convertingParticles = Instantiate(particlePrefabs[2].gameObject, transform.position, Quaternion.identity);
+                convertingParticles.transform.parent = particlesParent.transform;
+                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             }
         }
         else if (health <= healthMaxEnm)
@@ -306,6 +317,10 @@ public class Entity : MonoBehaviour
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
                 rnd.material = stateMats[0];
+
+                GameObject convertingParticles = Instantiate(particlePrefabs[0].gameObject, transform.position, Quaternion.identity);
+                convertingParticles.transform.parent = particlesParent.transform;
+                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             }
             if (previousStatus == EntityStatus.Ally)
             {
@@ -313,6 +328,10 @@ public class Entity : MonoBehaviour
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, false);
                 rnd.material = stateMats[0];
+
+                GameObject convertingParticles = Instantiate(particlePrefabs[0].gameObject, transform.position, Quaternion.identity);
+                convertingParticles.transform.parent = particlesParent.transform;
+                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             }
         }
         else if (health > healthMaxEnm && health < healthMinAlly)
@@ -337,6 +356,10 @@ public class Entity : MonoBehaviour
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
                 rnd.material = stateMats[1];
+
+                GameObject convertingParticles = Instantiate(particlePrefabs[1].gameObject, transform.position, Quaternion.identity);
+                convertingParticles.transform.parent = particlesParent.transform;
+                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             }
             if (previousStatus == EntityStatus.Ally)
             {
@@ -344,6 +367,10 @@ public class Entity : MonoBehaviour
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, false);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
                 rnd.material = stateMats[1];
+
+                GameObject convertingParticles = Instantiate(particlePrefabs[1].gameObject, transform.position, Quaternion.identity);
+                convertingParticles.transform.parent = particlesParent.transform;
+                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             }
         }
     }
