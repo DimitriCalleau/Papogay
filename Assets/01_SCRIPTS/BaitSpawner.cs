@@ -27,7 +27,7 @@ public class BaitSpawner : MonoBehaviour
         spawnTimer = timeBeforeSpawn;
         hasSpawned = false;
 
-        timerPercentage = spawnTimer / timeBeforeSpawn;
+        timerPercentage = spawnTimer;
 
         timerText.text = timerPercentage.ToString();
         timerImage.fillAmount = timerPercentage;
@@ -39,7 +39,7 @@ public class BaitSpawner : MonoBehaviour
         {
             spawnTimer -= Time.deltaTime;
             timerPercentage = spawnTimer / timeBeforeSpawn;
-            timerText.text = Mathf.CeilToInt(timerPercentage).ToString();
+            timerText.text = Mathf.CeilToInt(spawnTimer).ToString();
             timerImage.fillAmount = timerPercentage;
         }
         else

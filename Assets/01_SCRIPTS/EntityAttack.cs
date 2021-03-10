@@ -28,7 +28,6 @@ public class EntityAttack : MonoBehaviour
                         {
                             entity.entityNavMeshAgent.isStopped = true;
                             entity.anm.SetTrigger("Attack"); 
-                            Debug.Log("attaque");
                             timerCooldownAttack = entityDamageCooldown;
                             timerDamageAnticipation = enemyDamageAnticipationDuration;
                             enemyIsAttacking = true;
@@ -37,7 +36,6 @@ public class EntityAttack : MonoBehaviour
                         {
                             entity.entityNavMeshAgent.isStopped = true;
                             entity.anm.SetTrigger("Attack");
-                            Debug.Log("attaque");
                             timerCooldownAttack = entityDamageCooldown;
                             timerDamageAnticipation = enemyDamageAnticipationDuration;
                             enemyIsAttacking = true;

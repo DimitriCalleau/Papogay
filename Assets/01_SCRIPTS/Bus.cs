@@ -7,6 +7,8 @@ public class Bus : Baits
 {
     public float range;
     Collider[] Enemies;
+
+
     public void SetCollider()
     {
         colliderCenter = transform.position + Vector3.up * offsetHeightCollider;

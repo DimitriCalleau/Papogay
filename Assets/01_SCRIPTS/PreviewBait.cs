@@ -7,11 +7,12 @@ using TMPro;
 public class PreviewBait
 {
     GameObject preview_GO, rangePreview_GO;
-    Mesh preview_Mesh, range_Mesh;
-    public GameObject spherePrefab, cubePrefab, ui_Preview_Stats;
+    Mesh preview_Mesh;
+    public Mesh circleRangeMesh, boxRangeMesh;
+    public GameObject cubePrefab, ui_Preview_Stats;
     public float offsetHeightStatsPreview;
     TextMeshProUGUI nbBaitsPreview;
-    public Material previewMat, range_Mat;
+    public Material previewMat, range_Mat, box_range_Mat;
 
     public void InitPreview()
     {
@@ -61,16 +62,15 @@ public class PreviewBait
     }
     public void SphereRangeDisplayer(Vector3 center, float range)
     {
-        range_Mesh = spherePrefab.GetComponent<MeshFilter>().sharedMesh;
         rangePreview_GO.transform.position = center;
-        rangePreview_GO.transform.localScale = Vector3.one * (range * 2);
-        rangePreview_GO.GetComponent<MeshFilter>().mesh = range_Mesh;
+        rangePreview_GO.transform.localScale = Vector3.one * (range * 2) * 0.1f;
+        rangePreview_GO.GetComponent<MeshFilter>().mesh = circleRangeMesh;
     }
     public void BoxRangeDisplayer(Vector3 center, Vector3 boundaries)
     {
-        range_Mesh = cubePrefab.GetComponent<MeshFilter>().sharedMesh;
+        boxRangeMesh = cubePrefab.GetComponent<MeshFilter>().sharedMesh;
         rangePreview_GO.transform.position = center;
         rangePreview_GO.transform.localScale = boundaries;
-        rangePreview_GO.GetComponent<MeshFilter>().mesh = range_Mesh;
+        rangePreview_GO.GetComponent<MeshFilter>().mesh = boxRangeMesh;
     }
 }
