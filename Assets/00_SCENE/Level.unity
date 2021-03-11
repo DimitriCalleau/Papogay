@@ -5091,17 +5091,14 @@ MonoBehaviour:
       m_Bits: 8192
     closeToShop: 0
   preview:
-    circleRangeMesh: {fileID: -91544239223479333, guid: 5ef0c12dc2cb9504b9388fc4fc536e59,
-      type: 3}
-    boxRangeMesh: {fileID: 0}
-    cubePrefab: {fileID: 782780084990316906, guid: 9ac6b1029bf95df43b9b667a67a3a90b,
+    cubePrefab: {fileID: 4185062320184054048, guid: 3d81f5c228250d440b3aea3b3e65d599,
       type: 3}
     ui_Preview_Stats: {fileID: 3020331988496219009, guid: a56eb4b1fd8460c4fbf69091fc7e8335,
       type: 3}
     offsetHeightStatsPreview: 12
     previewMat: {fileID: 2100000, guid: 0a12562ab33e42c4a819c885b03ee0dd, type: 2}
-    range_Mat: {fileID: 2100000, guid: e13c60b7beee8a745896a892ee212085, type: 2}
-    box_range_Mat: {fileID: 2100000, guid: d06c19f5f7af8104196bab4363c98eb9, type: 2}
+    range_Mat: {fileID: 2100000, guid: 5727aa4b1a142664c8b79fba6c35d50d, type: 2}
+    box_range_Mat: {fileID: 2100000, guid: b1b57933845996944b2e1632c7844e66, type: 2}
   inventorySlotPrefab: {fileID: 7677407625855949514, guid: 2db977b3b9b84aa458cc457773350cbb,
     type: 3}
   shopSlotPrefab: {fileID: 5004000097812245792, guid: 31361079f47f3834090f0cf7f589bbc7,
@@ -6953,10 +6950,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 825512502, guid: 189ff1b9d3dda7e4dae91649b05ff671, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7793907873889669674, guid: 189ff1b9d3dda7e4dae91649b05ff671,
         type: 3}
       propertyPath: m_LocalPosition.x

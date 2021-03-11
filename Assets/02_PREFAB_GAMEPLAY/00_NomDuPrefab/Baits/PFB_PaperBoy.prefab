@@ -52,7 +52,7 @@ MonoBehaviour:
   colliderCenter: {x: 0, y: 2, z: 0}
   offsetHeightCollider: 2
   offsetForwardCollider: 0
-  timeBeforeSpawn: 8
+  timeBeforeSpawn: 2
   usure: 20
   currentUsureMax: 20
   usureMax:

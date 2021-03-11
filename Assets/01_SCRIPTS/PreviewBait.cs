@@ -8,7 +8,7 @@ public class PreviewBait
 {
     GameObject preview_GO, rangePreview_GO;
     Mesh preview_Mesh;
-    public Mesh circleRangeMesh, boxRangeMesh;
+    //public Mesh circleRangeMesh, boxRangeMesh;
     public GameObject cubePrefab, ui_Preview_Stats;
     public float offsetHeightStatsPreview;
     TextMeshProUGUI nbBaitsPreview;
@@ -29,6 +29,8 @@ public class PreviewBait
         rangePreview_GO.AddComponent<MeshFilter>();
         rangePreview_GO.AddComponent<MeshRenderer>();
         rangePreview_GO.GetComponent<MeshRenderer>().material = range_Mat;
+        Mesh boxRangeMesh = cubePrefab.GetComponent<MeshFilter>().sharedMesh;
+        rangePreview_GO.GetComponent<MeshFilter>().mesh = boxRangeMesh;
 
         HidePreview(false);
     }
@@ -60,7 +62,7 @@ public class PreviewBait
             preview_GO.transform.rotation = Quaternion.Euler(0, rotation, 0);
         }
     }
-    public void SphereRangeDisplayer(Vector3 center, float range)
+   /* public void SphereRangeDisplayer(Vector3 center, float range)
     {
         rangePreview_GO.transform.position = center;
         rangePreview_GO.transform.localScale = Vector3.one * (range * 2) * 0.1f;
@@ -72,5 +74,25 @@ public class PreviewBait
         rangePreview_GO.transform.position = center;
         rangePreview_GO.transform.localScale = boundaries;
         rangePreview_GO.GetComponent<MeshFilter>().mesh = boxRangeMesh;
+    }*/
+    public void RangeDisplayer(Vector3 position, Vector3 boundaries, bool circleOrBox)
+    {
+        rangePreview_GO.transform.position = position;
+        rangePreview_GO.transform.localEulerAngles = new Vector3(90, 0, 0);
+
+        switch (circleOrBox)
+        {
+            case true:
+                rangePreview_GO.transform.localScale = new Vector3(2 * boundaries.y, 2 * boundaries.y, 0.5f);
+                rangePreview_GO.GetComponent<MeshRenderer>().material = range_Mat;
+                break;
+            case false:
+                Vector3 goodCollider;
+                Quaternion forwardRotation = Quaternion.Euler(-90, 0, 0);
+                goodCollider = forwardRotation * boundaries;
+                rangePreview_GO.transform.localScale = goodCollider;
+                rangePreview_GO.GetComponent<MeshRenderer>().material = box_range_Mat;
+                break;
+        }
     }
 }
