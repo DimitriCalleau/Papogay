@@ -2,14 +2,36 @@
 
 public class V_S_FX_Library : MonoBehaviour
 {
+    #region Singleton
+    private static V_S_FX_Library fX_Library = null;
+
+    // Game Instance Singleton
+    public static V_S_FX_Library FX_Library
+    {
+        get
+        {
+            return fX_Library;
+        }
+    }
+
+    private void Awake()
+    {
+        if (fX_Library != null && fX_Library != this)
+        {
+            Destroy(this.gameObject);
+        }
+        fX_Library = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
+    #endregion
+
     [Header("Sound FX")]
     public AudioSource S_enmSpawn;
     public AudioSource S_endWave, S_startWave, S_cantSummonTrap, S_shop, S_enmAttack, S_dash, S_trapActivated, S_trapDestroyed, S_trapPlaced, S_playerDeath, S_conversion, S_newZoneOnMap;
     [Header("Visual FX")]
     public ParticleSystem V_corpoSpawn;
-    public ParticleSystem V_spawnEnm, V_placeTrap, V_convertToAlly, V_convertToEnm, V_convertToNeutral, V_DamagedCorpo;
-    public int interationParticleSpawnEnm;
-    public GameObject V_shopBeam, V_corpoBeam, V_playerDamaged, V_entityDamaged;
+    public ParticleSystem V_spawnEnm, V_placeTrap, V_convertToAlly, V_convertToEnm, V_convertToNeutral;
+    public GameObject V_shopBeam, V_corpoBeam, V_playerDamaged, V_entityDamaged, V_DamagedCorpo;
 
     #region SFX
 
@@ -127,10 +149,7 @@ public class V_S_FX_Library : MonoBehaviour
 
     public void SpawnEnmFX()
     {
-        for (int i = 0; i < interationParticleSpawnEnm; i++)
-        {
-            V_spawnEnm.Play();
-        }
+        V_spawnEnm.Play();
     }
 
     public void PlayerDamaged()
@@ -165,7 +184,8 @@ public class V_S_FX_Library : MonoBehaviour
 
     public void CorporationDamaged()
     {
-        V_DamagedCorpo.Play();
+        V_DamagedCorpo.GetComponentsInChildren<ParticleSystem>()[0].Play();
+        V_DamagedCorpo.GetComponentsInChildren<ParticleSystem>()[1].Play();
     }
     #endregion
 }
