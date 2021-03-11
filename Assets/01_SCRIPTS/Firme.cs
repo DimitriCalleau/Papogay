@@ -87,6 +87,15 @@ public class Firme : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    //cancer
+    /*
+    public void DamagedFX()
+    {
+        V_S_FX_Library.FX_Library.V_DamagedCorpo.GetComponentsInChildren<ParticleSystem>()[0].Play();
+        V_S_FX_Library.FX_Library.V_DamagedCorpo.GetComponentsInChildren<ParticleSystem>()[1].Play();
+    }
+    */
+
     void OnEnable()
     {
         GameManager.Instance.EndWave += DestroyCorpo;
