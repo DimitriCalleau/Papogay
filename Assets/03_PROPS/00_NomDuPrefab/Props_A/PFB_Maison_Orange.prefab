@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 8067720578389191736}
   - component: {fileID: 2340718329611530531}
   - component: {fileID: 1052902483688952412}
+  - component: {fileID: 1568405493530900775}
   m_Layer: 0
   m_Name: Maison_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8067720578389191736
 Transform:
@@ -80,6 +81,25 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &1568405493530900775
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219759094167840316}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f1fa719d88386c74d804ecebc805b9b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3047719208559390728
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +116,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2378037860136741554
 Transform:
@@ -142,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseTag: SmallHouse
   zone: 0
-  shopped: 0
+  timeBeforeRecall: 0.5
 --- !u!1 &3620609299485338771
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +353,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6588105175736836323
 Transform:

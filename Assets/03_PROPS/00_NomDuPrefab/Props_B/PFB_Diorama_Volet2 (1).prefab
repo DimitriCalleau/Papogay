@@ -15,8 +15,8 @@ GameObject:
   m_Name: fenetre023
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8033802929678695571
 Transform:
@@ -94,8 +94,8 @@ GameObject:
   m_Name: fenetre029
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &528063218553626564
 Transform:
@@ -173,8 +173,8 @@ GameObject:
   m_Name: fenetre026
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5673354924412840725
 Transform:
@@ -247,7 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1332605962795515433}
   m_Layer: 0
-  m_Name: SM_Diorama_Volet2 (1)
+  m_Name: PFB_Diorama_Volet2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -283,8 +283,8 @@ GameObject:
   m_Name: fenetre021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5258591164782750520
 Transform:
@@ -362,8 +362,8 @@ GameObject:
   m_Name: fenetre020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2819918629837780457
 Transform:
@@ -441,8 +441,8 @@ GameObject:
   m_Name: pCube6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3523194436859812083
 Transform:
@@ -520,8 +520,8 @@ GameObject:
   m_Name: fenetre027
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7421543412959770948
 Transform:
@@ -599,8 +599,8 @@ GameObject:
   m_Name: pCylinder15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2039367436743020884
 Transform:
@@ -724,8 +724,8 @@ GameObject:
   m_Name: fenetre031
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &486014638286886134
 Transform:
@@ -803,8 +803,8 @@ GameObject:
   m_Name: pCylinder13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2299882694591526147
 Transform:
@@ -882,8 +882,8 @@ GameObject:
   m_Name: fenetre022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7028277865192675948
 Transform:
@@ -961,8 +961,8 @@ GameObject:
   m_Name: fenetre028
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2657445806259254015
 Transform:
@@ -1040,8 +1040,8 @@ GameObject:
   m_Name: fenetre030
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3053059756466793837
 Transform:
@@ -1119,8 +1119,8 @@ GameObject:
   m_Name: fenetre025
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1369916259752731608
 Transform:
@@ -1198,8 +1198,8 @@ GameObject:
   m_Name: pCylinder14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4487164216540288977
 Transform:
@@ -1277,8 +1277,8 @@ GameObject:
   m_Name: fenetre024
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5755232580087975565
 Transform:

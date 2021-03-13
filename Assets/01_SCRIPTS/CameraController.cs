@@ -8,9 +8,10 @@ public class CameraController : MonoBehaviour
     Vector2 moveCam;
     bool isRotating;
 
-    [SerializeField]
-    float verticalSensitivity = 0.5f;
-    float horizontalSentivity = 0.5f;
+    [SerializeField, Range(0f, 1f)]
+    float horizontalSentivity = 0.1f;
+    [SerializeField, Range(0f, 1f)]
+    float verticalSensitivity = 0.1f;
 
     [SerializeField]
     Transform focus = default;
@@ -192,6 +193,14 @@ public class CameraController : MonoBehaviour
         return direction.x < 0f ? 360f - angle : angle;
     }
 
+    public void SetXSensitivity(float xSensitivity)
+    {
+        horizontalSentivity = xSensitivity;
+    }
+    public void SetYSensitivity(float ySensitivity)
+    {
+        verticalSensitivity = ySensitivity;
+    }
     void OnValidate()
     {
         if (maxVerticalAngle < minVerticalAngle)

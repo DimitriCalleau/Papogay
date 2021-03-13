@@ -14,25 +14,25 @@
                     "interactions": ""
                 },
                 {
-                    "name": "SwitchBaitRight",
-                    "type": "Button",
+                    "name": "SwitchBait",
+                    "type": "Value",
                     "id": "4e9ccf5b-093b-4bd5-8c16-9b0185947b2a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "SwitchBaitLeft",
-                    "type": "Button",
-                    "id": "ecfd8a0f-23de-4438-97ec-8e4c605acac0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "RotateTrap",
+                    "name": "RotateTrapRight",
                     "type": "Value",
                     "id": "8fb76f3a-fdd0-4c8d-9232-2d96e714515d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RotateTrapLeft",
+                    "type": "Value",
+                    "id": "a53b201a-c6d7-4178-b7b0-3815d31148dc",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -109,33 +109,22 @@
                 {
                     "name": "",
                     "id": "9b9dcec7-3128-4034-9afd-22216c6417a4",
-                    "path": "<Keyboard>/e",
+                    "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SwitchBaitRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1b0e3c05-96c0-4846-8907-52857d777c07",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwitchBaitLeft",
+                    "action": "SwitchBait",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "818eb4d1-cb25-48b1-a55a-bc4cde9a96f5",
-                    "path": "<Mouse>/scroll",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RotateTrap",
+                    "action": "RotateTrapRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -257,6 +246,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Map",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73aa1ce0-9abc-4b96-a40c-267e9c99b0ad",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateTrapLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

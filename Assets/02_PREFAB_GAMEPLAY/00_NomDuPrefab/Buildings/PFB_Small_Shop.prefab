@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1704579058}
   - component: {fileID: 1704579057}
   m_Layer: 0
-  m_Name: Mesh
+  m_Name: AnimatedPart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 6327837999411396362}
   - {fileID: 4061816809114536401}
   m_Father: {fileID: 5997452331869352494}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1704579059
 MeshFilter:
@@ -370,8 +370,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5997452332050381284}
   - {fileID: 1704579056}
+  - {fileID: 5997452332050381284}
   - {fileID: 7779622544872352770}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -423,7 +423,7 @@ RectTransform:
   - {fileID: 5997452331093703406}
   - {fileID: 5997452332236919788}
   m_Father: {fileID: 5997452331869352494}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

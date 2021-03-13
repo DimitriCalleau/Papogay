@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 621399399840992724}
   - component: {fileID: 621399399840992723}
   m_Layer: 0
-  m_Name: CorporationSpawnFX
+  m_Name: VFX_Corporation_Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

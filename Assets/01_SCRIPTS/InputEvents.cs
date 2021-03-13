@@ -28,9 +28,9 @@ public class InputEvents : MonoBehaviour
         playerInputs = new InputPapogay();
 
         playerInputs.Actions.PlaceBait.performed += ctx => OnPlaceBait();
-        playerInputs.Actions.SwitchBaitRight.performed += ctx => OnSwitchSelection(true);
-        playerInputs.Actions.SwitchBaitLeft.performed += ctx => OnSwitchSelection(false);
-        playerInputs.Actions.RotateTrap.performed += ctx => OnRotateBait(ctx.ReadValue<Vector2>());
+        playerInputs.Actions.SwitchBait.performed += ctx => OnSwitchSelection(ctx.ReadValue<Vector2>());
+        playerInputs.Actions.RotateTrapRight.performed += ctx => OnRotateBait(true);
+        playerInputs.Actions.RotateTrapLeft.performed += ctx => OnRotateBait(false);
         playerInputs.Actions.Inventory.performed += ctx => OnOpenInventory();
         playerInputs.Actions.Shop.performed += ctx => OnOpenShop();
         playerInputs.Actions.Map.started += ctx => OnOpenMap();
@@ -52,22 +52,22 @@ public class InputEvents : MonoBehaviour
         }
     }
 
-    public event Action<Vector2> Rotate;
-    void OnRotateBait(Vector2 _whichWay)
+    public event Action<bool> RotateBait;
+    void OnRotateBait(bool _whichWay)
     {
-        if (Rotate != null)
+        if (RotateBait != null)
         {
-            Rotate(_whichWay);
+            RotateBait(_whichWay);
         }
     }
 
     //InventorySelection
-    public event Action<bool> SwitchSelection;
-    void OnSwitchSelection(bool _witchSide)
+    public event Action<Vector2> SwitchSelection;
+    void OnSwitchSelection(Vector2 _whitchWay)
     {
         if (SwitchSelection != null)
         {
-            SwitchSelection(_witchSide);
+            SwitchSelection(_whitchWay);
         }
     }
     //InventorySelection

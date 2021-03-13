@@ -22,6 +22,7 @@ public class EntityAttack : MonoBehaviour
                 }
                 else 
                 {
+                    entity.entityNavMeshAgent.isStopped = false;
                     if (entity.target != null && enemyIsAttacking != true && Vector3.Distance(transform.position, entity.target.transform.position) <= entityStratAttackingRange)
                     {
                         if (entity.target == GameManager.Instance.player)
@@ -63,9 +64,8 @@ public class EntityAttack : MonoBehaviour
                                 entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, false);
                             }
                         }
-                        entity.entityNavMeshAgent.isStopped = false;
-                        enemyIsAttacking = false;
                     }
+                    enemyIsAttacking = false;
                 }
                 break;
 

@@ -61,16 +61,26 @@ public class UIManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
     public GameObject optionPanel;
+    public GameObject controlPanel;
     public GameObject creditsPanel;
     public GameObject mapPanel;
     #endregion
 
+    [Header("Money")]
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI shopGoldText;
+
+    [Header("HealthCare")]
+    public GameObject healthBarHolder;
+    public Image healthBarBG;
     public Image healthBar;
     public GameObject damageIndicatorPanel;
     public GameObject deathfadePanel;
+    public float healthBarClosingTime;
+    float healthBarClosingTimer;
 
+    [Header("Wavestats")]
+    public TextMeshProUGUI waveIndexIndicator;
     public Image allyEntityBar;
     public Image enemyEntityBar;
 
@@ -107,6 +117,12 @@ public class UIManager : MonoBehaviour
         {
             GameManager.Instance.playerStats.timerIndicator -= Time.deltaTime;
         }
+
+        if(healthBarClosingTimer > 0)
+        {
+            healthBarClosingTimer -= Time.deltaTime;
+            CloseHealthBar();
+        }
     }
     void FixedUpdate()
     {
@@ -138,7 +154,7 @@ public class UIManager : MonoBehaviour
     {
         reward.AddBait(BaitType.PaperBoy, 10, 0);
         reward.AddBait(BaitType.FruitBox, 10, 0);
-        inventory.SwitchBaitSelection(true);
+        inventory.SwitchBaitSelection(new Vector2(0, 1));
         GameManager.Instance.EventStartWave();
         GameManager.Instance.gameState.SetPause(false);
         GameManager.Instance.gameState.start = true;
@@ -249,6 +265,36 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void OpenHealthBar()
+    {
+        healthBarHolder.SetActive(true);
+        Color bghealthcolor = healthBarBG.color;
+        bghealthcolor.a = 100;
+        healthBarBG.color = bghealthcolor;
+        Color healthcolor = healthBar.color;
+        healthcolor.a = 100;
+        healthBar.color = healthcolor;
+
+        healthBarClosingTimer = healthBarClosingTime;
+    }
+
+    public void CloseHealthBar()
+    {
+        float closingTimePercentage = healthBarClosingTimer/healthBarClosingTime;
+
+        Color bghealthcolor = healthBarBG.color;
+        bghealthcolor.a = closingTimePercentage;
+        healthBarBG.color = bghealthcolor;
+        Color healthcolor = healthBar.color;
+        healthcolor.a = closingTimePercentage;
+        healthBar.color = healthcolor;
+
+        if (healthBarClosingTimer <= 0)
+        {
+            healthBarHolder.SetActive(false);
+        }
+    }
+
     public void Pause()
     {
         switch (GameManager.Instance.gameState.pause)
@@ -277,6 +323,7 @@ public class UIManager : MonoBehaviour
             CursorState(true);
         }
         optionPanel.SetActive(false);
+        controlPanel.SetActive(false);
         creditsPanel.SetActive(false);
     }
 
@@ -326,6 +373,7 @@ public class UIManager : MonoBehaviour
         inventoryPanel.SetActive(false);
         shopPanel.SetActive(false);
         optionPanel.SetActive(false);
+        controlPanel.SetActive(false);
         creditsPanel.SetActive(false);
         mapPanel.SetActive(false);
 
@@ -369,7 +417,7 @@ public class UIManager : MonoBehaviour
     {
         InputEvents.Instance.SwitchSelection += inventory.SwitchBaitSelection;
         InputEvents.Instance.Place += baitManager.PlaceTrap;
-        InputEvents.Instance.Rotate += baitManager.RotateSelectedBait;
+        InputEvents.Instance.RotateBait += baitManager.RotateSelectedBait;
         InputEvents.Instance.OpenInventory += inventory.OpenInventory;
         InputEvents.Instance.SetPause += Pause;
         InputEvents.Instance.OpenShop += OpenCloseShop;
@@ -382,7 +430,7 @@ public class UIManager : MonoBehaviour
     {
         InputEvents.Instance.SwitchSelection -= inventory.SwitchBaitSelection;
         InputEvents.Instance.Place -= baitManager.PlaceTrap;
-        InputEvents.Instance.Rotate -= baitManager.RotateSelectedBait;
+        InputEvents.Instance.RotateBait -= baitManager.RotateSelectedBait;
         InputEvents.Instance.OpenInventory -= inventory.OpenInventory;
         InputEvents.Instance.SetPause -= Pause;
         InputEvents.Instance.OpenShop -= OpenCloseShop;

@@ -29,14 +29,14 @@ public class PlayerStats
     }
     public void DamagePlayer(int damages)
     {
-
-        if(invincible == false)
+        if(invincible == false && itsAlreadyDead == false)
         {
             timerIndicator = indicatorShowTime;
             UIManager.Instance.damageIndicatorPanel.SetActive(true);
             currentHealth -= damages;
             healthPercentage = currentHealth / maxHealth;
             GameManager.Instance.mainCam.GetComponent<CameraController>().shake = true;
+            UIManager.Instance.OpenHealthBar();
         }
         if(itsAlreadyDead == false && currentHealth <= 0)
         {

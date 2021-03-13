@@ -25,11 +25,11 @@ public class BaitManager
         }
     }
 
-    public void RotateSelectedBait(Vector2 _whichDirection)
+    public void RotateSelectedBait(bool _whichDirection)
     {
         if (UIManager.Instance.inventoryOpened == true)
         {
-            if (_whichDirection.y > 0)
+            if (_whichDirection == true)
             {
                 baitRotation += 90;
                 if (baitRotation > 360)

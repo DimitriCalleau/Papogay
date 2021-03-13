@@ -9,7 +9,7 @@ public class PreviewBait
     GameObject preview_GO, rangePreview_GO;
     Mesh preview_Mesh;
     //public Mesh circleRangeMesh, boxRangeMesh;
-    public GameObject cubePrefab, ui_Preview_Stats;
+    public GameObject rangeMeshPrefab, ui_Preview_Stats;
     public float offsetHeightStatsPreview;
     TextMeshProUGUI nbBaitsPreview;
     public Material previewMat, range_Mat, box_range_Mat;
@@ -29,7 +29,7 @@ public class PreviewBait
         rangePreview_GO.AddComponent<MeshFilter>();
         rangePreview_GO.AddComponent<MeshRenderer>();
         rangePreview_GO.GetComponent<MeshRenderer>().material = range_Mat;
-        Mesh boxRangeMesh = cubePrefab.GetComponent<MeshFilter>().sharedMesh;
+        Mesh boxRangeMesh = rangeMeshPrefab.GetComponent<MeshFilter>().sharedMesh;
         rangePreview_GO.GetComponent<MeshFilter>().mesh = boxRangeMesh;
 
         HidePreview(false);

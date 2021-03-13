@@ -471,6 +471,7 @@ Transform:
   m_Children:
   - {fileID: 3367156011832148149}
   - {fileID: 2059643893723288984}
+  - {fileID: 1808039549738758225}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -491,7 +492,8 @@ MonoBehaviour:
   modifiedHouseIndex: 0
   timeBetweenSpawn: 2
   spawnRadius: 50
-  timerSpawn: 0
+  timeBeforeDeath: 3
+  damagedParticles: {fileID: 1808039549738758231}
 --- !u!65 &5200875198212636600
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -681,6 +683,92 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &2883060211186153480
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7194532886188430435}
+    m_Modifications:
+    - target: {fileID: 3536976730358614104, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Corporation_Damaged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536976730358614111, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+        type: 3}
+      propertyPath: InitialModule.rotation3D
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f58cca8dd47aab478255c2b1d3647f3, type: 3}
+--- !u!4 &1808039549738758225 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3536976730358614105, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2883060211186153480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1808039549738758231 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3536976730358614111, guid: 0f58cca8dd47aab478255c2b1d3647f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2883060211186153480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3732352690228356497
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,26 +6,25 @@ public class BaitInventory
 {
     public Slot selection;
     public int selectionIndex;
-    public void SwitchBaitSelection(bool rightOrLeft)
+    public void SwitchBaitSelection(Vector2 rightOrLeft)
     {
         if (UIManager.Instance.inventoryOpened == true)
         {
-            switch (rightOrLeft)
+            if(rightOrLeft.y > 0)
             {
-                case true:
-                    selectionIndex += 1;
-                    if (selectionIndex == UIManager.Instance.allCurrentBaits.Count)
-                    {
-                        selectionIndex = 0;
-                    }
-                    break;
-                case false:
-                    selectionIndex -= 1;
-                    if (selectionIndex == -1)
-                    {
-                        selectionIndex = UIManager.Instance.allCurrentBaits.Count - 1;
-                    }
-                    break;
+                selectionIndex += 1;
+                if (selectionIndex == UIManager.Instance.allCurrentBaits.Count)
+                {
+                    selectionIndex = 0;
+                }
+            }
+            if (rightOrLeft.y < 0)
+            {
+                selectionIndex -= 1;
+                if (selectionIndex == -1)
+                {
+                    selectionIndex = UIManager.Instance.allCurrentBaits.Count - 1;
+                }
             }
         }
         if (UIManager.Instance.allCurrentBaits.Count > 0)

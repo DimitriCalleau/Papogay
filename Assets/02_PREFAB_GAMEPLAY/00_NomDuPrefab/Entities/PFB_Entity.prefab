@@ -529,9 +529,9 @@ MonoBehaviour:
   anm: {fileID: 0}
   particlesParent: {fileID: 2797127274336403471}
   particlePrefabs:
-  - {fileID: 4851875388189877695, guid: cde0eeddb3aefad439e110e730cc3983, type: 3}
-  - {fileID: 5263877543810189558, guid: b8d1497108cfe7e49bd9a90062eabcde, type: 3}
-  - {fileID: 650293548815446706, guid: 2a86d360100f6c045b6bca2c52b77ffd, type: 3}
+  - {fileID: 1362673987267699470, guid: 1aa23b9d0939e384ea7fd8642a92fe37, type: 3}
+  - {fileID: 1362673987267699470, guid: 13bea476043d9bb4e877c2f597269994, type: 3}
+  - {fileID: 1362673987267699470, guid: 2a89050b6327dce448509357e5706d95, type: 3}
   AllyProgressBar: {fileID: 1070349280361404770}
   StateColors:
     serializedVersion: 2
@@ -582,7 +582,7 @@ MonoBehaviour:
   entityDamageCooldown: 2
   entityAttackRange: 6.5
   entityStratAttackingRange: 7
-  enemyDamageAnticipationDuration: 1.2
+  enemyDamageAnticipationDuration: 0.7
   allyDamageAnticipationDuration: 0.8
   allyAttackLayer:
     serializedVersion: 2

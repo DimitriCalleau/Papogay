@@ -68,6 +68,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public event Action CleanMap;
+    public void EventCleanMap()
+    {
+        if (CleanMap != null)
+        {
+            CleanMap();
+        }
+    }
+
     public event Action Win;
     public void EventWin()
     {
@@ -89,6 +98,7 @@ public class GameManager : MonoBehaviour
     public void Retry()
     {
         EventEndWave();
+        EventCleanMap();
         waveManager.Reset();
         builder.ResetShops();
         UIManager.Instance.Play();
@@ -113,7 +123,6 @@ public class GameManager : MonoBehaviour
                 deathTimer += Time.deltaTime;
                 Color c = UIManager.Instance.deathfadePanel.GetComponent<Image>().color;
                 c.a = (deathTimer / deathTime);
-                Debug.Log((deathTimer / deathTime));
                 UIManager.Instance.deathfadePanel.GetComponent<Image>().color = c;
             }
         }

@@ -81,7 +81,7 @@ public class Entity : MonoBehaviour
 
     void Update()
     {
-        if(entityNavMeshAgent != null)
+        if (entityNavMeshAgent != null)
         {
             entityNavMeshAgent.stoppingDistance = targetTreshold;
         }
@@ -96,11 +96,6 @@ public class Entity : MonoBehaviour
 
         if (entityNavMeshAgent.destination != null || entityNavMeshAgent.isStopped == false)
         {
-            if (entityNavMeshAgent.remainingDistance <= targetTreshold)
-            {
-                anm.SetFloat("WalkIdle", 0);
-            }
-            else
                 anm.SetFloat("WalkIdle", 1);
         }
         else

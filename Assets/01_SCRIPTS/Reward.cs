@@ -13,6 +13,6 @@ public class Reward
         Slot newSlot = new Slot(baitAmount, typeOfBait);
         UIManager.Instance.allCurrentBaits.Add(newSlot);
         GameManager.Instance.playerStats.gold += _goldReward;
-        UIManager.Instance.inventory.SwitchBaitSelection(true);
+        UIManager.Instance.inventory.SwitchBaitSelection(new Vector2(0, 1));
     }
 }

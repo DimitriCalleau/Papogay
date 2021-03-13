@@ -65,7 +65,7 @@ Material:
     - _ColorMask: 15
     - _ColorMode: 4
     - _Cull: 2
-    - _Cutoff: 0.51
+    - _Cutoff: 0
     - _DistortionBlend: 0.5
     - _DistortionEnabled: 0
     - _DistortionStrength: 1

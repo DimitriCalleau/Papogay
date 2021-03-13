@@ -32,15 +32,15 @@ public class Shop
             {
                 if (oldShopSelection != null)
                 {
-                    GameObject oldChild = oldShopSelection.transform.GetChild(0).gameObject;
+                    GameObject oldChild = oldShopSelection.transform.GetChild(1).gameObject;
                     oldChild.SetActive(false);
-                    GameObject oldAnimatedPart = oldShopSelection.transform.GetChild(1).gameObject;
+                    GameObject oldAnimatedPart = oldShopSelection.transform.GetChild(0).gameObject;
                     oldAnimatedPart.GetComponent<Animator>().SetBool("OpenClose", false);
                 }
             }
-            GameObject child = selectedShop.transform.GetChild(0).gameObject;
+            GameObject child = selectedShop.transform.GetChild(1).gameObject;
             child.SetActive(true);
-            GameObject animatedPart = selectedShop.transform.GetChild(1).gameObject;
+            GameObject animatedPart = selectedShop.transform.GetChild(0).gameObject;
             animatedPart.GetComponent<Animator>().SetBool("OpenClose", true);
             oldShopSelection = selectedShop;
             closeToShop = true;
@@ -49,9 +49,9 @@ public class Shop
         {
             if(selectedShop != null)
             {
-                GameObject child = selectedShop.transform.GetChild(0).gameObject;
+                GameObject child = selectedShop.transform.GetChild(1).gameObject;
                 child.SetActive(false);
-                GameObject animatedPart = selectedShop.transform.GetChild(1).gameObject;
+                GameObject animatedPart = selectedShop.transform.GetChild(0).gameObject;
                 animatedPart.GetComponent<Animator>().SetBool("OpenClose", false);
                 selectedShop = null;
             }

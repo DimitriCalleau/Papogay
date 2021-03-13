@@ -122,11 +122,13 @@ public class WaveManager
         nbAllyEntities = 0;
         nbNeutralEntities = 0;
         nbEnemyEntities = 0;
+        UIManager.Instance.waveIndexIndicator.text = "Vague " + waveindex;
     }
 
     public void IncreaseWaveIndex()
     {
         waveindex += 1;
+        UIManager.Instance.waveIndexIndicator.text = "Vague " + waveindex;
     }
 
     public void CheckEntityRatio()

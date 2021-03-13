@@ -18,11 +18,14 @@ public class Firme : MonoBehaviour
     [Header("Spawner")]
     GameObject entityToSpawn;
     public float timeBetweenSpawn, spawnRadius;
-    public float timerSpawn;
+    float timerSpawn;
+    bool canSpawn;
 
+    [Header("Death")]
+    public float timeBeforeDeath;
+
+    [Header("VFX")]
     public ParticleSystem damagedParticles;
-    public ParticleSystem spawnParticles;
-    public ParticleSystem destroyedParticles;
     public void InitFirme(FirmeType _firmeType, FirmeSize _size, int _index)
     {
         corpoType = _firmeType;
@@ -34,10 +37,11 @@ public class Firme : MonoBehaviour
         healthbar.fillAmount = (health / defaultHealth);
         timerSpawn = timeBetweenSpawn;
         entityToSpawn = GameManager.Instance.builder.SelectEntity(corpoType);
+        canSpawn = true;
     }
     void Update()
     {
-        if (timerSpawn <= 0 && entityToSpawn != null)
+        if (timerSpawn <= 0 && entityToSpawn != null && canSpawn == true)
         {
             SpawnEntity(ChooseSpawnPointEntity(spawnRadius));
         }
@@ -72,7 +76,8 @@ public class Firme : MonoBehaviour
         health -= _damages;
         healthbar.fillAmount = (health / defaultHealth);
         anm.SetTrigger("Damages");
-        if (health <= 0)
+        damagedParticles.Play();
+        if (health <= 0 && canSpawn == true)
         {
             StartCorpoDestruction();
         }
@@ -80,33 +85,25 @@ public class Firme : MonoBehaviour
 
     void StartCorpoDestruction()
     {
+        canSpawn = false;
+        GameManager.Instance.builder.allFirmesLocations.Remove(this.transform);
         anm.SetBool("Destroy", true);
-        //Should Wait For Destruction anim to end
+        Destroy(this.gameObject, timeBeforeDeath);
         GameManager.Instance.builder.RecallModifiedHouses(modifiedHouseIndex, firmeSize);
-        DestroyCorpo();
     }
 
+    //for safety
     void DestroyCorpo()
     {
         Destroy(this.gameObject);
     }
 
-    //cancer
-    /*
-    public void DamagedFX()
-    {
-        V_S_FX_Library.FX_Library.V_DamagedCorpo.GetComponentsInChildren<ParticleSystem>()[0].Play();
-        V_S_FX_Library.FX_Library.V_DamagedCorpo.GetComponentsInChildren<ParticleSystem>()[1].Play();
-    }
-    */
-
     void OnEnable()
     {
-        GameManager.Instance.EndWave += DestroyCorpo;
-    }
-
+        GameManager.Instance.CleanMap += DestroyCorpo;
+    }   
     void OnDisable()
     {
-        GameManager.Instance.EndWave -= DestroyCorpo;
+        GameManager.Instance.CleanMap -= DestroyCorpo;
     }
 }

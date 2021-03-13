@@ -27,25 +27,25 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""SwitchBaitRight"",
-                    ""type"": ""Button"",
+                    ""name"": ""SwitchBait"",
+                    ""type"": ""Value"",
                     ""id"": ""4e9ccf5b-093b-4bd5-8c16-9b0185947b2a"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""SwitchBaitLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""ecfd8a0f-23de-4438-97ec-8e4c605acac0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""RotateTrap"",
+                    ""name"": ""RotateTrapRight"",
                     ""type"": ""Value"",
                     ""id"": ""8fb76f3a-fdd0-4c8d-9232-2d96e714515d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RotateTrapLeft"",
+                    ""type"": ""Value"",
+                    ""id"": ""a53b201a-c6d7-4178-b7b0-3815d31148dc"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -122,33 +122,22 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9b9dcec7-3128-4034-9afd-22216c6417a4"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SwitchBaitRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1b0e3c05-96c0-4846-8907-52857d777c07"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchBaitLeft"",
+                    ""action"": ""SwitchBait"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""818eb4d1-cb25-48b1-a55a-bc4cde9a96f5"",
-                    ""path"": ""<Mouse>/scroll"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RotateTrap"",
+                    ""action"": ""RotateTrapRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -272,6 +261,17 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                     ""action"": ""Map"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73aa1ce0-9abc-4b96-a40c-267e9c99b0ad"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateTrapLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -281,9 +281,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         // Actions
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
         m_Actions_PlaceBait = m_Actions.FindAction("PlaceBait", throwIfNotFound: true);
-        m_Actions_SwitchBaitRight = m_Actions.FindAction("SwitchBaitRight", throwIfNotFound: true);
-        m_Actions_SwitchBaitLeft = m_Actions.FindAction("SwitchBaitLeft", throwIfNotFound: true);
-        m_Actions_RotateTrap = m_Actions.FindAction("RotateTrap", throwIfNotFound: true);
+        m_Actions_SwitchBait = m_Actions.FindAction("SwitchBait", throwIfNotFound: true);
+        m_Actions_RotateTrapRight = m_Actions.FindAction("RotateTrapRight", throwIfNotFound: true);
+        m_Actions_RotateTrapLeft = m_Actions.FindAction("RotateTrapLeft", throwIfNotFound: true);
         m_Actions_Inventory = m_Actions.FindAction("Inventory", throwIfNotFound: true);
         m_Actions_Escape = m_Actions.FindAction("Escape", throwIfNotFound: true);
         m_Actions_Move = m_Actions.FindAction("Move", throwIfNotFound: true);
@@ -341,9 +341,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Actions;
     private IActionsActions m_ActionsActionsCallbackInterface;
     private readonly InputAction m_Actions_PlaceBait;
-    private readonly InputAction m_Actions_SwitchBaitRight;
-    private readonly InputAction m_Actions_SwitchBaitLeft;
-    private readonly InputAction m_Actions_RotateTrap;
+    private readonly InputAction m_Actions_SwitchBait;
+    private readonly InputAction m_Actions_RotateTrapRight;
+    private readonly InputAction m_Actions_RotateTrapLeft;
     private readonly InputAction m_Actions_Inventory;
     private readonly InputAction m_Actions_Escape;
     private readonly InputAction m_Actions_Move;
@@ -356,9 +356,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         private @InputPapogay m_Wrapper;
         public ActionsActions(@InputPapogay wrapper) { m_Wrapper = wrapper; }
         public InputAction @PlaceBait => m_Wrapper.m_Actions_PlaceBait;
-        public InputAction @SwitchBaitRight => m_Wrapper.m_Actions_SwitchBaitRight;
-        public InputAction @SwitchBaitLeft => m_Wrapper.m_Actions_SwitchBaitLeft;
-        public InputAction @RotateTrap => m_Wrapper.m_Actions_RotateTrap;
+        public InputAction @SwitchBait => m_Wrapper.m_Actions_SwitchBait;
+        public InputAction @RotateTrapRight => m_Wrapper.m_Actions_RotateTrapRight;
+        public InputAction @RotateTrapLeft => m_Wrapper.m_Actions_RotateTrapLeft;
         public InputAction @Inventory => m_Wrapper.m_Actions_Inventory;
         public InputAction @Escape => m_Wrapper.m_Actions_Escape;
         public InputAction @Move => m_Wrapper.m_Actions_Move;
@@ -378,15 +378,15 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 @PlaceBait.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPlaceBait;
                 @PlaceBait.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPlaceBait;
                 @PlaceBait.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPlaceBait;
-                @SwitchBaitRight.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchBaitRight;
-                @SwitchBaitRight.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchBaitRight;
-                @SwitchBaitRight.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchBaitRight;
-                @SwitchBaitLeft.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchBaitLeft;
-                @SwitchBaitLeft.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchBaitLeft;
-                @SwitchBaitLeft.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchBaitLeft;
-                @RotateTrap.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotateTrap;
-                @RotateTrap.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotateTrap;
-                @RotateTrap.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotateTrap;
+                @SwitchBait.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchBait;
+                @SwitchBait.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchBait;
+                @SwitchBait.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSwitchBait;
+                @RotateTrapRight.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotateTrapRight;
+                @RotateTrapRight.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotateTrapRight;
+                @RotateTrapRight.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotateTrapRight;
+                @RotateTrapLeft.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotateTrapLeft;
+                @RotateTrapLeft.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotateTrapLeft;
+                @RotateTrapLeft.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotateTrapLeft;
                 @Inventory.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInventory;
@@ -415,15 +415,15 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 @PlaceBait.started += instance.OnPlaceBait;
                 @PlaceBait.performed += instance.OnPlaceBait;
                 @PlaceBait.canceled += instance.OnPlaceBait;
-                @SwitchBaitRight.started += instance.OnSwitchBaitRight;
-                @SwitchBaitRight.performed += instance.OnSwitchBaitRight;
-                @SwitchBaitRight.canceled += instance.OnSwitchBaitRight;
-                @SwitchBaitLeft.started += instance.OnSwitchBaitLeft;
-                @SwitchBaitLeft.performed += instance.OnSwitchBaitLeft;
-                @SwitchBaitLeft.canceled += instance.OnSwitchBaitLeft;
-                @RotateTrap.started += instance.OnRotateTrap;
-                @RotateTrap.performed += instance.OnRotateTrap;
-                @RotateTrap.canceled += instance.OnRotateTrap;
+                @SwitchBait.started += instance.OnSwitchBait;
+                @SwitchBait.performed += instance.OnSwitchBait;
+                @SwitchBait.canceled += instance.OnSwitchBait;
+                @RotateTrapRight.started += instance.OnRotateTrapRight;
+                @RotateTrapRight.performed += instance.OnRotateTrapRight;
+                @RotateTrapRight.canceled += instance.OnRotateTrapRight;
+                @RotateTrapLeft.started += instance.OnRotateTrapLeft;
+                @RotateTrapLeft.performed += instance.OnRotateTrapLeft;
+                @RotateTrapLeft.canceled += instance.OnRotateTrapLeft;
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
@@ -452,9 +452,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
     public interface IActionsActions
     {
         void OnPlaceBait(InputAction.CallbackContext context);
-        void OnSwitchBaitRight(InputAction.CallbackContext context);
-        void OnSwitchBaitLeft(InputAction.CallbackContext context);
-        void OnRotateTrap(InputAction.CallbackContext context);
+        void OnSwitchBait(InputAction.CallbackContext context);
+        void OnRotateTrapRight(InputAction.CallbackContext context);
+        void OnRotateTrapLeft(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);

@@ -17,7 +17,7 @@ public class FirmeBuilder
     public List<int> modifiedSmallHouses; //Sauvegarde les index de bighouse des maisons modifiées
     [HideInInspector]
     public List<GameObject> allShopsOnMap; //Sauvegarde les index de bighouse des maisons modifiées
-    [HideInInspector]
+    //[HideInInspector]
     public List<Transform> allFirmesLocations;
     Vector3 firmeLocation, firmeRotation;
     int changeHouseIndex;
@@ -101,10 +101,9 @@ public class FirmeBuilder
         {
             //Spawn Neutrals
             Vector3 spawnPoint = Vector3.zero;
-            Vector3 randomDirection = Random.insideUnitSphere * 1000;
+            Vector3 randomDirection = new Vector3(Random.Range(-640, 70), 0, Random.Range(-360, 80));
             NavMeshHit hit;
-            Vector3 entitySpawnPoint = Vector3.zero;
-            if (NavMesh.SamplePosition(randomDirection, out hit, 1000, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomDirection, out hit, 700, NavMesh.AllAreas))
             {
                 spawnPoint = hit.position;
             }
@@ -121,10 +120,12 @@ public class FirmeBuilder
             if(_size == FirmeSize.Big)
             {
                 bigHouses[modifiedBigHouses[_index]].SetActive(true);
+                bigHouses[modifiedBigHouses[_index]].GetComponent<Houses>().StartRecallingHouse();
             }
             else
             {
                 smallHouses[modifiedSmallHouses[_index]].SetActive(true);
+                smallHouses[modifiedSmallHouses[_index]].GetComponent<Houses>().StartRecallingHouse();
             }
         }
         else
@@ -137,13 +138,11 @@ public class FirmeBuilder
             {
                 GameObject shop = GameObject.Instantiate(pfb_Big_Shop, bigHouses[modifiedBigHouses[_index]].transform.position, bigHouses[modifiedBigHouses[_index]].transform.rotation);
                 allShopsOnMap.Add(shop.gameObject);
-                //GameObject.Destroy(bigHouses[modifiedBigHouses[_index]]);
             }
             else
             {
                 GameObject shop = GameObject.Instantiate(pfb_Small_Shop, smallHouses[modifiedSmallHouses[_index]].transform.position, smallHouses[modifiedSmallHouses[_index]].transform.rotation);
                 allShopsOnMap.Add(shop.gameObject);
-                //GameObject.Destroy(smallHouses[modifiedSmallHouses[_index]]);
             }
             UIManager.Instance.shop.hasNewBaitToAdd = true;
             GameManager.Instance.EventEndWave();
@@ -176,6 +175,16 @@ public class FirmeBuilder
         foreach(GameObject shop in allShopsOnMap)
         {
             GameObject.Destroy(shop);
+        }
+
+        foreach(GameObject bighouses in bigHouses)
+        {
+            bighouses.SetActive(true);
+        }
+
+        foreach(GameObject smallhouses in bigHouses)
+        {
+            smallhouses.SetActive(true);
         }
     }
 }
