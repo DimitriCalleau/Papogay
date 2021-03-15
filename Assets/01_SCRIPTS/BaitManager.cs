@@ -15,6 +15,7 @@ public class BaitManager
             {
                 if (inventorySelection.nbBaits > 0 && inventorySelection != null)
                 {
+                    GameManager.Instance.player.GetComponent<PlayerMovementController>().playerAnimator.SetTrigger("Pose");
                     GameObject baitSpawner = GameObject.Instantiate(UIManager.Instance.baitSpawnerPrefab, UIManager.Instance.selectedLocation.transform.position, Quaternion.Euler(0, baitRotation, 0));
                     baitSpawner.GetComponent<BaitSpawner>().InitSpawn(inventorySelection.baitPrefab, UIManager.Instance.selectedLocation);
                     UIManager.Instance.selectedLocation.occupied = true;

@@ -46,7 +46,8 @@ public class Entity : MonoBehaviour
     public Gradient StateColors;
     public Image StateIndicator;
     public Image mapIndicator;
-
+    public Image focusIndicator;
+    public Sprite[] focusImages;//0 player, 1 ally, 2 neutral, 3 enemy
     public void Init(int lifePoints)
     {
         health = lifePoints;
@@ -65,7 +66,6 @@ public class Entity : MonoBehaviour
         if (targetTreshold == 0f)
         {
             targetTreshold = 1.5f;
-            Debug.Log("target treshold set to " + targetTreshold + " by default");
         }//security just in case
 
         possibleTargets = GameObject.FindGameObjectsWithTag("TargetForEnemyEntity");
@@ -94,13 +94,16 @@ public class Entity : MonoBehaviour
             entityNavMeshAgent.destination = tempAttractingPoint;
         }
 
-        if (entityNavMeshAgent.destination != null || entityNavMeshAgent.isStopped == false)
+        if(status != EntityStatus.Neutral)
         {
+            if (entityNavMeshAgent.destination != null || entityNavMeshAgent.isStopped == false)
+            {
                 anm.SetFloat("WalkIdle", 1);
-        }
-        else
-        {
-            anm.SetFloat("WalkIdle", 0);
+            }
+            else
+            {
+                anm.SetFloat("WalkIdle", 0);
+            }
         }
 
         if (attractingTimer > 0)
@@ -131,7 +134,12 @@ public class Entity : MonoBehaviour
                 }
                 if (entityNavMeshAgent.remainingDistance <= targetTreshold)
                 {
+                    anm.SetFloat("WalkIdle", 0);
                     waitingDelay -= Time.deltaTime;
+                }
+                else
+                {
+                    anm.SetFloat("WalkIdle", 1);
                 }
                 break;
             #endregion
@@ -213,6 +221,7 @@ public class Entity : MonoBehaviour
                     {
                         destination = tempFirme.position;
                         target = tempFirme.gameObject;
+                        focusIndicator.sprite = focusImages[3];
                     }
                 }
                 else
@@ -232,10 +241,14 @@ public class Entity : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.player.activeInHierarchy == true && Vector3.Distance(transform.position, GameManager.Instance.player.transform.position) <= playerDetectionRadius)
         {
+            focusIndicator.sprite = focusImages[0];
             return true;
         }
         else
+        {
+            focusIndicator.sprite = focusImages[1];
             return false;
+        }
     }
     public void DamageEntity(int _damage, bool damageOrHeal)//true -> heal, false -> damage
     {
@@ -245,9 +258,15 @@ public class Entity : MonoBehaviour
         {
             case true:
                 health += _damage;
+                GameObject allyDamageParticles = Instantiate(particlePrefabs[4].gameObject, transform.position, Quaternion.identity);
+                allyDamageParticles.transform.parent = particlesParent.transform;
+                Destroy(allyDamageParticles, allyDamageParticles.GetComponent<ParticleSystem>().main.duration);
                 break;
             case false:
                 health -= _damage;
+                GameObject enemyDamageParticles = Instantiate(particlePrefabs[3].gameObject, transform.position, Quaternion.identity);
+                enemyDamageParticles.transform.parent = particlesParent.transform;
+                Destroy(enemyDamageParticles, enemyDamageParticles.GetComponent<ParticleSystem>().main.duration);
                 break;
         }
         ChangeEntityStatus();
@@ -336,6 +355,8 @@ public class Entity : MonoBehaviour
             this.gameObject.layer = 11;//neutralLayer;
             gameObject.tag = "TargetForEnemyEntity";
             anm.SetInteger("Status", 1);
+
+            focusIndicator.sprite = focusImages[2];
 
             AllyProgressBar.fillAmount = health / maxHealth;
             if (health == 0)
