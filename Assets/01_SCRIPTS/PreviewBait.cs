@@ -55,6 +55,15 @@ public class PreviewBait
             preview_Mesh = _previewMesh;
             preview_GO.GetComponent<MeshFilter>().mesh = preview_Mesh;
             nbBaitsPreview.text = UIManager.Instance.inventory.selection.nbBaits.ToString();
+
+            if(UIManager.Instance.inventory.selection.nbBaits <= 0)
+            {
+                nbBaitsPreview.color = Color.red;
+            }
+            else
+            {
+                nbBaitsPreview.color = Color.white;
+            }
         }
         if (location != null)
         {

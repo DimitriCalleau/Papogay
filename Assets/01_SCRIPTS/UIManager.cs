@@ -45,7 +45,6 @@ public class UIManager : MonoBehaviour
     public GameObject shopSlotPrefab;
     public GameObject upgradeSlotPrefab;
     public GameObject baitSpawnerPrefab;
-
     //[Header("Panels")]
     #region Panels
     public GameObject startPanel;
@@ -86,9 +85,8 @@ public class UIManager : MonoBehaviour
     public float locationDetectionRange;
     [SerializeField]
     LayerMask locationLayer = -1;
-    Location closestLocation;
     [HideInInspector]
-    public Location selectedLocation;
+    public Location closestLocation, selectedLocation;
     [HideInInspector]
     public bool inventoryOpened, shopOpened, mapOpened;
 
@@ -144,6 +142,17 @@ public class UIManager : MonoBehaviour
                     }
                 }
             }
+
+            if(allLocations.Length <= 0)
+            {
+                preview.HidePreview(false);
+                selectedLocation = null;
+            }
+            else
+            {
+                preview.HidePreview(true);
+            }
+
             preview.MovePreview(selectedLocation,  baitManager.baitRotation, inventory.selection.baitPrefab.GetComponent<MeshFilter>().sharedMesh);
             UIManager.Instance.inventory.selection.UpdatePreviewMesh();
         }
@@ -227,7 +236,8 @@ public class UIManager : MonoBehaviour
                     shopPanel.SetActive(true);
                     CursorState(false);
                     shopOpened = true;
-                    GameManager.Instance.gameState.SetPause(true);
+                    GameManager.Instance.gameState.SetPause(true); 
+                    inventoryPanel.SetActive(true);
                 }
                 break;
         }
@@ -245,6 +255,7 @@ public class UIManager : MonoBehaviour
             }
             rewardPanel.SetActive(false);
             shopPanel.SetActive(false);
+            inventoryPanel.SetActive(false);
             CursorState(true);
             shopOpened = false;
         }

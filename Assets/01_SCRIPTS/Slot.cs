@@ -56,6 +56,14 @@ public class Slot
         thisShopSlot.GetComponentInChildren<Text>().text = currentCost.ToString();
         thisUpgradeSlot.GetComponent<Image>().sprite = currentUpgradeImage;
         thisUpgradeSlot.GetComponentInChildren<Text>().text = upgradeCost.ToString();
+        if (nbBaits <= 0)
+        {
+            thisInventorySlot.GetComponentInChildren<Text>().color = Color.red;
+        }
+        else
+        {
+            thisInventorySlot.GetComponentInChildren<Text>().color = Color.black;
+        }
     }
     public void UpgradeSlotBait()
     {
