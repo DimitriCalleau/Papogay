@@ -27,9 +27,8 @@ public class UIManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(this.gameObject);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
+        CursorState(false);
+        }
     #endregion
 
     public List<GameObject> allBaits;//Tous les baits du jeu
@@ -98,6 +97,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         preview.InitPreview();
+        UIManager.Instance.CursorState(false);
     }
     void Update()
     {
@@ -319,7 +319,6 @@ public class UIManager : MonoBehaviour
         {
             GameManager.Instance.gameState.SetPause(false);
             pausePanel.SetActive(false);
-
             CursorState(true);
         }
         optionPanel.SetActive(false);
