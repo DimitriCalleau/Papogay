@@ -38,6 +38,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         inputs = new InputPapogay();
         inputs.Actions.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
+        Debug.Log(move);
         inputs.Actions.Move.canceled += ctx => move = Vector2.zero;
         inputs.Actions.Roll.performed += ctx => TriggerRoll();
     }
@@ -99,6 +100,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     public void Move()
     {
+        Debug.Log("cul");
         float targetRotation = Mathf.Atan2(move.x, move.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
         rotation = Quaternion.Euler(skin.transform.rotation.x, cam.eulerAngles.y, skin.transform.rotation.z); //Vecteur de rotation
         Collider[] groundCheck = Physics.OverlapSphere(floorDetectorPosition.position, floorDetectionSphereRange, floor);
