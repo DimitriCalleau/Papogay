@@ -58,7 +58,8 @@ public class PlayerMovementController : MonoBehaviour
             chara.enabled = true;
         }
         if (GameManager.Instance.gameState.pause == false)
-        {
+        { 
+            
             if (rollTimer > 0)
             {
                 Roll(currentRollDir);

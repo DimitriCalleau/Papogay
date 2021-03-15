@@ -44910,6 +44910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d83df11992f4164da1b43a9e12ce68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unpauseAtStart: 1
   mainCam: {fileID: 1166246383}
   player: {fileID: 1849488149}
   playerStartPosition: {x: 0, y: 0, z: 0}
@@ -44922,7 +44923,7 @@ MonoBehaviour:
     nbEntities: 0
     entitylayers:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 7168
     waveindex: 0
     zoneIndex: 0
     locationZones: []
@@ -44946,7 +44947,7 @@ MonoBehaviour:
     gold: 56
     startGold: 0
     invincible: 0
-    invincibilityTime: 0
+    invincibilityTime: 0.5
     speed: 15
     rollSpeed: 50
     boostFactor: 2

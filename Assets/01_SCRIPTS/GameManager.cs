@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public bool unpauseAtStart;
     #region Singleton
     private static GameManager instance = null;
 
@@ -38,7 +39,6 @@ public class GameManager : MonoBehaviour
     public GameObject baitManager;
 
     public GameState gameState = new GameState();
-
     public WaveManager waveManager = new WaveManager();
     public FirmeBuilder builder = new FirmeBuilder();
 
@@ -51,6 +51,13 @@ public class GameManager : MonoBehaviour
     public float deathTime;
     float deathTimer;
     bool isDying;
+    void Start()
+    {
+        if (unpauseAtStart)
+        {
+            gameState.pause = false;
+        }
+    }
     public void EventStartWave()
     {
         if (StartWave != null)
