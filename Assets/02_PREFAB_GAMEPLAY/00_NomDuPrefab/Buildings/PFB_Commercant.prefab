@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8285685916039351850}
   - component: {fileID: 5827241366719811339}
+  - component: {fileID: 2245676450308874008}
   m_Layer: 15
   m_Name: PFB_Commercant
   m_TagString: Untagged
@@ -46,6 +47,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 20, z: 20}
   m_Center: {x: 0, y: 10, z: 0}
+--- !u!114 &2245676450308874008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165665749172826155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb9a4accd374244aada28cba04a7122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &939307504708560283
 GameObject:
   m_ObjectHideFlags: 0
