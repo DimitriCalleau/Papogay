@@ -1,33 +1,28 @@
-﻿Shader "_/SeeThrough"
+﻿Shader "_/CharacterSeeThrough"
 {
-    Properties
-    {
-        _MainTex ("Texture", 2D) = "white" {}
-		_Color("alpha only", Color) = (1,1,1,1)
-    }
-    SubShader
-    {
-		Tags { "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
-        LOD 100
+	Properties
+	{
+		_MainTex("Texture", 2D) = "white" {}
+		[HideInInspector]
+		_Color("Color (RGB)", Color) = (.5,.5,.5,1)
+	}
 
-		ZWrite On
-		Blend SrcAlpha OneMinusSrcAlpha
-
-		Stencil
-		{
-			Ref 1
-			Comp Always
-			Pass Replace
-		}
-
-		Stencil
-		{
-			Ref 1
-			Comp NotEqual
-		}
+	SubShader
+	{
+		Tags { "RenderType" = "Transparent" "Queue" = "Geometry"}
 
 		Pass
 		{
+			ZWrite On
+			Blend SrcAlpha OneMinusSrcAlpha
+
+			Stencil
+			{
+				Ref 2
+				Comp always
+				Pass replace
+			}
+
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
@@ -67,5 +62,5 @@
 			}
 			ENDCG
 		}
-    }
+	}
 }
