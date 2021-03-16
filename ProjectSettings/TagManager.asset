@@ -10,6 +10,7 @@ TagManager:
   - BigHouse
   - SmallHouse
   - Shop
+  - SeeThroughSphereTag
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Shop
   - Map
   - Firme
-  - 
+  - SeeThroughTestLayer
   - 
   - 
   - 

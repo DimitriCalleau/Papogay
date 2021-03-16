@@ -6,7 +6,8 @@ public class SeeThroughCulling : MonoBehaviour
 {
     public GameObject mainCamera, seeThroughSphere;
     public LayerMask seeThroughLayer;
-    public float seeThroughScalingSpeed, defaultScale, aimedMaxScale, aimedMinScale;
+    public float seeThroughScalingSpeed, aimedMaxScale;
+    float defaultScale;
 
     void Update()
     {
@@ -14,9 +15,10 @@ public class SeeThroughCulling : MonoBehaviour
         
         if (Physics.Raycast(mainCamera.transform.position, (seeThroughSphere.transform.position - mainCamera.transform.position).normalized, out raycastHit, Mathf.Infinity, seeThroughLayer))
         {
-            if (raycastHit.collider.gameObject.tag == "SeeThroughSphereMask")
+            Debug.Log("raycast triggered");
+            if (raycastHit.collider.gameObject.tag == "SeeThroughSphereTag")
             {
-                DoScale(defaultScale, aimedMinScale);
+                DoScale(defaultScale, 0);
             }
             else
             {
