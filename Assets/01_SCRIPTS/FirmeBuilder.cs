@@ -7,184 +7,81 @@ using UnityEngine.AI;
 public class FirmeBuilder
 {
     public List<WaveStats> waveStats;
-    public GameObject pfb_Small_Shop, pfb_Big_Shop;
+    [HideInInspector]
+    public GameObject[] allShopsLocations;
+    [HideInInspector]
+    public GameObject[] spawnerLocations;
 
-    public GameObject[] smallHouses;
-    public GameObject[] bigHouses;
-    [HideInInspector]
-    public List<int> modifiedBigHouses; //Sauvegarde les index de bighouse des maisons modifiées
-    [HideInInspector]
-    public List<int> modifiedSmallHouses; //Sauvegarde les index de bighouse des maisons modifiées
-    [HideInInspector]
-    public List<GameObject> allShopsOnMap; //Sauvegarde les index de bighouse des maisons modifiées
-    //[HideInInspector]
     public List<Transform> allFirmesLocations;
+    public List<int> modifiedShops;
     Vector3 firmeLocation, firmeRotation;
-    int changeHouseIndex;
 
-    int nbDestroyedFirmes, nbFirmesThisWave, smallFirmeSpawnIndex, bigFirmeSpawnIndex;
+    int nbFirmesThisWave, changeShopIndex;
 
-    public List<GameObject> entityPrefabs;
-    public int nbEntityMaxThisWave;
-    public void ReplaceHousesBycorporations(int _waveIndex)
+    public GameObject entityPrefab; 
+    public GameObject spawnerPrefab;
+
+    public void SpawnSpawner()
+    {
+        spawnerLocations = GameObject.FindGameObjectsWithTag("SpawnerLocation");
+
+        if (spawnerLocations.Length > 0)
+        {
+            for (int i = 0; i < spawnerLocations.Length; i++)
+            {
+                GameObject newSpawner = GameObject.Instantiate(spawnerPrefab, spawnerLocations[i].transform.position, spawnerLocations[i].transform.rotation);
+                newSpawner.GetComponent<SpawnerNeutrals>().InitSpawn();
+            }
+        }
+    }
+    public void ReplaceShopByCorpo()
     {
         int currentWaveIndex = GameManager.Instance.waveManager.waveindex;
 
         //Reset Arrays
-        bigHouses = new GameObject[0];
-        smallHouses = new GameObject[0];
-        modifiedBigHouses.Clear();
-        modifiedSmallHouses.Clear();
         allFirmesLocations.Clear();
-        nbDestroyedFirmes = 0;
-        smallFirmeSpawnIndex = 0;
-        bigFirmeSpawnIndex = 0;
+        modifiedShops.Clear();
+        int firmeSpawnIndex = 0;
 
         //Find Houses
 
-        bigHouses = GameObject.FindGameObjectsWithTag("BigHouse");
-        smallHouses = GameObject.FindGameObjectsWithTag("SmallHouse");
-        if(waveStats.Count > 0) {
+        if (waveStats.Count > 0)
+        {
             nbFirmesThisWave = waveStats[currentWaveIndex].nbFirmesThisWave;
-            nbEntityMaxThisWave = waveStats[currentWaveIndex].nbMaxEntity;
         }
-
+        allShopsLocations = GameObject.FindGameObjectsWithTag("Shop");
 
         for (int i = 0; i < nbFirmesThisWave; i++)
         {
             GameObject firmeToInstanciate = waveStats[currentWaveIndex].firmeToSpawnPrefab[i];
             FirmeType firmeType = waveStats[currentWaveIndex].typesDeFirmes[i];
-            FirmeSize firmeSize = waveStats[currentWaveIndex].firmeSize0Small1Medium2Big[i];
 
-            if(firmeSize == FirmeSize.Big)//BigFirme
+            changeShopIndex = Random.Range(0, allShopsLocations.Length);
+            if (modifiedShops.Contains(changeShopIndex))
             {
-                changeHouseIndex = Random.Range(0, bigHouses.Length);
-                if (modifiedBigHouses.Contains(changeHouseIndex))
+                while (modifiedShops.Contains(changeShopIndex))
                 {
-                    while (modifiedBigHouses.Contains(changeHouseIndex))
-                    {
-                        changeHouseIndex = Random.Range(0, bigHouses.Length);
-                    }
+                    changeShopIndex = Random.Range(0, allShopsLocations.Length);
                 }
-                firmeLocation = bigHouses[changeHouseIndex].transform.position;
-                firmeRotation = bigHouses[changeHouseIndex].transform.eulerAngles;
-                bigHouses[changeHouseIndex].SetActive(false);
-                GameObject newFirme = GameObject.Instantiate(firmeToInstanciate, firmeLocation, Quaternion.Euler(firmeRotation));
-                newFirme.GetComponent<Firme>().InitFirme(firmeType, firmeSize, bigFirmeSpawnIndex);
-                bigFirmeSpawnIndex += 1;
-                allFirmesLocations.Add(newFirme.transform);
-                modifiedBigHouses.Add(changeHouseIndex);
             }
-            else
-            {
-                changeHouseIndex = Random.Range(0, smallHouses.Length);
-                if (modifiedSmallHouses.Contains(changeHouseIndex))
-                {
-                    while (modifiedSmallHouses.Contains(changeHouseIndex))
-                    {
-                        changeHouseIndex = Random.Range(0, smallHouses.Length);
-                    }
-                }
-                firmeLocation = smallHouses[changeHouseIndex].transform.position;
-                firmeRotation = smallHouses[changeHouseIndex].transform.eulerAngles;
-                smallHouses[changeHouseIndex].SetActive(false);
-                GameObject newFirme = GameObject.Instantiate(firmeToInstanciate, firmeLocation, Quaternion.Euler(firmeRotation));
-                newFirme.GetComponent<Firme>().InitFirme(firmeType, firmeSize, smallFirmeSpawnIndex);
-                smallFirmeSpawnIndex += 1;
-                allFirmesLocations.Add(newFirme.transform);
-                modifiedSmallHouses.Add(changeHouseIndex);
-            }
+            firmeLocation = allShopsLocations[changeShopIndex].transform.position;
+            firmeRotation = allShopsLocations[changeShopIndex].transform.eulerAngles;
+            allShopsLocations[changeShopIndex].SetActive(false);
+            GameObject newFirme = GameObject.Instantiate(firmeToInstanciate, firmeLocation, Quaternion.Euler(firmeRotation));
+            newFirme.GetComponent<Firme>().InitFirme(firmeType, firmeSpawnIndex);
+            firmeSpawnIndex += 1;
+            allFirmesLocations.Add(newFirme.transform);
+            modifiedShops.Add(changeShopIndex);
         }
 
-        //Spawn neutrals
-        for (int i = 0; i < waveStats[currentWaveIndex].nbNeutralEntities; i++)
-        {
-            //Spawn Neutrals
-            Vector3 spawnPoint = Vector3.zero;
-            Vector3 randomDirection = new Vector3(Random.Range(-640, 70), 0, Random.Range(-360, 80));
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomDirection, out hit, 700, NavMesh.AllAreas))
-            {
-                spawnPoint = hit.position;
-            }
-            GameObject newNeutral = GameObject.Instantiate(GameManager.Instance.neutralEntityPrefab, spawnPoint, Quaternion.identity);
-            newNeutral.GetComponent<Entity>().Init(50);
-        }
     }
 
-    public void RecallModifiedHouses(int _index, FirmeSize _size)
+    public void RecallModifiedShops()
     {
-        nbDestroyedFirmes += 1;
-        if (nbDestroyedFirmes < nbFirmesThisWave)
+        for (int i = 0; i < allShopsLocations.Length; i++)
         {
-            if(_size == FirmeSize.Big)
-            {
-                bigHouses[modifiedBigHouses[_index]].SetActive(true);
-                bigHouses[modifiedBigHouses[_index]].GetComponent<Houses>().StartRecallingHouse();
-            }
-            else
-            {
-                smallHouses[modifiedSmallHouses[_index]].SetActive(true);
-                smallHouses[modifiedSmallHouses[_index]].GetComponent<Houses>().StartRecallingHouse();
-            }
+            allShopsLocations[i].SetActive(true);
         }
-        else
-        {
-            if (GameManager.Instance.waveManager.waveindex >= (waveStats.Count - 1))
-            {
-                GameManager.Instance.EventWin();
-            }
-            if (_size == FirmeSize.Big)
-            {
-                GameObject shop = GameObject.Instantiate(pfb_Big_Shop, bigHouses[modifiedBigHouses[_index]].transform.position, bigHouses[modifiedBigHouses[_index]].transform.rotation);
-                allShopsOnMap.Add(shop.gameObject);
-            }
-            else
-            {
-                GameObject shop = GameObject.Instantiate(pfb_Small_Shop, smallHouses[modifiedSmallHouses[_index]].transform.position, smallHouses[modifiedSmallHouses[_index]].transform.rotation);
-                allShopsOnMap.Add(shop.gameObject);
-            }
-            UIManager.Instance.shop.hasNewBaitToAdd = true;
-            GameManager.Instance.EventEndWave();
-        }
-    }
-
-    public GameObject SelectEntity(FirmeType whichType)
-    {
-        GameObject selection = null;
-        bool found = false;
-        for (int b = 0; b < entityPrefabs.Count; b++)
-        {
-            if (entityPrefabs[b].GetComponent<Entity>().type == whichType)
-            {
-                selection = entityPrefabs[b];
-                found = true;
-                break;
-            }
-        }
-        if (found == true)
-        {
-            return selection;
-        }
-        else
-            return null;
-    }
-
-    public void ResetShops()
-    {
-        foreach(GameObject shop in allShopsOnMap)
-        {
-            GameObject.Destroy(shop);
-        }
-
-        foreach(GameObject bighouses in bigHouses)
-        {
-            bighouses.SetActive(true);
-        }
-
-        foreach(GameObject smallhouses in bigHouses)
-        {
-            smallhouses.SetActive(true);
-        }
+        UIManager.Instance.shop.hasNewBaitToAdd = true;
     }
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8067720578389191736}
   - component: {fileID: 2340718329611530531}
   - component: {fileID: 1052902483688952412}
-  - component: {fileID: 1568405493530900775}
   m_Layer: 0
   m_Name: Maison_Orange
   m_TagString: Untagged
@@ -81,25 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &1568405493530900775
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219759094167840316}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f1fa719d88386c74d804ecebc805b9b9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3047719208559390728
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +90,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2378037860136741554}
   - component: {fileID: 2970527534494480390}
-  - component: {fileID: 4460938969420271710}
   m_Layer: 8
   m_Name: PFB_Maison_Orange
   m_TagString: Untagged
@@ -148,21 +127,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 45, z: 20}
   m_Center: {x: 0, y: 22.5, z: 0}
---- !u!114 &4460938969420271710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3047719208559390728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a78cd11c16c681846ad04cf77a5323a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  houseTag: SmallHouse
-  zone: 0
-  timeBeforeRecall: 0.5
 --- !u!1 &3620609299485338771
 GameObject:
   m_ObjectHideFlags: 0

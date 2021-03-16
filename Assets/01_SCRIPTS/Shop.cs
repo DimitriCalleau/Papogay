@@ -10,21 +10,27 @@ public class Shop
     public float detectionRange;
     [SerializeField]
     LayerMask shopLayer = -1;
-    Collider[] shops;
+    Collider[] detectedCloseShops;
+    public Collider[] allShops;
     public bool closeToShop;
     GameObject selectedShop, oldShopSelection;
+
+    public void AllShopsDetection()
+    {
+        allShops = Physics.OverlapSphere(Vector3.zero, 1000, shopLayer);
+    }
     public void DetectCloseShop()
     {
-        shops = Physics.OverlapSphere(GameManager.Instance.player.transform.position, detectionRange, shopLayer);
-        if (shops.Length > 0)
+        detectedCloseShops = Physics.OverlapSphere(GameManager.Instance.player.transform.position, detectionRange, shopLayer);
+        if (detectedCloseShops.Length > 0)
         {
             float minDist = Mathf.Infinity;
-            for (int i = 0; i < shops.Length; i++)
+            for (int i = 0; i < detectedCloseShops.Length; i++)
             {
-                float distance = Vector3.Distance(GameManager.Instance.player.transform.position, shops[i].transform.position);
+                float distance = Vector3.Distance(GameManager.Instance.player.transform.position, detectedCloseShops[i].transform.position);
                 if (distance < minDist)
                 {
-                    selectedShop = shops[i].gameObject;
+                    selectedShop = detectedCloseShops[i].gameObject;
                     minDist = distance;
                 }
             }
@@ -58,5 +64,4 @@ public class Shop
             closeToShop = false;
         }
     }
-
 }

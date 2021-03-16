@@ -123,23 +123,34 @@ public class Entity : MonoBehaviour
             #region neutral
             case EntityStatus.Neutral:
 
-                if (waitingDelay <= 0)
+                float shortestDistance = Mathf.Infinity;
+                if (GameManager.Instance.builder.allFirmesLocations != null)
                 {
-                    destination = transform.position + Random.insideUnitSphere * randomSelectorRadius;
-                    if (NavMesh.SamplePosition(destination, out navMeshHit, randomSelectorRadius, NavMesh.AllAreas))
+                    Transform tempFirme = null;
+                    for (int i = 0; i < GameManager.Instance.builder.allFirmesLocations.Count; i++)
                     {
-                        waitingDelay = Random.Range(minWaitingTime, maxWaitingTime);
-                        destination = navMeshHit.position;
+                        if (GameManager.Instance.builder.allFirmesLocations[i] != null)
+                        {
+                            float distance = Vector3.Distance(transform.position, GameManager.Instance.builder.allFirmesLocations[i].position);
+                            if (distance < shortestDistance)
+                            {
+                                shortestDistance = distance;
+                                tempFirme = GameManager.Instance.builder.allFirmesLocations[i];
+                            }
+                        }
+
                     }
-                }
-                if (entityNavMeshAgent.remainingDistance <= targetTreshold)
-                {
-                    anm.SetFloat("WalkIdle", 0);
-                    waitingDelay -= Time.deltaTime;
+
+                    if (tempFirme != null)
+                    {
+                        destination = tempFirme.position;
+                        target = tempFirme.gameObject;
+                        focusIndicator.sprite = focusImages[3];
+                    }
                 }
                 else
                 {
-                    anm.SetFloat("WalkIdle", 1);
+                    Destroy(gameObject);
                 }
                 break;
             #endregion
@@ -147,12 +158,8 @@ public class Entity : MonoBehaviour
             #region enemy
             case EntityStatus.Enemy:
                 possibleTargets = GameObject.FindGameObjectsWithTag("TargetForEnemyEntity");
-                if (PlayerInRange() == true)
-                {
-                    target = GameManager.Instance.player;
-                    destination = target.transform.position;
-                }
-                else if (possibleTargets.Length == 0 || possibleTargets == null)
+
+                if (possibleTargets.Length == 0 || possibleTargets == null)
                 {
                     target = null;
                     if (waitingDelay <= 0)
@@ -199,28 +206,28 @@ public class Entity : MonoBehaviour
 
             #region ally
             case EntityStatus.Ally:
-                float shortestDistance = Mathf.Infinity;
-                if (GameManager.Instance.builder.allFirmesLocations != null)
+                float minDist = Mathf.Infinity;
+                if (GameManager.Instance.builder.allShopsLocations != null)
                 {
-                    Transform tempFirme = null;
+                    Transform tempShop = null;
                     for (int i = 0; i < GameManager.Instance.builder.allFirmesLocations.Count; i++)
                     {
                         if (GameManager.Instance.builder.allFirmesLocations[i] != null)
                         {
                             float distance = Vector3.Distance(transform.position, GameManager.Instance.builder.allFirmesLocations[i].position);
-                            if (distance < shortestDistance)
+                            if (distance < minDist)
                             {
                                 shortestDistance = distance;
-                                tempFirme = GameManager.Instance.builder.allFirmesLocations[i];
+                                tempShop = GameManager.Instance.builder.allFirmesLocations[i];
                             }
                         }
 
                     }
 
-                    if (tempFirme != null)
+                    if (tempShop != null)
                     {
-                        destination = tempFirme.position;
-                        target = tempFirme.gameObject;
+                        destination = tempShop.position;
+                        target = tempShop.gameObject;
                         focusIndicator.sprite = focusImages[3];
                     }
                 }
@@ -235,19 +242,6 @@ public class Entity : MonoBehaviour
         {
             entityNavMeshAgent.speed = currentSpeed;
             entityNavMeshAgent.destination = destination;
-        }
-    }
-    public bool PlayerInRange()
-    {
-        if (GameManager.Instance != null && GameManager.Instance.player.activeInHierarchy == true && Vector3.Distance(transform.position, GameManager.Instance.player.transform.position) <= playerDetectionRadius)
-        {
-            focusIndicator.sprite = focusImages[0];
-            return true;
-        }
-        else
-        {
-            focusIndicator.sprite = focusImages[1];
-            return false;
         }
     }
     public void DamageEntity(int _damage, bool damageOrHeal)//true -> heal, false -> damage
@@ -424,11 +418,8 @@ public class Entity : MonoBehaviour
     }
     public void ChangeEntitySpeed(float slowFactor, float duration)
     {
-        if (type != FirmeType.NormalGym)//les Entités de ce groupe sont immunisées au controles
-        {
-            currentSpeed = baseSpeed * slowFactor;
-            timerSlow = duration;
-        }
+        currentSpeed = baseSpeed * slowFactor;
+        timerSlow = duration;
     }
     public void AttractEntity(Vector3 attractingPoint, float attrationTime)
     {

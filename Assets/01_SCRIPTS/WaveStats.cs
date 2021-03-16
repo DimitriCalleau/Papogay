@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class WaveStats 
+public class WaveStats
 {
+    public int nbMinAllyEntityInShop;
+    public int nbMaxEnemyEntityOnMap;
     public int nbFirmesThisWave;
     public List<FirmeType> typesDeFirmes;
-    public List<FirmeSize> firmeSize0Small1Medium2Big;
     public List<GameObject> firmeToSpawnPrefab;
-    public int nbNeutralEntities;
-    public int nbMaxEntity; 
 }

@@ -43,14 +43,14 @@ public class GameManager : MonoBehaviour
     public FirmeBuilder builder = new FirmeBuilder();
 
     public PlayerStats playerStats = new PlayerStats();
-    public GameObject houseFolder;
-    public GameObject neutralEntityPrefab;
     #region Events
     public event Action StartWave;
 
     public float deathTime;
     float deathTimer;
     bool isDying;
+
+    GameObject[] shops;
     void Start()
     {
         if (unpauseAtStart)
@@ -106,8 +106,9 @@ public class GameManager : MonoBehaviour
     {
         EventEndWave();
         EventCleanMap();
+        ResetShops();
+        GameManager.Instance.builder.RecallModifiedShops();
         waveManager.Reset();
-        builder.ResetShops();
         UIManager.Instance.Play();
         playerStats.SetHealth();
         isDying = false;
@@ -141,6 +142,15 @@ public class GameManager : MonoBehaviour
         isDying = true;
     }
 
+
+    void ResetShops()
+    {
+        shops = GameObject.FindGameObjectsWithTag("Shop");
+        foreach (GameObject shop in shops)
+        {
+            shop.GetComponent<Artisan>().UnactivateShop();
+        }
+    }
     void OnEnable()
     {
         StartWave += waveManager.StartWave;

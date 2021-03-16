@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1068552583400126270}
   - component: {fileID: 7637857239142032953}
-  - component: {fileID: -7928119793550464209}
   m_Layer: 8
   m_Name: PFB_Maison_Violette
   m_TagString: Untagged
@@ -48,21 +47,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 40, z: 20}
   m_Center: {x: 0, y: 20, z: 0}
---- !u!114 &-7928119793550464209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405203318144740740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a78cd11c16c681846ad04cf77a5323a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  houseTag: SmallHouse
-  zone: 0
-  timeBeforeRecall: 0.5
 --- !u!1 &1580138382340752986
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +225,6 @@ GameObject:
   - component: {fileID: 6869452745927783304}
   - component: {fileID: 1161123730270953212}
   - component: {fileID: 4554443895548827569}
-  - component: {fileID: 791444230422588009}
   m_Layer: 0
   m_Name: Maison_Violette
   m_TagString: Untagged
@@ -311,25 +294,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &791444230422588009
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4196354550484012115}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f1fa719d88386c74d804ecebc805b9b9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4525026539224822582
 GameObject:
   m_ObjectHideFlags: 0
