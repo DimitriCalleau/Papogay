@@ -38916,7 +38916,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!222 &1049009322
@@ -45029,29 +45029,23 @@ MonoBehaviour:
   baitManager: {fileID: 0}
   waveManager:
     startWave: 0
-    nbAllyEntities: 0
-    nbNeutralEntities: 0
+    nbEntityInShops: 0
     nbEnemyEntities: 0
     nbEntities: 0
-    entitylayers:
-      serializedVersion: 2
-      m_Bits: 7168
     waveindex: 0
-    zoneIndex: 0
-    locationZones: []
+    zones: []
     blocageZones: []
+    playerStartPositions: []
   builder:
+    allBigFirmes: []
+    allSmallFirmes: []
     waveStats: []
-    pfb_Small_Shop: {fileID: 0}
-    pfb_Big_Shop: {fileID: 0}
-    smallHouses: []
-    bigHouses: []
-    modifiedBigHouses: 
-    modifiedSmallHouses: 
-    allShopsOnMap: []
+    allShopsLocations: []
+    buildShop: []
+    spawnerLocations: []
     allFirmesLocations: []
-    entityPrefabs: []
-    nbEntityMaxThisWave: 0
+    entityPrefab: {fileID: 0}
+    spawnerPrefab: {fileID: 0}
   playerStats:
     currentHealth: 0
     maxHealth: 500
@@ -45065,8 +45059,6 @@ MonoBehaviour:
     boostFactor: 2
     indicatorShowTime: 0
     timerIndicator: 0
-  houseFolder: {fileID: 0}
-  neutralEntityPrefab: {fileID: 0}
   deathTime: 0
 --- !u!4 &1199990356
 Transform:

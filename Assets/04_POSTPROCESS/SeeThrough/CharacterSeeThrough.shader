@@ -3,7 +3,6 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		[HideInInspector]
 		_Color("Color (RGB)", Color) = (.5,.5,.5,1)
 	}
 

@@ -2,7 +2,6 @@
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
 		_Color ("Tint", color) = (1,0,0,1)
     }
 
