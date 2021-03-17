@@ -26060,11 +26060,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1566288348}
     m_Modifications:
-    - target: {fileID: 1057024671374060936, guid: ecbc8d9441e32264aaaf2eb0a8a59987,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7bdcd1c5f3953524288282a553133056, type: 2}
     - target: {fileID: 8415566384949220083, guid: ecbc8d9441e32264aaaf2eb0a8a59987,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -45034,29 +45029,23 @@ MonoBehaviour:
   baitManager: {fileID: 0}
   waveManager:
     startWave: 0
-    nbAllyEntities: 0
-    nbNeutralEntities: 0
+    nbEntityInShops: 0
     nbEnemyEntities: 0
     nbEntities: 0
-    entitylayers:
-      serializedVersion: 2
-      m_Bits: 7168
     waveindex: 0
-    zoneIndex: 0
-    locationZones: []
+    zones: []
     blocageZones: []
+    playerStartPositions: []
   builder:
+    allBigFirmes: []
+    allSmallFirmes: []
     waveStats: []
-    pfb_Small_Shop: {fileID: 0}
-    pfb_Big_Shop: {fileID: 0}
-    smallHouses: []
-    bigHouses: []
-    modifiedBigHouses: 
-    modifiedSmallHouses: 
-    allShopsOnMap: []
+    allShopsLocations: []
+    buildShop: []
+    spawnerLocations: []
     allFirmesLocations: []
-    entityPrefabs: []
-    nbEntityMaxThisWave: 0
+    entityPrefab: {fileID: 0}
+    spawnerPrefab: {fileID: 0}
   playerStats:
     currentHealth: 0
     maxHealth: 500
@@ -45070,8 +45059,6 @@ MonoBehaviour:
     boostFactor: 2
     indicatorShowTime: 0
     timerIndicator: 0
-  houseFolder: {fileID: 0}
-  neutralEntityPrefab: {fileID: 0}
   deathTime: 0
 --- !u!4 &1199990356
 Transform:
