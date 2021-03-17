@@ -4,9 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Shop
   - TargetForEnemyEntity
+  - ModifiedHouse
+  - Corpo
+  - BigHouse
+  - SmallHouse
+  - Shop
+<<<<<<< Updated upstream
+  - SeeThroughSphereTag
+=======
   - SpawnerLocation
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -41,6 +49,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 174927469
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Forground
+    uniqueID: 3930020361
     locked: 0
