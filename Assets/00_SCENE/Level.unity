@@ -7480,7 +7480,6 @@ MonoBehaviour:
     nbEnemyEntities: 0
     nbEntities: 0
     waveindex: 0
-    zoneIndex: 0
     zones:
     - {fileID: 440616303}
     - {fileID: 849873283}
@@ -10671,22 +10670,22 @@ PrefabInstance:
     - target: {fileID: 766921223989089179, guid: 449c4e3ae1e5d3b4e9843195f6079b13,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1719939
+      value: 0.17172058
       objectReference: {fileID: 0}
     - target: {fileID: 766921223989089179, guid: 449c4e3ae1e5d3b4e9843195f6079b13,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.13561182
+      value: 0.14632884
       objectReference: {fileID: 0}
     - target: {fileID: 766921223989089179, guid: 449c4e3ae1e5d3b4e9843195f6079b13,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.023912016
+      value: -0.025801718
       objectReference: {fileID: 0}
     - target: {fileID: 766921223989089179, guid: 449c4e3ae1e5d3b4e9843195f6079b13,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97542596
+      value: 0.9738759
       objectReference: {fileID: 0}
     - target: {fileID: 766921223989089179, guid: 449c4e3ae1e5d3b4e9843195f6079b13,
         type: 3}
@@ -10701,7 +10700,7 @@ PrefabInstance:
     - target: {fileID: 766921223989089179, guid: 449c4e3ae1e5d3b4e9843195f6079b13,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 15.83
+      value: 17.09
       objectReference: {fileID: 0}
     - target: {fileID: 766921223989089179, guid: 449c4e3ae1e5d3b4e9843195f6079b13,
         type: 3}

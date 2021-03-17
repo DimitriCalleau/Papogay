@@ -13,6 +13,7 @@ public class Firme : MonoBehaviour
     [Header("Spawner")]
     public int nbEntityToSpawn;
     GameObject entityToSpawn;
+    public Vector3 emergencySpawnPoint;
 
     public float timeBetweenSpawn, spawnRadius;
     float timerSpawn;
@@ -51,6 +52,12 @@ public class Firme : MonoBehaviour
         if (NavMesh.SamplePosition(randomDirection, out hit, _radius, NavMesh.AllAreas))
         {
             entitySpawnPoint = hit.position;
+        }
+        else
+        {
+            Quaternion firmeRotation = transform.rotation;
+            Vector3 emergencySpawn = (transform.position + firmeRotation * emergencySpawnPoint);
+            entitySpawnPoint = emergencySpawn;
         }
         return entitySpawnPoint;
     }

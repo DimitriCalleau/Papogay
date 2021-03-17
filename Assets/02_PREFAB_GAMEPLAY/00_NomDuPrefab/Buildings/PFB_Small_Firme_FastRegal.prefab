@@ -49,6 +49,7 @@ MonoBehaviour:
   anm: {fileID: 0}
   corpoType: 1
   nbEntityToSpawn: 0
+  emergencySpawnPoint: {x: 0, y: 0, z: 13}
   timeBetweenSpawn: 2
   spawnRadius: 20
   timeBeforeDeath: 3
