@@ -10,11 +10,7 @@ TagManager:
   - BigHouse
   - SmallHouse
   - Shop
-<<<<<<< Updated upstream
-  - SeeThroughSphereTag
-=======
   - SpawnerLocation
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
