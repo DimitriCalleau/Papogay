@@ -4768,7 +4768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
+  m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
@@ -5837,7 +5837,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 554116487}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 5
   m_WholeNumbers: 0
   m_Value: 0.5
   m_OnValueChanged:
@@ -7523,7 +7523,7 @@ MonoBehaviour:
     - {fileID: 165665749172826155, guid: c0956608f7882a3479862336cb14be00, type: 3}
     - {fileID: 165665749172826155, guid: df3a35cfacdb8c248b14b3a8ad967425, type: 3}
     waveStats:
-    - nbMinAllyEntityInShop: 20
+    - nbMinAllyEntityInShop: 5
       nbMaxEnemyEntityOnMap: 15
       nbFirmesThisWave: 1
       typesDeFirmes: 00000000
@@ -10074,7 +10074,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 579324246}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 5
   m_WholeNumbers: 0
   m_Value: 0.5
   m_OnValueChanged:

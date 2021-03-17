@@ -8,9 +8,9 @@ public class CameraController : MonoBehaviour
     Vector2 moveCam;
     bool isRotating;
 
-    [SerializeField, Range(0f, 1f)]
+    [SerializeField, Range(0f, 5f)]
     float horizontalSentivity = 0.1f;
-    [SerializeField, Range(0f, 1f)]
+    [SerializeField, Range(0f, 5f)]
     float verticalSensitivity = 0.1f;
 
     [SerializeField]
@@ -150,7 +150,7 @@ public class CameraController : MonoBehaviour
         {
             if (moveCam.x < -e || moveCam.x > e || moveCam.y < -e || moveCam.y > e)
             {
-                orbitAngles += rotationSpeed * Time.unscaledDeltaTime * new Vector2(-moveCam.y * verticalSensitivity, moveCam.x * horizontalSentivity);
+                orbitAngles += rotationSpeed * Time.unscaledDeltaTime * new Vector2(-moveCam.y * verticalSensitivity * 0.5f, moveCam.x * horizontalSentivity * 0.5f);
                 lastManualRotationTime = Time.unscaledTime;
                 return true;
             }
