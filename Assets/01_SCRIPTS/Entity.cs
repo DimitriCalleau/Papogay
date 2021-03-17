@@ -233,7 +233,7 @@ public class Entity : MonoBehaviour
                 if (GameManager.Instance.builder.allShopsLocations != null)
                 {
                     Transform tempShop = null;
-                    for (int i = 0; i < GameManager.Instance.builder.allFirmesLocations.Count; i++)
+                    for (int i = 0; i < GameManager.Instance.builder.allShopsLocations.Length; i++)
                     {
                         if (GameManager.Instance.builder.allShopsLocations[i] != null)
                         {
@@ -389,16 +389,19 @@ public class Entity : MonoBehaviour
         if (health >= healthMinAlly)
         {
             previousStatus = EntityStatus.Ally;
+            GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
             rnd.material = stateMats[2];
         }
         else if (health <= healthMaxEnm)
         {
             previousStatus = EntityStatus.Enemy;
+            GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
             rnd.material = stateMats[0];
         }
         else if (health > healthMaxEnm && health < healthMinAlly)
         {
             previousStatus = EntityStatus.Neutral;
+            GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
             rnd.material = stateMats[1];
         }
     }
