@@ -288,8 +288,8 @@ MonoBehaviour:
   neutralEntities: {fileID: 4488616244660598821, guid: d69bb6e5d7f5d0040bacda9dddb7d9c6,
     type: 3}
   spawnPosition: {fileID: 4633090074732961712}
-  timeBetweenSpawns: 3
-  timeBeforeDestruction: 1
+  timeBetweenSpawns: 2
+  timeBeforeDestruction: 0.1
 --- !u!1 &8353376784263367424
 GameObject:
   m_ObjectHideFlags: 0

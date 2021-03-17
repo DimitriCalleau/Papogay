@@ -11,13 +11,12 @@ public class Entity : MonoBehaviour
 {
     [Header("Stats")]
     public EntityStatus status, previousStatus;
-    public FirmeType type;
 
     public bool isAttracted;
     Vector3 tempAttractingPoint;
     public float health, maxHealth;
     public int healthMinAlly, healthMaxEnm;
-    public float currentSpeed, baseSpeed, playerDetectionRadius, targetTreshold, amazoonSpeedFactor;
+    public float currentSpeed, enemySpeed, neutralAllySpeed, playerDetectionRadius, targetTreshold, amazoonSpeedFactor;
 
     public float randomSelectorRadius,minWaitingTime, maxWaitingTime, waitingDelay;
 
@@ -33,7 +32,7 @@ public class Entity : MonoBehaviour
     [HideInInspector]
     public Vector3 destination;//Position a atteind
 
-    [Header("VisualInformations")]
+    [Header("Visual Informations")]
     public GameObject skin;
     public SkinnedMeshRenderer rnd;
     public Material[] stateMats;//Enemy = 0, Neutral = 1, Ally = 2
@@ -42,9 +41,12 @@ public class Entity : MonoBehaviour
     public ParticleSystem[] particlePrefabs;
 
     [Header("UI")]
-    public Image AllyProgressBar;
-    public Gradient StateColors;
-    public Image StateIndicator;
+    public Gradient stateColors;
+    public Image allyProgressBar;
+    public Image progressBar;
+    public float progressBarFadingTime, timeBeforeBarFading;
+    float progressBarFadingTimer, beforeFadingTimer;
+
     public Image mapIndicator;
     public Image focusIndicator;
     public Sprite[] focusImages;//0 player, 1 ally, 2 neutral, 3 enemy
@@ -53,12 +55,6 @@ public class Entity : MonoBehaviour
         health = lifePoints;
 
         anm = skin.GetComponent<Animator>();
-
-        if (type == FirmeType.Amazoon)
-        {
-            baseSpeed = baseSpeed * amazoonSpeedFactor;
-        }
-        currentSpeed = baseSpeed;
 
         AddEntity();
         ChangeEntityStatus();
@@ -77,6 +73,14 @@ public class Entity : MonoBehaviour
         destination.y = destination.y + entityNavMeshAgent.baseOffset;
 
         GetComponent<EntityAttack>().entity = this;
+
+        progressBarFadingTime -= Time.deltaTime;
+        Color allyBarColor = allyProgressBar.color;
+        Color barColor = progressBar.color;
+        allyBarColor.a = 0;
+        barColor.a = 0;
+        allyProgressBar.color = allyBarColor;
+        progressBar.color = barColor;
     }
 
     void Update()
@@ -114,6 +118,24 @@ public class Entity : MonoBehaviour
         {
             isAttracted = false;
         }
+
+        if(beforeFadingTimer <= 0)
+        {
+            if (progressBarFadingTimer > 0)
+            {
+                progressBarFadingTime -= Time.deltaTime;
+                Color allyBarColor = allyProgressBar.color;
+                Color barColor = progressBar.color;
+                allyBarColor.a = progressBarFadingTime / progressBarFadingTimer;
+                barColor.a = progressBarFadingTime / progressBarFadingTimer;
+                allyProgressBar.color = allyBarColor;
+                progressBar.color = barColor;
+            }
+        }
+        else
+        {
+            beforeFadingTimer -= Time.deltaTime;
+        }
     }
 
     void ChangeDestination()
@@ -138,14 +160,12 @@ public class Entity : MonoBehaviour
                                 tempFirme = GameManager.Instance.builder.allFirmesLocations[i];
                             }
                         }
-
                     }
-
                     if (tempFirme != null)
                     {
                         destination = tempFirme.position;
                         target = tempFirme.gameObject;
-                        focusIndicator.sprite = focusImages[3];
+                        focusIndicator.sprite = focusImages[1];
                     }
                 }
                 else
@@ -157,6 +177,7 @@ public class Entity : MonoBehaviour
 
             #region enemy
             case EntityStatus.Enemy:
+
                 possibleTargets = GameObject.FindGameObjectsWithTag("TargetForEnemyEntity");
 
                 if (possibleTargets.Length == 0 || possibleTargets == null)
@@ -188,6 +209,7 @@ public class Entity : MonoBehaviour
                             shortDistance = distance;
                             destination = possibleTargets[i].transform.position;
                             target = possibleTargets[i].gameObject;
+                            focusIndicator.sprite = focusImages[2];
                         }
                     }
                 }
@@ -198,7 +220,7 @@ public class Entity : MonoBehaviour
                 }
                 else
                 {
-                    currentSpeed = baseSpeed;
+                    currentSpeed = enemySpeed;
                 }
 
                 break;
@@ -206,29 +228,29 @@ public class Entity : MonoBehaviour
 
             #region ally
             case EntityStatus.Ally:
+
                 float minDist = Mathf.Infinity;
                 if (GameManager.Instance.builder.allShopsLocations != null)
                 {
                     Transform tempShop = null;
                     for (int i = 0; i < GameManager.Instance.builder.allFirmesLocations.Count; i++)
                     {
-                        if (GameManager.Instance.builder.allFirmesLocations[i] != null)
+                        if (GameManager.Instance.builder.allShopsLocations[i] != null)
                         {
-                            float distance = Vector3.Distance(transform.position, GameManager.Instance.builder.allFirmesLocations[i].position);
+                            float distance = Vector3.Distance(transform.position, GameManager.Instance.builder.allShopsLocations[i].transform.position);
                             if (distance < minDist)
                             {
-                                shortestDistance = distance;
-                                tempShop = GameManager.Instance.builder.allFirmesLocations[i];
+                                minDist = distance;
+                                tempShop = GameManager.Instance.builder.allShopsLocations[i].transform;
                             }
                         }
-
                     }
 
                     if (tempShop != null)
                     {
                         destination = tempShop.position;
                         target = tempShop.gameObject;
-                        focusIndicator.sprite = focusImages[3];
+                        focusIndicator.sprite = focusImages[0];
                     }
                 }
                 else
@@ -258,11 +280,25 @@ public class Entity : MonoBehaviour
                 break;
             case false:
                 health -= _damage;
+                if(health < healthMaxEnm)
+                {
+                    health = healthMaxEnm + 1;
+                }
                 GameObject enemyDamageParticles = Instantiate(particlePrefabs[3].gameObject, transform.position, Quaternion.identity);
                 enemyDamageParticles.transform.parent = particlesParent.transform;
                 Destroy(enemyDamageParticles, enemyDamageParticles.GetComponent<ParticleSystem>().main.duration);
                 break;
         }
+
+        Color allyBarColor = allyProgressBar.color;
+        Color barColor = progressBar.color;
+        allyBarColor.a = 1;
+        barColor.a = 1;
+        allyProgressBar.color = allyBarColor;
+        progressBar.color = barColor;
+        beforeFadingTimer = timeBeforeBarFading;
+        progressBarFadingTimer = progressBarFadingTime;
+
         ChangeEntityStatus();
     }
     public void ChangeEntityStatus()
@@ -274,36 +310,25 @@ public class Entity : MonoBehaviour
             gameObject.tag = "TargetForEnemyEntity";
             anm.SetInteger("Status", 2);
 
-            AllyProgressBar.fillAmount = health / maxHealth;
+            allyProgressBar.fillAmount = health / maxHealth;
             if(health == 0)
             {
-                AllyProgressBar.fillAmount = 0;
+                allyProgressBar.fillAmount = 0;
             }
 
-            StateIndicator.color = StateColors.colorKeys[0].color;
-            mapIndicator.color = StateColors.colorKeys[0].color;
-            currentSpeed = baseSpeed;
-            if (previousStatus == EntityStatus.Neutral)
-            {
-                previousStatus = EntityStatus.Ally;
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
-                rnd.material = stateMats[2];
+            mapIndicator.color = stateColors.colorKeys[2].color;
+            currentSpeed = neutralAllySpeed;
 
-                GameObject convertingParticles = Instantiate(particlePrefabs[2].gameObject, transform.position, Quaternion.identity);
-                convertingParticles.transform.parent = particlesParent.transform;
-                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
-            }
+            rnd.material = stateMats[2];
+
+            GameObject convertingParticles = Instantiate(particlePrefabs[2].gameObject, transform.position, Quaternion.identity);
+            convertingParticles.transform.parent = particlesParent.transform;
+            Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             if (previousStatus == EntityStatus.Enemy)
             {
+                Debug.Log("converted");
                 previousStatus = EntityStatus.Ally;
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
-                rnd.material = stateMats[2];
-
-                GameObject convertingParticles = Instantiate(particlePrefabs[2].gameObject, transform.position, Quaternion.identity);
-                convertingParticles.transform.parent = particlesParent.transform;
-                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             }
         }
         else if (health <= healthMaxEnm)
@@ -313,75 +338,49 @@ public class Entity : MonoBehaviour
             gameObject.tag = "Untagged";
             anm.SetInteger("Status", 0);
 
-            AllyProgressBar.fillAmount = health / maxHealth;
+            allyProgressBar.fillAmount = health / maxHealth;
             if (health == 0)
             {
-                AllyProgressBar.fillAmount = 0;
-            }
-            StateIndicator.color = StateColors.colorKeys[2].color;
-            mapIndicator.color = StateColors.colorKeys[2].color;
-            if (previousStatus == EntityStatus.Neutral)
+                allyProgressBar.fillAmount = 0;
+            } 
+            mapIndicator.color = stateColors.colorKeys[0].color;
+            currentSpeed = enemySpeed;
+
+            if(previousStatus != EntityStatus.Enemy)
             {
                 previousStatus = EntityStatus.Enemy;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
                 rnd.material = stateMats[0];
-
-                GameObject convertingParticles = Instantiate(particlePrefabs[0].gameObject, transform.position, Quaternion.identity);
-                convertingParticles.transform.parent = particlesParent.transform;
-                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             }
-            if (previousStatus == EntityStatus.Ally)
-            {
-                previousStatus = EntityStatus.Enemy;
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, false);
-                rnd.material = stateMats[0];
 
-                GameObject convertingParticles = Instantiate(particlePrefabs[0].gameObject, transform.position, Quaternion.identity);
-                convertingParticles.transform.parent = particlesParent.transform;
-                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
-            }
+            GameObject convertingParticles = Instantiate(particlePrefabs[0].gameObject, transform.position, Quaternion.identity);
+            convertingParticles.transform.parent = particlesParent.transform;
+            Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
         }
         else if (health > healthMaxEnm && health < healthMinAlly)
         {
             status = EntityStatus.Neutral;
             this.gameObject.layer = 11;//neutralLayer;
-            gameObject.tag = "TargetForEnemyEntity";
+            gameObject.tag = "Untagged";
             anm.SetInteger("Status", 1);
 
-            focusIndicator.sprite = focusImages[2];
-
-            AllyProgressBar.fillAmount = health / maxHealth;
+            allyProgressBar.fillAmount = health / maxHealth;
             if (health == 0)
             {
-                AllyProgressBar.fillAmount = 0;
+                allyProgressBar.fillAmount = 0;
             }
-            StateIndicator.color = StateColors.colorKeys[1].color;
-            mapIndicator.color = StateColors.colorKeys[1].color;
-            currentSpeed = baseSpeed;
+            mapIndicator.color = stateColors.colorKeys[1].color;
+            currentSpeed = neutralAllySpeed;
 
+            rnd.material = stateMats[1];
+
+            GameObject convertingParticles = Instantiate(particlePrefabs[1].gameObject, transform.position, Quaternion.identity);
+            convertingParticles.transform.parent = particlesParent.transform;
+            Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             if (previousStatus == EntityStatus.Enemy)
             {
                 previousStatus = EntityStatus.Neutral;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
-                rnd.material = stateMats[1];
-
-                GameObject convertingParticles = Instantiate(particlePrefabs[1].gameObject, transform.position, Quaternion.identity);
-                convertingParticles.transform.parent = particlesParent.transform;
-                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
-            }
-            if (previousStatus == EntityStatus.Ally)
-            {
-                previousStatus = EntityStatus.Neutral;
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, false);
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
-                rnd.material = stateMats[1];
-
-                GameObject convertingParticles = Instantiate(particlePrefabs[1].gameObject, transform.position, Quaternion.identity);
-                convertingParticles.transform.parent = particlesParent.transform;
-                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             }
         }
     }
@@ -390,35 +389,22 @@ public class Entity : MonoBehaviour
         if (health >= healthMinAlly)
         {
             previousStatus = EntityStatus.Ally;
-
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
-            }
             rnd.material = stateMats[2];
         }
         else if (health <= healthMaxEnm)
         {
             previousStatus = EntityStatus.Enemy;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, true);
-            }
             rnd.material = stateMats[0];
         }
         else if (health > healthMaxEnm && health < healthMinAlly)
         {
             previousStatus = EntityStatus.Neutral;
-            if(GameManager.Instance != null)
-            {
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, true);
-            }
             rnd.material = stateMats[1];
         }
     }
     public void ChangeEntitySpeed(float slowFactor, float duration)
     {
-        currentSpeed = baseSpeed * slowFactor;
+        currentSpeed = enemySpeed * slowFactor;
         timerSlow = duration;
     }
     public void AttractEntity(Vector3 attractingPoint, float attrationTime)
@@ -428,34 +414,17 @@ public class Entity : MonoBehaviour
         entityNavMeshAgent.destination = tempAttractingPoint;
         attractingTimer = attrationTime;
     }
-    public void Dead()
+
+    void DestroyEntity()
     {
-        switch (status)
-        {
-            case EntityStatus.Neutral:
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Neutral, false);
-                break;
-            case EntityStatus.Enemy:
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
-                break;
-            case EntityStatus.Ally:
-                GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, false);
-                break;
-            default:
-                break;
-        }
         Destroy(this.gameObject);
     }
-
-    void OnEnable() 
+    void OnEnable()
     {
-        if(GameManager.Instance != null)
-        {
-            GameManager.Instance.EndWave += Dead;
-        }
+        GameManager.Instance.EndWave += DestroyEntity;
     }
     void OnDisable()
     {
-        GameManager.Instance.EndWave -= Dead;
+        GameManager.Instance.EndWave -= DestroyEntity;
     }
 }

@@ -44,6 +44,7 @@ public class EntityAttack : MonoBehaviour
                 {
                     if (enemyIsAttacking == true)
                     {
+
                         if (entity.target != null && Vector3.Distance(transform.position, entity.target.transform.position) <= entityRange +1)
                         {
                             entity.target.GetComponent<Entity>().DamageEntity(enemyAttackDamages, false);
@@ -54,15 +55,17 @@ public class EntityAttack : MonoBehaviour
                 break;
 
             case EntityStatus.Neutral:
+                entity.entityNavMeshAgent.isStopped = false;
+
                 Collider[] firmes = Physics.OverlapSphere(transform.position + Vector3.up, entityRange, neutralDetectionLayer);
+
                 if (entity.target != null)//link between destination and target
                 {
                     if (firmes.Length != 0 && neutralIsEntering == false)
                     {
                         for (int i = 0; i < firmes.Length; i++)
                         {
-                            entity.entityNavMeshAgent.isStopped = true;
-                            entity.anm.SetTrigger("Attack");
+                            firmes[i].GetComponent<Firme>().anm.SetTrigger("GetEntity");
                             timerAnticipation = neutralEntersFirmeTime;
                             neutralIsEntering = true;
                         }
@@ -84,7 +87,7 @@ public class EntityAttack : MonoBehaviour
                                 for (int i = 0; i < firmes.Length; i++)
                                 {
                                     firmes[i].GetComponent<Firme>().GetNewEntity();
-                                    entity.Dead();
+                                    Destroy(this.gameObject);                               
                                 }
                             }
                         }
@@ -93,6 +96,7 @@ public class EntityAttack : MonoBehaviour
                 break;
 
             case EntityStatus.Ally:
+                entity.entityNavMeshAgent.isStopped = false;
 
                 Collider[] artisan = Physics.OverlapSphere(transform.position + Vector3.up, entityRange, allyDetectionLayer);
 
@@ -102,8 +106,6 @@ public class EntityAttack : MonoBehaviour
                     {
                         for (int i = 0; i < artisan.Length; i++)
                         {
-                            entity.entityNavMeshAgent.isStopped = true;
-                            entity.anm.SetTrigger("Attack");
                             timerAnticipation = allyEntersShopTime;
                             allyIsEntering = true;
                         }
@@ -118,14 +120,14 @@ public class EntityAttack : MonoBehaviour
                         if (allyIsEntering == true)
                         {
 
-                            entity.entityNavMeshAgent.isStopped = false;
                             allyIsEntering = false;
                             if (artisan.Length != 0)
                             {
                                 for (int i = 0; i < artisan.Length; i++)
                                 {
                                     GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
-                                    entity.Dead();
+                                    artisan[i].GetComponent<Artisan>().shopAnm.SetTrigger("GetEntity");
+                                    Destroy(this.gameObject);
                                 }
                             }
                         }

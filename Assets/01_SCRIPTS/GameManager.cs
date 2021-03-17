@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCam;
     public GameObject player;
+    [HideInInspector]
     public Vector3 playerStartPosition;
     public GameObject baitManager;
 
@@ -104,10 +105,10 @@ public class GameManager : MonoBehaviour
     #endregion
     public void Retry()
     {
+        builder.ResetShops();
         EventEndWave();
         EventCleanMap();
         ResetShops();
-        GameManager.Instance.builder.RecallModifiedShops();
         waveManager.Reset();
         UIManager.Instance.Play();
         playerStats.SetHealth();
@@ -145,10 +146,10 @@ public class GameManager : MonoBehaviour
 
     void ResetShops()
     {
-        shops = GameObject.FindGameObjectsWithTag("Shop");
-        foreach (GameObject shop in shops)
+        UIManager.Instance.shop.AllShopsDetection();
+        foreach (Collider shopinou in UIManager.Instance.shop.allShops)
         {
-            shop.GetComponent<Artisan>().UnactivateShop();
+            shopinou.gameObject.GetComponent<Artisan>().UnactivateShop();
         }
     }
     void OnEnable()

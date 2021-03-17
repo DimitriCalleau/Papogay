@@ -6,15 +6,13 @@ using UnityEngine.UI;
 
 public class Firme : MonoBehaviour
 {
-    Animator anm;
-    FirmeType corpoType;
-
-    public int modifiedShopIndex;
+    [HideInInspector]
+    public Animator anm;
+    public FirmeType corpoType;
 
     [Header("Spawner")]
     public int nbEntityToSpawn;
     GameObject entityToSpawn;
-    public Image entityBar;
 
     public float timeBetweenSpawn, spawnRadius;
     float timerSpawn;
@@ -23,10 +21,8 @@ public class Firme : MonoBehaviour
     [Header("Death")]
     public float timeBeforeDeath;
 
-    public void InitFirme(FirmeType _firmeType, int _index)
+    public void InitFirme()
     {
-        corpoType = _firmeType;
-        modifiedShopIndex = _index;
 
         anm = GetComponentInChildren<Animator>();
 

@@ -9,5 +9,4 @@ public class WaveStats
     public int nbMaxEnemyEntityOnMap;
     public int nbFirmesThisWave;
     public List<FirmeType> typesDeFirmes;
-    public List<GameObject> firmeToSpawnPrefab;
 }

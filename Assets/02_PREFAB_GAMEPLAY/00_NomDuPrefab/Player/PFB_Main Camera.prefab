@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1fe036723a267945907c05c01e96e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSentivity: 0.1
+  horizontalSentivity: 0.5
   verticalSensitivity: 0.5
   focus: {fileID: 0}
   distance: 25
@@ -236,7 +236,7 @@ MonoBehaviour:
   lastManualRotationTime: 0
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 41216
+    m_Bits: 0
   shakePower: 0.2
   shakeDuration: 0.2
   shake: 0

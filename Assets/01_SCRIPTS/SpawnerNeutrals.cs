@@ -35,7 +35,7 @@ public class SpawnerNeutrals : MonoBehaviour
     void Spawn()
     {
         GameObject newEntity = GameObject.Instantiate(neutralEntities, spawnPosition.position, Quaternion.identity);
-        newEntity.GetComponent<Entity>().Init(50);//0 = enm, 100 = ally, 50 = neutral
+        newEntity.GetComponent<Entity>().Init(60);//0 = enm, 100 = ally, 50 = neutral
         spawnTimer = timeBetweenSpawns;
     }
 
