@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCam;
     public GameObject player;
+    [HideInInspector]
     public Vector3 playerStartPosition;
     public GameObject baitManager;
 
@@ -43,14 +44,14 @@ public class GameManager : MonoBehaviour
     public FirmeBuilder builder = new FirmeBuilder();
 
     public PlayerStats playerStats = new PlayerStats();
-    public GameObject houseFolder;
-    public GameObject neutralEntityPrefab;
     #region Events
     public event Action StartWave;
 
     public float deathTime;
     float deathTimer;
     bool isDying;
+
+    GameObject[] shops;
     void Start()
     {
         if (unpauseAtStart)
@@ -104,10 +105,11 @@ public class GameManager : MonoBehaviour
     #endregion
     public void Retry()
     {
+        builder.ResetShops();
         EventEndWave();
         EventCleanMap();
+        ResetShops();
         waveManager.Reset();
-        builder.ResetShops();
         UIManager.Instance.Play();
         playerStats.SetHealth();
         isDying = false;
@@ -141,6 +143,15 @@ public class GameManager : MonoBehaviour
         isDying = true;
     }
 
+
+    void ResetShops()
+    {
+        UIManager.Instance.shop.AllShopsDetection();
+        foreach (Collider shopinou in UIManager.Instance.shop.allShops)
+        {
+            shopinou.gameObject.GetComponent<Artisan>().UnactivateShop();
+        }
+    }
     void OnEnable()
     {
         StartWave += waveManager.StartWave;

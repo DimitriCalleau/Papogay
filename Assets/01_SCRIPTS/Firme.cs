@@ -6,17 +6,14 @@ using UnityEngine.UI;
 
 public class Firme : MonoBehaviour
 {
-    Animator anm;
-    FirmeType corpoType;
-    FirmeSize firmeSize;
-    public float defaultHealth;
-    float health;
-    public Image healthbar;
-
-    public int modifiedHouseIndex;
+    [HideInInspector]
+    public Animator anm;
+    public FirmeType corpoType;
 
     [Header("Spawner")]
+    public int nbEntityToSpawn;
     GameObject entityToSpawn;
+
     public float timeBetweenSpawn, spawnRadius;
     float timerSpawn;
     bool canSpawn;
@@ -24,24 +21,20 @@ public class Firme : MonoBehaviour
     [Header("Death")]
     public float timeBeforeDeath;
 
-    [Header("VFX")]
-    public ParticleSystem damagedParticles;
-    public void InitFirme(FirmeType _firmeType, FirmeSize _size, int _index)
+    public void InitFirme()
     {
-        corpoType = _firmeType;
-        firmeSize = _size;
-        modifiedHouseIndex = _index;
 
         anm = GetComponentInChildren<Animator>();
-        health = defaultHealth;
-        healthbar.fillAmount = (health / defaultHealth);
-        timerSpawn = timeBetweenSpawn;
-        entityToSpawn = GameManager.Instance.builder.SelectEntity(corpoType);
+
         canSpawn = true;
+        timerSpawn = timeBetweenSpawn;
+
+        nbEntityToSpawn = 0;
+        entityToSpawn = GameManager.Instance.builder.entityPrefab;
     }
     void Update()
     {
-        if (timerSpawn <= 0 && entityToSpawn != null && canSpawn == true)
+        if (nbEntityToSpawn > 0 && entityToSpawn != null && canSpawn == true && timerSpawn <= 0)
         {
             SpawnEntity(ChooseSpawnPointEntity(spawnRadius));
         }
@@ -63,47 +56,31 @@ public class Firme : MonoBehaviour
     }
     void SpawnEntity(Vector3 _spawnPoint)
     {
-        if(GameManager.Instance.waveManager.nbEntities < GameManager.Instance.builder.nbEntityMaxThisWave)
-        {
-            GameObject newEntity = GameObject.Instantiate(entityToSpawn, _spawnPoint, Quaternion.identity);
-            newEntity.GetComponent<Entity>().Init(0);//0 = enm, 100 = ally, 50 = neutral
-            timerSpawn = timeBetweenSpawn;
-            anm.SetTrigger("Spawn");
-        }
+        GameObject newEntity = GameObject.Instantiate(entityToSpawn, _spawnPoint, Quaternion.identity);
+        newEntity.GetComponent<Entity>().Init(0);//0 = enm, 100 = ally, 50 = neutral
+        timerSpawn = timeBetweenSpawn;
+        anm.SetTrigger("Spawn");
+        nbEntityToSpawn -= 1;
     }
-    public void DamageFirme(int _damages)
-    {
-        health -= _damages;
-        healthbar.fillAmount = (health / defaultHealth);
-        anm.SetTrigger("Damages");
-        damagedParticles.Play();
-        if (health <= 0 && canSpawn == true)
-        {
-            StartCorpoDestruction();
-        }
-    }
-
     void StartCorpoDestruction()
     {
         canSpawn = false;
         GameManager.Instance.builder.allFirmesLocations.Remove(this.transform);
         anm.SetBool("Destroy", true);
         Destroy(this.gameObject, timeBeforeDeath);
-        GameManager.Instance.builder.RecallModifiedHouses(modifiedHouseIndex, firmeSize);
     }
 
-    //for safety
-    void DestroyCorpo()
+    public void GetNewEntity()
     {
-        Destroy(this.gameObject);
+        nbEntityToSpawn += 1;
     }
 
     void OnEnable()
     {
-        GameManager.Instance.CleanMap += DestroyCorpo;
+        GameManager.Instance.EndWave += StartCorpoDestruction;
     }   
     void OnDisable()
     {
-        GameManager.Instance.CleanMap -= DestroyCorpo;
+        GameManager.Instance.EndWave -= StartCorpoDestruction;
     }
 }

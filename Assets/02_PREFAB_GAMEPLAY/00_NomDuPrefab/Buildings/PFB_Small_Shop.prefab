@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1704579059}
   - component: {fileID: 1704579058}
   - component: {fileID: 1704579057}
+  - component: {fileID: 387347405445646539}
   m_Layer: 0
   m_Name: AnimatedPart
   m_TagString: Untagged
@@ -101,6 +102,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &387347405445646539
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704579055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 10, z: 10}
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!1 &2763738340629957896
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,9 +366,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5997452331869352494}
   - component: {fileID: 5997452331869352491}
+  - component: {fileID: 767678468437964515}
   m_Layer: 13
-  m_Name: PFB_Small_Shop
-  m_TagString: Untagged
+  m_Name: PFB_Shop
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -387,8 +402,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 20, y: 40, z: 20}
+  m_Center: {x: 0, y: 20, z: 0}
+--- !u!114 &767678468437964515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997452331869352490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8551540fd473e41a0a5b953ba8f71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneIndex: 0
+  shopAnm: {fileID: 1704579057}
+  activatedTag: Shop
+  unactivatedTag: Untagged
 --- !u!1 &5997452332050381283
 GameObject:
   m_ObjectHideFlags: 0

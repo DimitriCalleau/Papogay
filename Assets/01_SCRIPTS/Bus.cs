@@ -7,9 +7,9 @@ public class Bus : Baits
 {
     public float range;
     Collider[] Enemies;
-    int entityCount;
+    //int entityCount;
     public float departureTime, arrivingTime, travelingTime;
-    bool isTraveling, hasArrived;
+    bool isTraveling;
     public float timeBetweenSpawns;
     float timer;
     public void SetCollider()
@@ -27,6 +27,10 @@ public class Bus : Baits
             if(timer < travelingTime)
             {
                 timer += Time.deltaTime;
+            }
+            else
+            {
+                isTraveling = false;
             }
         }
         if(isTraveling == false)

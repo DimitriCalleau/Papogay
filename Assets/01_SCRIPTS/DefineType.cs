@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum BaitType { PaperBoy, FruitBox, Sign, MarketStand, Perfume, Militant, Bar, Bus}
 public enum FirmeType { Carrouf, FastRegal, Sinpharo, NormalGym, Banana, Amazoon }
-public enum FirmeSize { Small, Medium, Big }
+public enum BuildingSize { Small, Big }
 public enum EntityStatus { Neutral, Enemy, Ally }
 public class DefineType
 {

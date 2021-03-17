@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1704579059}
   - component: {fileID: 1704579058}
   - component: {fileID: 1704579057}
+  - component: {fileID: 387347405445646539}
   m_Layer: 0
   m_Name: AnimatedPart
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6327837999411396362}
-  - {fileID: 584160782834598088}
+  - {fileID: 4061816809114536401}
   m_Father: {fileID: 5997452331869352494}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,6 +102,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &387347405445646539
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704579055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 10, z: 10}
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!1 &2763738340629957896
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,9 +366,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5997452331869352494}
   - component: {fileID: 5997452331869352491}
+  - component: {fileID: 767678468437964515}
   m_Layer: 13
   m_Name: PFB_Big_Shop
-  m_TagString: Untagged
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -387,8 +402,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 30, y: 40, z: 20}
+  m_Center: {x: 0, y: 20, z: 0}
+--- !u!114 &767678468437964515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997452331869352490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8551540fd473e41a0a5b953ba8f71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopAnm: {fileID: 1704579057}
+  size: 1
+  activatedTag: Shop
+  unactivatedTag: Untagged
 --- !u!1 &5997452332050381283
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +765,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1001 &9221068514664604441
+--- !u!1001 &5742919692473264640
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -818,9 +849,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97155bf8040091e4c8a2dc27354ef30f, type: 3}
---- !u!4 &584160782834598088 stripped
+--- !u!4 &4061816809114536401 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8641435537909834705, guid: 97155bf8040091e4c8a2dc27354ef30f,
     type: 3}
-  m_PrefabInstance: {fileID: 9221068514664604441}
+  m_PrefabInstance: {fileID: 5742919692473264640}
   m_PrefabAsset: {fileID: 0}

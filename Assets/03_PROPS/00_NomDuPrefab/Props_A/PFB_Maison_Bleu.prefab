@@ -85,7 +85,6 @@ GameObject:
   - component: {fileID: 5975956614317357786}
   - component: {fileID: 1006201893867532523}
   - component: {fileID: 3921985723482168004}
-  - component: {fileID: 1806078166612638250}
   m_Layer: 0
   m_Name: Maison_Bleu
   m_TagString: Untagged
@@ -158,25 +157,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &1806078166612638250
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5364918034496704365}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f1fa719d88386c74d804ecebc805b9b9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7612889130275555938
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +359,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9042448395825256320}
   - component: {fileID: 2670378500933259652}
-  - component: {fileID: -4355395565335762665}
   m_Layer: 8
   m_Name: PFB_Maison_Bleu
   m_TagString: Untagged
@@ -417,21 +396,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 40, z: 19.825}
   m_Center: {x: 0, y: 20, z: 0}
---- !u!114 &-4355395565335762665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8518253325920455994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a78cd11c16c681846ad04cf77a5323a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  houseTag: SmallHouse
-  zone: 0
-  timeBeforeRecall: 0.5
 --- !u!1001 &3984150019432512730
 PrefabInstance:
   m_ObjectHideFlags: 0

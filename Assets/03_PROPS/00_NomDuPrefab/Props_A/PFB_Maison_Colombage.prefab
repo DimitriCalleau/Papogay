@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 565599321685810428}
   - component: {fileID: 8774144009153495481}
-  - component: {fileID: -6792987311248635244}
   m_Layer: 8
   m_Name: PFB_Maison_Colombage
   m_TagString: Untagged
@@ -48,21 +47,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 38, z: 20}
   m_Center: {x: 0, y: 19, z: 0}
---- !u!114 &-6792987311248635244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 905990136045012550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a78cd11c16c681846ad04cf77a5323a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  houseTag: SmallHouse
-  zone: 0
-  timeBeforeRecall: 0.5
 --- !u!1 &5410487721202163921
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +225,6 @@ GameObject:
   - component: {fileID: 691566685122389100}
   - component: {fileID: 203214750055323955}
   - component: {fileID: 6106869067602849252}
-  - component: {fileID: 2272665332325008861}
   m_Layer: 0
   m_Name: Maison_Colombage
   m_TagString: Untagged
@@ -333,25 +316,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &2272665332325008861
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7070328517800979204}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f1fa719d88386c74d804ecebc805b9b9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7141657974819067238
 GameObject:
   m_ObjectHideFlags: 0

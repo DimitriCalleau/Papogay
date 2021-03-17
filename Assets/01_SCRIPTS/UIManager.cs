@@ -18,7 +18,6 @@ public class UIManager : MonoBehaviour
             return instance;
         }
     }
-
     private void Awake()
     {
         if (instance != null && instance != this)

@@ -9,132 +9,159 @@ public class WaveManager
     public bool startWave;
 
     [HideInInspector]
-    public int nbAllyEntities;
-    [HideInInspector]
-    public int nbNeutralEntities;
+    public int nbEntityInShops;
     [HideInInspector]
     public int nbEnemyEntities;
     [HideInInspector]
     public int nbEntities;
 
-    public LayerMask entitylayers = -1;
-
     [HideInInspector]
     public int waveindex;
-    [HideInInspector]
-    public int zoneIndex = 0;
-    public GameObject[] locationZones;
+
+    public GameObject[] zones;
     public GameObject[] blocageZones;
+    public Vector3[] playerStartPositions;
     public void AddRemoveEntity(EntityStatus status, bool addOrRemove)
     {
         if(addOrRemove == true)
         {
             switch (status)
             {
-                case EntityStatus.Neutral:
-                    nbNeutralEntities += 1;
-                    break;
                 case EntityStatus.Enemy:
                     nbEnemyEntities += 1;
                     break;
                 case EntityStatus.Ally:
-                    nbAllyEntities += 1;
-                    break;
-                default:
-                    break;
-            }
+                    nbEntityInShops += 1;
+                    break;            }
         }
         else if (addOrRemove == false)
         {
             switch (status)
             {
-                case EntityStatus.Neutral:
-                    nbNeutralEntities -= 1;
-                    break;
                 case EntityStatus.Enemy:
                     nbEnemyEntities -= 1;
                     break;
                 case EntityStatus.Ally:
-                    nbAllyEntities -= 1;
-                    break;
-                default:
+                    nbEntityInShops -= 1;
                     break;
             }
         }
-        nbEntities = nbAllyEntities + nbNeutralEntities + nbEnemyEntities;
 
-        if (nbEntities > 0)
+        if (nbEntityInShops > 0)
         {
-            float floatEnm = nbEnemyEntities;
-            float floatAlly = nbAllyEntities;
-            float floatGeneral = GameManager.Instance.builder.nbEntityMaxThisWave;
+            float floatAlly = nbEntityInShops;
 
-            UIManager.Instance.allyEntityBar.fillAmount = floatAlly / floatGeneral;
-            UIManager.Instance.enemyEntityBar.fillAmount = floatEnm / floatGeneral;
+            float floatMinAlly = GameManager.Instance.builder.waveStats[waveindex].nbMinAllyEntityInShop;
+
+            UIManager.Instance.allyEntityBar.fillAmount = floatAlly / floatMinAlly;
             CheckEntityRatio();
         }
         else
         {
             UIManager.Instance.allyEntityBar.fillAmount = 0;
+        }
+
+        if(nbEnemyEntities > 0)
+        {
+            float floatEnm = nbEnemyEntities;
+
+            float floatMaxEnemy = GameManager.Instance.builder.waveStats[waveindex].nbMaxEnemyEntityOnMap;
+
+            UIManager.Instance.enemyEntityBar.fillAmount = floatEnm / floatMaxEnemy;
+
+            CheckEntityRatio();
+        }
+        else
+        {
             UIManager.Instance.enemyEntityBar.fillAmount = 0;
         }
     }
-
     public void StartWave()
     {
-        if(locationZones[waveindex] != null)
+        nbEntityInShops = 0;
+        nbEnemyEntities = 0;
+
+        UIManager.Instance.enemyEntityBar.fillAmount = 0;
+        UIManager.Instance.allyEntityBar.fillAmount = 0;
+
+        GameManager.Instance.playerStartPosition = playerStartPositions[waveindex];
+
+        if (zones[waveindex] != null)
         {
-            zoneIndex += 1;
-            locationZones[waveindex].SetActive(true);
-            for (int i = 0; i < GameManager.Instance.houseFolder.transform.childCount; i++)
+
+            for (int i = 0; i < zones.Length; i++)
             {
-                Transform tempSlect = GameManager.Instance.houseFolder.transform.GetChild(i);
-                tempSlect.GetComponent<Houses>().ActivateTag(zoneIndex);
-            }
-            if (blocageZones[waveindex] != null)
-            {
-                blocageZones[waveindex].SetActive(false);
+                if(i == waveindex)
+                {
+                    zones[i].SetActive(true);
+                }
+                else
+                {
+                    zones[i].SetActive(false); 
+                }
             }
         }
-        GameManager.Instance.builder.ReplaceHousesBycorporations(waveindex);
+
+        if(blocageZones[waveindex] != null)
+        {
+            for (int i = 0; i < blocageZones.Length; i++)
+            {
+                if (i == waveindex)
+                {
+                    if (blocageZones[i] != null)
+                    {
+                        blocageZones[i].SetActive(false);
+                    }
+                }
+                else
+                {
+                    if (blocageZones[i] != null)
+                    {
+                        blocageZones[i].SetActive(true);
+                    }
+                }
+            }
+        }
+        GameManager.Instance.builder.SpawnSpawner();
+        GameManager.Instance.builder.ReplaceShopByCorpo();
     }
 
     public void Reset()
     {
-        for (int i = 0; i < locationZones.Length; i++)
-        {
-            if (locationZones[i] != null)
-            {
-                locationZones[i].SetActive(false);
-                for (int j = 0; j < GameManager.Instance.houseFolder.transform.childCount; j++)
-                {
-                    Transform tempSlect = GameManager.Instance.houseFolder.transform.GetChild(j);
-                    tempSlect.GetComponent<Houses>().Unactivate();
-                }
-                if (blocageZones[i] != null)
-                {
-                    blocageZones[i].SetActive(true);
-                }
-            }
-        }
         waveindex = 0;
-        zoneIndex = 0;
-        nbAllyEntities = 0;
-        nbNeutralEntities = 0;
-        nbEnemyEntities = 0;
-        UIManager.Instance.waveIndexIndicator.text = "Vague " + waveindex;
+
+        UIManager.Instance.waveIndexIndicator.text = "Vague " + 1;
     }
 
     public void IncreaseWaveIndex()
     {
         waveindex += 1;
-        UIManager.Instance.waveIndexIndicator.text = "Vague " + waveindex;
+        UIManager.Instance.waveIndexIndicator.text = "Vague " + (waveindex + 1);
     }
 
     public void CheckEntityRatio()
     {
-        if(nbEnemyEntities == GameManager.Instance.builder.nbEntityMaxThisWave)
+        if( nbEntityInShops == GameManager.Instance.builder.waveStats[waveindex].nbMinAllyEntityInShop)
         {
+            if(waveindex >= GameManager.Instance.builder.waveStats.Count)
+            {
+                GameManager.Instance.EventWin();
+            }
+            else
+            {
+                GameManager.Instance.builder.RecallModifiedShops();
+                GameManager.Instance.EventEndWave();
+            }
+        }
+
+
+        if (nbEnemyEntities == GameManager.Instance.builder.waveStats[waveindex].nbMaxEnemyEntityOnMap)
+        {
+            UIManager.Instance.shop.AllShopsDetection();
+            foreach (Collider shopinou in UIManager.Instance.shop.allShops)
+            {
+                shopinou.gameObject.GetComponent<Artisan>().UnactivateShop();
+            }
             GameManager.Instance.EventLose();
         }
     }
