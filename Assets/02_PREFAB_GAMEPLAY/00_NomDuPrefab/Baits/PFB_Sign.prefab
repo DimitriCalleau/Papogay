@@ -467,12 +467,14 @@ MonoBehaviour:
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 402847522312469766}
   ui_UsureAmountText: {fileID: 402847522459045484}
+  baitDescription: "Faux panneau publicitaire : Attire les entit\xE9s neutres ou
+    ennemies qui passent devant."
   damages: 
   cooldown: []
   countdown: 0
   ennemisMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   colliderSize: {x: 10, y: 11, z: 20}
   gatheringPoint: {x: 0, y: 0, z: 3}
   rotatedColliderSize: {x: 10, y: 11, z: 20}

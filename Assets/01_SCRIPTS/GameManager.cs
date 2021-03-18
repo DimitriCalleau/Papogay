@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
     #endregion
     public void Retry()
     {
-        builder.ResetShops();
+        builder.ResetWaveShops();
         EventEndWave();
         EventCleanMap();
         ResetShops();
@@ -146,6 +146,10 @@ public class GameManager : MonoBehaviour
 
     void ResetShops()
     {
+        for (int i = 0; i < waveManager.zoneFolder.transform.childCount; i++)
+        {
+            waveManager.zoneFolder.transform.GetChild(i).gameObject.SetActive(true);
+        }
         UIManager.Instance.shop.AllShopsDetection();
         foreach (Collider shopinou in UIManager.Instance.shop.allShops)
         {
@@ -155,9 +159,11 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         StartWave += waveManager.StartWave;
+        EndWave += builder.ResetWaveShops;
     }
     void OnDisable()
     {
         StartWave -= waveManager.StartWave;
+        EndWave += builder.ResetWaveShops;
     }
 }

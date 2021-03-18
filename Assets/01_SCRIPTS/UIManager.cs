@@ -50,9 +50,6 @@ public class UIManager : MonoBehaviour
     public GameObject rewardPanel;
     public GameObject rewardButton;
     public GameObject firstTrapsButton;
-    public GameObject shopPanel;
-    public GameObject shopLayout;
-    public GameObject upgradeLayout;
     public GameObject inventoryPanel;
     public GameObject pausePanel;
     public GameObject winPanel;
@@ -62,6 +59,12 @@ public class UIManager : MonoBehaviour
     public GameObject creditsPanel;
     public GameObject mapPanel;
     #endregion
+
+    [Header("Shop")]
+    public GameObject shopPanel;
+    public GameObject shopLayout;
+    public GameObject upgradeLayout;
+    public TextMeshProUGUI baitDescription;
 
     [Header("Money")]
     public TextMeshProUGUI goldText;
@@ -170,7 +173,6 @@ public class UIManager : MonoBehaviour
         rewardPanel.SetActive(false);
         firstTrapsButton.SetActive(false);
         CursorState(true);
-        GameManager.Instance.player.GetComponent<PlayerMovementController>().hasRetried = true;
     }
     public void AddReward()
     {
