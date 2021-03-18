@@ -7601,11 +7601,11 @@ MonoBehaviour:
     - {fileID: 165665749172826155, guid: c0956608f7882a3479862336cb14be00, type: 3}
     - {fileID: 165665749172826155, guid: df3a35cfacdb8c248b14b3a8ad967425, type: 3}
     waveStats:
-    - nbMinAllyEntityInShop: 3
+    - nbMinAllyEntityInShop: 20
       nbMaxEnemyEntityOnMap: 15
       nbFirmesThisWave: 1
       typesDeFirmes: 00000000
-    - nbMinAllyEntityInShop: 3
+    - nbMinAllyEntityInShop: 20
       nbMaxEnemyEntityOnMap: 15
       nbFirmesThisWave: 2
       typesDeFirmes: 0200000000000000
