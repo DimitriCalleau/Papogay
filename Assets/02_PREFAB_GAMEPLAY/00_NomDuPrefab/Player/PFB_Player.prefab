@@ -597,6 +597,7 @@ GameObject:
   - component: {fileID: 8415566384949220082}
   - component: {fileID: 8415566384949220081}
   - component: {fileID: 661149736}
+  - component: {fileID: 2952658563321227716}
   m_Layer: 0
   m_Name: PFB_Player
   m_TagString: Untagged
@@ -677,6 +678,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 4, z: 0}
+--- !u!114 &2952658563321227716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8415566384949220093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6c83ff7e21d5940bbe8b2901a43866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: cd896157843d88f4388db35fd58adeaf, type: 2}
+  _camera: {fileID: 766921223989089180, guid: 449c4e3ae1e5d3b4e9843195f6079b13, type: 3}
+  rayMaskLayer:
+    serializedVersion: 2
+    m_Bits: 131072
 --- !u!1 &8415566385876149300
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,15 +862,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd745a026d97ee4f91e86d59bd8a791, type: 3}
---- !u!4 &3476153590149671383 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bfd745a026d97ee4f91e86d59bd8a791,
-    type: 3}
-  m_PrefabInstance: {fileID: 4014816374679178812}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4284638386312033133 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bfd745a026d97ee4f91e86d59bd8a791,
+    type: 3}
+  m_PrefabInstance: {fileID: 4014816374679178812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3476153590149671383 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bfd745a026d97ee4f91e86d59bd8a791,
     type: 3}
   m_PrefabInstance: {fileID: 4014816374679178812}
   m_PrefabAsset: {fileID: 0}
