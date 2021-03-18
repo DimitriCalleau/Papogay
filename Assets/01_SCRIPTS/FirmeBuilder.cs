@@ -43,12 +43,12 @@ public class FirmeBuilder
         allFirmesLocations.Clear();
         int firmeSpawnIndex = 0;
 
-        //Find Houses
         if (waveStats.Count > 0)
         {
             nbFirmesThisWave = waveStats[currentWaveIndex].nbFirmesThisWave;
         }
         buildShop = GameObject.FindGameObjectsWithTag("Shop");
+
 
         for (int i = 0; i < nbFirmesThisWave; i++)
         {
@@ -78,6 +78,7 @@ public class FirmeBuilder
             shopinou.gameObject.GetComponent<Artisan>().ActivateShop();
         }
         allShopsLocations = GameObject.FindGameObjectsWithTag("Shop");
+
     }
 
     public void RecallModifiedShops()
@@ -90,7 +91,6 @@ public class FirmeBuilder
         {
             buildShop[i].SetActive(true);
         }
-        UIManager.Instance.shop.hasNewBaitToAdd = true;
     }
 
     public void ResetWaveShops()

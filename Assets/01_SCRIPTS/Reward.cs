@@ -14,5 +14,6 @@ public class Reward
         UIManager.Instance.allCurrentBaits.Add(newSlot);
         GameManager.Instance.playerStats.gold += _goldReward;
         UIManager.Instance.inventory.SwitchBaitSelection(new Vector2(0, 1));
+        UIManager.Instance.UpdateInventorySize();
     }
 }

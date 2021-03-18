@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
 
     public PlayerStats playerStats = new PlayerStats();
     #region Events
-    public event Action StartWave;
 
     public float deathTime;
     float deathTimer;
@@ -59,6 +58,8 @@ public class GameManager : MonoBehaviour
             gameState.pause = false;
         }
     }
+    public event Action StartWave;
+
     public void EventStartWave()
     {
         if (StartWave != null)

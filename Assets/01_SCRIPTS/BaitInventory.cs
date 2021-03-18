@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class BaitInventory
 {
-    public Slot selection;
+    public Slot selection, oldSelection;
     public int selectionIndex;
     public void SwitchBaitSelection(Vector2 rightOrLeft)
     {
         if (UIManager.Instance.inventoryOpened == true)
         {
-            if(rightOrLeft.y > 0)
+            if (UIManager.Instance.allCurrentBaits.Count > 0)
+            {
+                oldSelection = UIManager.Instance.allCurrentBaits[selectionIndex];
+            }
+            if (rightOrLeft.y > 0)
             {
                 selectionIndex += 1;
                 if (selectionIndex == UIManager.Instance.allCurrentBaits.Count)
@@ -30,6 +34,11 @@ public class BaitInventory
         if (UIManager.Instance.allCurrentBaits.Count > 0)
         {
             selection = UIManager.Instance.allCurrentBaits[selectionIndex];
+            selection.inventorySlotAnimator.SetBool("Selected", true);
+            if (oldSelection != null)
+            {
+                oldSelection.inventorySlotAnimator.SetBool("Selected", false);
+            }
         }
     }
 

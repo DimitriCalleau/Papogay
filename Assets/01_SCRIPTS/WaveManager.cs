@@ -90,7 +90,6 @@ public class WaveManager
 
         if (zones[waveindex] != null)
         {
-
             for (int i = 0; i < zones.Length; i++)
             {
                 if(i == waveindex)
@@ -141,7 +140,7 @@ public class WaveManager
         UIManager.Instance.waveIndexIndicator.text = "Vague " + (waveindex + 1);
     }
 
-    public void CheckEntityRatio()
+    void CheckEntityRatio()
     {
         if (nbEnemyEntities == GameManager.Instance.builder.waveStats[waveindex].nbMaxEnemyEntityOnMap)
         {
@@ -160,12 +159,13 @@ public class WaveManager
 
         if ( nbEntityInShops == GameManager.Instance.builder.waveStats[waveindex].nbMinAllyEntityInShop)
         {
-            if(waveindex >= GameManager.Instance.builder.waveStats.Count)
+            if ((waveindex + 1) >= GameManager.Instance.builder.waveStats.Count)
             {
                 GameManager.Instance.EventWin();
             }
             else
             {
+                UIManager.Instance.shop.hasNewBaitToAdd = true;
                 GameManager.Instance.builder.RecallModifiedShops();
                 GameManager.Instance.EventEndWave();
             }

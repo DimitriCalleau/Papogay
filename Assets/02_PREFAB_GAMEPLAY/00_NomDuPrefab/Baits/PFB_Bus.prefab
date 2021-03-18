@@ -64,7 +64,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 13
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -257,41 +257,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 7
   upgradeIndex: 0
-  nbUpgradeMax: 0
+  nbUpgradeMax: 3
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 0, z: 0}
   offsetHeightCollider: 0
   offsetForwardCollider: 0
-  timeBeforeSpawn: 0
-  usure: 0
-  currentUsureMax: 0
-  usureMax: []
-  usurePercentage: 0
-  costs: 
-  currentCost: 0
-  upgradeCosts: 
-  currentUpgradeCost: 0
+  timeBeforeSpawn: 2
+  usure: 10
+  currentUsureMax: 10
+  usureMax:
+  - 10
+  - 15
+  - 20
+  usurePercentage: 10
+  costs: 320000004600000064000000
+  currentCost: 50
+  upgradeCosts: 2c01000090010000f4010000
+  currentUpgradeCost: 300
   ui_Sprites:
   - {fileID: 21300000, guid: 8e80ebbf5de666340aa7c13217409b55, type: 3}
   - {fileID: 21300000, guid: 29ddc841757ec6b43a94632e02ba0244, type: 3}
   - {fileID: 21300000, guid: 87d7757805aa2164c8bbac9ff0d2b3d1, type: 3}
-  ui_UsureBar: {fileID: 0}
-  ui_healthBar: {fileID: 0}
-  ui_UsureAmountText: {fileID: 0}
+  ui_UsureBar: {fileID: 3451081593875598430}
+  ui_healthBar: {fileID: 6114404994846417184}
+  ui_UsureAmountText: {fileID: 4328660632056072306}
   baitDescription: "Bus : Embarque toute les entit\xE9s \xE0 proximit\xE9 et leur
     donne de l'esprit critique jusqu'a les rendre alli\xE9es, puis fait r\xE9appara\xEEtre
     ces entit\xE9s."
-  damages: 
-  cooldown: []
-  countdown: 0
+  damages: 64000000c80000002c010000
+  cooldown:
+  - 30
+  - 40
+  - 50
+  countdown: 30
   ennemisMask:
     serializedVersion: 2
     m_Bits: 3072
-  range: 0
-  departureTime: 0
+  range: 30
+  departureTime: 5
   arrivingTime: 0
-  travelingTime: 0
-  timeBetweenSpawns: 0
+  travelingTime: 20
+  timeBetweenSpawns: 0.2
 --- !u!33 &4488611761184861894
 MeshFilter:
   m_ObjectHideFlags: 0

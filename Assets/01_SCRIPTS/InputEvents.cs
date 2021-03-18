@@ -40,6 +40,8 @@ public class InputEvents : MonoBehaviour
         playerInputs.Actions.MoveCam.canceled += ctx => OnMoveCam(Vector2.zero);
 
         playerInputs.Actions.Escape.performed += ctx => OnPause();
+
+        playerInputs.Actions.Skip.performed += ctx => OnSkip();
     }
 
     //Place Bait
@@ -111,6 +113,14 @@ public class InputEvents : MonoBehaviour
         if (MoveCam != null)
         {
             MoveCam(camMovement);
+        }
+    }
+    public event Action Skip;
+    void OnSkip()
+    {
+        if (Skip != null)
+        {
+            Skip();
         }
     }
 

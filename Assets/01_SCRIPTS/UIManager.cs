@@ -155,8 +155,11 @@ public class UIManager : MonoBehaviour
                 preview.HidePreview(true);
             }
 
-            preview.MovePreview(selectedLocation,  baitManager.baitRotation, inventory.selection.baitPrefab.GetComponent<MeshFilter>().sharedMesh);
-            UIManager.Instance.inventory.selection.UpdatePreviewMesh();
+            if(selectedLocation != null)
+            {
+                preview.MovePreview(selectedLocation, baitManager.baitRotation, inventory.selection.baitPrefab.GetComponent<MeshFilter>().sharedMesh);
+                UIManager.Instance.inventory.selection.UpdatePreviewMesh();
+            }
         }
         shop.DetectCloseShop();
     }
@@ -164,7 +167,6 @@ public class UIManager : MonoBehaviour
     public void AddFirstTraps()
     {
         reward.AddBait(BaitType.PaperBoy, 10, 0);
-        reward.AddBait(BaitType.FruitBox, 10, 0);
         inventory.SwitchBaitSelection(new Vector2(0, 1));
         GameManager.Instance.EventStartWave();
         GameManager.Instance.gameState.SetPause(false);
@@ -261,6 +263,17 @@ public class UIManager : MonoBehaviour
             shopOpened = false;
         }
     }
+
+    void SkipWave()
+    {
+        GameManager.Instance.EventEndWave();
+        shopOpened = true;
+        shop.hasNewBaitToAdd = true;
+        shop.baitHasBeenTaken = true;
+        AddReward();
+        CloseShop();
+    }
+
     public void OpenCloseMap()
     {
         switch (mapOpened)
@@ -290,6 +303,15 @@ public class UIManager : MonoBehaviour
         healthBarClosingTimer = healthBarClosingTime;
     }
 
+    public void UpdateInventorySize()
+    {
+        int nbSlots = inventoryPanel.transform.childCount;
+        float xOffset = inventoryPanel.GetComponent<GridLayoutGroup>().spacing.x;
+        float slotSize = inventoryPanel.GetComponent<GridLayoutGroup>().cellSize.x;
+        float panelHeight = inventoryPanel.GetComponent<RectTransform>().rect.height;
+        float panelWidth = nbSlots * xOffset + nbSlots * slotSize + xOffset;
+        inventoryPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(panelWidth, panelHeight);
+    } 
     public void CloseHealthBar()
     {
         float closingTimePercentage = healthBarClosingTimer/healthBarClosingTime;
@@ -436,6 +458,7 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.OpenMap += OpenCloseMap;
         GameManager.Instance.Win += OpenWinPanel;
         GameManager.Instance.Lose += OpenLosePanel;
+        InputEvents.Instance.Skip += SkipWave;
     }
     void OnDisable()
     {
@@ -449,5 +472,6 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.OpenMap -= OpenCloseMap;
         GameManager.Instance.Win -= OpenWinPanel;
         GameManager.Instance.Lose -= OpenLosePanel;
+        InputEvents.Instance.Skip -= SkipWave;
     }
 }

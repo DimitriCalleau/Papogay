@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 [System.Serializable]
 public class Slot
 {
+    public Animator inventorySlotAnimator;
     public BaitType type;
     public GameObject baitPrefab;
     public int nbBaits;
@@ -32,12 +33,14 @@ public class Slot
         upgradeCost = thisBait.currentUpgradeCost;
         currentUIImage = thisBait.ui_Sprites[thisBait.upgradeIndex];
         baitDescription = thisBait.baitDescription;
+
         if (thisBait.upgradeIndex < thisBait.nbUpgradeMax - 1)
         {
             currentUpgradeImage = thisBait.ui_Sprites[thisBait.upgradeIndex + 1];
         }
         thisInventorySlot = GameObject.Instantiate(UIManager.Instance.inventorySlotPrefab);
         thisInventorySlot.transform.SetParent(UIManager.Instance.inventoryPanel.transform);
+        inventorySlotAnimator = thisInventorySlot.transform.GetChild(1).GetComponent<Animator>();
 
         //Slot pour acheter des appats
         thisShopSlot = GameObject.Instantiate(UIManager.Instance.shopSlotPrefab);
@@ -53,7 +56,7 @@ public class Slot
     }
     void UpdateDisplay()
     {
-        thisInventorySlot.GetComponent<Image>().sprite = currentUIImage;
+        thisInventorySlot.transform.GetChild(1).GetComponent<Image>().sprite = currentUIImage;
         thisInventorySlot.GetComponentInChildren<Text>().text = nbBaits.ToString();
         thisShopSlot.GetComponent<Image>().sprite = currentUIImage;
         thisShopSlot.GetComponentInChildren<Text>().text = currentCost.ToString();

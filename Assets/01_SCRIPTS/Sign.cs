@@ -34,7 +34,6 @@ public class Sign : Baits
         Enemies = Physics.OverlapBox(colliderCenter, rotatedColliderSize, Quaternion.identity, ennemisMask);
         if(Enemies.Length > 0)
         {
-            Debug.Log("frero");
             foreach (Collider e in Enemies)
             {
                 if(e.GetComponent<Entity>().isAttracted == false)

@@ -500,7 +500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status: 1
   previousStatus: 0
-  convertingValue: 0
+  convertingValue: 20
   isAttracted: 0
   health: 0
   maxHealth: 100

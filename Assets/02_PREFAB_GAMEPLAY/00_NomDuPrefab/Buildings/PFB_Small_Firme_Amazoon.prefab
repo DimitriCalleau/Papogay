@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anm: {fileID: 0}
-  corpoType: 0
+  corpoType: 5
   nbEntityToSpawn: 0
   emergencySpawnPoint: {x: 0, y: 0, z: 13}
   timeBetweenSpawn: 2
