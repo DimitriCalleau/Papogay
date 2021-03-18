@@ -93,7 +93,7 @@ public class FirmeBuilder
         UIManager.Instance.shop.hasNewBaitToAdd = true;
     }
 
-    public void ResetShops()
+    public void ResetWaveShops()
     {
         for (int i = 0; i < allShopsLocations.Length; i++)
         {
@@ -102,6 +102,11 @@ public class FirmeBuilder
         for (int i = 0; i < buildShop.Length; i++)
         {
             buildShop[i].SetActive(true);
+        }
+        UIManager.Instance.shop.AllShopsDetection();
+        foreach (Collider shopinou in UIManager.Instance.shop.allShops)
+        {
+            shopinou.gameObject.GetComponent<Artisan>().UnactivateShop();
         }
     }
 

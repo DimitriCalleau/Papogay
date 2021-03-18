@@ -72,6 +72,10 @@ MonoBehaviour:
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 2199264175722164987}
   ui_UsureAmountText: {fileID: 2199264175332295057}
+  baitDescription: "Parfum artisanal : Parfume une entit\xE9, c'ette entit\xE9 peut
+    ensuite parfumer les entit\xE9s qu'elle touche pendant qu'elle est parfum\xE9.
+    Lorsqu'une unit\xE9 est parfum\xE9 elle gagne de l'esprit critique toute les
+    secondes."
   damages: 010000000200000003000000
   cooldown:
   - 5
@@ -80,7 +84,7 @@ MonoBehaviour:
   countdown: 0
   ennemisMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   range: 15
   ui_cooldownImage: {fileID: 7929412571790794392}
 --- !u!33 &-8169976624040830328

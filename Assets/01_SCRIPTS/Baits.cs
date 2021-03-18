@@ -32,6 +32,7 @@ public class Baits : MonoBehaviour
     public GameObject ui_UsureBar;
     public Image ui_healthBar;
     public TextMeshProUGUI ui_UsureAmountText;
+    public string baitDescription;
 
     [Header("Damages")]
     public List<int> damages;

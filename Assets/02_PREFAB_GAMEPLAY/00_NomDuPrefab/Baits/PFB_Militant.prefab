@@ -70,12 +70,14 @@ MonoBehaviour:
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 0}
   ui_UsureAmountText: {fileID: 0}
+  baitDescription: "Militant : Fait un allez-retour dans le couloir devant lui en
+    donnant de l'esprit critique aux unit\xE9s proche."
   damages: 
   cooldown: []
   countdown: 0
   ennemisMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3072
   range: 0
   ui_cooldownImage: {fileID: 0}
 --- !u!33 &1794616993246625383

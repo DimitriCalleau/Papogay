@@ -72,6 +72,7 @@ MonoBehaviour:
   ui_UsureBar: {fileID: 1742713039233884961}
   ui_healthBar: {fileID: 1742713039978412429}
   ui_UsureAmountText: {fileID: 1742713040117123815}
+  baitDescription: "Bar : Donne de l'esprit critique aux entit\xE9s proches."
   damages: 140000001400000014000000
   cooldown:
   - 3

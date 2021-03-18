@@ -278,13 +278,20 @@ MonoBehaviour:
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 0}
   ui_UsureAmountText: {fileID: 0}
+  baitDescription: "Bus : Embarque toute les entit\xE9s \xE0 proximit\xE9 et leur
+    donne de l'esprit critique jusqu'a les rendre alli\xE9es, puis fait r\xE9appara\xEEtre
+    ces entit\xE9s."
   damages: 
   cooldown: []
   countdown: 0
   ennemisMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3072
   range: 0
+  departureTime: 0
+  arrivingTime: 0
+  travelingTime: 0
+  timeBetweenSpawns: 0
 --- !u!33 &4488611761184861894
 MeshFilter:
   m_ObjectHideFlags: 0

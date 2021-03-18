@@ -11,7 +11,7 @@ public class Entity : MonoBehaviour
 {
     [Header("Stats")]
     public EntityStatus status, previousStatus;
-
+    public int convertingValue;
     public bool isAttracted;
     Vector3 tempAttractingPoint;
     public float health, maxHealth;
@@ -326,7 +326,7 @@ public class Entity : MonoBehaviour
             Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             if (previousStatus == EntityStatus.Enemy)
             {
-                Debug.Log("converted");
+                GameManager.Instance.playerStats.AddGold(convertingValue);
                 previousStatus = EntityStatus.Ally;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
             }
@@ -379,6 +379,7 @@ public class Entity : MonoBehaviour
             Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             if (previousStatus == EntityStatus.Enemy)
             {
+                GameManager.Instance.playerStats.AddGold(convertingValue);
                 previousStatus = EntityStatus.Neutral;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
             }

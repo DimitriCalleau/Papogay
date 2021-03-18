@@ -71,6 +71,8 @@ MonoBehaviour:
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 1736244942355804732}
   ui_UsureAmountText: {fileID: 1736244941965377878}
+  baitDescription: "Crieur de Presse : Il se dirige vers les entit\xE9s neutres ou
+    ennemies et une fois assez proche leur donne de l'esprit critique."
   damages: 14000000190000001e000000
   cooldown:
   - 2.5

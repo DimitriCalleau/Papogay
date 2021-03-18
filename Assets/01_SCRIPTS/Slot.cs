@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class Slot
@@ -12,6 +13,7 @@ public class Slot
     public int nbBaits;
     public int currentCost;
     public int upgradeCost;
+    public string baitDescription;
     public Sprite currentUIImage;
     public Sprite currentUpgradeImage;
     public GameObject thisInventorySlot;
@@ -28,7 +30,8 @@ public class Slot
         thisBait.InitBait();
         currentCost = thisBait.currentCost;
         upgradeCost = thisBait.currentUpgradeCost;
-        currentUIImage = thisBait.ui_Sprites[thisBait.upgradeIndex]; 
+        currentUIImage = thisBait.ui_Sprites[thisBait.upgradeIndex];
+        baitDescription = thisBait.baitDescription;
         if (thisBait.upgradeIndex < thisBait.nbUpgradeMax - 1)
         {
             currentUpgradeImage = thisBait.ui_Sprites[thisBait.upgradeIndex + 1];
@@ -64,6 +67,7 @@ public class Slot
         {
             thisInventorySlot.GetComponentInChildren<Text>().color = Color.black;
         }
+        UIManager.Instance.baitDescription.text = baitDescription;
     }
     public void UpgradeSlotBait()
     {
@@ -77,6 +81,10 @@ public class Slot
             if (thisBait.upgradeIndex < thisBait.nbUpgradeMax - 1)
             {
                 currentUpgradeImage = thisBait.ui_Sprites[thisBait.upgradeIndex + 1];
+            }
+            else
+            {
+                thisUpgradeSlot.GetComponent<Button>().interactable = false;
             }
             GameManager.Instance.playerStats.Pay(upgradeCost);
             UpdateDisplay();
@@ -97,14 +105,13 @@ public class Slot
             case false:
                 nbBaits -= 1;
                 UpdateDisplay();
-                break;            
+                break;
             case true:
                 nbBaits += 1;
                 UpdateDisplay();
                 break;
         }
     }
-
     /*public void UpdatePreviewMesh()
     {
         if(UIManager.Instance.selectedLocation != null)
