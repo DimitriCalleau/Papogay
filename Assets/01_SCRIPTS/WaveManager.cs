@@ -123,8 +123,23 @@ public class WaveManager
                 }
             }
         }
+
+        foreach (GameObject noBaitZone in GameManager.Instance.builder.allNoBaitZones)
+        {
+            GameObject.Destroy(noBaitZone);
+        }
+        GameManager.Instance.builder.allNoBaitZones.Clear();
+
         GameManager.Instance.builder.SpawnSpawner();
         GameManager.Instance.builder.ReplaceShopByCorpo();
+
+        if(UIManager.Instance.inventoryOpened == false && GameManager.Instance.builder.allNoBaitZones.Count > 0)
+        {
+            foreach (GameObject noBaitZone in GameManager.Instance.builder.allNoBaitZones)
+            {
+                noBaitZone.SetActive(false);
+            }
+        }
     }
 
     public void Reset()

@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   occupied: 0
+  noBaitLayer:
+    serializedVersion: 2
+    m_Bits: 65536
+  cantReceiveBait: 0
 --- !u!65 &6956155715999814346
 BoxCollider:
   m_ObjectHideFlags: 0

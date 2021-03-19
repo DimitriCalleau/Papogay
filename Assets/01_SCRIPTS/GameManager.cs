@@ -95,6 +95,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public event Action CheckInventory;
+    public void EventCheckInventory()
+    {
+        if (CheckInventory != null)
+        {
+            CheckInventory();
+        }
+    }
+
     public event Action Lose;
     public void EventLose()
     {
