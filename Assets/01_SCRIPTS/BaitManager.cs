@@ -13,7 +13,7 @@ public class BaitManager
             Slot inventorySelection = UIManager.Instance.inventory.selection;
             if (cooldownTimer <= 0)
             {
-                if (inventorySelection != null && UIManager.Instance.selectedLocation != null && inventorySelection.nbBaits > 0 && UIManager.Instance.selectedLocation.occupied == false)
+                if (inventorySelection != null && UIManager.Instance.selectedLocation != null && UIManager.Instance.selectedLocation.cantReceiveBait == false && inventorySelection.nbBaits > 0 && UIManager.Instance.selectedLocation.occupied == false)
                 {
                     GameManager.Instance.player.GetComponent<PlayerMovementController>().playerAnimator.SetTrigger("Pose");
                     GameObject baitSpawner = GameObject.Instantiate(UIManager.Instance.baitSpawnerPrefab, UIManager.Instance.selectedLocation.transform.position, Quaternion.Euler(0, baitRotation, 0));

@@ -12,7 +12,7 @@ public class PreviewBait
     public GameObject rangeMeshPrefab, ui_Preview_Stats;
     public float offsetHeightStatsPreview;
     TextMeshProUGUI nbBaitsPreview;
-    public Material previewMat, range_Mat, box_range_Mat;
+    public Material canPlaceBait, cantPlaceBait, range_Mat, box_range_Mat;
 
     public void InitPreview()
     {
@@ -24,7 +24,7 @@ public class PreviewBait
 
         preview_GO.AddComponent<MeshFilter>();
         preview_GO.AddComponent<MeshRenderer>();
-        preview_GO.GetComponent<MeshRenderer>().material = previewMat;
+        preview_GO.GetComponent<MeshRenderer>().material = canPlaceBait;
 
         rangePreview_GO.AddComponent<MeshFilter>();
         rangePreview_GO.AddComponent<MeshRenderer>();
@@ -69,6 +69,17 @@ public class PreviewBait
         {
             preview_GO.transform.position = location.transform.position;
             preview_GO.transform.rotation = Quaternion.Euler(0, rotation, 0);
+
+            if(location.cantReceiveBait == true)
+            {
+                rangePreview_GO.SetActive(false);
+                preview_GO.GetComponent<MeshRenderer>().material = cantPlaceBait;
+            }
+            else
+            {
+                rangePreview_GO.SetActive(true);
+                preview_GO.GetComponent<MeshRenderer>().material = canPlaceBait; 
+            }
         }
     }
    /* public void SphereRangeDisplayer(Vector3 center, float range)

@@ -11,6 +11,7 @@ public class SpawnerNeutrals : MonoBehaviour
     float spawnTimer;
     bool canSpawn;
     Animator neutralAnimator;
+    public Vector3 noBaitZoneSize; 
 
     public void InitSpawn()
     {
