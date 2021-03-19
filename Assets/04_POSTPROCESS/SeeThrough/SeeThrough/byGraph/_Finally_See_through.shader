@@ -15,7 +15,7 @@
 		Vector1_D6334043("EllipseSmoothEdge", Range(0, 1)) = 0.5
 		Vector1_A3DF504C("EllipseOpacity", Range(0, 1)) = 1
 	}
-	SubShader
+		SubShader
 		{
 			Tags
 			{
@@ -123,14 +123,14 @@
 				Out = A * B;
 			}
 
-			void Unity_Add_float2(float2 A, float2 B, out float2 Out)
-			{
-				Out = A + B;
-			}
-
 			void Unity_Remap_float2(float2 In, float2 InMinMax, float2 OutMinMax, out float2 Out)
 			{
 				Out = OutMinMax.x + (In - InMinMax.x) * (OutMinMax.y - OutMinMax.x) / (InMinMax.y - InMinMax.x);
+			}
+
+			void Unity_Add_float2(float2 A, float2 B, out float2 Out)
+			{
+				Out = A + B;
 			}
 
 			void Unity_TilingAndOffset_float(float2 UV, float2 Tiling, float2 Offset, out float2 Out)
@@ -246,10 +246,8 @@
 				float _Property_F322EAD_Out_0 = Vector1_D6334043;
 				float4 _ScreenPosition_E749F047_Out_0 = float4(IN.ScreenPosition.xy / IN.ScreenPosition.w, 0, 0);
 				float2 _Property_78F335E4_Out_0 = _Position;
-				float2 _Add_2F6ADFF8_Out_2;
-				Unity_Add_float2(_Property_78F335E4_Out_0, float2(0, 0.1), _Add_2F6ADFF8_Out_2);
 				float2 _Remap_BA61707E_Out_3;
-				Unity_Remap_float2(_Add_2F6ADFF8_Out_2, float2 (0, 1), float2 (0.5, -1.5), _Remap_BA61707E_Out_3);
+				Unity_Remap_float2(_Property_78F335E4_Out_0, float2 (0, 1), float2 (0.5, -1.5), _Remap_BA61707E_Out_3);
 				float2 _Add_564F2BBC_Out_2;
 				Unity_Add_float2((_ScreenPosition_E749F047_Out_0.xy), _Remap_BA61707E_Out_3, _Add_564F2BBC_Out_2);
 				float2 _TilingAndOffset_338820E1_Out_3;
@@ -542,14 +540,14 @@
 
 				// Graph Functions
 
-				void Unity_Add_float2(float2 A, float2 B, out float2 Out)
-				{
-					Out = A + B;
-				}
-
 				void Unity_Remap_float2(float2 In, float2 InMinMax, float2 OutMinMax, out float2 Out)
 				{
 					Out = OutMinMax.x + (In - InMinMax.x) * (OutMinMax.y - OutMinMax.x) / (InMinMax.y - InMinMax.x);
+				}
+
+				void Unity_Add_float2(float2 A, float2 B, out float2 Out)
+				{
+					Out = A + B;
 				}
 
 				void Unity_TilingAndOffset_float(float2 UV, float2 Tiling, float2 Offset, out float2 Out)
@@ -624,10 +622,8 @@
 					float _Property_F322EAD_Out_0 = Vector1_D6334043;
 					float4 _ScreenPosition_E749F047_Out_0 = float4(IN.ScreenPosition.xy / IN.ScreenPosition.w, 0, 0);
 					float2 _Property_78F335E4_Out_0 = _Position;
-					float2 _Add_2F6ADFF8_Out_2;
-					Unity_Add_float2(_Property_78F335E4_Out_0, float2(0, 0.1), _Add_2F6ADFF8_Out_2);
 					float2 _Remap_BA61707E_Out_3;
-					Unity_Remap_float2(_Add_2F6ADFF8_Out_2, float2 (0, 1), float2 (0.5, -1.5), _Remap_BA61707E_Out_3);
+					Unity_Remap_float2(_Property_78F335E4_Out_0, float2 (0, 1), float2 (0.5, -1.5), _Remap_BA61707E_Out_3);
 					float2 _Add_564F2BBC_Out_2;
 					Unity_Add_float2((_ScreenPosition_E749F047_Out_0.xy), _Remap_BA61707E_Out_3, _Add_564F2BBC_Out_2);
 					float2 _TilingAndOffset_338820E1_Out_3;
@@ -863,14 +859,14 @@
 
 					// Graph Functions
 
-					void Unity_Add_float2(float2 A, float2 B, out float2 Out)
-					{
-						Out = A + B;
-					}
-
 					void Unity_Remap_float2(float2 In, float2 InMinMax, float2 OutMinMax, out float2 Out)
 					{
 						Out = OutMinMax.x + (In - InMinMax.x) * (OutMinMax.y - OutMinMax.x) / (InMinMax.y - InMinMax.x);
+					}
+
+					void Unity_Add_float2(float2 A, float2 B, out float2 Out)
+					{
+						Out = A + B;
 					}
 
 					void Unity_TilingAndOffset_float(float2 UV, float2 Tiling, float2 Offset, out float2 Out)
@@ -945,10 +941,8 @@
 						float _Property_F322EAD_Out_0 = Vector1_D6334043;
 						float4 _ScreenPosition_E749F047_Out_0 = float4(IN.ScreenPosition.xy / IN.ScreenPosition.w, 0, 0);
 						float2 _Property_78F335E4_Out_0 = _Position;
-						float2 _Add_2F6ADFF8_Out_2;
-						Unity_Add_float2(_Property_78F335E4_Out_0, float2(0, 0.1), _Add_2F6ADFF8_Out_2);
 						float2 _Remap_BA61707E_Out_3;
-						Unity_Remap_float2(_Add_2F6ADFF8_Out_2, float2 (0, 1), float2 (0.5, -1.5), _Remap_BA61707E_Out_3);
+						Unity_Remap_float2(_Property_78F335E4_Out_0, float2 (0, 1), float2 (0.5, -1.5), _Remap_BA61707E_Out_3);
 						float2 _Add_564F2BBC_Out_2;
 						Unity_Add_float2((_ScreenPosition_E749F047_Out_0.xy), _Remap_BA61707E_Out_3, _Add_564F2BBC_Out_2);
 						float2 _TilingAndOffset_338820E1_Out_3;
@@ -1194,14 +1188,14 @@
 							Out = A * B;
 						}
 
-						void Unity_Add_float2(float2 A, float2 B, out float2 Out)
-						{
-							Out = A + B;
-						}
-
 						void Unity_Remap_float2(float2 In, float2 InMinMax, float2 OutMinMax, out float2 Out)
 						{
 							Out = OutMinMax.x + (In - InMinMax.x) * (OutMinMax.y - OutMinMax.x) / (InMinMax.y - InMinMax.x);
+						}
+
+						void Unity_Add_float2(float2 A, float2 B, out float2 Out)
+						{
+							Out = A + B;
 						}
 
 						void Unity_TilingAndOffset_float(float2 UV, float2 Tiling, float2 Offset, out float2 Out)
@@ -1287,10 +1281,8 @@
 							float _Property_F322EAD_Out_0 = Vector1_D6334043;
 							float4 _ScreenPosition_E749F047_Out_0 = float4(IN.ScreenPosition.xy / IN.ScreenPosition.w, 0, 0);
 							float2 _Property_78F335E4_Out_0 = _Position;
-							float2 _Add_2F6ADFF8_Out_2;
-							Unity_Add_float2(_Property_78F335E4_Out_0, float2(0, 0.1), _Add_2F6ADFF8_Out_2);
 							float2 _Remap_BA61707E_Out_3;
-							Unity_Remap_float2(_Add_2F6ADFF8_Out_2, float2 (0, 1), float2 (0.5, -1.5), _Remap_BA61707E_Out_3);
+							Unity_Remap_float2(_Property_78F335E4_Out_0, float2 (0, 1), float2 (0.5, -1.5), _Remap_BA61707E_Out_3);
 							float2 _Add_564F2BBC_Out_2;
 							Unity_Add_float2((_ScreenPosition_E749F047_Out_0.xy), _Remap_BA61707E_Out_3, _Add_564F2BBC_Out_2);
 							float2 _TilingAndOffset_338820E1_Out_3;
@@ -1544,14 +1536,14 @@
 								Out = A * B;
 							}
 
-							void Unity_Add_float2(float2 A, float2 B, out float2 Out)
-							{
-								Out = A + B;
-							}
-
 							void Unity_Remap_float2(float2 In, float2 InMinMax, float2 OutMinMax, out float2 Out)
 							{
 								Out = OutMinMax.x + (In - InMinMax.x) * (OutMinMax.y - OutMinMax.x) / (InMinMax.y - InMinMax.x);
+							}
+
+							void Unity_Add_float2(float2 A, float2 B, out float2 Out)
+							{
+								Out = A + B;
 							}
 
 							void Unity_TilingAndOffset_float(float2 UV, float2 Tiling, float2 Offset, out float2 Out)
@@ -1636,10 +1628,8 @@
 								float _Property_F322EAD_Out_0 = Vector1_D6334043;
 								float4 _ScreenPosition_E749F047_Out_0 = float4(IN.ScreenPosition.xy / IN.ScreenPosition.w, 0, 0);
 								float2 _Property_78F335E4_Out_0 = _Position;
-								float2 _Add_2F6ADFF8_Out_2;
-								Unity_Add_float2(_Property_78F335E4_Out_0, float2(0, 0.1), _Add_2F6ADFF8_Out_2);
 								float2 _Remap_BA61707E_Out_3;
-								Unity_Remap_float2(_Add_2F6ADFF8_Out_2, float2 (0, 1), float2 (0.5, -1.5), _Remap_BA61707E_Out_3);
+								Unity_Remap_float2(_Property_78F335E4_Out_0, float2 (0, 1), float2 (0.5, -1.5), _Remap_BA61707E_Out_3);
 								float2 _Add_564F2BBC_Out_2;
 								Unity_Add_float2((_ScreenPosition_E749F047_Out_0.xy), _Remap_BA61707E_Out_3, _Add_564F2BBC_Out_2);
 								float2 _TilingAndOffset_338820E1_Out_3;

@@ -26060,6 +26060,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1566288348}
     m_Modifications:
+    - target: {fileID: 2952658563321227716, guid: ecbc8d9441e32264aaaf2eb0a8a59987,
+        type: 3}
+      propertyPath: rayMaskLayer.m_Bits
+      value: 131072
+      objectReference: {fileID: 0}
     - target: {fileID: 8415566384949220083, guid: ecbc8d9441e32264aaaf2eb0a8a59987,
         type: 3}
       propertyPath: m_LocalPosition.x
