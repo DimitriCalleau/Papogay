@@ -8,12 +8,11 @@ public class Location : MonoBehaviour
     public LayerMask noBaitLayer = -1;
     public bool cantReceiveBait;
     bool hasChecked, isNotReceiver;
-
     void Start()
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.CheckInventory += CanReceive;
+            GameManager.Instance.UpdateLocationState += CanReceive;
         }
     }
     void CanReceive()
@@ -50,14 +49,14 @@ public class Location : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.CheckInventory += CanReceive;
+            GameManager.Instance.UpdateLocationState += CanReceive;
         }
     }
     void OnDisable()
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.CheckInventory -= CanReceive;
+            GameManager.Instance.UpdateLocationState -= CanReceive;
         }
     }
 }

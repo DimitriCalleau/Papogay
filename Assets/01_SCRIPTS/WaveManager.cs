@@ -133,7 +133,7 @@ public class WaveManager
         GameManager.Instance.builder.SpawnSpawner();
         GameManager.Instance.builder.ReplaceShopByCorpo();
 
-        if(UIManager.Instance.inventoryOpened == false && GameManager.Instance.builder.allNoBaitZones.Count > 0)
+        if (UIManager.Instance.inventoryOpened == false && GameManager.Instance.builder.allNoBaitZones.Count > 0)
         {
             foreach (GameObject noBaitZone in GameManager.Instance.builder.allNoBaitZones)
             {

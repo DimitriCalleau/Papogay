@@ -129,6 +129,7 @@ public class FirmeBuilder
                 {
                     noBaitZone.SetActive(true);
                 }
+                GameManager.Instance.EventUpdateLocationState();
                 break;
             case false:
                 foreach (GameObject noBaitZone in allNoBaitZones)

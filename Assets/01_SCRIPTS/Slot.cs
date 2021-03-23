@@ -40,7 +40,7 @@ public class Slot
         }
         thisInventorySlot = GameObject.Instantiate(UIManager.Instance.inventorySlotPrefab);
         thisInventorySlot.transform.SetParent(UIManager.Instance.inventoryPanel.transform);
-        inventorySlotAnimator = thisInventorySlot.transform.GetChild(1).GetComponent<Animator>();
+        inventorySlotAnimator = thisInventorySlot.transform.GetChild(0).GetComponent<Animator>();
 
         //Slot pour acheter des appats
         thisShopSlot = GameObject.Instantiate(UIManager.Instance.shopSlotPrefab);
@@ -56,7 +56,7 @@ public class Slot
     }
     void UpdateDisplay()
     {
-        thisInventorySlot.transform.GetChild(1).GetComponent<Image>().sprite = currentUIImage;
+        thisInventorySlot.transform.GetChild(0).GetComponent<Image>().sprite = currentUIImage;
         thisInventorySlot.GetComponentInChildren<Text>().text = nbBaits.ToString();
         thisShopSlot.GetComponent<Image>().sprite = currentUIImage;
         thisShopSlot.GetComponentInChildren<Text>().text = currentCost.ToString();

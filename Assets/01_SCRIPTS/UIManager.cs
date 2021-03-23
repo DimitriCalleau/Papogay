@@ -94,6 +94,8 @@ public class UIManager : MonoBehaviour
 
     public float timeBetweenBaits;
 
+
+    public TextMeshProUGUI buildDebug;
     void Start()
     {
         preview.InitPreview();
@@ -270,8 +272,9 @@ public class UIManager : MonoBehaviour
         shopOpened = true;
         shop.hasNewBaitToAdd = true;
         shop.baitHasBeenTaken = true;
-        AddReward();
-        CloseShop();
+        AddReward(); 
+        CloseShop(); 
+
     }
 
     public void OpenCloseMap()

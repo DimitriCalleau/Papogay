@@ -95,12 +95,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public event Action CheckInventory;
-    public void EventCheckInventory()
+    public event Action UpdateLocationState;
+    public void EventUpdateLocationState()
     {
-        if (CheckInventory != null)
+        if (UpdateLocationState != null)
         {
-            CheckInventory();
+            UpdateLocationState();
         }
     }
 

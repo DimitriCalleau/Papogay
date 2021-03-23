@@ -67,6 +67,5 @@ public class BaitInventory
             UIManager.Instance.preview.HidePreview(false);
             GameManager.Instance.builder.OpenCloseNoBaitZones(false);
         }
-        GameManager.Instance.EventCheckInventory();
     }
 }

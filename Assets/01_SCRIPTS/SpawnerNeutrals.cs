@@ -17,7 +17,7 @@ public class SpawnerNeutrals : MonoBehaviour
     {
         spawnTimer = timeBetweenSpawns;
         canSpawn = true;
-        neutralAnimator = GetComponent<Animator>();
+        neutralAnimator = GetComponent<Animator>(); 
     }
 
     void Update()
