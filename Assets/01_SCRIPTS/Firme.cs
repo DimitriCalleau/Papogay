@@ -19,6 +19,8 @@ public class Firme : MonoBehaviour
     float timerSpawn;
     bool canSpawn;
 
+    public Vector3 noBaitZoneSize;
+
     [Header("Death")]
     public float timeBeforeDeath;
 

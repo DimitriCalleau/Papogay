@@ -44,7 +44,7 @@ public class BaitInventory
 
     public void OpenInventory()
     {
-        if(GameManager.Instance.gameState.start == true && GameManager.Instance.gameState.pause == false)
+        if (GameManager.Instance.gameState.start == true && GameManager.Instance.gameState.pause == false)
         {
             UIManager.Instance.inventoryOpened = !UIManager.Instance.inventoryOpened;
             switch (UIManager.Instance.inventoryOpened)
@@ -52,12 +52,21 @@ public class BaitInventory
                 case true:
                     UIManager.Instance.inventoryPanel.SetActive(true);
                     UIManager.Instance.preview.HidePreview(true);
+                    GameManager.Instance.builder.OpenCloseNoBaitZones(true);
                     break;
                 case false:
                     UIManager.Instance.inventoryPanel.SetActive(false);
                     UIManager.Instance.preview.HidePreview(false);
+                    GameManager.Instance.builder.OpenCloseNoBaitZones(false);
                     break;
             }
         }
+        else
+        {
+            UIManager.Instance.inventoryPanel.SetActive(false);
+            UIManager.Instance.preview.HidePreview(false);
+            GameManager.Instance.builder.OpenCloseNoBaitZones(false);
+        }
+        GameManager.Instance.EventCheckInventory();
     }
 }

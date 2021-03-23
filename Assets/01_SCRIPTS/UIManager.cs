@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
     public bool inventoryOpened, shopOpened, mapOpened;
 
     public float timeBetweenBaits;
-    
+
     void Start()
     {
         preview.InitPreview();
