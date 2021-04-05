@@ -84,14 +84,14 @@ public class Baits : MonoBehaviour
 
         if (this.usure <= 0)
         {
-            location.occupied = false;
+            location.state = LocationState.Free;
             Destroy(this.gameObject);
         }
     }
 
     void DestroyBait()
     {
-        location.occupied = false;
+        location.state = LocationState.Free;
         Destroy(this.gameObject);
     }
 

@@ -70,7 +70,7 @@ public class PreviewBait
             preview_GO.transform.position = location.transform.position;
             preview_GO.transform.rotation = Quaternion.Euler(0, rotation, 0);
 
-            if(location.cantReceiveBait == true)
+            if(location.state == LocationState.NoBait)
             {
                 rangePreview_GO.SetActive(false);
                 preview_GO.GetComponent<MeshRenderer>().material = cantPlaceBait;

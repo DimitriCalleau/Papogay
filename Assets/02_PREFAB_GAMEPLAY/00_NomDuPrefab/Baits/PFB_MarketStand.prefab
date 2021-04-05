@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7069832796164665052}
   - component: {fileID: 186720941163465322}
   - component: {fileID: 3973515691623525465}
+  - component: {fileID: 7397321611516576401}
+  - component: {fileID: 2593897944449744744}
   m_Layer: 0
   m_Name: PFB_MarketStand
   m_TagString: Untagged
@@ -50,9 +52,9 @@ MonoBehaviour:
   upgradeIndex: 0
   nbUpgradeMax: 3
   location: {fileID: 0}
-  colliderCenter: {x: 0, y: 0, z: 0}
-  offsetHeightCollider: 0
-  offsetForwardCollider: 0
+  colliderCenter: {x: 9.999999, y: 5, z: 0.00000059604645}
+  offsetHeightCollider: 5
+  offsetForwardCollider: 5
   timeBeforeSpawn: 2
   usure: 10
   currentUsureMax: 10
@@ -83,10 +85,10 @@ MonoBehaviour:
   ennemisMask:
     serializedVersion: 2
     m_Bits: 3072
-  attackRange: 0
-  colliderSize: {x: 7.25, y: 10, z: 20}
-  gatheringPoint: {x: 0, y: 0, z: 0}
-  rotatedColliderSize: {x: 0, y: 0, z: 0}
+  attackRange: 5
+  colliderSize: {x: 10, y: 10, z: 20}
+  gatheringPoint: {x: 0, y: 0, z: 5}
+  rotatedColliderSize: {x: 20, y: 10, z: -9.999998}
   ui_cooldownImage: {fileID: 3178184539470270058}
 --- !u!33 &186720941163465322
 MeshFilter:
@@ -135,6 +137,35 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!208 &7397321611516576401
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069832796164665050}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 5, y: 6, z: 5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 6, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!65 &2593897944449744744
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069832796164665050}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 12, z: 8}
+  m_Center: {x: 0, y: 6, z: 0}
 --- !u!1001 &5604636926945329909
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -524,7 +524,7 @@ MonoBehaviour:
   stateMats:
   - {fileID: 2100000, guid: d781ad8c1babb7644a54c7d51d614af0, type: 2}
   - {fileID: 2100000, guid: e197588c2cc03c04b904c7f4e6b7a888, type: 2}
-  - {fileID: 2100000, guid: cc44f9b2c0ddb3948b67887bd2871f9a, type: 2}
+  - {fileID: 2100000, guid: ef3968b5b0dd8d143ab4299d55db9a47, type: 2}
   anm: {fileID: 5701618129355016407}
   particlesParent: {fileID: 2797127274336403471}
   particlePrefabs:
@@ -840,7 +840,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cc44f9b2c0ddb3948b67887bd2871f9a, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: -6200678406742145052, guid: dd2b5900dea8951439af9bd32dacdf36,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
