@@ -472,7 +472,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5915713619787867037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: 15}
+  m_LocalPosition: {x: 0, y: 6, z: 12.83}
   m_LocalScale: {x: 20, y: 12, z: 10}
   m_Children: []
   m_Father: {fileID: 341565155117993255}
@@ -695,6 +695,7 @@ MonoBehaviour:
   timeBetweenEntityRespawns: 0.3
   busGameobject: {fileID: 5915713619787867037}
   respawnPoint: {fileID: 320568235967081356}
+  timerText: {fileID: 3561494565268075742}
 --- !u!33 &4488611761184861894
 MeshFilter:
   m_ObjectHideFlags: 0

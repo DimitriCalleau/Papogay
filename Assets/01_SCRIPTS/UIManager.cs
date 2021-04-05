@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     public Shop shop = new Shop();
     public BaitInventory inventory = new BaitInventory();
     public BaitManager baitManager = new BaitManager();
+    public GameObject PerfumeCloudPrefab;
 
     public PreviewBait preview = new PreviewBait();
 
@@ -168,7 +169,7 @@ public class UIManager : MonoBehaviour
      
     public void AddFirstTraps()
     {
-        reward.AddBait(BaitType.MarketStand, 10, 0);
+        reward.AddBait(BaitType.PaperBoy, 10, 0);
         inventory.SwitchBaitSelection(new Vector2(0, 1));
         GameManager.Instance.EventStartWave();
         GameManager.Instance.gameState.SetPause(false);

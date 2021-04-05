@@ -14,6 +14,7 @@ public class Bus : Baits
     public GameObject busGameobject, respawnPoint;
     Animator busAnimator;
     Material busMaterial;
+    public TextMeshProUGUI timerText;
     public void SetCollider()
     {
         colliderCenter = transform.position + Vector3.up * offsetHeightCollider;
@@ -29,15 +30,13 @@ public class Bus : Baits
     }
     public void Update()
     {
-        Debug.Log(entityCount);
         switch (state)
         {
             case BusState.isTraveling:
-                Debug.Log("is traveling");
-
                 if (travelingTimer > 0)
                 {
                     travelingTimer -= Time.deltaTime;
+                    UpdateTimerText(travelingTimer);
                 }
                 else
                 {
@@ -48,8 +47,9 @@ public class Bus : Baits
             case BusState.isArriving:
                 if (arrivingTimer < arrivingTime)
                 {
-                    arrivingTime += Time.deltaTime;
+                    arrivingTimer += Time.deltaTime;
                     Fade(arrivingTimer / arrivingTime);
+                    UpdateTimerText(arrivingTimer);
                 }
                 else
                 {
@@ -58,12 +58,11 @@ public class Bus : Baits
                 }
                 break;
             case BusState.isGoing:
-                Debug.Log("is going");
-
                 if (departureTimer > 0)
                 {
                     departureTimer -= Time.deltaTime;
                     Fade(departureTimer / departureTime);
+                    UpdateTimerText(departureTimer);
                 }
                 else
                 {
@@ -73,12 +72,11 @@ public class Bus : Baits
                 }
                 break;
             case BusState.isWaiting:
-                Debug.Log("is waiting");
                 if (arrivingTimer < arrivingTime)
                 {
                     arrivingTimer += Time.deltaTime;
                     Fade(arrivingTimer / arrivingTime);
-                }
+               }
                 else
                 {
                     Fade(1);
@@ -88,6 +86,7 @@ public class Bus : Baits
                 if(waitingTimer > 0)
                 {
                     waitingTimer -= Time.deltaTime;
+                    UpdateTimerText(waitingTimer);
                 }
                 else
                 {
@@ -96,7 +95,6 @@ public class Bus : Baits
                 break;
 
             case BusState.isSpawning:
-                Debug.Log("is spawning");
                 if (entityCount > 0)
                 {
                     if (entitySpawnTimer <= 0)
@@ -104,10 +102,12 @@ public class Bus : Baits
                         GameObject newAlly = Instantiate(GameManager.Instance.builder.entityPrefab, respawnPoint.transform.position, Quaternion.identity);
                         newAlly.GetComponent<Entity>().Init(100);
                         entitySpawnTimer = timeBetweenEntityRespawns;
+                        entityCount -= 1;
                     }
                     else
                     {
                         entitySpawnTimer -= Time.deltaTime;
+                        UpdateTimerText(entitySpawnTimer);
                     }
                 }
                 else
@@ -126,7 +126,7 @@ public class Bus : Baits
             foreach(Collider enm in Enemies)
             {
                 EntityStatus enmstatus = enm.GetComponent<Entity>().status;
-                Destroy(enm);
+                Destroy(enm.gameObject);
                 GameManager.Instance.waveManager.AddRemoveEntity(enmstatus, false);
             }
             state = BusState.isGoing;
@@ -138,9 +138,15 @@ public class Bus : Baits
 
     void Fade(float _timer)
     {
-        Debug.Log(busMaterial);
         Color fadecolor = busMaterial.color;
         fadecolor.a = _timer;
         busMaterial.color = fadecolor;
+    }
+
+    void UpdateTimerText(float _timer)
+    {
+        float minutesPart = Mathf.FloorToInt(_timer / 60);
+        float secondsPart = Mathf.CeilToInt(_timer - (minutesPart * 60));
+        timerText.text = minutesPart + ":" + secondsPart;
     }
 }
