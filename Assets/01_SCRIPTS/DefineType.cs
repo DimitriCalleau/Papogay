@@ -6,6 +6,8 @@ public enum BaitType { PaperBoy, FruitBox, Sign, MarketStand, Perfume, Militant,
 public enum FirmeType { Carrouf, FastRegal, Sinpharo, NormalGym, Banana, Amazoon }
 public enum BuildingSize { Small, Big }
 public enum EntityStatus { Neutral, Enemy, Ally }
+public enum LocationState {Occupied, NoBait, Free}
+public enum BusState { isTraveling, isArriving, isGoing, isWaiting, isSpawning }
 public class DefineType
 {
     //bait

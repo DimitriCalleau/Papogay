@@ -16,6 +16,7 @@ public class FruitBox : Baits
         Quaternion forwardRotation = Quaternion.Euler(0, UIManager.Instance.baitManager.baitRotation, 0);
         Vector3 forwardVector = forwardRotation * Vector3.forward * offsetForwardCollider;
         rotatedColliderSize = forwardRotation * colliderSize;
+        rotatedColliderSize = new Vector3(Mathf.Sqrt(rotatedColliderSize.x * rotatedColliderSize.x), Mathf.Sqrt(rotatedColliderSize.y * rotatedColliderSize.y), Mathf.Sqrt(rotatedColliderSize.z * rotatedColliderSize.z));
         colliderCenter = transform.position + Vector3.up * offsetHeightCollider + forwardVector;
     }
     void Start()
@@ -29,7 +30,7 @@ public class FruitBox : Baits
     }
     public void BaitAttack()
     {
-        Enemies = Physics.OverlapBox(colliderCenter, rotatedColliderSize, Quaternion.identity, ennemisMask);
+        Enemies = Physics.OverlapBox(colliderCenter, rotatedColliderSize / 2, Quaternion.identity, ennemisMask);
         if (Enemies.Length > 0)
         {
             foreach (Collider e in Enemies)

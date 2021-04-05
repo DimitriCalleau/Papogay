@@ -291,7 +291,7 @@ MonoBehaviour:
   spawnRange: 15
   timeBetweenSpawns: 2
   timeBeforeDestruction: 0.1
-  noBaitZoneSize: {x: 50, y: 30, z: 0.02}
+  noBaitZoneSize: {x: 49, y: 29, z: 0.02}
 --- !u!1 &8353376784263367424
 GameObject:
   m_ObjectHideFlags: 0

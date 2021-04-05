@@ -96,6 +96,14 @@ public class Entity : MonoBehaviour
         else
         {
             entityNavMeshAgent.destination = tempAttractingPoint;
+            if (attractingTimer > 0)
+            {
+                attractingTimer -= Time.deltaTime;
+            }
+            else
+            {
+                isAttracted = false;
+            }
         }
 
         if(status != EntityStatus.Neutral)
@@ -108,15 +116,6 @@ public class Entity : MonoBehaviour
             {
                 anm.SetFloat("WalkIdle", 0);
             }
-        }
-
-        if (attractingTimer > 0)
-        {
-            attractingTimer -= Time.deltaTime;
-        }
-        else
-        {
-            isAttracted = false;
         }
 
         if(beforeFadingTimer <= 0)
@@ -309,6 +308,8 @@ public class Entity : MonoBehaviour
             this.gameObject.layer = 12;//allyLayer;
             gameObject.tag = "TargetForEnemyEntity";
             anm.SetInteger("Status", 2);
+
+            isAttracted = false;
 
             allyProgressBar.fillAmount = health / maxHealth;
             if(health == 0)

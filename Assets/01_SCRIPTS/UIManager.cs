@@ -140,7 +140,7 @@ public class UIManager : MonoBehaviour
                 {
                     minDist = dist;
                     closestLocation = allLocations[i].gameObject.GetComponent<Location>();
-                    if (closestLocation.occupied == false)
+                    if (closestLocation.state != LocationState.Occupied)
                     {
                         selectedLocation = closestLocation;
                     }
@@ -168,7 +168,7 @@ public class UIManager : MonoBehaviour
      
     public void AddFirstTraps()
     {
-        reward.AddBait(BaitType.PaperBoy, 10, 0);
+        reward.AddBait(BaitType.MarketStand, 10, 0);
         inventory.SwitchBaitSelection(new Vector2(0, 1));
         GameManager.Instance.EventStartWave();
         GameManager.Instance.gameState.SetPause(false);
@@ -210,6 +210,8 @@ public class UIManager : MonoBehaviour
         MenuBaseState(true);
         GameManager.Instance.playerStats.SetHealth();
         inventory.selectionIndex = 0;
+        inventory.oldSelection = null;
+        inventory.selection = null;
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
             Destroy(inventoryPanel.transform.GetChild(i).gameObject);

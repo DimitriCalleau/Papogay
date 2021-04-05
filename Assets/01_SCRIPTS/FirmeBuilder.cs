@@ -21,6 +21,7 @@ public class FirmeBuilder
     int nbFirmesThisWave;
 
     public List<GameObject> allNoBaitZones;
+    public LayerMask locationLayer = -1;
 
     public GameObject entityPrefab; 
     public GameObject spawnerPrefab;
@@ -38,6 +39,15 @@ public class FirmeBuilder
                 GameObject newNoBaitZone = GameObject.Instantiate(noBaitZonePrefab, spawnerLocations[i].transform.position, Quaternion.Euler(new Vector3(noBaitZonePrefab.transform.eulerAngles.x, spawnerLocations[i].transform.eulerAngles.y, spawnerLocations[i].transform.eulerAngles.z)));
                 newNoBaitZone.transform.localScale = newSpawner.GetComponent<SpawnerNeutrals>().noBaitZoneSize;
                 allNoBaitZones.Add(newNoBaitZone);
+
+                Collider[] closeLocations = Physics.OverlapBox(newNoBaitZone.transform.position, (newNoBaitZone.transform.localScale / 2), newNoBaitZone.transform.rotation, locationLayer);
+                if (closeLocations.Length > 0)
+                {
+                    foreach (Collider selectedLocation in closeLocations)
+                    {
+                        selectedLocation.GetComponent<Location>().state = LocationState.NoBait;
+                    }
+                }
             }
         }
     }
@@ -80,6 +90,15 @@ public class FirmeBuilder
             GameObject newNoBaitZone = GameObject.Instantiate(noBaitZonePrefab, firmeLocation, Quaternion.Euler(new Vector3(noBaitZonePrefab.transform.eulerAngles.x, firmeRotation.y, firmeRotation.z)));
             newNoBaitZone.transform.localScale = newFirme.GetComponent<Firme>().noBaitZoneSize;
             allNoBaitZones.Add(newNoBaitZone);
+
+            Collider[] closeLocations = Physics.OverlapBox(newNoBaitZone.transform.position, (newNoBaitZone.transform.localScale / 2), newNoBaitZone.transform.rotation, locationLayer);
+            if (closeLocations.Length > 0)
+            {
+                foreach (Collider selectedLocation in closeLocations)
+                {
+                    selectedLocation.GetComponent<Location>().state = LocationState.NoBait;
+                }
+            }
         }
 
         UIManager.Instance.shop.AllShopsDetection();
