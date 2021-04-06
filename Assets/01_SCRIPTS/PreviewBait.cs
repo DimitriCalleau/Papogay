@@ -38,8 +38,7 @@ public class PreviewBait
         direction_GO.GetComponent<MeshFilter>().mesh = boxRangeMesh;
         direction_GO.AddComponent<MeshRenderer>();
         direction_GO.GetComponent<MeshRenderer>().material = directional_Arrow;
-        direction_GO.transform.localScale = Vector3.one * 5f;
-        direction_GO.transform.position = Vector3.forward * 2.5f;
+        direction_GO.transform.localScale = new Vector3(10, 10, 0.05f);
 
         HidePreview(false);
     }
@@ -54,6 +53,7 @@ public class PreviewBait
             case false:
                 preview_GO.SetActive(false);
                 rangePreview_GO.SetActive(false);
+                direction_GO.SetActive(false);
                 break;
         }
     }
@@ -78,8 +78,8 @@ public class PreviewBait
         {
             preview_GO.transform.position = location.transform.position;
             preview_GO.transform.rotation = Quaternion.Euler(0, rotation, 0);
-            direction_GO.transform.position = location.transform.position + (Quaternion.Euler(0, rotation, 0) * new Vector3(10,10,0.05f));
-            direction_GO.transform.rotation = Quaternion.Euler(90, rotation, 0);
+            direction_GO.transform.position = location.transform.position + (Quaternion.Euler(0, rotation + 180, 0) * new Vector3(0,0,10f));
+            direction_GO.transform.rotation = Quaternion.Euler(90, rotation + 180, 0);
 
             if (location.state == LocationState.NoBait)
             {

@@ -53,7 +53,7 @@ MonoBehaviour:
   upgradeIndex: 0
   nbUpgradeMax: 3
   location: {fileID: 0}
-  colliderCenter: {x: 0.0000003059797, y: 5, z: 1.75}
+  colliderCenter: {x: 1.7499999, y: 5, z: 0.00000010430813}
   offsetHeightCollider: 5
   offsetForwardCollider: 0.5
   timeBeforeSpawn: 1

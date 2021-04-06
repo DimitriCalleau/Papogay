@@ -7705,7 +7705,7 @@ MonoBehaviour:
     cantPlaceBait: {fileID: 2100000, guid: 032d85c2e1be33b48906a9e4dbece57c, type: 2}
     range_Mat: {fileID: 2100000, guid: 5727aa4b1a142664c8b79fba6c35d50d, type: 2}
     box_range_Mat: {fileID: 2100000, guid: b1b57933845996944b2e1632c7844e66, type: 2}
-    directional_Arrow: {fileID: 0}
+    directional_Arrow: {fileID: 2100000, guid: 37b40b99c5970014aa8cb71d6077fb9a, type: 2}
   inventorySlotPrefab: {fileID: 7677407625855949514, guid: 2db977b3b9b84aa458cc457773350cbb,
     type: 3}
   shopSlotPrefab: {fileID: 5004000097812245792, guid: 31361079f47f3834090f0cf7f589bbc7,
