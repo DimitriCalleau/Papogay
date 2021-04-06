@@ -72,8 +72,8 @@ public class Baits : MonoBehaviour
         this.upgradeIndex += 1;
         this.currentCost = costs[upgradeIndex];
         this.currentUpgradeCost = upgradeCosts[upgradeIndex];
-        this.usure += this.usure * (this.usureMax[this.upgradeIndex] / this.currentUsureMax);
         this.currentUsureMax = this.usureMax[this.upgradeIndex];
+        this.usure = this.currentUsureMax;
     }
 
     public void LoseLife(float damage)
