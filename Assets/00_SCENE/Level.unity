@@ -7693,6 +7693,8 @@ MonoBehaviour:
       m_Bits: 8192
     allShops: []
     closeToShop: 0
+  PerfumeCloudPrefab: {fileID: 6081195720239914886, guid: 49feda55e5093964298701147985813d,
+    type: 3}
   preview:
     rangeMeshPrefab: {fileID: 8037026776483839857, guid: d75f2569b26180b42bb057cbc578d2e6,
       type: 3}
@@ -17862,6 +17864,11 @@ PrefabInstance:
       propertyPath: state
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3690013765481914496, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 3699399486048596297, guid: 189ff1b9d3dda7e4dae91649b05ff671,
         type: 3}
       propertyPath: state
@@ -20491,6 +20498,21 @@ PrefabInstance:
         type: 3}
       propertyPath: state
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297767008304975020, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297767008304975020, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297767008304975020, guid: 189ff1b9d3dda7e4dae91649b05ff671,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7307207340403589720, guid: 189ff1b9d3dda7e4dae91649b05ff671,
         type: 3}

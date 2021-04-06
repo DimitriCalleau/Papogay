@@ -6,6 +6,7 @@ public class BaitManager
 {
     public int baitRotation;
     public float cooldownTimer;
+
     public void PlaceTrap()
     {
         if (UIManager.Instance.inventoryOpened == true)

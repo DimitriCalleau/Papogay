@@ -226,6 +226,7 @@ public class Slot
                     if (baitPrefab.GetComponent<Militant>().colliderCenter != null)
                     {
                         baitPrefab.GetComponent<Militant>().SetCollider();
+                        baitPrefab.GetComponent<Militant>().SetObstacleCollider();
                         UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<Militant>().range, true);
                     }
                     break;

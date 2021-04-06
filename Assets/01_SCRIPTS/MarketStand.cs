@@ -75,10 +75,4 @@ public class MarketStand : Baits
             ui_cooldownImage.fillAmount = 0;
         }
     }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(colliderCenter, rotatedColliderSize);
-    }
 }
