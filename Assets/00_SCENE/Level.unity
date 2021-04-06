@@ -100,7 +100,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: c2a24c35a653f194da99129fa04de606,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7749,7 +7749,7 @@ MonoBehaviour:
   inventoryOpened: 0
   shopOpened: 0
   mapOpened: 0
-  timeBetweenBaits: 0.5
+  timeBetweenBaits: 1
   buildDebug: {fileID: 1796391116}
 --- !u!1 &1546365707
 GameObject:

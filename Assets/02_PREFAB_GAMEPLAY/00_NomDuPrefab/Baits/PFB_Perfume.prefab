@@ -48,24 +48,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  upgradeIndex: 0
+  upgradeIndex: 2
   nbUpgradeMax: 3
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 0, z: 0}
   offsetHeightCollider: 0
   offsetForwardCollider: 0
   timeBeforeSpawn: 2
-  usure: 20
-  currentUsureMax: 20
+  usure: 15
+  currentUsureMax: 15
   usureMax:
-  - 20
-  - 20
-  - 20
-  usurePercentage: 20
-  costs: 050000000a0000000f000000
-  currentCost: 5
-  upgradeCosts: 6a000000ce00000032010000
-  currentUpgradeCost: 106
+  - 10
+  - 15
+  - 15
+  usurePercentage: 10
+  costs: 14000000280000003c000000
+  currentCost: 60
+  upgradeCosts: 7d000000fa000000c2010000
+  currentUpgradeCost: 450
   ui_Sprites:
   - {fileID: 21300000, guid: 546786634a4f516469169aa7334ee091, type: 3}
   - {fileID: 21300000, guid: f59aa816c36f4de428909c3301a07233, type: 3}
@@ -77,12 +77,12 @@ MonoBehaviour:
     ensuite parfumer les entit\xE9s qu'elle touche pendant qu'elle est parfum\xE9.
     Lorsqu'une unit\xE9 est parfum\xE9 elle gagne de l'esprit critique toute les
     secondes."
-  damages: 010000000200000003000000
+  damages: 020000000200000003000000
   cooldown:
-  - 3
-  - 2.5
   - 2
-  countdown: 5
+  - 1.5
+  - 1.5
+  countdown: 3
   ennemisMask:
     serializedVersion: 2
     m_Bits: 3072
@@ -146,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 1248398480471839638, guid: 1f8cc1f448abb4a44b912c7b86a6a840,
         type: 3}
       propertyPath: m_text
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1248398481099662317, guid: 1f8cc1f448abb4a44b912c7b86a6a840,
         type: 3}

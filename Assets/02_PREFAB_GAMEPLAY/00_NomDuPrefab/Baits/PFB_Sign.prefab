@@ -447,20 +447,20 @@ MonoBehaviour:
   upgradeIndex: 0
   nbUpgradeMax: 3
   location: {fileID: 0}
-  colliderCenter: {x: 0, y: 5.5, z: 10}
-  offsetHeightCollider: 5.5
+  colliderCenter: {x: 9.999999, y: 5, z: 0.00000059604645}
+  offsetHeightCollider: 5
   offsetForwardCollider: 10
   timeBeforeSpawn: 2
   usure: 10
   currentUsureMax: 10
   usureMax:
   - 10
-  - 20
+  - 15
   - 25
   usurePercentage: 10
   costs: 14000000280000003c000000
   currentCost: 20
-  upgradeCosts: 6b000000cf00000033010000
+  upgradeCosts: 64000000c80000002c010000
   currentUpgradeCost: 107
   ui_Sprites:
   - {fileID: 21300000, guid: 4aa49ea3df1ad804687cc0c8b0f38ecc, type: 3}
@@ -478,8 +478,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   colliderSize: {x: 10, y: 10, z: 20}
-  gatheringPoint: {x: 0, y: 0, z: 2.5}
-  rotatedColliderSize: {x: 10, y: 11, z: 20}
+  gatheringPoint: {x: -2.4998825, y: 0, z: 0.00022879422}
+  rotatedColliderSize: {x: 20, y: 10, z: 9.999998}
 --- !u!33 &7422682549750173078
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -656,7 +656,7 @@ MonoBehaviour:
   colliderCenter: {x: 0, y: 0, z: 0}
   offsetHeightCollider: 0
   offsetForwardCollider: 0
-  timeBeforeSpawn: 2
+  timeBeforeSpawn: 5
   usure: 10
   currentUsureMax: 10
   usureMax:
@@ -664,8 +664,8 @@ MonoBehaviour:
   - 15
   - 20
   usurePercentage: 10
-  costs: 320000004600000064000000
-  currentCost: 50
+  costs: 6400000096000000c8000000
+  currentCost: 100
   upgradeCosts: 2c01000090010000f4010000
   currentUpgradeCost: 300
   ui_Sprites:
@@ -688,8 +688,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   range: 30
-  departureTime: 2
-  arrivingTime: 2
+  departureTime: 5
+  arrivingTime: 5
   waitingTime: 5
   travelingTime: 5
   timeBetweenEntityRespawns: 0.3
