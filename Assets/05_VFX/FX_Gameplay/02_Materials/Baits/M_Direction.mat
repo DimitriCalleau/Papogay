@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Circle_Range
+  m_Name: M_Direction
   m_Shader: {fileID: 4800000, guid: 6a8dc89364ffd92488cf320c015ff52c, type: 3}
   m_ShaderKeywords: _COLORCOLOR_ON _MULALPHATORGB_ON _UnityFogEnable
   m_LightmapFlags: 6
@@ -37,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: aa7cafbf68f8e3a44b8ec7cfeaf0e851, type: 3}
+        m_Texture: {fileID: 2800000, guid: 39e75b64ad857cf4a849fe1f8a34052f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
