@@ -57,7 +57,7 @@ MonoBehaviour:
   currentUsureMax: 20
   usureMax:
   - 20
-  - 30
+  - 800
   - 40
   usurePercentage: 20
   costs: 0a000000140000001e000000
@@ -77,7 +77,7 @@ MonoBehaviour:
   cooldown:
   - 2.5
   - 2
-  - 1.5
+  - 1
   countdown: 2.5
   ennemisMask:
     serializedVersion: 2

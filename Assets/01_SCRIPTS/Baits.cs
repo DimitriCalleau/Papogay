@@ -68,6 +68,7 @@ public class Baits : MonoBehaviour
 
     public void Upgrade()
     {
+        Debug.Log("upgrade");
         this.upgradeIndex += 1;
         this.currentCost = costs[upgradeIndex];
         this.currentUpgradeCost = upgradeCosts[upgradeIndex];
