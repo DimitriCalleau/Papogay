@@ -249,7 +249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4633090075874344669}
   - component: {fileID: 5869295210126627276}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: SpawnerEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
