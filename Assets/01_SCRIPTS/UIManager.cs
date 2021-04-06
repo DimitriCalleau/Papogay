@@ -94,9 +94,6 @@ public class UIManager : MonoBehaviour
     public bool inventoryOpened, shopOpened, mapOpened;
 
     public float timeBetweenBaits;
-
-
-    public TextMeshProUGUI buildDebug;
     void Start()
     {
         preview.InitPreview();
