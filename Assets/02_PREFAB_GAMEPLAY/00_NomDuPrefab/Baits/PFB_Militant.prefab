@@ -53,7 +53,7 @@ MonoBehaviour:
   upgradeIndex: 0
   nbUpgradeMax: 3
   location: {fileID: 0}
-  colliderCenter: {x: 1.7499999, y: 5, z: 0.00000010430813}
+  colliderCenter: {x: 0.0000003059797, y: 5, z: 1.75}
   offsetHeightCollider: 5
   offsetForwardCollider: 0.5
   timeBeforeSpawn: 1
@@ -77,12 +77,12 @@ MonoBehaviour:
   ui_UsureAmountText: {fileID: 2951863680374659370}
   baitDescription: "Militant : Fait un allez-retour dans le couloir devant lui en
     donnant de l'esprit critique aux unit\xE9s proche."
-  damages: 010000000100000001000000
+  damages: 030000000300000004000000
   cooldown:
+  - 1
   - 0.5
   - 0.5
-  - 0.5
-  countdown: 0.5
+  countdown: 1
   ennemisMask:
     serializedVersion: 2
     m_Bits: 3072
