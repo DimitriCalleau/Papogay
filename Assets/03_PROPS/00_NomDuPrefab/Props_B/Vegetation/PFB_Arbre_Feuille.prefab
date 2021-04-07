@@ -88,6 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 40334678354643081}
+  - component: {fileID: 1834152441708796815}
   m_Layer: 0
   m_Name: PFB_Arbre_Feuille
   m_TagString: Untagged
@@ -111,6 +112,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1834152441708796815
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5763478729535526477}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 4.6529593
+  m_Height: 11.058592
+  m_Direction: 1
+  m_Center: {x: -0.18093777, y: 5.029296, z: 0.2767024}
 --- !u!1001 &3607641021151581115
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -875,7 +875,7 @@ MonoBehaviour:
     m_Bits: 3072
   slowFactor: 0.5
   colliderSize: {x: 5, y: 1, z: 5}
-  rotatedColliderSize: {x: 5, y: 1, z: 5}
+  rotatedColliderSize: {x: 5, y: 1, z: 4.9999995}
 --- !u!33 &6149078815159792092
 MeshFilter:
   m_ObjectHideFlags: 0

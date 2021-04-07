@@ -50,24 +50,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 6
-  upgradeIndex: 0
+  upgradeIndex: 2
   nbUpgradeMax: 3
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 0, z: 0}
   offsetHeightCollider: 0
   offsetForwardCollider: 0
   timeBeforeSpawn: 2
-  usure: 9
-  currentUsureMax: 9
+  usure: 10
+  currentUsureMax: 10
   usureMax:
   - 9
   - 10
   - 10
   usurePercentage: 9
   costs: 320000005000000064000000
-  currentCost: 50
+  currentCost: 100
   upgradeCosts: c80000009001000058020000
-  currentUpgradeCost: 200
+  currentUpgradeCost: 600
   ui_Sprites:
   - {fileID: 21300000, guid: dd076f2cfaf825347bb1e91e1f7198e6, type: 3}
   - {fileID: 21300000, guid: 0ccfdece3afb05c45871c14135914914, type: 3}
