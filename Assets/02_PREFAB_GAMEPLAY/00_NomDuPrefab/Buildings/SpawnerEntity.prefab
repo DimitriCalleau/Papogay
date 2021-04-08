@@ -289,7 +289,7 @@ MonoBehaviour:
     type: 3}
   spawnPosition: {fileID: 4633090074732961712}
   spawnRange: 15
-  timeBetweenSpawns: 2
+  timeBetweenSpawns: 4
   timeBeforeDestruction: 0.1
   noBaitZoneSize: {x: 49, y: 29, z: 0.02}
 --- !u!1 &8353376784263367424
