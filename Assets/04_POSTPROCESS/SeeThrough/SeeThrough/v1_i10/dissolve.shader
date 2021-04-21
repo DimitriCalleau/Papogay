@@ -1,5 +1,5 @@
-﻿Shader "_/dissolve"
-{
+﻿Shader "_/dissolve_bad"
+{/*
 	Properties{
 		_Color("Color", Color) = (1,1,1,1)
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
@@ -48,5 +48,5 @@
 		}
 		ENDCG
 	}
-	FallBack "Diffuse"
+	FallBack "Diffuse"*/
 }
