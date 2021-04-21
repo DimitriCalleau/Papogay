@@ -6,6 +6,7 @@ public class BaitManager
 {
     public int baitRotation;
     public float cooldownTimer;
+
     public void PlaceTrap()
     {
         if (UIManager.Instance.inventoryOpened == true)
@@ -13,12 +14,12 @@ public class BaitManager
             Slot inventorySelection = UIManager.Instance.inventory.selection;
             if (cooldownTimer <= 0)
             {
-                if (inventorySelection != null && UIManager.Instance.selectedLocation != null && inventorySelection.nbBaits > 0 && UIManager.Instance.selectedLocation.occupied == false)
+                if (inventorySelection != null && UIManager.Instance.selectedLocation != null && UIManager.Instance.selectedLocation.state == LocationState.Free && inventorySelection.nbBaits > 0)
                 {
                     GameManager.Instance.player.GetComponent<PlayerMovementController>().playerAnimator.SetTrigger("Pose");
                     GameObject baitSpawner = GameObject.Instantiate(UIManager.Instance.baitSpawnerPrefab, UIManager.Instance.selectedLocation.transform.position, Quaternion.Euler(0, baitRotation, 0));
                     baitSpawner.GetComponent<BaitSpawner>().InitSpawn(inventorySelection.baitPrefab, UIManager.Instance.selectedLocation);
-                    UIManager.Instance.selectedLocation.occupied = true;
+                    UIManager.Instance.selectedLocation.state = LocationState.Occupied;
                     inventorySelection.AddRemove(false);
                     cooldownTimer = UIManager.Instance.timeBetweenBaits;
                 }

@@ -11,8 +11,8 @@ public class Entity : MonoBehaviour
 {
     [Header("Stats")]
     public EntityStatus status, previousStatus;
-
-    public bool isAttracted;
+    public int convertingValue;
+    public bool isAttracted, perfumed;
     Vector3 tempAttractingPoint;
     public float health, maxHealth;
     public int healthMinAlly, healthMaxEnm;
@@ -96,6 +96,14 @@ public class Entity : MonoBehaviour
         else
         {
             entityNavMeshAgent.destination = tempAttractingPoint;
+            if (attractingTimer > 0)
+            {
+                attractingTimer -= Time.deltaTime;
+            }
+            else
+            {
+                isAttracted = false;
+            }
         }
 
         if(status != EntityStatus.Neutral)
@@ -108,15 +116,6 @@ public class Entity : MonoBehaviour
             {
                 anm.SetFloat("WalkIdle", 0);
             }
-        }
-
-        if (attractingTimer > 0)
-        {
-            attractingTimer -= Time.deltaTime;
-        }
-        else
-        {
-            isAttracted = false;
         }
 
         if(beforeFadingTimer <= 0)
@@ -310,6 +309,8 @@ public class Entity : MonoBehaviour
             gameObject.tag = "TargetForEnemyEntity";
             anm.SetInteger("Status", 2);
 
+            isAttracted = false;
+
             allyProgressBar.fillAmount = health / maxHealth;
             if(health == 0)
             {
@@ -326,7 +327,7 @@ public class Entity : MonoBehaviour
             Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             if (previousStatus == EntityStatus.Enemy)
             {
-                Debug.Log("converted");
+                GameManager.Instance.playerStats.AddGold(convertingValue);
                 previousStatus = EntityStatus.Ally;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
             }
@@ -374,13 +375,20 @@ public class Entity : MonoBehaviour
 
             rnd.material = stateMats[1];
 
-            GameObject convertingParticles = Instantiate(particlePrefabs[1].gameObject, transform.position, Quaternion.identity);
-            convertingParticles.transform.parent = particlesParent.transform;
-            Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             if (previousStatus == EntityStatus.Enemy)
             {
+                GameObject convertingParticles = Instantiate(particlePrefabs[1].gameObject, transform.position, Quaternion.identity);
+                convertingParticles.transform.parent = particlesParent.transform;
+                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
+                GameManager.Instance.playerStats.AddGold(convertingValue);
                 previousStatus = EntityStatus.Neutral;
                 GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Enemy, false);
+            }
+            if(previousStatus == EntityStatus.Ally)
+            {
+                GameObject convertingParticles = Instantiate(particlePrefabs[1].gameObject, transform.position, Quaternion.identity);
+                convertingParticles.transform.parent = particlesParent.transform;
+                Destroy(convertingParticles, convertingParticles.GetComponent<ParticleSystem>().main.duration);
             }
         }
     }
@@ -389,7 +397,6 @@ public class Entity : MonoBehaviour
         if (health >= healthMinAlly)
         {
             previousStatus = EntityStatus.Ally;
-            GameManager.Instance.waveManager.AddRemoveEntity(EntityStatus.Ally, true);
             rnd.material = stateMats[2];
         }
         else if (health <= healthMaxEnm)

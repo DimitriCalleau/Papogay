@@ -32,6 +32,7 @@ public class Baits : MonoBehaviour
     public GameObject ui_UsureBar;
     public Image ui_healthBar;
     public TextMeshProUGUI ui_UsureAmountText;
+    public string baitDescription;
 
     [Header("Damages")]
     public List<int> damages;
@@ -67,11 +68,12 @@ public class Baits : MonoBehaviour
 
     public void Upgrade()
     {
+        Debug.Log("upgrade");
         this.upgradeIndex += 1;
         this.currentCost = costs[upgradeIndex];
         this.currentUpgradeCost = upgradeCosts[upgradeIndex];
-        this.usure += this.usure * (this.usureMax[this.upgradeIndex] / this.currentUsureMax);
         this.currentUsureMax = this.usureMax[this.upgradeIndex];
+        this.usure = this.currentUsureMax;
     }
 
     public void LoseLife(float damage)
@@ -83,14 +85,14 @@ public class Baits : MonoBehaviour
 
         if (this.usure <= 0)
         {
-            location.occupied = false;
+            location.state = LocationState.Free;
             Destroy(this.gameObject);
         }
     }
 
     void DestroyBait()
     {
-        location.occupied = false;
+        location.state = LocationState.Free;
         Destroy(this.gameObject);
     }
 

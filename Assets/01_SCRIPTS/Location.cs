@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Location : MonoBehaviour
 {
-    public bool occupied = false;
+    public LocationState state = LocationState.Free;
 }

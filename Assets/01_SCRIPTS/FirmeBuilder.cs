@@ -20,8 +20,12 @@ public class FirmeBuilder
 
     int nbFirmesThisWave;
 
+    public List<GameObject> allNoBaitZones;
+    public LayerMask locationLayer = -1;
+
     public GameObject entityPrefab; 
     public GameObject spawnerPrefab;
+    public GameObject noBaitZonePrefab;
 
     public void SpawnSpawner()
     {
@@ -32,6 +36,18 @@ public class FirmeBuilder
             {
                 GameObject newSpawner = GameObject.Instantiate(spawnerPrefab, spawnerLocations[i].transform.position, spawnerLocations[i].transform.rotation);
                 newSpawner.GetComponent<SpawnerNeutrals>().InitSpawn();
+                GameObject newNoBaitZone = GameObject.Instantiate(noBaitZonePrefab, spawnerLocations[i].transform.position, Quaternion.Euler(new Vector3(noBaitZonePrefab.transform.eulerAngles.x, spawnerLocations[i].transform.eulerAngles.y, spawnerLocations[i].transform.eulerAngles.z)));
+                newNoBaitZone.transform.localScale = newSpawner.GetComponent<SpawnerNeutrals>().noBaitZoneSize;
+                allNoBaitZones.Add(newNoBaitZone);
+
+                Collider[] closeLocations = Physics.OverlapBox(newNoBaitZone.transform.position, (newNoBaitZone.transform.localScale / 2), newNoBaitZone.transform.rotation, locationLayer);
+                if (closeLocations.Length > 0)
+                {
+                    foreach (Collider selectedLocation in closeLocations)
+                    {
+                        selectedLocation.GetComponent<Location>().state = LocationState.NoBait;
+                    }
+                }
             }
         }
     }
@@ -43,12 +59,12 @@ public class FirmeBuilder
         allFirmesLocations.Clear();
         int firmeSpawnIndex = 0;
 
-        //Find Houses
         if (waveStats.Count > 0)
         {
             nbFirmesThisWave = waveStats[currentWaveIndex].nbFirmesThisWave;
         }
         buildShop = GameObject.FindGameObjectsWithTag("Shop");
+
 
         for (int i = 0; i < nbFirmesThisWave; i++)
         {
@@ -70,6 +86,19 @@ public class FirmeBuilder
             newFirme.GetComponent<Firme>().InitFirme(); 
             allFirmesLocations.Add(newFirme.transform);
             firmeSpawnIndex += 1;
+
+            GameObject newNoBaitZone = GameObject.Instantiate(noBaitZonePrefab, firmeLocation, Quaternion.Euler(new Vector3(noBaitZonePrefab.transform.eulerAngles.x, firmeRotation.y, firmeRotation.z)));
+            newNoBaitZone.transform.localScale = newFirme.GetComponent<Firme>().noBaitZoneSize;
+            allNoBaitZones.Add(newNoBaitZone);
+
+            Collider[] closeLocations = Physics.OverlapBox(newNoBaitZone.transform.position, (newNoBaitZone.transform.localScale / 2), newNoBaitZone.transform.rotation, locationLayer);
+            if (closeLocations.Length > 0)
+            {
+                foreach (Collider selectedLocation in closeLocations)
+                {
+                    selectedLocation.GetComponent<Location>().state = LocationState.NoBait;
+                }
+            }
         }
 
         UIManager.Instance.shop.AllShopsDetection();
@@ -78,6 +107,7 @@ public class FirmeBuilder
             shopinou.gameObject.GetComponent<Artisan>().ActivateShop();
         }
         allShopsLocations = GameObject.FindGameObjectsWithTag("Shop");
+
     }
 
     public void RecallModifiedShops()
@@ -90,10 +120,9 @@ public class FirmeBuilder
         {
             buildShop[i].SetActive(true);
         }
-        UIManager.Instance.shop.hasNewBaitToAdd = true;
     }
 
-    public void ResetShops()
+    public void ResetWaveShops()
     {
         for (int i = 0; i < allShopsLocations.Length; i++)
         {
@@ -102,6 +131,31 @@ public class FirmeBuilder
         for (int i = 0; i < buildShop.Length; i++)
         {
             buildShop[i].SetActive(true);
+        }
+        UIManager.Instance.shop.AllShopsDetection();
+        foreach (Collider shopinou in UIManager.Instance.shop.allShops)
+        {
+            shopinou.gameObject.GetComponent<Artisan>().UnactivateShop();
+        }
+    }
+
+    public void OpenCloseNoBaitZones(bool openClose)//open = true, close = false
+    {
+        switch (openClose)
+        {
+            case true:
+                foreach (GameObject noBaitZone in allNoBaitZones)
+                {
+                    noBaitZone.SetActive(true);
+                }
+                GameManager.Instance.EventUpdateLocationState();
+                break;
+            case false:
+                foreach (GameObject noBaitZone in allNoBaitZones)
+                {
+                    noBaitZone.SetActive(false);
+                }
+                break;
         }
     }
 

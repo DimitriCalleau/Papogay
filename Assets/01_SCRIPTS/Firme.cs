@@ -19,12 +19,13 @@ public class Firme : MonoBehaviour
     float timerSpawn;
     bool canSpawn;
 
+    public Vector3 noBaitZoneSize;
+
     [Header("Death")]
     public float timeBeforeDeath;
 
     public void InitFirme()
     {
-
         anm = GetComponentInChildren<Animator>();
 
         canSpawn = true;
@@ -41,7 +42,10 @@ public class Firme : MonoBehaviour
         }
         else
         {
-            timerSpawn -= Time.deltaTime;
+            if(nbEntityToSpawn > 0)
+            {
+                timerSpawn -= Time.deltaTime;
+            }
         }
     }
     public Vector3 ChooseSpawnPointEntity(float _radius)

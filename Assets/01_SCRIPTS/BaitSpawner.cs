@@ -54,7 +54,6 @@ public class BaitSpawner : MonoBehaviour
     public void SpawnFinalBait()
     {
         GameObject bait = GameObject.Instantiate(prefabToSpawn, locationToSpawn.transform.position, Quaternion.Euler(0, UIManager.Instance.baitManager.baitRotation, 0));
-        bait.GetComponent<Baits>().InitBait();
         bait.GetComponent<Baits>().location = locationToSpawn;
         hasSpawned = true;
         Destroy(this.gameObject);

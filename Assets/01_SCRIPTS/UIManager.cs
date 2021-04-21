@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     public Shop shop = new Shop();
     public BaitInventory inventory = new BaitInventory();
     public BaitManager baitManager = new BaitManager();
+    public GameObject PerfumeCloudPrefab;
 
     public PreviewBait preview = new PreviewBait();
 
@@ -50,9 +51,6 @@ public class UIManager : MonoBehaviour
     public GameObject rewardPanel;
     public GameObject rewardButton;
     public GameObject firstTrapsButton;
-    public GameObject shopPanel;
-    public GameObject shopLayout;
-    public GameObject upgradeLayout;
     public GameObject inventoryPanel;
     public GameObject pausePanel;
     public GameObject winPanel;
@@ -62,6 +60,12 @@ public class UIManager : MonoBehaviour
     public GameObject creditsPanel;
     public GameObject mapPanel;
     #endregion
+
+    [Header("Shop")]
+    public GameObject shopPanel;
+    public GameObject shopLayout;
+    public GameObject upgradeLayout;
+    public TextMeshProUGUI baitDescription;
 
     [Header("Money")]
     public TextMeshProUGUI goldText;
@@ -90,7 +94,6 @@ public class UIManager : MonoBehaviour
     public bool inventoryOpened, shopOpened, mapOpened;
 
     public float timeBetweenBaits;
-    
     void Start()
     {
         preview.InitPreview();
@@ -135,7 +138,7 @@ public class UIManager : MonoBehaviour
                 {
                     minDist = dist;
                     closestLocation = allLocations[i].gameObject.GetComponent<Location>();
-                    if (closestLocation.occupied == false)
+                    if (closestLocation.state != LocationState.Occupied)
                     {
                         selectedLocation = closestLocation;
                     }
@@ -152,8 +155,11 @@ public class UIManager : MonoBehaviour
                 preview.HidePreview(true);
             }
 
-            preview.MovePreview(selectedLocation,  baitManager.baitRotation, inventory.selection.baitPrefab.GetComponent<MeshFilter>().sharedMesh);
-            UIManager.Instance.inventory.selection.UpdatePreviewMesh();
+            if(selectedLocation != null)
+            {
+                preview.MovePreview(selectedLocation, baitManager.baitRotation, inventory.selection.baitPrefab.GetComponent<MeshFilter>().sharedMesh);
+                UIManager.Instance.inventory.selection.UpdatePreviewMesh();
+            }
         }
         shop.DetectCloseShop();
     }
@@ -161,7 +167,6 @@ public class UIManager : MonoBehaviour
     public void AddFirstTraps()
     {
         reward.AddBait(BaitType.PaperBoy, 10, 0);
-        reward.AddBait(BaitType.FruitBox, 10, 0);
         inventory.SwitchBaitSelection(new Vector2(0, 1));
         GameManager.Instance.EventStartWave();
         GameManager.Instance.gameState.SetPause(false);
@@ -170,7 +175,6 @@ public class UIManager : MonoBehaviour
         rewardPanel.SetActive(false);
         firstTrapsButton.SetActive(false);
         CursorState(true);
-        GameManager.Instance.player.GetComponent<PlayerMovementController>().hasRetried = true;
     }
     public void AddReward()
     {
@@ -204,6 +208,8 @@ public class UIManager : MonoBehaviour
         MenuBaseState(true);
         GameManager.Instance.playerStats.SetHealth();
         inventory.selectionIndex = 0;
+        inventory.oldSelection = null;
+        inventory.selection = null;
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
             Destroy(inventoryPanel.transform.GetChild(i).gameObject);
@@ -259,6 +265,18 @@ public class UIManager : MonoBehaviour
             shopOpened = false;
         }
     }
+
+    void SkipWave()
+    {
+        GameManager.Instance.EventEndWave();
+        shopOpened = true;
+        shop.hasNewBaitToAdd = true;
+        shop.baitHasBeenTaken = true;
+        AddReward(); 
+        CloseShop(); 
+
+    }
+
     public void OpenCloseMap()
     {
         switch (mapOpened)
@@ -288,6 +306,15 @@ public class UIManager : MonoBehaviour
         healthBarClosingTimer = healthBarClosingTime;
     }
 
+    public void UpdateInventorySize()
+    {
+        int nbSlots = inventoryPanel.transform.childCount;
+        float xOffset = inventoryPanel.GetComponent<GridLayoutGroup>().spacing.x;
+        float slotSize = inventoryPanel.GetComponent<GridLayoutGroup>().cellSize.x;
+        float panelHeight = inventoryPanel.GetComponent<RectTransform>().rect.height;
+        float panelWidth = nbSlots * xOffset + nbSlots * slotSize + xOffset;
+        inventoryPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(panelWidth, panelHeight);
+    } 
     public void CloseHealthBar()
     {
         float closingTimePercentage = healthBarClosingTimer/healthBarClosingTime;
@@ -434,6 +461,7 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.OpenMap += OpenCloseMap;
         GameManager.Instance.Win += OpenWinPanel;
         GameManager.Instance.Lose += OpenLosePanel;
+        InputEvents.Instance.Skip += SkipWave;
     }
     void OnDisable()
     {
@@ -447,5 +475,6 @@ public class UIManager : MonoBehaviour
         InputEvents.Instance.OpenMap -= OpenCloseMap;
         GameManager.Instance.Win -= OpenWinPanel;
         GameManager.Instance.Lose -= OpenLosePanel;
+        InputEvents.Instance.Skip -= SkipWave;
     }
 }

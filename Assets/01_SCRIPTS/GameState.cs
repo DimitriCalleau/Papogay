@@ -14,9 +14,6 @@ public class GameState
         {
             case true:
                 Time.timeScale = 0;
-                UIManager.Instance.inventoryOpened = false;
-                UIManager.Instance.inventoryPanel.SetActive(false);
-                UIManager.Instance.preview.HidePreview(false);
                 break;
             case false:
                 Time.timeScale = 1;

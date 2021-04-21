@@ -7,18 +7,21 @@ public class MarketStand : Baits
 {
     public float attackRange;
     public Vector3 colliderSize, gatheringPoint;
+    Vector3 turnedGatheringPoint;
     [HideInInspector]
     public Vector3 rotatedColliderSize;
     Collider[] Enemies;
     public Image ui_cooldownImage;
-
+    GameObject francis;
     public void SetCollider()
     {
         offsetHeightCollider = colliderSize.y / 2;
-        offsetForwardCollider = colliderSize.z / 2;
+        float offsetForwardAndHalf = offsetForwardCollider + (colliderSize.z / 2);
         Quaternion forwardRotation = Quaternion.Euler(0, UIManager.Instance.baitManager.baitRotation, 0);
-        Vector3 forwardVector = forwardRotation * Vector3.forward * offsetForwardCollider;
+        turnedGatheringPoint = transform.position +  forwardRotation * gatheringPoint;
+        Vector3 forwardVector = forwardRotation * Vector3.forward * offsetForwardAndHalf;
         rotatedColliderSize = forwardRotation * colliderSize;
+        rotatedColliderSize = new Vector3(Mathf.Sqrt(rotatedColliderSize.x * rotatedColliderSize.x), Mathf.Sqrt(rotatedColliderSize.y * rotatedColliderSize.y), Mathf.Sqrt(rotatedColliderSize.z * rotatedColliderSize.z));
         colliderCenter = transform.position + Vector3.up * offsetHeightCollider + forwardVector;
     }
     void Start()
@@ -41,14 +44,14 @@ public class MarketStand : Baits
     }
     public void Attract()
     {
-        Enemies = Physics.OverlapBox(colliderCenter, rotatedColliderSize, Quaternion.identity, ennemisMask);
+      Enemies = Physics.OverlapBox(colliderCenter, rotatedColliderSize / 2, Quaternion.identity, ennemisMask);
         if (Enemies.Length > 0)
         {
             foreach (Collider e in Enemies)
             {
-                if (e.GetComponent<Entity>().isAttracted)
+                if (e.GetComponent<Entity>().isAttracted == false)
                 {
-                    e.GetComponent<Entity>().AttractEntity(gatheringPoint, usure);
+                    e.GetComponent<Entity>().AttractEntity(turnedGatheringPoint, usure);
                 }
             }
         }
@@ -58,10 +61,11 @@ public class MarketStand : Baits
         int nbTouchedEnemies = 0;
         foreach (Collider item in Enemies)
         {
-            float enmDist = Vector3.Distance(gatheringPoint, item.transform.position);
+            float enmDist = Vector3.Distance(turnedGatheringPoint, item.transform.position);
             if(enmDist <= attackRange)
             {
                 item.GetComponent<Entity>().DamageEntity(damages[upgradeIndex], true);
+                Debug.Log("Dans ta race");
                 nbTouchedEnemies += 1;
             }
         }

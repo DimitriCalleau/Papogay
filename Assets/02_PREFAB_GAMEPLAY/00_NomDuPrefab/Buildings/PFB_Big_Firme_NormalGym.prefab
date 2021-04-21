@@ -52,6 +52,7 @@ MonoBehaviour:
   emergencySpawnPoint: {x: 0, y: 0, z: 13}
   timeBetweenSpawn: 2
   spawnRadius: 20
+  noBaitZoneSize: {x: 69, y: 59, z: 0.02}
   timeBeforeDeath: 3
 --- !u!65 &5827241366719811339
 BoxCollider:

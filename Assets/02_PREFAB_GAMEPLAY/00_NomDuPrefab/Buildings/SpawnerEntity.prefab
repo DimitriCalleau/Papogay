@@ -123,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4633090074732961713}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4633090075874344669}
@@ -249,7 +249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4633090075874344669}
   - component: {fileID: 5869295210126627276}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: SpawnerEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,6 +291,7 @@ MonoBehaviour:
   spawnRange: 15
   timeBetweenSpawns: 2
   timeBeforeDestruction: 0.1
+  noBaitZoneSize: {x: 49, y: 29, z: 0.02}
 --- !u!1 &8353376784263367424
 GameObject:
   m_ObjectHideFlags: 0

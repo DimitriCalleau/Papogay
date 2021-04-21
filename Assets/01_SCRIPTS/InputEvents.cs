@@ -40,13 +40,15 @@ public class InputEvents : MonoBehaviour
         playerInputs.Actions.MoveCam.canceled += ctx => OnMoveCam(Vector2.zero);
 
         playerInputs.Actions.Escape.performed += ctx => OnPause();
+
+        playerInputs.Actions.Skip.performed += ctx => OnSkip();
     }
 
     //Place Bait
     public event Action Place;
     void OnPlaceBait()
     {
-        if (Place != null)
+        if (Place != null && GameManager.Instance.gameState.pause == false)
         {
             Place();
         }
@@ -55,7 +57,7 @@ public class InputEvents : MonoBehaviour
     public event Action<bool> RotateBait;
     void OnRotateBait(bool _whichWay)
     {
-        if (RotateBait != null)
+        if (RotateBait != null && GameManager.Instance.gameState.pause == false)
         {
             RotateBait(_whichWay);
         }
@@ -65,7 +67,7 @@ public class InputEvents : MonoBehaviour
     public event Action<Vector2> SwitchSelection;
     void OnSwitchSelection(Vector2 _whitchWay)
     {
-        if (SwitchSelection != null)
+        if (SwitchSelection != null && GameManager.Instance.gameState.pause == false)
         {
             SwitchSelection(_whitchWay);
         }
@@ -74,7 +76,7 @@ public class InputEvents : MonoBehaviour
     public event Action OpenInventory;
     void OnOpenInventory()
     {
-        if (OpenInventory != null)
+        if (OpenInventory != null && GameManager.Instance.gameState.pause == false)
         {
             OpenInventory();
         }
@@ -82,7 +84,7 @@ public class InputEvents : MonoBehaviour
     public event Action OpenShop;
     void OnOpenShop()
     {
-        if (OpenShop != null)
+        if (OpenShop != null && GameManager.Instance.gameState.pause == false)
         {
             OpenShop();
         }
@@ -90,7 +92,7 @@ public class InputEvents : MonoBehaviour
     public event Action OpenMap;
     void OnOpenMap()
     {
-        if (OpenMap != null)
+        if (OpenMap != null && GameManager.Instance.gameState.pause == false)
         {
             OpenMap();
         }
@@ -108,9 +110,17 @@ public class InputEvents : MonoBehaviour
     public event Action<Vector2> MoveCam;
     void OnMoveCam(Vector2 camMovement)
     {
-        if (MoveCam != null)
+        if (MoveCam != null && GameManager.Instance.gameState.pause == false)
         {
             MoveCam(camMovement);
+        }
+    }
+    public event Action Skip;
+    void OnSkip()
+    {
+        if (Skip != null && GameManager.Instance.gameState.pause == false)
+        {
+            Skip();
         }
     }
 

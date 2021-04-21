@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
 
     public PlayerStats playerStats = new PlayerStats();
     #region Events
-    public event Action StartWave;
 
     public float deathTime;
     float deathTimer;
@@ -59,6 +58,8 @@ public class GameManager : MonoBehaviour
             gameState.pause = false;
         }
     }
+    public event Action StartWave;
+
     public void EventStartWave()
     {
         if (StartWave != null)
@@ -94,6 +95,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public event Action UpdateLocationState;
+    public void EventUpdateLocationState()
+    {
+        if (UpdateLocationState != null)
+        {
+            UpdateLocationState();
+        }
+    }
+
     public event Action Lose;
     public void EventLose()
     {
@@ -105,7 +115,7 @@ public class GameManager : MonoBehaviour
     #endregion
     public void Retry()
     {
-        builder.ResetShops();
+        builder.ResetWaveShops();
         EventEndWave();
         EventCleanMap();
         ResetShops();
@@ -146,6 +156,10 @@ public class GameManager : MonoBehaviour
 
     void ResetShops()
     {
+        for (int i = 0; i < waveManager.zoneFolder.transform.childCount; i++)
+        {
+            waveManager.zoneFolder.transform.GetChild(i).gameObject.SetActive(true);
+        }
         UIManager.Instance.shop.AllShopsDetection();
         foreach (Collider shopinou in UIManager.Instance.shop.allShops)
         {
@@ -155,9 +169,11 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         StartWave += waveManager.StartWave;
+        EndWave += builder.ResetWaveShops;
     }
     void OnDisable()
     {
         StartWave -= waveManager.StartWave;
+        EndWave += builder.ResetWaveShops;
     }
 }

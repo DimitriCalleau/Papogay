@@ -32,7 +32,7 @@ public class PlayerMovementController : MonoBehaviour
     bool isrolling;
     float rollTimer;
     bool isboosted = false;
-    public bool hasRetried;
+    public bool mustMovePlayer;
 
     void Awake()
     {
@@ -49,11 +49,11 @@ public class PlayerMovementController : MonoBehaviour
     }
     void Update()
     {
-        if (hasRetried)
+        if (mustMovePlayer)
         {
             chara.enabled = false;
             transform.position = GameManager.Instance.playerStartPosition;
-            hasRetried = false;
+            mustMovePlayer = false;
             chara.enabled = true;
         }
         if (GameManager.Instance.gameState.pause == false)

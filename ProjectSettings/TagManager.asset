@@ -29,11 +29,11 @@ TagManager:
   - Shop
   - Map
   - Firme
-  - 
+  - NoBaitZone
   - SeeThroughLayer
-  - 
-  - 
-  - 
+  - PostProcessing
+  - Obstacle
+  - Player
   - 
   - 
   - 

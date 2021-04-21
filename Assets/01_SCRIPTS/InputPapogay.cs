@@ -105,6 +105,14 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd0b75f7-8b32-4a6e-9fb1-78942763c766"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -272,6 +280,17 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                     ""action"": ""RotateTrapLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c487fdc-f731-4041-bc1e-96aaf32f018d"",
+                    ""path"": ""<Keyboard>/numpad8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -291,6 +310,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         m_Actions_MoveCam = m_Actions.FindAction("MoveCam", throwIfNotFound: true);
         m_Actions_Shop = m_Actions.FindAction("Shop", throwIfNotFound: true);
         m_Actions_Map = m_Actions.FindAction("Map", throwIfNotFound: true);
+        m_Actions_Skip = m_Actions.FindAction("Skip", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -351,6 +371,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
     private readonly InputAction m_Actions_MoveCam;
     private readonly InputAction m_Actions_Shop;
     private readonly InputAction m_Actions_Map;
+    private readonly InputAction m_Actions_Skip;
     public struct ActionsActions
     {
         private @InputPapogay m_Wrapper;
@@ -366,6 +387,7 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         public InputAction @MoveCam => m_Wrapper.m_Actions_MoveCam;
         public InputAction @Shop => m_Wrapper.m_Actions_Shop;
         public InputAction @Map => m_Wrapper.m_Actions_Map;
+        public InputAction @Skip => m_Wrapper.m_Actions_Skip;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -408,6 +430,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 @Map.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMap;
                 @Map.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMap;
                 @Map.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMap;
+                @Skip.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSkip;
+                @Skip.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSkip;
+                @Skip.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSkip;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -445,6 +470,9 @@ public class @InputPapogay : IInputActionCollection, IDisposable
                 @Map.started += instance.OnMap;
                 @Map.performed += instance.OnMap;
                 @Map.canceled += instance.OnMap;
+                @Skip.started += instance.OnSkip;
+                @Skip.performed += instance.OnSkip;
+                @Skip.canceled += instance.OnSkip;
             }
         }
     }
@@ -462,5 +490,6 @@ public class @InputPapogay : IInputActionCollection, IDisposable
         void OnMoveCam(InputAction.CallbackContext context);
         void OnShop(InputAction.CallbackContext context);
         void OnMap(InputAction.CallbackContext context);
+        void OnSkip(InputAction.CallbackContext context);
     }
 }

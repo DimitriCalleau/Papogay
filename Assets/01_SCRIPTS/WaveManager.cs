@@ -18,6 +18,7 @@ public class WaveManager
     [HideInInspector]
     public int waveindex;
 
+    public GameObject zoneFolder;
     public GameObject[] zones;
     public GameObject[] blocageZones;
     public Vector3[] playerStartPositions;
@@ -85,10 +86,10 @@ public class WaveManager
         UIManager.Instance.allyEntityBar.fillAmount = 0;
 
         GameManager.Instance.playerStartPosition = playerStartPositions[waveindex];
+        GameManager.Instance.player.GetComponent<PlayerMovementController>().mustMovePlayer = true;
 
         if (zones[waveindex] != null)
         {
-
             for (int i = 0; i < zones.Length; i++)
             {
                 if(i == waveindex)
@@ -122,8 +123,23 @@ public class WaveManager
                 }
             }
         }
+
+        foreach (GameObject noBaitZone in GameManager.Instance.builder.allNoBaitZones)
+        {
+            GameObject.Destroy(noBaitZone);
+        }
+        GameManager.Instance.builder.allNoBaitZones.Clear();
+
         GameManager.Instance.builder.SpawnSpawner();
         GameManager.Instance.builder.ReplaceShopByCorpo();
+
+        if (UIManager.Instance.inventoryOpened == false && GameManager.Instance.builder.allNoBaitZones.Count > 0)
+        {
+            foreach (GameObject noBaitZone in GameManager.Instance.builder.allNoBaitZones)
+            {
+                noBaitZone.SetActive(false);
+            }
+        }
     }
 
     public void Reset()
@@ -139,30 +155,35 @@ public class WaveManager
         UIManager.Instance.waveIndexIndicator.text = "Vague " + (waveindex + 1);
     }
 
-    public void CheckEntityRatio()
+    void CheckEntityRatio()
     {
-        if( nbEntityInShops == GameManager.Instance.builder.waveStats[waveindex].nbMinAllyEntityInShop)
-        {
-            if(waveindex >= GameManager.Instance.builder.waveStats.Count)
-            {
-                GameManager.Instance.EventWin();
-            }
-            else
-            {
-                GameManager.Instance.builder.RecallModifiedShops();
-                GameManager.Instance.EventEndWave();
-            }
-        }
-
-
         if (nbEnemyEntities == GameManager.Instance.builder.waveStats[waveindex].nbMaxEnemyEntityOnMap)
         {
+            for (int i = 0; i < zoneFolder.transform.childCount; i++)
+            {
+                zoneFolder.transform.GetChild(i).gameObject.SetActive(true);
+            }
+
             UIManager.Instance.shop.AllShopsDetection();
             foreach (Collider shopinou in UIManager.Instance.shop.allShops)
             {
                 shopinou.gameObject.GetComponent<Artisan>().UnactivateShop();
             }
             GameManager.Instance.EventLose();
+        }
+
+        if ( nbEntityInShops == GameManager.Instance.builder.waveStats[waveindex].nbMinAllyEntityInShop)
+        {
+            if ((waveindex + 1) >= GameManager.Instance.builder.waveStats.Count)
+            {
+                GameManager.Instance.EventWin();
+            }
+            else
+            {
+                UIManager.Instance.shop.hasNewBaitToAdd = true;
+                GameManager.Instance.builder.RecallModifiedShops();
+                GameManager.Instance.EventEndWave();
+            }
         }
     }
 }

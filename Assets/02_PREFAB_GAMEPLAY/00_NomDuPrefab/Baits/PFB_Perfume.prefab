@@ -31,6 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2199264176832049642}
+  - {fileID: 7810743834574372351}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,24 +48,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  upgradeIndex: 0
+  upgradeIndex: 2
   nbUpgradeMax: 3
   location: {fileID: 0}
   colliderCenter: {x: 0, y: 0, z: 0}
   offsetHeightCollider: 0
   offsetForwardCollider: 0
   timeBeforeSpawn: 2
-  usure: 0
-  currentUsureMax: 0
+  usure: 15
+  currentUsureMax: 15
   usureMax:
-  - 20
-  - 20
-  - 20
-  usurePercentage: 0
-  costs: 050000000a0000000f000000
-  currentCost: 0
-  upgradeCosts: 6a000000ce00000032010000
-  currentUpgradeCost: 0
+  - 10
+  - 15
+  - 15
+  usurePercentage: 10
+  costs: 14000000280000003c000000
+  currentCost: 60
+  upgradeCosts: 7d000000fa000000c2010000
+  currentUpgradeCost: 450
   ui_Sprites:
   - {fileID: 21300000, guid: 546786634a4f516469169aa7334ee091, type: 3}
   - {fileID: 21300000, guid: f59aa816c36f4de428909c3301a07233, type: 3}
@@ -72,16 +73,21 @@ MonoBehaviour:
   ui_UsureBar: {fileID: 0}
   ui_healthBar: {fileID: 2199264175722164987}
   ui_UsureAmountText: {fileID: 2199264175332295057}
-  damages: 010000000200000003000000
+  baitDescription: "Parfum artisanal : Parfume une entit\xE9, c'ette entit\xE9 peut
+    ensuite parfumer les entit\xE9s qu'elle touche pendant qu'elle est parfum\xE9.
+    Lorsqu'une unit\xE9 est parfum\xE9 elle gagne de l'esprit critique toute les
+    secondes."
+  damages: 020000000200000003000000
   cooldown:
-  - 5
-  - 4
-  - 3
-  countdown: 0
+  - 2
+  - 1.5
+  - 1.5
+  countdown: 3
   ennemisMask:
     serializedVersion: 2
-    m_Bits: 1024
-  range: 15
+    m_Bits: 3072
+  range: 20
+  perfumeDuration: 5
   ui_cooldownImage: {fileID: 7929412571790794392}
 --- !u!33 &-8169976624040830328
 MeshFilter:
@@ -90,7 +96,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6065224144304386526}
-  m_Mesh: {fileID: -3678738297345544280, guid: 8148501178fbf064f9d65d05bec987b3, type: 3}
+  m_Mesh: {fileID: -5355652127789480864, guid: 8148501178fbf064f9d65d05bec987b3, type: 3}
 --- !u!23 &-1533353702307121629
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -137,6 +143,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6065224144304386527}
     m_Modifications:
+    - target: {fileID: 1248398480471839638, guid: 1f8cc1f448abb4a44b912c7b86a6a840,
+        type: 3}
+      propertyPath: m_text
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1248398481099662317, guid: 1f8cc1f448abb4a44b912c7b86a6a840,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -200,7 +211,7 @@ PrefabInstance:
     - target: {fileID: 1248398481099662317, guid: 1f8cc1f448abb4a44b912c7b86a6a840,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1248398481099662317, guid: 1f8cc1f448abb4a44b912c7b86a6a840,
         type: 3}
@@ -291,3 +302,93 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &6592574382322162299
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6065224144304386527}
+    m_Modifications:
+    - target: {fileID: 393737463920307237, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Perfume_Cloud
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e072ffc1124204849b22fe6e19ed04fb, type: 3}
+--- !u!4 &7810743834574372351 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3970153258936674180, guid: e072ffc1124204849b22fe6e19ed04fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6592574382322162299}
+  m_PrefabAsset: {fileID: 0}

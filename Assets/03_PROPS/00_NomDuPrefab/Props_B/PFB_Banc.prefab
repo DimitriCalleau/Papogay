@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b78019f3a5ff6ce48b958c8534d430cf, type: 2}
+  - {fileID: 2100000, guid: 30ca57e8229d4cb4694804ecc6e198f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5412411695285168993}
   - component: {fileID: 2772137806006213659}
+  - component: {fileID: 2877913371010018600}
   m_Layer: 0
   m_Name: PFB_Banc
   m_TagString: Untagged
@@ -127,3 +128,16 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &2877913371010018600
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5424528346392786466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.2, y: 7.15, z: 11.3}
+  m_Center: {x: 0, y: 0, z: 0}

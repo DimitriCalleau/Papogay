@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class Slot
 {
+    public Animator inventorySlotAnimator;
     public BaitType type;
     public GameObject baitPrefab;
     public int nbBaits;
     public int currentCost;
     public int upgradeCost;
+    public string baitDescription;
     public Sprite currentUIImage;
     public Sprite currentUpgradeImage;
     public GameObject thisInventorySlot;
@@ -28,13 +31,16 @@ public class Slot
         thisBait.InitBait();
         currentCost = thisBait.currentCost;
         upgradeCost = thisBait.currentUpgradeCost;
-        currentUIImage = thisBait.ui_Sprites[thisBait.upgradeIndex]; 
+        currentUIImage = thisBait.ui_Sprites[thisBait.upgradeIndex];
+        baitDescription = thisBait.baitDescription;
+
         if (thisBait.upgradeIndex < thisBait.nbUpgradeMax - 1)
         {
             currentUpgradeImage = thisBait.ui_Sprites[thisBait.upgradeIndex + 1];
         }
         thisInventorySlot = GameObject.Instantiate(UIManager.Instance.inventorySlotPrefab);
         thisInventorySlot.transform.SetParent(UIManager.Instance.inventoryPanel.transform);
+        inventorySlotAnimator = thisInventorySlot.transform.GetChild(0).GetComponent<Animator>();
 
         //Slot pour acheter des appats
         thisShopSlot = GameObject.Instantiate(UIManager.Instance.shopSlotPrefab);
@@ -50,7 +56,7 @@ public class Slot
     }
     void UpdateDisplay()
     {
-        thisInventorySlot.GetComponent<Image>().sprite = currentUIImage;
+        thisInventorySlot.transform.GetChild(0).GetComponent<Image>().sprite = currentUIImage;
         thisInventorySlot.GetComponentInChildren<Text>().text = nbBaits.ToString();
         thisShopSlot.GetComponent<Image>().sprite = currentUIImage;
         thisShopSlot.GetComponentInChildren<Text>().text = currentCost.ToString();
@@ -64,6 +70,7 @@ public class Slot
         {
             thisInventorySlot.GetComponentInChildren<Text>().color = Color.black;
         }
+        UIManager.Instance.baitDescription.text = baitDescription;
     }
     public void UpgradeSlotBait()
     {
@@ -77,6 +84,10 @@ public class Slot
             if (thisBait.upgradeIndex < thisBait.nbUpgradeMax - 1)
             {
                 currentUpgradeImage = thisBait.ui_Sprites[thisBait.upgradeIndex + 1];
+            }
+            else
+            {
+                thisUpgradeSlot.GetComponent<Button>().interactable = false;
             }
             GameManager.Instance.playerStats.Pay(upgradeCost);
             UpdateDisplay();
@@ -97,14 +108,13 @@ public class Slot
             case false:
                 nbBaits -= 1;
                 UpdateDisplay();
-                break;            
+                break;
             case true:
                 nbBaits += 1;
                 UpdateDisplay();
                 break;
         }
     }
-
     /*public void UpdatePreviewMesh()
     {
         if(UIManager.Instance.selectedLocation != null)
@@ -181,56 +191,57 @@ public class Slot
                     if (baitPrefab.GetComponent<PaperBoy>().colliderCenter != null)
                     {
                         baitPrefab.GetComponent<PaperBoy>().SetCollider();
-                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<PaperBoy>().detectionRange, true);
+                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<PaperBoy>().detectionRange, true, false);
                     }
                     break;
                 case BaitType.FruitBox:
                     if (baitPrefab.GetComponent<FruitBox>().colliderCenter != null)
                     {
                         baitPrefab.GetComponent<FruitBox>().SetCollider();
-                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<FruitBox>().colliderCenter, baitPrefab.GetComponent<FruitBox>().rotatedColliderSize, false);
+                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<FruitBox>().colliderCenter, baitPrefab.GetComponent<FruitBox>().rotatedColliderSize, false, false);
                     }
                     break;
                 case BaitType.Sign:
                     if (baitPrefab.GetComponent<Sign>().colliderCenter != null)
                     {
                         baitPrefab.GetComponent<Sign>().SetCollider();
-                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Sign>().colliderCenter, baitPrefab.GetComponent<Sign>().rotatedColliderSize, false);
+                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<Sign>().colliderCenter, baitPrefab.GetComponent<Sign>().rotatedColliderSize, false, false);
                     }
                     break;
                 case BaitType.MarketStand:
                     if (baitPrefab.GetComponent<MarketStand>().colliderCenter != null)
                     {
                         baitPrefab.GetComponent<MarketStand>().SetCollider();
-                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<MarketStand>().colliderCenter, baitPrefab.GetComponent<MarketStand>().rotatedColliderSize, false);
+                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position + baitPrefab.GetComponent<MarketStand>().colliderCenter, baitPrefab.GetComponent<MarketStand>().rotatedColliderSize, false, false);
                     }
                     break;
                 case BaitType.Perfume:
                     if (baitPrefab.GetComponent<Perfume>().colliderCenter != null)
                     {
                         baitPrefab.GetComponent<Perfume>().SetCollider();
-                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<Perfume>().range, true);
+                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<Perfume>().range, true, false);
                     }
                     break;
                 case BaitType.Militant:
                     if (baitPrefab.GetComponent<Militant>().colliderCenter != null)
                     {
                         baitPrefab.GetComponent<Militant>().SetCollider();
-                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<Militant>().range, true);
+                        baitPrefab.GetComponent<Militant>().SetObstacleCollider();
+                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<Militant>().range, true, true);
                     }
                     break;
                 case BaitType.Bar:
                     if (baitPrefab.GetComponent<Bar>().colliderCenter != null)
                     {
                         baitPrefab.GetComponent<Bar>().SetCollider();
-                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<Bar>().range, true);
+                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<Bar>().range, true, false);
                     }
                     break;
                 case BaitType.Bus:
                     if (baitPrefab.GetComponent<Bus>().colliderCenter != null)
                     {
                         baitPrefab.GetComponent<Bus>().SetCollider();
-                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<Bus>().range, true);
+                        UIManager.Instance.preview.RangeDisplayer(UIManager.Instance.selectedLocation.transform.position, Vector3.one * baitPrefab.GetComponent<Bus>().range, true, false);
                     }
                     break;
             }

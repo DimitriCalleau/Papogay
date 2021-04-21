@@ -865,15 +865,17 @@ MonoBehaviour:
   ui_UsureBar: {fileID: 1813921593054480787}
   ui_healthBar: {fileID: 1813921594156108446}
   ui_UsureAmountText: {fileID: 1813921594302544372}
+  baitDescription: "Bac \xE0 epluchures : Ralentit les entit\xE9s neutres ou ennemies
+    qui passent dessus."
   damages: 
   cooldown: []
   countdown: 0
   ennemisMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   slowFactor: 0.5
   colliderSize: {x: 5, y: 1, z: 5}
-  rotatedColliderSize: {x: 5, y: 1, z: 5}
+  rotatedColliderSize: {x: 5, y: 1, z: 4.9999995}
 --- !u!33 &6149078815159792092
 MeshFilter:
   m_ObjectHideFlags: 0

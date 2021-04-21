@@ -6,7 +6,7 @@ using TMPro;
 
 public class Perfume : Baits
 {
-    public float range;
+    public float range, perfumeDuration;
     Collider[] Enemies;
     public Image ui_cooldownImage;
 
@@ -33,7 +33,31 @@ public class Perfume : Baits
     }
     public void BaitAttack()
     {
-        countdown = 0;
-        ui_cooldownImage.fillAmount = 0;
+        Collider[] EntityToTransmit = Physics.OverlapSphere(transform.position, range, ennemisMask);
+        GameObject transmissionTarget = null;
+        float mindist = Mathf.Infinity;
+        if (EntityToTransmit.Length > 0)
+        {
+            for (int i = 0; i < EntityToTransmit.Length; i++)
+            {
+                if (EntityToTransmit[i].GetComponent<Entity>().perfumed == false)
+                {
+                    float dist = Vector3.Distance(transform.position, EntityToTransmit[i].transform.position);
+                    if (dist < mindist)
+                    {
+                        mindist = dist;
+                        transmissionTarget = EntityToTransmit[i].gameObject;
+                    }
+                }
+            }
+        }
+
+        if (transmissionTarget != null)
+        {
+            GameObject newCloud = Instantiate(UIManager.Instance.PerfumeCloudPrefab, transmissionTarget.transform);
+            newCloud.GetComponent<PerfumeCloud>().Init(perfumeDuration, damages[upgradeIndex]);
+            countdown = 0;
+            Debug.Log(transmissionTarget);
+        }
     }
 }
