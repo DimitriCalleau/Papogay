@@ -26060,6 +26060,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1566288348}
     m_Modifications:
+    - target: {fileID: 1057024671374060936, guid: ecbc8d9441e32264aaaf2eb0a8a59987,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 71ceb4a4cccde0c439d8c61bb17ef75d, type: 2}
     - target: {fileID: 2952658563321227716, guid: ecbc8d9441e32264aaaf2eb0a8a59987,
         type: 3}
       propertyPath: rayMaskLayer.m_Bits
